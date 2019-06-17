@@ -1,0 +1,9 @@
+fof(query1, definition, (
+  ! [FST_A, FST_B] :
+    ( query1(FST_A, FST_B)
+      <=> ( ? [SND_A, SND_B] :
+        tab(FST_A, SND_A)
+        & tab(FST_B, SND_B)
+        & FST_B = SND_A
+        & FST_A = SND_B
+        & SND_B < SND_A ) ) ) ).
