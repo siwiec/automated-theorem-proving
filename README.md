@@ -91,4 +91,7 @@ TODO
 #### TPTP
 [TPTP form of Query 4.](tptp/query4.tptp)
 
-## Equivalence test
+## Equivalence tests
+
+[TPTP form of the equivalence check for queries 1. and 2.](tptp/equiv12.tptp)
+[TPTP form of the equivalence check for queries 3. and 4.](tptp/equiv34.tptp)
