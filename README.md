@@ -44,7 +44,7 @@ WHERE  ( a.fst = b.snd
 ```
 SELECT fst
 FROM tab
-WHERE thr > 10
+WHERE trd > 10
 GROUP BY fst ;
 ```
 
