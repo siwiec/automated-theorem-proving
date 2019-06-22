@@ -1,4 +1,27 @@
-fof(equiv12, conjecture, (
-  ! [FST_A, FST_B] :
-    ( query1(FST_A, FST_B)
-    <=> query2(FST_A, FST_B) ) ) ).
+tff(tab_type, type, tab : ( $int * $int ) > $o ).
+tff(query1_type, type, query1 : ( $int * $int ) > $o ).
+tff(query2_type, type, query2 : ( $int * $int ) > $o ).
+
+tff(query1,definition,(
+  ! [FST_A : $int,FST_B : $int] :
+    ( query1(FST_A,FST_B)
+      <=> ( ? [SND_A : $int,SND_B : $int] :
+        ( tab(FST_A,SND_A)
+        & tab(FST_B,SND_B)
+        & FST_B = SND_A
+        & FST_A = SND_B
+        & $greater(SND_A,SND_B) ) ) ) ) ).
+
+tff(query2,definition,(
+  ! [FST_A : $int,FST_B : $int] :
+    ( query2(FST_A,FST_B)
+      <=> ( ? [SND_A : $int,SND_B : $int] :
+        ( tab(FST_A,SND_A)
+        & tab(FST_B,SND_B)
+        & FST_B = SND_A
+        & FST_A = SND_B ) ) ) ) ).
+
+tff(equiv12,conjecture,(
+  ! [FST_A : $int,FST_B : $int] :
+    ( query1(FST_A,FST_B)
+    <=> query2(FST_A,FST_B) ) ) ).
