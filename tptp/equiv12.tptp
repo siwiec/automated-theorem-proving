@@ -1,27 +1,122 @@
-tff(tab_type, type, tab : ( $int * $int ) > $o ).
-tff(query1_type, type, query1 : ( $int * $int ) > $o ).
-tff(query2_type, type, query2 : ( $int * $int ) > $o ).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TYPES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-tff(query1,definition,(
-  ! [FST_A : $int,FST_B : $int] :
-    ( query1(FST_A,FST_B)
-      <=> ( ? [SND_A : $int,SND_B : $int] :
-        ( tab(FST_A,SND_A)
-        & tab(FST_B,SND_B)
-        & FST_B = SND_A
-        & FST_A = SND_B
-        & $greater(SND_A,SND_B) ) ) ) ) ).
+ 
+tff(record_type,        		type,                   record : $tType                                ).
+tff(r_type,        			type,                        r : ( $int * record ) > record            ). % record structure (list of ints)
+tff(empty_record_type,        		type,             empty_record : record                                ). % empty_record type
+tff(empty_record_condition_type,        type,   empty_record_condition : record > $o                           ). % record emptiness check
 
-tff(query2,definition,(
-  ! [FST_A : $int,FST_B : $int] :
-    ( query2(FST_A,FST_B)
-      <=> ( ? [SND_A : $int,SND_B : $int] :
-        ( tab(FST_A,SND_A)
-        & tab(FST_B,SND_B)
-        & FST_B = SND_A
-        & FST_A = SND_B ) ) ) ) ).
+tff(valid_record_type,        		type,             valid_record : record > $o                           ). % record validity check
 
-tff(equiv12,conjecture,(
-  ! [FST_A : $int,FST_B : $int] :
-    ( query1(FST_A,FST_B)
-    <=> query2(FST_A,FST_B) ) ) ).
+
+tff(database_type,        		type,                 database : $tType                                ).
+tff(db_type,        			type,                       db : ( record * database ) > database      ). % database structure (list of valid records)
+tff(empty_database_type,        	type,           empty_database : database                              ). % empty database type
+tff(empty_database_condition_type,      type, empty_database_condition : database > $o                         ). % database emptiness check
+
+tff(database_member_type,        	type,          database_member : ( record * database ) > $o            ). % database lookup
+ 
+tff(query1_type,        		type,                   query1 : ( database * $int * $int ) > $o       ).
+tff(query2_type,        		type,                   query2 : ( database * $int * $int ) > $o       ).
+
+tff(tab_type,        			type,                      tab : ( database * $int * $int * $int) > $o ). % TODO not needed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RECORD AXIOMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+tff(empty_record, axiom,
+    empty_record_condition(empty_record) ).
+
+tff(nonempty_record, axiom,
+    ! [ X: $int, XS : record] :
+        ( ~ empty_record_condition( r(X, XS) ) ) ).
+
+tff(valid_record, axiom,
+    ! [ R : record ] :
+        ( valid_record(R)
+            <=> ? [ X : $int, Y : $int, Z : $int ] : R = r(X, r(Y, r(Z, empty_record) ) ) ) ).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DATABASE AXIOMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+tff(empty_database, axiom,
+    empty_database_condition(empty_database) ).
+
+tff(nonempty_database, axiom, (
+    ! [X : record, XS : database] :
+        ( ~ empty_database_condition( db(X, XS) ) ) ) ).
+
+tff(empty_database_member, axiom, (
+    ! [X : record] :
+        ( ~ database_member(X, empty_database) ) ) ).
+
+tff(database_with_only_valid_records, axiom, (
+    ! [X : record, XS : database] :
+        ( ( ~ valid_record(X) ) => ( ~ database_member(X,XS) ) ) ) ).
+
+tff(database_member, axiom, (
+    ! [X : record, XS : database] :
+        ( database_member(X, db(X, XS) ) ) ) ).
+
+tff(database_member, axiom, (
+    ! [X : record, Y : record, XS : database ] :
+        ( database_member(X, XS) => database_member(X, db(Y, XS) ) ) ) ).
+
+% database lookup
+tff(data_in_table, axiom, (
+    ! [DB : database, FST : $int, SND : $int, TRD : $int] :
+        ( tab(DB, FST, SND, TRD)
+            <=> ( database_member( r(TRD, r(SND, r(FST, empty_record))), DB) ) ) ) ).
+
+
+tff(query1, definition, (
+    ! [DB : database, FST_A : $int, FST_B : $int] :
+        ( query1(DB, FST_A,FST_B)
+            <=> ( ? [SND_A : $int,SND_B : $int, TRD_A : $int, TRD_B: $int] :
+                ( tab(DB, FST_A,SND_A,TRD_A)
+                & tab(DB, FST_B,SND_B,TRD_B)
+                & FST_B = SND_A
+                & FST_A = SND_B
+                & $greater(SND_A,SND_B) ) ) ) ) ).
+
+tff(query2, definition, (
+    ! [DB : database, FST_A : $int, FST_B : $int] :
+        ( query2(DB, FST_A,FST_B)
+            <=> ( ? [SND_A : $int, SND_B : $int, TRD_A : $int, TRD_B : $int] :
+                ( tab(DB, FST_A,SND_A,TRD_A)
+                & tab(DB, FST_B,SND_B,TRD_B)
+                & FST_B = SND_A
+                & FST_A = SND_B ) ) ) ) ).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TESTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+/*
+tff(test, conjecture, (
+    ? [R : record, DB : database] :
+        ( database_member(R, DB) ) ) ).
+*/
+
+/*
+tff(test2, conjecture, (
+    ! [R : record] :
+        ( valid_record(R) =>
+            ? [DB : database] :
+                ( database_member(R, DB) ) ) ) ).
+*/
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EQUIVALENCE CHECK
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+tff(equiv12, conjecture, (
+    ! [DB : database, FST_A : $int,FST_B : $int] :
+        ( query1(DB,FST_A,FST_B)
+            <=> query2(DB, FST_A,FST_B) ) ) ).
