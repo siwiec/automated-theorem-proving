@@ -92,31 +92,16 @@ tff(query2, definition, (
                 & FST_B = SND_A
                 & FST_A = SND_B ) ) ) ) ).
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% TESTS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-/*
-tff(test, conjecture, (
-    ? [R : record, DB : database] :
-        ( database_member(R, DB) ) ) ).
-*/
-
-/*
-tff(test2, conjecture, (
-    ! [R : record] :
-        ( valid_record(R) =>
-            ? [DB : database] :
-                ( database_member(R, DB) ) ) ) ).
-*/
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % EQUIVALENCE CHECK
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 tff(equiv12, conjecture, (
     ! [DB : database, FST_A : $int,FST_B : $int] :
         ( query1(DB,FST_A,FST_B)
             <=> query2(DB, FST_A,FST_B) ) ) ).
+
+
+
+
+
