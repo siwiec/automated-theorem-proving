@@ -42,7 +42,9 @@ WHERE  ( a.fst = b.snd
 
 ### Query 3
 ```
-SELECT fst
+SELECT fst,
+       0,
+       SUM(trd)
 FROM tab
 WHERE trd > 10
 GROUP BY fst ;
@@ -51,12 +53,16 @@ GROUP BY fst ;
 ### Query 4
 
 ```
-SELECT fst
+SELECT fst,
+       0,
+       SUM(trd)
 FROM (SELECT fst,
+             0,
              trd
       FROM tab
       WHERE trd > 10 )
 GROUP BY fst ;
+
 ```
 ## Analysis
 
@@ -92,9 +98,8 @@ TODO
 ### Current output
 
 ```
-+ ./vampire4.2.2 --mode casc -t 1000 ./tptp/equiv12.tptp
 % Starting sequential portfolio solving with schedule "casc"
-% spawned child 30447 with time: 4 (total remaining time 2999)
+% spawned child 7701 with time: 4 (total remaining time 2999)
 % dis+10_1_add=off:afp=40000:afq=1.1:amm=off:anc=none:cond=on:fsr=off:irw=on:nm=64:nwc=1:sas=z3:sac=on_2 on equiv12
 % Refutation found. Thanks to Tanya!
 % SZS status Theorem for equiv12
@@ -501,8 +506,175 @@ tff(f260,plain,(
 % Termination reason: Refutation
 
 % Memory used [KB]: 767
-% Time elapsed: 0.097 s
+% Time elapsed: 0.087 s
 % ------------------------------
 % ------------------------------
-% Success in time 0.095 s
+% Success in time 0.096 s
+% Starting sequential portfolio solving with schedule "casc_sat"
+% spawned child 7703 with time: 3 (total remaining time 3000)
+% fmb+10_1_av=off:bce=on:fmbsr=1.8:nm=4_1 on equiv34
+% Terminated due to inappropriate strategy.
+% ------------------------------
+% Version: Vampire 4.2.2 (commit e1949dd on 2017-12-14 18:39:21 +0000)
+% Termination reason: Inappropriate
+
+% Memory used [KB]: 511
+% Time elapsed: 0.001 s
+% ------------------------------
+% ------------------------------
+% spawned child 7704 with time: 33 (total remaining time 3000)
+% ott+11_3_aac=none:afr=on:afp=4000:afq=1.4:amm=off:anc=all:bs=unit_only:bsr=on:bce=on:fde=unused:irw=on:nm=64:newcnf=on:nwc=1:nicw=on:sac=on:sp=reverse_arity:uhcvi=on_31 on equiv34
+% Refutation found. Thanks to Tanya!
+% SZS status Theorem for equiv34
+% SZS output start Proof for equiv34
+tff(type_def_5, type, record: $tType).
+tff(type_def_6, type, database: $tType).
+tff(func_def_0, type, r: ($int * record) > record).
+tff(func_def_1, type, empty_record: record).
+tff(func_def_2, type, db: (record * database) > database).
+tff(func_def_3, type, empty_database: database).
+tff(func_def_9, type, sK0: database).
+tff(func_def_10, type, sK1: $int).
+tff(func_def_11, type, sK2: $int).
+tff(func_def_12, type, sK3: record > $int).
+tff(func_def_13, type, sK4: record > $int).
+tff(func_def_14, type, sK5: record > $int).
+tff(func_def_15, type, sK6: database > database).
+tff(func_def_16, type, sK7: database > $int).
+tff(func_def_17, type, sK8: database > $int).
+tff(func_def_18, type, sK9: database > $int).
+tff(func_def_19, type, sK10: database > $int).
+tff(func_def_20, type, sK11: (database * $int) > $int).
+tff(func_def_21, type, sK12: (database * $int) > $int).
+tff(func_def_22, type, sK13: (database * $int * $int) > database).
+tff(func_def_23, type, sK14: (database * $int) > $int).
+tff(func_def_24, type, sK15: (database * $int) > $int).
+tff(func_def_25, type, sK16: (database * $int * $int) > database).
+tff(func_def_26, type, sK17: (database * $int * database) > $int).
+tff(func_def_27, type, sK18: (database * $int * database) > $int).
+tff(pred_def_1, type, empty_record_condition: record > $o).
+tff(pred_def_2, type, valid_record: record > $o).
+tff(pred_def_3, type, empty_database_condition: database > $o).
+tff(pred_def_4, type, database_member: (record * database) > $o).
+tff(pred_def_5, type, tab: (database * $int * $int * $int) > $o).
+tff(pred_def_6, type, query3: (database * $int * $int) > $o).
+tff(pred_def_7, type, query4: (database * $int * $int) > $o).
+tff(pred_def_8, type, select_by_first: (database * $int * database) > $o).
+tff(pred_def_9, type, filtered3: (database * database) > $o).
+tff(pred_def_10, type, sum_third: (database * $int) > $o).
+tff(f1,axiom,(
+  empty_record_condition(empty_record)),
+  file('./tptp/equiv34.tptp',empty_record)).
+tff(f2,axiom,(
+  ! [X0 : $int,X1 : record] : ~empty_record_condition(r(X0,X1))),
+  file('./tptp/equiv34.tptp',nonempty_record)).
+tff(f3,axiom,(
+  ! [X2 : record] : (valid_record(X2) <=> ? [X0 : $int,X3 : $int,X4 : $int] : r(X0,r(X3,r(X4,empty_record))) = X2)),
+  file('./tptp/equiv34.tptp',valid_record)).
+tff(f7,axiom,(
+  ! [X0 : record,X1 : database] : (~valid_record(X0) => ~database_member(X0,X1))),
+  file('./tptp/equiv34.tptp',database_with_only_valid_records)).
+tff(f8,axiom,(
+  ! [X0 : record,X1 : database] : database_member(X0,db(X0,X1))),
+  file('./tptp/equiv34.tptp',database_member)).
+tff(f32,plain,(
+  ! [X0 : record] : (valid_record(X0) <=> ? [X1 : $int,X2 : $int,X3 : $int] : r(X1,r(X2,r(X3,empty_record))) = X0)),
+  inference(rectify,[],[f3])).
+tff(f40,plain,(
+  ! [X0 : record] : (valid_record(X0) => ? [X1 : $int,X2 : $int,X3 : $int] : r(X1,r(X2,r(X3,empty_record))) = X0)),
+  inference(unused_predicate_definition_removal,[],[f32])).
+tff(f42,plain,(
+  ! [X0 : record] : (? [X1 : $int,X2 : $int,X3 : $int] : r(X1,r(X2,r(X3,empty_record))) = X0 | ~valid_record(X0))),
+  inference(ennf_transformation,[],[f40])).
+tff(f43,plain,(
+  ! [X0 : record,X1 : database] : (~database_member(X0,X1) | valid_record(X0))),
+  inference(ennf_transformation,[],[f7])).
+tff(f49,plain,(
+  empty_record_condition(empty_record)),
+  inference(cnf_transformation,[],[f1])).
+tff(f53,plain,(
+  ( ! [X0:record] : (~valid_record(X0) | r(sK3(X0),r(sK4(X0),r(sK5(X0),empty_record))) = X0) )),
+  inference(cnf_transformation,[],[f42])).
+tff(f54,plain,(
+  ( ! [X0:$int,X1:record] : (~empty_record_condition(r(X0,X1))) )),
+  inference(cnf_transformation,[],[f2])).
+tff(f56,plain,(
+  ( ! [X0:record,X1:database] : (database_member(X0,db(X0,X1))) )),
+  inference(cnf_transformation,[],[f8])).
+tff(f57,plain,(
+  ( ! [X0:record,X1:database] : (valid_record(X0) | ~database_member(X0,X1)) )),
+  inference(cnf_transformation,[],[f43])).
+tff(f75,plain,(
+  spl19_0 <=> empty_record_condition(empty_record)),
+  introduced(avatar_definition,[new_symbols(naming,[spl19_0])])).
+tff(f76,plain,(
+  empty_record_condition(empty_record) | ~spl19_0),
+  inference(avatar_component_clause,[],[f75])).
+tff(f77,plain,(
+  spl19_0),
+  inference(avatar_split_clause,[],[f49,f75])).
+tff(f95,plain,(
+  spl19_10 <=> ! [X1 : record,X0 : $int] : ~empty_record_condition(r(X0,X1))),
+  introduced(avatar_definition,[new_symbols(naming,[spl19_10])])).
+tff(f96,plain,(
+  ( ! [X0:$int,X1:record] : (~empty_record_condition(r(X0,X1))) ) | ~spl19_10),
+  inference(avatar_component_clause,[],[f95])).
+tff(f97,plain,(
+  spl19_10),
+  inference(avatar_split_clause,[],[f54,f95])).
+tff(f112,plain,(
+  spl19_18 <=> ! [X1 : database,X0 : record] : database_member(X0,db(X0,X1))),
+  introduced(avatar_definition,[new_symbols(naming,[spl19_18])])).
+tff(f113,plain,(
+  ( ! [X0:record,X1:database] : (database_member(X0,db(X0,X1))) ) | ~spl19_18),
+  inference(avatar_component_clause,[],[f112])).
+tff(f114,plain,(
+  spl19_18),
+  inference(avatar_split_clause,[],[f56,f112])).
+tff(f116,plain,(
+  spl19_20 <=> ! [X1 : database,X0 : record] : (valid_record(X0) | ~database_member(X0,X1))),
+  introduced(avatar_definition,[new_symbols(naming,[spl19_20])])).
+tff(f117,plain,(
+  ( ! [X0:record,X1:database] : (~database_member(X0,X1) | valid_record(X0)) ) | ~spl19_20),
+  inference(avatar_component_clause,[],[f116])).
+tff(f118,plain,(
+  spl19_20),
+  inference(avatar_split_clause,[],[f57,f116])).
+tff(f123,plain,(
+  ( ! [X0:record] : (valid_record(X0)) ) | (~spl19_18 | ~spl19_20)),
+  inference(resolution,[],[f117,f113])).
+tff(f124,plain,(
+  ( ! [X0:record] : (r(sK3(X0),r(sK4(X0),r(sK5(X0),empty_record))) = X0) ) | (~spl19_18 | ~spl19_20)),
+  inference(subsumption_resolution,[],[f53,f123])).
+tff(f651,plain,(
+  spl19_128 <=> ! [X0 : record] : r(sK3(X0),r(sK4(X0),r(sK5(X0),empty_record))) = X0),
+  introduced(avatar_definition,[new_symbols(naming,[spl19_128])])).
+tff(f652,plain,(
+  ( ! [X0:record] : (r(sK3(X0),r(sK4(X0),r(sK5(X0),empty_record))) = X0) ) | ~spl19_128),
+  inference(avatar_component_clause,[],[f651])).
+tff(f653,plain,(
+  spl19_128 | ~spl19_18 | ~spl19_20),
+  inference(avatar_split_clause,[],[f124,f116,f112,f651])).
+tff(f674,plain,(
+  ( ! [X0:record] : (~empty_record_condition(X0)) ) | (~spl19_10 | ~spl19_128)),
+  inference(superposition,[],[f96,f652])).
+tff(f675,plain,(
+  $false | (~spl19_0 | ~spl19_10 | ~spl19_128)),
+  inference(subsumption_resolution,[],[f76,f674])).
+tff(f676,plain,(
+  ~spl19_0 | ~spl19_10 | ~spl19_128),
+  inference(avatar_contradiction_clause,[],[f675])).
+tff(f677,plain,(
+  $false),
+  inference(avatar_sat_refutation,[],[f77,f97,f114,f118,f653,f676])).
+% SZS output end Proof for equiv34
+% ------------------------------
+% Version: Vampire 4.2.2 (commit e1949dd on 2017-12-14 18:39:21 +0000)
+% Termination reason: Refutation
+
+% Memory used [KB]: 5500
+% Time elapsed: 0.009 s
+% ------------------------------
+% ------------------------------
+% Success in time 0.125 s
 ```

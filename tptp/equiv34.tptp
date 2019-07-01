@@ -1,6 +1,143 @@
-tff(list_sum_type, type, list_sum 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TYPES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ 
+tff(record_type,                   type,                   record : $tType                                ).
+tff(r_type,                        type,                        r : ( $int * record ) > record            ). % record structure (list of ints)
+tff(empty_record_type,             type,             empty_record : record                                ). % empty_record type
+tff(empty_record_condition_type,   type,   empty_record_condition : record > $o                           ). % record emptiness check
+
+tff(valid_record_type,             type,             valid_record : record > $o                           ). % record validity check
+
+
+tff(database_type,                 type,                 database : $tType                                ).
+tff(db_type,                       type,                       db : ( record * database ) > database      ). % database structure (list of valid records)
+tff(empty_database_type,           type,           empty_database : database                              ). % empty database type
+tff(empty_database_condition_type, type, empty_database_condition : database > $o                         ). % database emptiness check
+
+tff(database_member_type,          type,          database_member : ( record * database ) > $o            ). % database lookup
+
+tff(tab_type,                      type,                      tab : ( database * $int * $int * $int) > $o ). % TODO not needed
+
+tff(query3_type,                   type,                   query3 : ( database * $int * $int ) > $o       ).
+tff(query4_type,                   type,                   query4 : ( database * $int * $int ) > $o       ).
+
+tff(select_by_first_type,          type,          select_by_first : ( database * $int * database ) > $o   ).
+tff(filtered3_type,                type,                filtered3 : ( database * database ) > $o          ).
+tff(sum_third_type,                type,                sum_third : ( database * $int ) > $o              ).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RECORD AXIOMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+tff(empty_record, axiom,
+    empty_record_condition(empty_record) ).
+
+tff(nonempty_record, axiom,
+    ! [ X: $int, XS : record] :
+        ( ~ empty_record_condition( r(X, XS) ) ) ).
+
+tff(valid_record, axiom,
+    ! [ R : record ] :
+        ( valid_record(R)
+            <=> ? [ X : $int, Y : $int, Z : $int ] : R = r(X, r(Y, r(Z, empty_record) ) ) ) ).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DATABASE AXIOMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+tff(empty_database, axiom,
+    empty_database_condition(empty_database) ).
+
+tff(nonempty_database, axiom, (
+    ! [X : record, XS : database] :
+        ( ~ empty_database_condition( db(X, XS) ) ) ) ).
+
+tff(empty_database_member, axiom, (
+    ! [X : record] :
+        ( ~ database_member(X, empty_database) ) ) ).
+
+tff(database_with_only_valid_records, axiom, (
+    ! [X : record, XS : database] :
+        ( ( ~ valid_record(X) ) => ( ~ database_member(X,XS) ) ) ) ).
+
+tff(database_member, axiom, (
+    ! [X : record, XS : database] :
+        ( database_member(X, db(X, XS) ) ) ) ).
+
+tff(database_member, axiom, (
+    ! [X : record, Y : record, XS : database ] :
+        ( database_member(X, XS) => database_member(X, db(Y, XS) ) ) ) ).
+
+% database lookup
+tff(data_in_table, axiom, (
+    ! [DB : database, FST : $int, SND : $int, TRD : $int] :
+        ( tab(DB, FST, SND, TRD)
+            <=> ( database_member( r(TRD, r(SND, r(FST, empty_record))), DB) ) ) ) ).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AGGREGATION FUNCTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+tff(selection_by_first, axiom, (
+    ! [DB : database, FST : $int, RESULT : database] :
+        ( select_by_first(DB, FST, RESULT)
+            <=> ( ! [ SND : $int, TRD : $int ] :
+                ( tab(DB, FST, SND, TRD) <=> tab(RESULT, FST, SND, TRD) ) ) ) ) ).
+
+tff(sum_third_empty_database, axiom, (
+    sum_third(empty_database, 0) ) ).
+
+tff(sum_third, axiom, (
+    ! [DB : database, SUM : $int] :
+        ( ? [DB2 : database, SUM2 : $int, FST : $int, SND : $int, TRD : $int] :
+            ( ( DB = db(r(TRD, r(SND, r(FST, empty_record))), DB2)
+                & sum_third(DB2, SUM2) )
+            => sum_third(DB, $sum(SUM2, TRD)) ) ) ) ).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% QUERY DEFINITIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+tff(query3_filter, definition, (
+    ! [DB : database, FILTERED : database] :
+        ( filtered3(DB, FILTERED) <=> (
+            ! [FST : $int, SND : $int, TRD : $int] :
+                ( ( tab(DB, FST, SND, TRD)
+                & $less(10, TRD) ) <=> tab(FILTERED, FST, SND, TRD) ) ) ) ) ).
+
+
+tff(query3, definition, (
+    ! [DB : database, FST : $int, SUM : $int] :
+        ( query3(DB, FST, SUM)
+            <=> ( ( ? [SND : $int, TRD : $int] : tab(DB, FST, SND, TRD) )
+                & ( ? [FILTERED_DB : database] :
+                    ( select_by_first(DB, FST, FILTERED_DB)
+                    & sum_third(FILTERED_DB, SUM) ) ) ) ) ) ).
+
+tff(query4, definition, (
+    ! [DB : database, FST : $int, SUM : $int] :
+        ( query4(DB, FST, SUM)
+            <=> ( ( ? [SND : $int, TRD : $int] : tab(DB, FST, SND, TRD) )
+                & ( ? [FILTERED_DB : database] :
+                    ( select_by_first(DB, FST, FILTERED_DB)
+                    & sum_third(FILTERED_DB, SUM) ) ) ) ) ) ).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EQUIVALENCE CHECK
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 tff(equiv34, conjecture, (
-  ! [FST] :
-    ( query3(FST)
-    <=> query4(FST) ) ) ).
+    ! [DB : database, FST : $int, SUM : $int] :
+        ( query3(DB, FST, SUM)
+            <=> query4(DB, FST, SUM) ) ) ).
+
+
+
+
+
