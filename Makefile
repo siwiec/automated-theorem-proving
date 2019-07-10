@@ -25,4 +25,4 @@ clean-tests: ## Remove all the .ast and .tptp files in the tests/ directory
 clean-build: ## Remove the dist/ directory
 	rm -rf dist
 
-clean-all: clean-dist clean-tests ## Remove all files not under version control
+clean-all: clean-build clean-tests ## Remove all files not under version control
