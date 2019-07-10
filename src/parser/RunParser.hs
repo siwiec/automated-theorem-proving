@@ -11,7 +11,6 @@ import Language.SQL.SimpleSQL.Parse
 
 import Language.SQL.SimpleSQL.Syntax (ansi2011, Statement)
 
-
 main :: IO ()
 main = do
     args <- getArgs
