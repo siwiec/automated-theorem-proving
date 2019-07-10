@@ -1,5 +1,3 @@
-#!/usr/bin/runhaskel
-
 import System.Environment
 import Text.Show.Pretty
 import System.IO
