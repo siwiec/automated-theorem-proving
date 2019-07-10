@@ -57,7 +57,9 @@ executable automated-theorem-proving
   -- other-extensions:    
   
   -- Other library packages from which modules are imported.
-  build-depends:       base >=4.10 && <4.11
+  build-depends:       base >=4.10 && <4.11,
+                       simple-sql-parser,
+                       pretty-show
   
   -- Directories containing source files.
   hs-source-dirs:      src
