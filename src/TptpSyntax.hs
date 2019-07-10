@@ -1,5 +1,5 @@
-module TptpSyntax where
+module TptpSyntax (TptpFormula)
+	where
 
 
-
-TptpFormula
+type TptpFormula = (String)

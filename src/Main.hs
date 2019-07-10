@@ -12,9 +12,6 @@ import Language.SQL.SimpleSQL.Parse
 import Language.SQL.SimpleSQL.Syntax (ansi2011, Statement)
 
 import Translate
-       (translateStatements
-       ,TranslateError
-       ,teFormattedError)
 
 import TptpSyntax (TptpFormula)
 
