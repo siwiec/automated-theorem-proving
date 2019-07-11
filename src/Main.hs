@@ -3,6 +3,7 @@ module Main where
 import System.Environment
 import Text.Show.Pretty
 import System.IO
+import System.Exit
 
 import Language.SQL.SimpleSQL.Parse
        (parseStatements
@@ -45,11 +46,12 @@ doIt :: String -> IO ()
 doIt src = do
     let parsed :: Either ParseError [Statement]
         parsed = parseStatements ansi2011 "" Nothing src
-    either (error . peFormattedError)
-           (putStrLn . ppShow)
-           parsed
-    let translated :: Either TranslationError [TptpFormula]
-        translated = translateStatements parsed
-    either (error . teFormattedError)
-           (putStrLn . ppShow)
-           translated
+    case parsed of
+        (Left err) -> (error . peFormattedError) err
+        (Right ast) -> do
+            translated <- translateStatements ast
+            case translated of
+                (Left err) -> do
+                    putStrLn err
+                    exitWith $ ExitFailure 1
+                (Right tptp) -> putStrLn tptp >> exitSuccess
