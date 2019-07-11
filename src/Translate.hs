@@ -51,7 +51,7 @@ translateStatements parsedDatabaseScheme parsedQuery = do
     case result of
         (Left errorMsg, _) -> do
             fail $ "Translation error: " ++ errorMsg
-        (Right _, (_, output)) -> return $ Right $ ((show databaseScheme), (concat(map show output)))
+        (Right _, (databaseScheme, output)) -> return $ Right $ ((show databaseScheme), (concat(map show output)))
 
 translateStatement :: Statement
                    -> Eval ()
@@ -84,10 +84,9 @@ translateSelect qeSelectList qeFrom qeWhere qeGroupBy qeHaving = do
     -- translateQeGroupBy qeGroupBy
     -- translateQeHaving qeHaving
     let existsIdents = [ id | id <- idents, notElem id forAllIdents ]
-    let formula = And (ForAll forAllIdents selectFormula) (And (Exists existsIdents fromFormula) EmptyFormula)
+    let formula = Equiv (ForAll forAllIdents selectFormula) (And (Exists existsIdents fromFormula) EmptyFormula)
     (_, store) <- get
     fofEmit ("select_" ++ ( show (length store))) Axiom formula Nothing
-
 
 translateQeCombOp :: SetOperatorName
                   -> Eval ()
