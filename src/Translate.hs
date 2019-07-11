@@ -6,6 +6,7 @@ module Translate
 
 import Language.SQL.SimpleSQL.Syntax
 import TptpSyntax
+import FofFormula
 
 
 
@@ -15,7 +16,7 @@ import Prelude
 import Data.Map ( Map, lookup, insert, empty, member, notMember, elems, union )
 import Data.Either
 import Data.Maybe
-import Data.List ( length )
+import Data.List ( length, intercalate )
 import System.Environment ( getArgs )
 import Control.Monad.State
 import System.FilePath.Posix
@@ -38,7 +39,7 @@ runTranslate initStore error = runStateT (runErrorT error) initStore
 
 fofEmit :: String       -- Name
         -> Role         -- Role
-        -> String       -- FofFormula
+        -> FofFormula   -- FofFormula
         -> Maybe String -- Annotations
         -> Eval ()
 fofEmit n r f a = modify $ \store -> store ++ [TptpFofFormula n r f a]
@@ -51,8 +52,6 @@ translateStatements ss = do
         (Left errorMsg, _) -> do
             fail $ "Translation error: " ++ errorMsg
         (Right _, (tptpFormulas)) -> return $ Right $ concat(map show tptpFormulas)
-
-
 
 translateStatement :: Statement
                    -> Eval ()
@@ -77,13 +76,17 @@ translateSelect :: [(ScalarExpr,Maybe Name)]
                 -> [GroupingExpr]
                 -> Maybe ScalarExpr
                 -> Eval ()
-
+translateSelect [] _ _ _ _ = return ()
 translateSelect qeSelectList qeFrom qeWhere qeGroupBy qeHaving = do
-    translateQeSelectList qeSelectList
-    translateQeFrom qeFrom
-    translateQeWhere qeWhere
-    translateQeGroupBy qeGroupBy
-    translateQeHaving qeHaving
+    (idents, fromFormula) <- translateQeFrom qeFrom
+    (forAllIdents, selectFormula) <- translateQeSelectList qeSelectList
+    whereFormula <- translateQeWhere qeWhere
+    -- translateQeGroupBy qeGroupBy
+    -- translateQeHaving qeHaving
+    let existsIdents = [ id | id <- idents, notElem id forAllIdents ]
+    let formula = And (ForAll forAllIdents selectFormula) (And (Exists existsIdents fromFormula) EmptyFormula)
+    store <- get
+    fofEmit ("select_" ++ ( show (length store))) Axiom formula Nothing
 
 
 translateQeCombOp :: SetOperatorName
@@ -91,11 +94,18 @@ translateQeCombOp :: SetOperatorName
 translateQeCombOp qeCombOp = throwError "Function not yet implemented"
 
 translateQeSelectList :: [(ScalarExpr,Maybe Name)]
-                      -> Eval ()
-translateQeSelectList qeSelectList = throwError "Function not yet implemented"
+                      -> Eval ([String], FofFormula)
+translateQeSelectList qeSelectList = do
+    let idents = map (intercalate "_") $
+                    map (\(Iden ns, _) ->
+                        map (\(Name _ n) -> n) ns
+                        ) qeSelectList
+    -- idents holds the names of columns
+    --queryName <- getNewQueryName
+    return (idents, EmptyFormula)
 
 translateQeFrom :: [TableRef]
-                -> Eval ()
+                -> Eval ([String], FofFormula)
 translateQeFrom qeFrom = throwError "Function not yet implemented"
 
 translateQeWhere :: Maybe ScalarExpr

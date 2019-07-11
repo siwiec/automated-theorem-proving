@@ -1,12 +1,13 @@
 module TptpSyntax (TptpFormula(..)
-                  ,Role
+                  ,Role(..)
                   ) where
 
+import FofFormula
 
 data Role = Axiom | Conjecture | Definition
 data TptpFormula = TptpFofFormula {name        :: String
                                   ,role        :: Role
-                                  ,formula     :: String
+                                  ,formula     :: FofFormula
                                   ,annotations :: Maybe String
                                   }
 
