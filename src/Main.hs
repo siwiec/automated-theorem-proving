@@ -20,13 +20,14 @@ main :: IO ()
 main = do
     args <- getArgs
     case args of
-        ("-t":xs) -> do
-            mapM_ (\x -> do
-                putStrLn $ "Running test for file " ++ x ++ "...\n"
-                withFile x ReadMode (\k -> do
-                    sql <- hGetContents k
-                    runTest sql)
-                runTest x) xs
+        ["--ast", databaseSchemeFile, queryFile] -> do
+                putStrLn $ "Running test for query " ++ queryFile ++ " with database scheme " ++ databaseSchemeFile ++ "...\n"
+                withFile databaseSchemeFile ReadMode (\k -> do
+                    rawDatabaseScheme <- hGetContents k
+                    withFile queryFile ReadMode (\k -> do
+                        rawQuery <- hGetContents k
+                        runTest rawDatabaseScheme rawQuery))
+
         [databaseSchemeFile, query1File, query2File] ->
             withFile databaseSchemeFile ReadMode (\k -> do
                 databaseScheme <- hGetContents k
@@ -38,19 +39,27 @@ main = do
         _ -> do
             putStrLn "Usage: automated-theorem-proving databaseScheme query1 query2"
 
-runTest :: String -> IO ()
-runTest sql = do
-    let parsed :: Either ParseError [Statement]
-        parsed = parseStatements ansi2011 "" Nothing sql
-    case parsed of
+runTest :: String -> String -> IO ()
+runTest rawDatabaseScheme rawQuery = do
+    let parsedDatabaseScheme :: Either ParseError [Statement]
+        parsedDatabaseScheme = parseStatements ansi2011 "" Nothing rawDatabaseScheme
+    case parsedDatabaseScheme of
         (Left err) -> (error . peFormattedError) err
-        (Right ast) -> do
-            translated <- translateStatements ast
-            case translated of
-                (Left err) -> do
-                    putStrLn err
-                    exitWith $ ExitFailure 1
-                (Right tptp) -> putStrLn tptp >> exitSuccess
+        (Right databaseSchemeAst) -> do
+            let parsedQuery :: Either ParseError [Statement]
+                parsedQuery = parseStatements ansi2011 "" Nothing rawQuery
+            case parsedQuery of
+                (Left err) -> (error . peFormattedError) err
+                (Right queryAst) -> do
+                    queryTptpFormat <- translateStatements databaseSchemeAst queryAst
+                    case queryTptpFormat of
+                        (Left err) -> do
+                            putStrLn err
+                            exitWith $ ExitFailure 1
+                        (Right (databaseScheme, query)) -> do
+                            putStrLn databaseScheme
+                            putStrLn query
+                            exitSuccess
 
 runEquivalenceCheck :: String -> String -> String -> IO ()
 runEquivalenceCheck databaseScheme query1 query2 = do

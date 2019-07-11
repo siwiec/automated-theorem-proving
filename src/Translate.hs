@@ -7,7 +7,7 @@ module Translate
 import Language.SQL.SimpleSQL.Syntax
 import TptpSyntax
 import FofFormula
-
+import DatabaseScheme
 
 
 import System.IO ( stdin, hGetContents, hPutStrLn, stderr )
@@ -27,10 +27,8 @@ import Data.Char
 -- Statement structure described here: https://github.com/JakeWheat/simple-sql-parser/blob/master/Language/SQL/SimpleSQL/Syntax.lhs
 
 
-type Store = ([TptpFormula]
+type Store = (DatabaseScheme, [TptpFormula]
              )
-
-initStore = []
 
 
 type Eval a = ErrorT String (StateT Store IO) a
@@ -42,16 +40,18 @@ fofEmit :: String       -- Name
         -> FofFormula   -- FofFormula
         -> Maybe String -- Annotations
         -> Eval ()
-fofEmit n r f a = modify $ \store -> store ++ [TptpFofFormula n r f a]
+fofEmit n r f a = modify $ \(databaseScheme, store) -> (databaseScheme, store ++ [TptpFofFormula n r f a])
 
-translateStatements :: [Statement]
-                    -> IO (Either String String)
-translateStatements ss = do
-    result <- runTranslate initStore (mapM_ translateStatement ss)
+translateStatements :: [Statement] -- databaseScheme
+                    -> [Statement] -- query
+                    -> IO (Either String (String, String))
+translateStatements parsedDatabaseScheme parsedQuery = do
+    let databaseScheme = databaseSchemeFromAst parsedDatabaseScheme
+    result <- runTranslate (databaseScheme, []) (mapM_ translateStatement parsedQuery)
     case result of
         (Left errorMsg, _) -> do
             fail $ "Translation error: " ++ errorMsg
-        (Right _, (tptpFormulas)) -> return $ Right $ concat(map show tptpFormulas)
+        (Right _, (_, output)) -> return $ Right $ ((show databaseScheme), (concat(map show output)))
 
 translateStatement :: Statement
                    -> Eval ()
@@ -85,7 +85,7 @@ translateSelect qeSelectList qeFrom qeWhere qeGroupBy qeHaving = do
     -- translateQeHaving qeHaving
     let existsIdents = [ id | id <- idents, notElem id forAllIdents ]
     let formula = And (ForAll forAllIdents selectFormula) (And (Exists existsIdents fromFormula) EmptyFormula)
-    store <- get
+    (_, store) <- get
     fofEmit ("select_" ++ ( show (length store))) Axiom formula Nothing
 
 
