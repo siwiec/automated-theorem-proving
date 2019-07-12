@@ -680,3 +680,10 @@ tff(f677,plain,(
 % ------------------------------
 % Success in time 0.125 s
 ```
+
+
+## git configuration
+To add pre-commit hooks for the git repository run
+```
+ln -s pre-commit.sh .git/hooks/pre-commit
+```

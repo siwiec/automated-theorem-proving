@@ -11,9 +11,9 @@ Module exports function translateStatements, which creates a query description i
 
 Currently only first-order logic statements are supported and only a small subset of SQL queries.
 
-```
+@
 BNF of the accepted SQL queries
-```
+@
 
 
 
