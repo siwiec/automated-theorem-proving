@@ -19,8 +19,9 @@ module TptpSyntax (
 
 import FofFormula
 
--- * Types
+-- | Definition of the TPTP formula role.
 data Role = Axiom | Conjecture | Definition
+-- | TptpFormula stores all the parameters for the TPTP predicates.
 data TptpFormula = TptpFofFormula {name        :: String
                                   ,role        :: Role
                                   ,formula     :: FofFormula

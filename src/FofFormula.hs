@@ -17,7 +17,7 @@ module FofFormula (
 
 import Data.List
 
--- * Types
+-- | FofFormula stores all available logical sentences, which can be translated into first-order logic TPTP syntax.
 data FofFormula = EmptyFormula
                 | ForAll [String] FofFormula
                 | Exists [String] FofFormula

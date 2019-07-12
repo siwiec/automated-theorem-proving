@@ -25,9 +25,12 @@ import Language.SQL.SimpleSQL.Parse
 import Language.SQL.SimpleSQL.Syntax
 import qualified Data.Map.Strict as Map
 
+-- | DataType contains all the implemented data types
 data DataType = Number deriving Show-- TODO different DataTypes
+-- | Type for storing the database scheme. It maps table names to column names and column names to their types.
 type DatabaseScheme = Map.Map String (Map.Map String DataType)
 
+-- | databaseSchemeFromAst creates the DatabaseScheme value based on the abstract syntax tree of the DDL.
 databaseSchemeFromAst :: [Statement] -> DatabaseScheme
 databaseSchemeFromAst ss = Map.fromList [ x | Just x <- (map addTable ss) ]
 
