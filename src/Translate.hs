@@ -1,6 +1,6 @@
 {-|
 Module      : Translate
-Description : Module exports datatypes and functions for managing the database scheme
+Description : Core module for translating queries into the TPTP syntax
 Copyright   : n/a
 License     : MIT
 Maintainer  : mat.siwiec@gmail.com
