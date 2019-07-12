@@ -1,3 +1,15 @@
+{-|
+Module      : Main
+Description : Module exports datatypes and functions for managing the database scheme
+Copyright   :
+License     : MIT
+Maintainer  : mat.siwiec@gmail.com
+Stability   : experimental
+Portability : POSIX
+
+Here is a longer description of this module, containing some
+commentary with @some markup@.
+-}
 module Main where
 
 import System.Environment
@@ -16,6 +28,7 @@ import Translate
 
 import TptpSyntax (TptpFormula)
 
+-- | main
 main :: IO ()
 main = do
     args <- getArgs
@@ -39,6 +52,7 @@ main = do
         _ -> do
             putStrLn "Usage: automated-theorem-proving databaseScheme query1 query2"
 
+-- | runTest
 runTest :: String -> String -> IO ()
 runTest rawDatabaseScheme rawQuery = do
     let parsedDatabaseScheme :: Either ParseError [Statement]
@@ -61,6 +75,7 @@ runTest rawDatabaseScheme rawQuery = do
                             putStrLn query
                             exitSuccess
 
+-- | runEquivalenceCheck
 runEquivalenceCheck :: String -> String -> String -> IO ()
 runEquivalenceCheck databaseScheme query1 query2 = do
     putStrLn "ERROR"

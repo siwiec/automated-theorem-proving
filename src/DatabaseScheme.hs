@@ -1,5 +1,24 @@
-module DatabaseScheme (DatabaseScheme
+{-|
+Module      : DatabaseScheme
+Description : Module exports datatypes and functions for managing the database scheme
+Copyright   :
+License     : MIT
+Maintainer  : mat.siwiec@gmail.com
+Stability   : experimental
+Portability : POSIX
+
+Here is a longer description of this module, containing some
+commentary with @some markup@.
+-}
+
+module DatabaseScheme (
+                      -- * Types
+                      -- ** DatabaseScheme
+                      DatabaseScheme
+                      -- ** DataType
                       ,DataType
+                      -- * Functions
+                      -- ** databaseSchemeFromAst
                       ,databaseSchemeFromAst
                       ) where
 

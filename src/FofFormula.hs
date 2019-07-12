@@ -1,7 +1,24 @@
-module FofFormula where
+{-|
+Module      : FofFormula
+Description : Module exports datatypes and functions for managing the database scheme
+Copyright   :
+License     : MIT
+Maintainer  : mat.siwiec@gmail.com
+Stability   : experimental
+Portability : POSIX
+
+Here is a longer description of this module, containing some
+commentary with @some markup@.
+-}
+module FofFormula (
+                  -- * Types
+                  -- ** FofFormula
+                  FofFormula(..)
+                  ) where
 
 import Data.List
 
+-- * Types
 data FofFormula = EmptyFormula
                 | ForAll [String] FofFormula
                 | Exists [String] FofFormula

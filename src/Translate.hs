@@ -1,7 +1,20 @@
+{-|
+Module      : Translate
+Description : Module exports datatypes and functions for managing the database scheme
+Copyright   :
+License     : MIT
+Maintainer  : mat.siwiec@gmail.com
+Stability   : experimental
+Portability : POSIX
+
+Here is a longer description of this module, containing some
+commentary with @some markup@.
+-}
 module Translate
-    (translateStatements
-    -- ,TranslateError
-    -- ,teFormattedError
+    (
+    -- * Functions
+    -- ** translateStatements
+    translateStatements
     ) where
 
 import Language.SQL.SimpleSQL.Syntax
@@ -23,10 +36,6 @@ import System.FilePath.Posix
 import Control.Monad.Error
 import Data.Char
 
-
--- Statement structure described here: https://github.com/JakeWheat/simple-sql-parser/blob/master/Language/SQL/SimpleSQL/Syntax.lhs
-
-
 type Store = (DatabaseScheme, [TptpFormula]
              )
 
@@ -42,8 +51,15 @@ fofEmit :: String       -- Name
         -> Eval ()
 fofEmit n r f a = modify $ \(databaseScheme, store) -> (databaseScheme, store ++ [TptpFofFormula n r f a])
 
-translateStatements :: [Statement] -- databaseScheme
-                    -> [Statement] -- query
+{- |
+    The translateStatements function takes two lists of statements (the abstract syntax tree of a DDL and a query)
+    and returns either an error message, when an eror occured during the translation of the query or two strings
+    one of which contains the description of the database scheme, and the other contains the query translated to the TPTP syntax
+
+    Statement structure described here: https://github.com/JakeWheat/simple-sql-parser/blob/master/Language/SQL/SimpleSQL/Syntax.lhs
+-}
+translateStatements :: [Statement] -- ^ databaseSchemeAst
+                    -> [Statement] -- ^ queryAst
                     -> IO (Either String (String, String))
 translateStatements parsedDatabaseScheme parsedQuery = do
     let databaseScheme = databaseSchemeFromAst parsedDatabaseScheme
