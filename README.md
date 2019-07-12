@@ -1,5 +1,7 @@
 # Automated theorem proving
 
+## Documentation
+Rendered documentation is available [http://htmlpreview.github.io/?https://github.com/siwiec/automated-theorem-proving/blob/master/docs/index.html](HERE).
 
 ## Database scheme
 ```
