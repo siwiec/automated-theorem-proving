@@ -1,14 +1,13 @@
 {-|
 Module      : Main
-Description : Module exports datatypes and functions for managing the database scheme
+Description : Main module for invoking the TPTP translation functions
 Copyright   :
 License     : MIT
 Maintainer  : mat.siwiec@gmail.com
 Stability   : experimental
 Portability : POSIX
 
-Here is a longer description of this module, containing some
-commentary with @some markup@.
+Module implements input parsing and TPTP output generation.
 -}
 module Main where
 

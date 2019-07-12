@@ -1,14 +1,13 @@
 {-|
 Module      : DatabaseScheme
 Description : Module exports datatypes and functions for managing the database scheme
-Copyright   :
+Copyright   : n/a
 License     : MIT
 Maintainer  : mat.siwiec@gmail.com
 Stability   : experimental
 Portability : POSIX
 
-Here is a longer description of this module, containing some
-commentary with @some markup@.
+DatabaseScheme exports basic types and function for creating, storing and analyzing the DatabaseScheme for analysed queries.
 -}
 
 module DatabaseScheme (

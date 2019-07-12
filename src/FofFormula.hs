@@ -1,14 +1,13 @@
 {-|
 Module      : FofFormula
-Description : Module exports datatypes and functions for managing the database scheme
-Copyright   :
+Description : Implementation of the first-order logic statements generation in the TPTP syntax
+Copyright   : n/a
 License     : MIT
 Maintainer  : mat.siwiec@gmail.com
 Stability   : experimental
 Portability : POSIX
 
-Here is a longer description of this module, containing some
-commentary with @some markup@.
+Module FofFormula implements the functions to translate first-order logic statements into the TPTP syntax.
 -}
 module FofFormula (
                   -- * Types

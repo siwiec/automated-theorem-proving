@@ -1,14 +1,22 @@
 {-|
 Module      : Translate
 Description : Module exports datatypes and functions for managing the database scheme
-Copyright   :
+Copyright   : n/a
 License     : MIT
 Maintainer  : mat.siwiec@gmail.com
 Stability   : experimental
 Portability : POSIX
 
-Here is a longer description of this module, containing some
-commentary with @some markup@.
+Module exports function translateStatements, which creates a query description in the TPTP syntax.
+
+Currently only first-order logic statements are supported and only a small subset of SQL queries.
+
+```
+BNF of the accepted SQL queries
+```
+
+
+
 -}
 module Translate
     (
