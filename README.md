@@ -1,7 +1,7 @@
 # Automated theorem proving
 
 ## Documentation
-Rendered documentation is available here: http://htmlpreview.github.io/?https://github.com/siwiec/automated-theorem-proving/blob/master/docs/index.html
+Haddock documentation is available here: http://htmlpreview.github.io/?https://github.com/siwiec/automated-theorem-proving/blob/master/docs/index.html
 
 ## Database scheme
 ```
@@ -14,8 +14,6 @@ CREATE TABLE tab (
 ```
 
 ## Simple queries
-
-
 
 ### Query 1
 

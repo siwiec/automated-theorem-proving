@@ -72,24 +72,15 @@ fofEmit n r f a = modify $ \(databaseScheme, store, queriesMap) -> (databaseSche
     Statement structure described here: https://github.com/JakeWheat/simple-sql-parser/blob/master/Language/SQL/SimpleSQL/Syntax.lhs
 -}
 translateStatements :: [Statement]
-                    -> IO () -- ^ Either error or database scheme description and translated query
-translateStatements inputAst = do
-    let databaseSchemeAst = [(CreateTable names tableElements) | (CreateTable names tableElements) <- inputAst]
-    let queriesAst = [(SelectStatement queryExpr) | (SelectStatement queryExpr) <- inputAst]
-    let databaseScheme = databaseSchemeFromAst databaseSchemeAst
-    -- translate all the queries
-    mapM_ (translateSingleQuery (databaseScheme, [], Data.Map.empty)) (zip [0..] queriesAst)
-
-translateSingleQuery :: Store                -- ^ Initial store
-                     -> (Integer, Statement)  -- ^ Pair (query number, query AST)
-                     -> IO () -- ^ Error message or the TPTP translation of the query
-translateSingleQuery initialStore (queryNumber, queryAst) = do
-    result <- runTranslate initialStore (translateStatement queryAst)
+                    -> IO (Either String (String, String)) -- ^ Either error or database scheme description and translated query
+translateStatements (parsedQuery1:parsedQuery2:parsedDatabaseScheme) = do
+    let databaseScheme = databaseSchemeFromAst parsedDatabaseScheme
+    result <- runTranslate (databaseScheme, [], Data.Map.empty) (mapM_ translateStatement [parsedQuery1, parsedQuery2])
     case result of
         (Left errorMsg, _) -> do
             fail $ "Translation error: " ++ errorMsg
-        (Right _, (_, queryTptp, _)) -> putStrLn $ show queryTptp
-
+        (Right _, (databaseScheme, output, _)) -> return $ Right ((show databaseScheme), (concat(Prelude.map show output)))
+translateStatements _ = fail "Unknown command; invalid number of queries"
 
 translateStatement :: Statement
                    -> Eval ()

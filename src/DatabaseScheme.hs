@@ -19,6 +19,8 @@ module DatabaseScheme (
                       -- * Functions
                       -- ** databaseSchemeFromAst
                       ,databaseSchemeFromAst
+					  -- ** getColumnNames
+					  ,getColumnNames
                       ) where
 
 import Language.SQL.SimpleSQL.Parse
@@ -41,3 +43,11 @@ addTable _ = Nothing
 addTableElement :: TableElement -> Maybe (String, DataType)
 addTableElement (TableColumnDef (ColumnDef (Name _ name) (PrecTypeName [Name _ "NUMBER" ] _) _ _)) = Just (name, Number)
 addTableElement _ = Nothing
+
+-- | Function returns the list of column names for the given table. If the table does not exist and empty list is returned.
+getColumnNames :: String -- ^ table name
+               -> DatabaseScheme -- ^ database scheme
+               -> [String] -- ^ column names
+getColumnNames tableName databaseScheme = case Map.lookup tableName databaseScheme of
+    Nothing -> []
+    (Just table) -> Map.keys table
