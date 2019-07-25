@@ -48,7 +48,7 @@ import Data.Foldable
 -- | Translator state
 type Store = (DatabaseScheme -- ^ set only at the beginning of the translation process
              ,[TptpFormula] -- ^ at the end of the translation process this value stores the query in the TPTP syntax
-             ,Data.Map.Map String FofFormula -- ^ map from query names to their first order representation
+             ,Data.Map.Map String ApplicableFofFormula -- ^ map from query names to their first order representation
              )
 
 
@@ -77,6 +77,8 @@ translateStatements inputAst = do
     let databaseSchemeAst = [(CreateTable names tableElements) | (CreateTable names tableElements) <- inputAst]
     let queriesAst = [(SelectStatement queryExpr) | (SelectStatement queryExpr) <- inputAst]
     let databaseScheme = databaseSchemeFromAst databaseSchemeAst
+    putStrLn "Database scheme:"
+    putStrLn $ show databaseScheme
     -- translate all the queries
     mapM_ (translateSingleQuery (databaseScheme, [], Data.Map.empty)) (zip [0..] queriesAst)
 
@@ -127,7 +129,7 @@ translateSelect qeSelectList qeFrom qeWhere qeGroupBy qeHaving = do
 
 translateQeCombOp :: SetOperatorName
                   -> Eval ()
-translateQeCombOp qeCombOp = throwError "Function not yet implemented"
+translateQeCombOp qeCombOp = throwError "Function translateQeCombOp not yet implemented"
 
 translateQeSelectList :: [(ScalarExpr,Maybe Name)]
                       -> Eval ([String], FofFormula)
@@ -153,25 +155,31 @@ translateTableRef tableRef = case tableRef of
     (TRSimple names) -> do
         translatedTRSimple <- mapM translateTRSimple names
         return $ Data.Foldable.foldr (\ (idents1, translatedTRSimple1) (idents2, translatedTRSimple2) -> (idents1 ++ idents2, And translatedTRSimple1 translatedTRSimple2)) ([], EmptyFormula) translatedTRSimple
-    (TRJoin tableRef1 nautral joinType tableRef2 joinCondition) ->  throwError "Function not yet implemented"
-    (TRParens tableRef) -> throwError "Function not yet implemented"
-    (TRAlias tableRef alias) -> throwError "Function not yet implemented"
-    (TRQueryExpr queryExpr) -> throwError "Function not yet implemented"
-    (TRFunction names scalarExprs) -> throwError "Function not yet implemented"
-    (TRLateral tableRef) -> throwError "Function not yet implemented"
-    (TROdbc tableRef) -> throwError "Function not yet implemented"
+    (TRJoin tableRef1 nautral joinType tableRef2 joinCondition) ->  throwError "Function translateTRJoin not yet implemented"
+    (TRParens tableRef) -> throwError "Function translateTRParens not yet implemented"
+    (TRAlias tableRef alias) -> translateTRAlias tableRef alias
+    (TRQueryExpr queryExpr) -> throwError "Function translateTRQueryExpr not yet implemented"
+    (TRFunction names scalarExprs) -> throwError "Function translateTRFunction not yet implemented"
+    (TRLateral tableRef) -> throwError "Function translateTRLateral not yet implemented"
+    (TROdbc tableRef) -> throwError "Function translateTROdbc not yet implemented"
+
+translateTRAlias :: TableRef
+                 -> Alias
+                 -> Eval ([String], FofFormula)
+translateTRAlias tableRef alias = throwError "Function translateTRAlias not yet implemented"
+
 
 translateQeWhere :: Maybe ScalarExpr
                  -> Eval ()
-translateQeWhere qeWhere = throwError "Function not yet implemented"
+translateQeWhere qeWhere = throwError "Function translateQeWhere not yet implemented"
 
 translateQeGroupBy :: [GroupingExpr]
                    -> Eval ()
-translateQeGroupBy qeGroupBy = throwError "Function not yet implemented"
+translateQeGroupBy qeGroupBy = throwError "Function translateQeGroupBy not yet implemented"
 
 translateQeHaving :: Maybe ScalarExpr
                   -> Eval ()
-translateQeHaving qeHaving = throwError "Function not yet implemented"
+translateQeHaving qeHaving = throwError "Function translateQeHaving not yet implemented"
 
 translateTRSimple :: Name
                -> Eval ([String], FofFormula)
@@ -188,4 +196,4 @@ translateJoinCondition :: Maybe JoinCondition
 translateJoinCondition _ = return EmptyFormula
 
 translateTable :: Name -> Eval ()
-translateTable name = throwError "Function not yet implemented"
+translateTable name = throwError "Function translateTable not yet implemented"

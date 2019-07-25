@@ -19,8 +19,8 @@ module DatabaseScheme (
                       -- * Functions
                       -- ** databaseSchemeFromAst
                       ,databaseSchemeFromAst
-					  -- ** getColumnNames
-					  ,getColumnNames
+                      -- ** getColumnNames
+                      ,getColumnNames
                       ) where
 
 import Language.SQL.SimpleSQL.Parse
@@ -28,13 +28,20 @@ import Language.SQL.SimpleSQL.Syntax
 import qualified Data.Map.Strict as Map
 
 -- | DataType contains all the implemented data types
-data DataType = Number deriving Show-- TODO different DataTypes
+data DataType = Number deriving Show
+
 -- | Type for storing the database scheme. It maps table names to column names and column names to their types.
-type DatabaseScheme = Map.Map String (Map.Map String DataType)
+data DatabaseScheme = Database (Map.Map String (Map.Map String DataType))
+
+instance Show DatabaseScheme where
+    show (Database databaseScheme) = concat $ map showTable $ Map.toList databaseScheme
+        where
+            showTable :: (String, (Map.Map String DataType)) -> String
+            showTable (tableName, columns) = tableName ++ ":\n" ++ (unlines ["\t" ++ columnName ++ ": " ++ show columnType | (columnName, columnType) <- (Map.toList columns)])
 
 -- | databaseSchemeFromAst creates the DatabaseScheme value based on the abstract syntax tree of the DDL.
 databaseSchemeFromAst :: [Statement] -> DatabaseScheme
-databaseSchemeFromAst ss = Map.fromList [ x | Just x <- (map addTable ss) ]
+databaseSchemeFromAst ss = Database (Map.fromList [ x | Just x <- (map addTable ss) ])
 
 addTable :: Statement -> Maybe (String, Map.Map String DataType)
 addTable (CreateTable [Name _ name] tableElements) = Just (name, Map.fromList [ x | Just x <- (map addTableElement tableElements)])
@@ -48,6 +55,8 @@ addTableElement _ = Nothing
 getColumnNames :: String -- ^ table name
                -> DatabaseScheme -- ^ database scheme
                -> [String] -- ^ column names
-getColumnNames tableName databaseScheme = case Map.lookup tableName databaseScheme of
+getColumnNames tableName (Database databaseScheme) = case Map.lookup tableName databaseScheme of
     Nothing -> []
     (Just table) -> Map.keys table
+
+

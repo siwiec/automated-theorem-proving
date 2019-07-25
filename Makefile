@@ -1,4 +1,4 @@
-PARSER_TESTS = $(wildcard tests/*.sql)
+TEST_FILES = $(wildcard tests/*.sql)
 
 help: ## Print help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -17,8 +17,8 @@ setup: ## Install all system dependencies (necessary for `make build` and `make 
 	cabal install simple-sql-parser
 	cabal install pretty-show
 
-test: src/RunParser.hs $(PARSER_TESTS) ## Run basic tests (.ast and .tptp files will be created in the tests/ directory)
-	$(foreach f,$(PARSER_TESTS),runhaskell src/RunParser.hs $(f) > $(patsubst tests/%.sql,tests/%.ast,$(f)) ; )
+test: build
+	for f in $(TEST_FILES); do ./dist/build/automated-theorem-proving/automated-theorem-proving $$f; done
 
 clean-tests: ## Remove all the .ast and .tptp files in the tests/ directory
 	rm -f tests/*.ast

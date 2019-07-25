@@ -32,7 +32,8 @@ main :: IO ()
 main = do
     args <- getArgs
     case args of
-        [inputFile] ->
+        [inputFile] -> do
+            putStrLn $ "Running equivallence check for file " ++ inputFile ++ "..."
             withFile inputFile ReadMode (\k -> do
                 rawInput <- hGetContents k
                 runEquivalenceCheck rawInput)
