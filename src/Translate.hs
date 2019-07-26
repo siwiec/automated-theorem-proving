@@ -46,9 +46,9 @@ import Data.Char
 import Data.Foldable
 
 -- | Translator state
-type Store = (DatabaseScheme -- ^ set only at the beginning of the translation process
-             ,[TptpFormula] -- ^ at the end of the translation process this value stores the query in the TPTP syntax
-             ,Data.Map.Map String ApplicableFofFormula -- ^ map from query names to their first order representation
+type Store = (DatabaseScheme
+             ,[TptpFormula]
+             ,Data.Map.Map String ApplicableFofFormula
              )
 
 
