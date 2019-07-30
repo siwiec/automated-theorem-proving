@@ -138,7 +138,7 @@ translateSelect qeSelectList qeFrom qeWhere qeGroupBy qeHaving = do
     -- translateQeGroupBy qeGroupBy
     -- translateQeHaving qeHaving
     let existsIdents = [ x | x <- idents, notElem x forAllIdents ]
-    let formula = Equiv selectFormula (And (Exists existsIdents fromFormula) EmptyFormula)
+    let formula = Equiv selectFormula (And (Exists existsIdents fromFormula) whereFormula)
     fofEmit "select" Definition formula Nothing
 
 translateQeCombOp :: SetOperatorName
