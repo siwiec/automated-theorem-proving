@@ -34,6 +34,8 @@ data FofFormula = EmptyFormula
                 | Equiv FofFormula FofFormula
                 | Not FofFormula
                 | Predicate String [String]
+                -- Additional subformulas
+                | Variable String
 
 
 instance Show FofFormula where

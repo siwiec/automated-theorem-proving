@@ -49,6 +49,7 @@ import Data.Foldable
 type Store = (DatabaseScheme
              ,[TptpFormula]
              ,Data.Map.Map String ApplicableFofFormula
+             ,Integer
              )
 
 
@@ -62,7 +63,8 @@ fofEmit :: String       -- ^ Formula name
         -> FofFormula   -- ^ first-order logic formula
         -> Maybe String -- ^ Optional annotations
         -> Eval ()      -- ^ Translator state
-fofEmit n r f a = modify $ \(databaseScheme, store, queriesMap) -> (databaseScheme, store ++ [TptpFofFormula (n ++ "_" ++ ( show (length store))) r f a], queriesMap)
+fofEmit n r f a = modify $ \(databaseScheme, store, queriesMap, counter) -> (databaseScheme, store ++ [TptpFofFormula (n ++ "_" ++ ( show (length store))) r f a], queriesMap, counter)
+
 
 {- |
     The translateStatements function takes two lists of statements (the abstract syntax tree of a DDL and a query)
@@ -80,7 +82,19 @@ translateStatements inputAst = do
     putStrLn "Database scheme:"
     putStrLn $ show databaseScheme
     -- translate all the queries
-    mapM_ (translateSingleQuery (databaseScheme, [], Data.Map.empty)) (zip [0..] queriesAst)
+    mapM_ (translateSingleQuery (databaseScheme, [], Data.Map.empty, 0)) (zip [0..] queriesAst)
+
+
+
+
+getName :: String
+        -> Eval String
+getName s = if s == "main_query" then throwError "Reserved name" else do
+    (databaseScheme, tptpFormulas, formulasMap, counter) <- get
+    put (databaseScheme, tptpFormulas, formulasMap, counter + 1)
+    return $ s ++ "_" ++ show counter
+
+
 
 translateSingleQuery :: Store                -- ^ Initial store
                      -> (Integer, Statement)  -- ^ Pair (query number, query AST)
@@ -90,7 +104,7 @@ translateSingleQuery initialStore (queryNumber, queryAst) = do
     case result of
         (Left errorMsg, _) -> do
             fail $ "Translation error: " ++ errorMsg
-        (Right _, (_, queryTptp, _)) -> putStrLn $ show queryTptp
+        (Right _, (_, queryTptp, _, _)) -> putStrLn $ show queryTptp
 
 
 translateStatement :: Statement
@@ -150,28 +164,88 @@ translateQeFrom qeFrom = do
 
 
 translateTableRef :: TableRef
-                  -> Eval ([String], FofFormula)
+                  -> Eval ApplicableFofFormula
 translateTableRef tableRef = case tableRef of
-    (TRSimple names) -> do
-        translatedTRSimple <- mapM translateTRSimple names
-        return $ Data.Foldable.foldr (\ (idents1, translatedTRSimple1) (idents2, translatedTRSimple2) -> (idents1 ++ idents2, And translatedTRSimple1 translatedTRSimple2)) ([], EmptyFormula) translatedTRSimple
+    (TRSimple names) -> translateTRSimple names
     (TRJoin tableRef1 nautral joinType tableRef2 joinCondition) ->  throwError "Function translateTRJoin not yet implemented"
     (TRParens tableRef) -> throwError "Function translateTRParens not yet implemented"
-    (TRAlias tableRef alias) -> translateTRAlias tableRef alias
+    (TRAlias tableRef (Alias (Name _ name) _)) -> do
+        tableRefApplicableFofFormula <- translateTableRef tableRef
+        (databaseScheme, store, queriesMap, counter) <- get
+        put (databaseScheme, store, (Data.Map.insert name tableRefApplicableFofFormula queriesMap), counter)
+        return tableRefApplicableFofFormula
     (TRQueryExpr queryExpr) -> throwError "Function translateTRQueryExpr not yet implemented"
     (TRFunction names scalarExprs) -> throwError "Function translateTRFunction not yet implemented"
     (TRLateral tableRef) -> throwError "Function translateTRLateral not yet implemented"
     (TROdbc tableRef) -> throwError "Function translateTROdbc not yet implemented"
 
-translateTRAlias :: TableRef
-                 -> Alias
-                 -> Eval ([String], FofFormula)
-translateTRAlias tableRef alias = throwError "Function translateTRAlias not yet implemented"
-
-
 translateQeWhere :: Maybe ScalarExpr
-                 -> Eval ()
-translateQeWhere qeWhere = throwError "Function translateQeWhere not yet implemented"
+                 -> Eval FofFormula
+translateQeWhere qeWhere = case qeWhere of
+    Nothing -> return EmptyFormula
+    (Just scalarExpr) -> translateScalarExpr scalarExpr
+
+translateScalarExpr :: ScalarExpr
+                    -> Eval FofFormula
+translateScalarExpr scalarExpr = do
+    case scalarExpr of
+        (NumLit _) -> throwError "Function translateScalarExpr not yet implemented for (NumLit _)"
+        (StringLit _ _ _) -> throwError "Function translateScalarExpr not yet implemented for (StringLit _ _ _)"
+        (IntervalLit _ _ _ _) -> throwError "Function translateScalarExpr not yet implemented for (IntervalLit _)"
+        (TypedLit _ _) -> throwError "Function translateScalarExpr not yet implemented for (TypedLit _ _)"
+        (Iden names) -> throwError $ "Iden names (" ++ show (Iden names) ++ ") cannot be represented as an FOF formula!"
+        Star -> throwError "Function translateScalarExpr not yet implemented for Star"
+        Parameter -> throwError "Function translateScalarExpr not yet implemented for Parameter"
+        (PositionalArg _) -> throwError "Function translateScalarExpr not yet implemented for (PositionalArg _)"
+        (HostParameter _ _) -> throwError "Function translateScalarExpr not yet implemented for (HostParameter _ _)"
+        (BinOp (Iden names) binOpNames (Iden names2)) -> do
+            let scalarExprFofFormula = namesToString names
+            let scalarExprFofFormula2 = namesToString names2
+            case binOpNames of
+                [Name _ "="] -> return $ Predicate "Equal" [scalarExprFofFormula, scalarExprFofFormula2]
+                [Name _ "<"] -> return $ Predicate "LessThan" [scalarExprFofFormula, scalarExprFofFormula2]
+                [Name _ ">"] -> return $ Predicate "GreaterThan" [scalarExprFofFormula, scalarExprFofFormula2]
+                [Name _ "<="] -> return $ Predicate "LessThanOrEqual" [scalarExprFofFormula, scalarExprFofFormula2]
+                [Name _ ">="] -> return $ Predicate "GreaterThanOrEqual" [scalarExprFofFormula, scalarExprFofFormula2]
+                [Name _ "!="] -> return $ Predicate "NotEqual" [scalarExprFofFormula, scalarExprFofFormula2]
+                _ -> throwError $ "Unknown BinOp expression: " ++ show (BinOp scalarExpr names scalarExpr)
+        (BinOp scalarExpr binOpNames scalarExpr2) -> do
+            scalarExprFofFormula <- translateScalarExpr scalarExpr
+            scalarExprFofFormula2 <- translateScalarExpr scalarExpr2
+            case binOpNames of
+                [Name _ "&"] -> return $ And scalarExprFofFormula scalarExprFofFormula2
+                [Name _ "and"] -> return $ And scalarExprFofFormula scalarExprFofFormula2
+                [Name _ "|"] -> return $ Or scalarExprFofFormula scalarExprFofFormula2
+                [Name _ "or"] -> return $ Or scalarExprFofFormula scalarExprFofFormula2
+                [Name _ "=>"] -> return $ Implies scalarExprFofFormula scalarExprFofFormula2
+                [Name _ "<=>"] -> return $ Equiv scalarExprFofFormula scalarExprFofFormula2
+                _ -> throwError $ "Unknown BinOp expression: " ++ show (BinOp scalarExpr binOpNames scalarExpr)
+
+        (PrefixOp names _) -> throwError "Function translateScalarExpr not yet implemented for (PrefixOp names _)"
+        (PostfixOp names _) -> throwError "Function translateScalarExpr not yet implemented for (PostfixOp names _)"
+        (SpecialOp names _) -> throwError "Function translateScalarExpr not yet implemented for (SpecialOp names _)"
+        (App names _) -> throwError "Function translateScalarExpr not yet implemented for (App names _)"
+        (AggregateApp _ _ _ _ _) -> throwError "Function translateScalarExpr not yet implemented for (AggregateApp _)"
+        (AggregateAppGroup _ _ _) -> throwError "Function translateScalarExpr not yet implemented for (AggregateAppGroup _)"
+        (WindowApp _ _ _ _ _) -> throwError "Function translateScalarExpr not yet implemented for (WindowApp _)"
+        (SpecialOpK names _ _) -> throwError "Function translateScalarExpr not yet implemented for (SpecialOpK names _ _)"
+        (Cast _ _) -> throwError "Function translateScalarExpr not yet implemented for (Cast _ _)"
+        (Case _ _ _) -> throwError "Function translateScalarExpr not yet implemented for (Case _ _)"
+        (Parens scalarExpr) -> translateScalarExpr scalarExpr
+        (In bool scalarExpr inPredValue) -> throwError "Function translateScalarExpr not yet implemented for (In bool scalarExpr inPredValue)"
+        (SubQueryExpr _ _) -> throwError "Function translateScalarExpr not yet implemented for (SubQueryExpr _ _)"
+        (QuantifiedComparison _ _ _ _) -> throwError "Function translateScalarExpr not yet implemented for (QuantifiedComparison _ _ _ _)"
+        (Match _ _ _) -> throwError "Function translateScalarExpr not yet implemented for (Match _ _ _)"
+        (Array scalarExpr scalarExprs) -> throwError "Function translateScalarExpr not yet implemented for (Array scalarExpr scalarExprs)"
+        (ArrayCtor queryExpr) -> throwError "Function translateScalarExpr not yet implemented for (ArrayCtor queryExpr)"
+        (Collate scalarExpr names) -> throwError "Function translateScalarExpr not yet implemented for (Collate scalarExpr names)"
+        (MultisetBinOp scalarExpr setOperatorName setQuantifier scalarExpr2) -> throwError "Function translateScalarExpr not yet implemented for (MultisetBinOp scalarExpr setOperatorName setQuantifier scalarExpr2)"
+        (MultisetCtor scalarExprs) -> throwError "Function translateScalarExpr not yet implemented for (MultisetCtor scalarExprs)"
+        (MultisetQueryCtor queryExpr) -> throwError "Function translateScalarExpr not yet implemented for (MultisetQueryCtor queryExpr)"
+        (NextValueFor names) -> throwError "Function translateScalarExpr not yet implemented for (NextValueFor names)"
+        (VEComment comments scalarExpr) -> throwError "Function translateScalarExpr not yet implemented for (VEComment comments scalarExpr)"
+        (OdbcLiteral odbcLiteralType str) -> throwError "Function translateScalarExpr not yet implemented for (OdbcLiteral odbcLiteralType str)"
+        (OdbcFunc scalarExpr) -> throwError "Function translateScalarExpr not yet implemented for (OdbcFunc scalarExpr)"
 
 translateQeGroupBy :: [GroupingExpr]
                    -> Eval ()
@@ -181,15 +255,17 @@ translateQeHaving :: Maybe ScalarExpr
                   -> Eval ()
 translateQeHaving qeHaving = throwError "Function translateQeHaving not yet implemented"
 
-translateTRSimple :: Name
-               -> Eval ([String], FofFormula)
-translateTRSimple (Name _ name) = do
-    (databaseScheme, _, _) <- get
-    let columnNames = getColumnNames name databaseScheme
-    -- getTableAlias
-    let tableAlias = name
-    let aliasedColumnNames = Prelude.map (\x -> name ++ "_" ++ x) columnNames
-    return $ (aliasedColumnNames, Predicate tableAlias aliasedColumnNames)
+translateTRSimple :: [Name]
+                  -> Eval ApplicableFofFormula
+translateTRSimple names = do
+    (databaseScheme, _, _, _) <- get
+    let tableName = namesToString names
+    let columnNames = getColumnNames tableName databaseScheme
+    let aliasedColumnNames = Prelude.map (\x -> tableName ++ "_" ++ x) columnNames
+    return $ (aliasedColumnNames, Predicate tableName aliasedColumnNames)
+
+namesToString :: [Name] -> String
+namesToString names = intercalate "_" (Prelude.map (\(Name _ name) -> name) names)
 
 translateJoinCondition :: Maybe JoinCondition
                        -> Eval FofFormula
