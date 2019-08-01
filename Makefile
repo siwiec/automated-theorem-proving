@@ -18,10 +18,15 @@ setup: ## Install all system dependencies (necessary for `make build` and `make 
 	cabal install pretty-show
 
 test: build
-	for f in $(TEST_FILES); do ./dist/build/automated-theorem-proving/automated-theorem-proving $$f; done
+	for f in $(TEST_FILES); do \
+		echo "Running automated-theorem-prover for file $$f..."; \
+		bash -c "./dist/build/automated-theorem-proving/automated-theorem-proving $$f" | tee tmp.tptp; \
+		echo "Running tptp4X for file $$f..."; \
+		./tptp4X tmp.tptp | tee $(addsuffix .tptp, $$f); \
+		rm tmp.tptp; \
+	done
 
-clean-tests: ## Remove all the .ast and .tptp files in the tests/ directory
-	rm -f tests/*.ast
+clean-tests: ## Remove all .tptp files in the tests/ directory
 	rm -f tests/*.tptp
 
 clean-build: ## Remove the dist/ directory
