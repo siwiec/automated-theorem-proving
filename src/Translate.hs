@@ -132,8 +132,10 @@ translateSelect :: [(ScalarExpr,Maybe Name)]
                 -> Eval ()
 translateSelect [] _ _ _ _ = return ()
 translateSelect qeSelectList qeFrom qeWhere qeGroupBy qeHaving = do
-    (idents, fromFormula) <- translateQeFrom qeFrom
+    fromApplicableFofFormulas <- translateQeFrom qeFrom
+    let idents = concat $ Prelude.map (\(x, _) -> x) fromApplicableFofFormulas
     (forAllIdents, selectFormula) <- translateQeSelectList qeSelectList
+    let fromFormula  = Data.Foldable.foldr (\x y -> And x y) EmptyFormula (Prelude.map (\(_, x) -> x) fromApplicableFofFormulas)
     whereFormula <- translateQeWhere qeWhere
     -- translateQeGroupBy qeGroupBy
     -- translateQeHaving qeHaving
@@ -157,23 +159,26 @@ translateQeSelectList qeSelectList = do
     return (idents, ForAll idents (Predicate "query1" idents))
 
 translateQeFrom :: [TableRef]
-                -> Eval ([String], FofFormula)
-translateQeFrom qeFrom = do
-    translatedTableRefs <- mapM translateTableRef qeFrom
-    return $ Data.Foldable.foldr (\ (idents1, translatedTableRefs1) (idents2, translatedTableRefs2) -> (idents1 ++ idents2, And translatedTableRefs1 translatedTableRefs2)) ([], EmptyFormula) translatedTableRefs
+                -> Eval [ApplicableFofFormula]
+translateQeFrom qeFrom = mapM (translateTableRef Nothing) qeFrom
 
 
-translateTableRef :: TableRef
+translateTableRef :: Maybe String -- ^ Alias of the table
+                  -> TableRef
                   -> Eval ApplicableFofFormula
-translateTableRef tableRef = case tableRef of
-    (TRSimple names) -> translateTRSimple names
+translateTableRef alias tableRef = case tableRef of
+    (TRSimple names) -> translateTRSimple alias names
     (TRJoin tableRef1 nautral joinType tableRef2 joinCondition) ->  throwError "Function translateTRJoin not yet implemented"
     (TRParens tableRef) -> throwError "Function translateTRParens not yet implemented"
-    (TRAlias tableRef (Alias (Name _ name) _)) -> do
+    {-(TRAlias tableRef (Alias (Name _ name) _)) -> do
         tableRefApplicableFofFormula <- translateTableRef tableRef
-        (databaseScheme, store, queriesMap, counter) <- get
-        put (databaseScheme, store, (Data.Map.insert name tableRefApplicableFofFormula queriesMap), counter)
-        return tableRefApplicableFofFormula
+        --(databaseScheme, store, queriesMap, counter) <- get
+        --put (databaseScheme, store, (Data.Map.insert name tableRefApplicableFofFormula queriesMap), counter)
+        let aliasedColumnNames = Prelude.map (\x -> name ++ "_" ++ x) columnNames
+        case applyFofFormula aliasedColumnNames tableRefApplicableFofFormula of
+            (Left errorMsg) -> throwError errorMsg
+            (Right aliastedTableRefFofApplicableFormula) -> return (aliasedColumnNames, aliastedTableRefFofApplicableFormula) -}
+    (TRAlias tableRef (Alias (Name _ name) _)) -> translateTableRef (Just name) tableRef
     (TRQueryExpr queryExpr) -> throwError "Function translateTRQueryExpr not yet implemented"
     (TRFunction names scalarExprs) -> throwError "Function translateTRFunction not yet implemented"
     (TRLateral tableRef) -> throwError "Function translateTRLateral not yet implemented"
@@ -202,9 +207,9 @@ translateScalarExpr scalarExpr = do
             let scalarExprFofFormula = namesToString names
             let scalarExprFofFormula2 = namesToString names2
             case binOpNames of
-                [Name _ "="] -> return $ Predicate "Equal" [scalarExprFofFormula, scalarExprFofFormula2]
-                [Name _ "<"] -> return $ Predicate "LessThan" [scalarExprFofFormula, scalarExprFofFormula2]
-                [Name _ ">"] -> return $ Predicate "GreaterThan" [scalarExprFofFormula, scalarExprFofFormula2]
+                [Name _ "="]  -> return $ Predicate "Equal" [scalarExprFofFormula, scalarExprFofFormula2]
+                [Name _ "<"]  -> return $ Predicate "LessThan" [scalarExprFofFormula, scalarExprFofFormula2]
+                [Name _ ">"]  -> return $ Predicate "GreaterThan" [scalarExprFofFormula, scalarExprFofFormula2]
                 [Name _ "<="] -> return $ Predicate "LessThanOrEqual" [scalarExprFofFormula, scalarExprFofFormula2]
                 [Name _ ">="] -> return $ Predicate "GreaterThanOrEqual" [scalarExprFofFormula, scalarExprFofFormula2]
                 [Name _ "!="] -> return $ Predicate "NotEqual" [scalarExprFofFormula, scalarExprFofFormula2]
@@ -255,13 +260,17 @@ translateQeHaving :: Maybe ScalarExpr
                   -> Eval ()
 translateQeHaving qeHaving = throwError "Function translateQeHaving not yet implemented"
 
-translateTRSimple :: [Name]
+translateTRSimple :: Maybe String -- ^ Optional alias
+                  -> [Name]
                   -> Eval ApplicableFofFormula
-translateTRSimple names = do
+translateTRSimple alias names = do
     (databaseScheme, _, _, _) <- get
     let tableName = namesToString names
     let columnNames = getColumnNames tableName databaseScheme
-    let aliasedColumnNames = Prelude.map (\x -> tableName ++ "_" ++ x) columnNames
+    aliasedColumnNames <- do
+        return $ case alias of
+            (Nothing) -> Prelude.map (\x -> tableName ++ "_" ++ x) columnNames
+            (Just a) -> Prelude.map (\x -> a ++ "_" ++ x) columnNames
     return $ (aliasedColumnNames, Predicate tableName aliasedColumnNames)
 
 namesToString :: [Name] -> String

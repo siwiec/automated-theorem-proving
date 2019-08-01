@@ -15,6 +15,9 @@ module FofFormula (
                    ApplicableFofFormula
                   -- ** FofFormula
                   ,FofFormula(..)
+                  -- * Functions
+                  -- ** applyFofFormula
+                  ,applyFofFormula
                   ) where
 
 import Data.Maybe ( fromMaybe)
