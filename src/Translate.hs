@@ -79,7 +79,7 @@ translateStatements inputAst = do
     let databaseSchemeAst = [(CreateTable names tableElements) | (CreateTable names tableElements) <- inputAst]
     let queriesAst = [(SelectStatement queryExpr) | (SelectStatement queryExpr) <- inputAst]
     let databaseScheme = databaseSchemeFromAst databaseSchemeAst
-    putStrLn "Database scheme:"
+    putStrLn "% Database scheme:"
     putStrLn $ show databaseScheme
     -- translate all the queries
     mapM_ (translateSingleQuery (databaseScheme, [], Data.Map.empty, 0)) (zip [0..] queriesAst)
@@ -104,7 +104,7 @@ translateSingleQuery initialStore (queryNumber, queryAst) = do
     case result of
         (Left errorMsg, _) -> do
             fail $ "Translation error: " ++ errorMsg
-        (Right _, (_, queryTptp, _, _)) -> putStrLn $ show queryTptp
+        (Right _, (_, queryTptp, _, _)) -> mapM_ (putStrLn . show) queryTptp
 
 
 translateStatement :: Statement
