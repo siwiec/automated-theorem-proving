@@ -20,10 +20,13 @@ setup: ## Install all system dependencies (necessary for `make build` and `make 
 test: build
 	for f in $(TEST_FILES); do \
 		echo "Running automated-theorem-prover for file $$f..."; \
-		bash -c "./dist/build/automated-theorem-proving/automated-theorem-proving $$f" | tee tmp.tptp; \
+		./dist/build/automated-theorem-proving/automated-theorem-proving $$f | tee tmp.tptp; \
 		echo "Running tptp4X for file $$f..."; \
 		./tptp4X tmp.tptp | tee $(addsuffix .tptp, $$f); \
 		rm tmp.tptp; \
+		if grep -q equivalence_check "$(addsuffix .tptp, $$f)" ; then \
+			./vampire4.2.2 $(addsuffix .tptp, $$f) | tee $(addsuffix .vampire, $$f); \
+		fi \
 	done
 
 clean-tests: ## Remove all .tptp files in the tests/ directory
