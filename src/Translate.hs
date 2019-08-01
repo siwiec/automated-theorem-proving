@@ -111,8 +111,12 @@ translateStatement :: String -- ^ Query name
                    -> Eval ()
 translateStatement queryName x = case x of
     (SelectStatement queryExpr) -> do
-       (idents, fofFormula) <- translateQueryExpr queryExpr
-       fofEmit "select" Definition (ForAll idents (Equiv (Predicate queryName idents) fofFormula)) Nothing
+        (idents, fofFormula) <- translateQueryExpr queryExpr
+        fofEmit (queryName ++ "_definition") Definition (ForAll idents (Equiv (Predicate queryName idents) fofFormula)) Nothing
+        if queryName == "main_query_1" then do
+            fofEmit "equivallence_check" Conjecture (ForAll idents (Equiv (Predicate "main_query_0" idents) (Predicate "main_query_1" idents))) Nothing
+            return ()
+        else return ()
     _ -> throwError "Unknown Statement"
 
 translateQueryExpr :: QueryExpr
