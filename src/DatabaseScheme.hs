@@ -25,25 +25,25 @@ module DatabaseScheme (
 
 import Language.SQL.SimpleSQL.Parse
 import Language.SQL.SimpleSQL.Syntax
-import qualified Data.Map.Strict as Map
+import qualified Data.Map.Ordered as Map
 
 -- | DataType contains all the implemented data types
 data DataType = Number deriving Show
 
 -- | Type for storing the database scheme. It maps table names to column names and column names to their types.
-data DatabaseScheme = Database (Map.Map String (Map.Map String DataType))
+data DatabaseScheme = Database (Map.OMap String (Map.OMap String DataType))
 
 instance Show DatabaseScheme where
-    show (Database databaseScheme) = concat $ map showTable $ Map.toList databaseScheme
+    show (Database databaseScheme) = concat $ map showTable $ Map.toAscList databaseScheme
         where
-            showTable :: (String, (Map.Map String DataType)) -> String
-            showTable (tableName, columns) = tableName ++ ":\n" ++ (unlines ["\t" ++ columnName ++ ": " ++ show columnType | (columnName, columnType) <- (Map.toList columns)])
+            showTable :: (String, (Map.OMap String DataType)) -> String
+            showTable (tableName, columns) = tableName ++ ":\n" ++ (unlines ["\t" ++ columnName ++ ": " ++ show columnType | (columnName, columnType) <- (Map.assocs columns)])
 
 -- | databaseSchemeFromAst creates the DatabaseScheme value based on the abstract syntax tree of the DDL.
 databaseSchemeFromAst :: [Statement] -> DatabaseScheme
 databaseSchemeFromAst ss = Database (Map.fromList [ x | Just x <- (map addTable ss) ])
 
-addTable :: Statement -> Maybe (String, Map.Map String DataType)
+addTable :: Statement -> Maybe (String, Map.OMap String DataType)
 addTable (CreateTable [Name _ name] tableElements) = Just (name, Map.fromList [ x | Just x <- (map addTableElement tableElements)])
 addTable _ = Nothing
 
@@ -57,6 +57,6 @@ getColumnNames :: String -- ^ table name
                -> [String] -- ^ column names
 getColumnNames tableName (Database databaseScheme) = case Map.lookup tableName databaseScheme of
     Nothing -> []
-    (Just table) -> Map.keys table
+    (Just table) -> Prelude.map fst $ Map.assocs table
 
 

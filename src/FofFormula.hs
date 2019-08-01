@@ -23,6 +23,7 @@ module FofFormula (
 import Data.Maybe ( fromMaybe)
 import Data.List as List
 import Data.Map.Strict as Map
+import Data.Char
 
 -- | ApplicableFofFormula is an FofFormula along with the list of needed global variables
 type ApplicableFofFormula = ([String], FofFormula)
@@ -37,20 +38,18 @@ data FofFormula = EmptyFormula
                 | Equiv FofFormula FofFormula
                 | Not FofFormula
                 | Predicate String [String]
-                -- Additional subformulas
-                | Variable String
 
 
 instance Show FofFormula where
     show (EmptyFormula)     = "$true"
-    show (ForAll vars f1)   = "! [" ++ (intercalate ", " vars) ++ "] : (" ++ (show f1) ++ ")"
-    show (Exists vars f1)   = "? [" ++ (intercalate ", " vars) ++ "] : (" ++ (show f1) ++ ")"
-    show (And f1 f2)        =   "(" ++ (show f1) ++ " &   " ++ (show f2) ++ ")"
-    show (Or f1 f2)         =   "(" ++ (show f1) ++ " |   " ++ (show f2) ++ ")"
-    show (Implies f1 f2)    =   "(" ++ (show f1) ++ " =>  " ++ (show f2) ++ ")"
-    show (Equiv f1 f2)      =   "(" ++ (show f1) ++ " <=> " ++ (show f2) ++ ")"
+    show (ForAll vars f1)   = "( ! [" ++ (intercalate ", " (Prelude.map (Prelude.map Data.Char.toUpper) vars)) ++ "] : (" ++ (show f1) ++ "))"
+    show (Exists vars f1)   = "( ? [" ++ (intercalate ", " (Prelude.map (Prelude.map Data.Char.toUpper) vars)) ++ "] : (" ++ (show f1) ++ "))"
+    show (And f1 f2)        = "(" ++ (show f1) ++ " & " ++ (show f2) ++ ")"
+    show (Or f1 f2)         = "(" ++ (show f1) ++ " | " ++ (show f2) ++ ")"
+    show (Implies f1 f2)    = "(" ++ (show f1) ++ " => " ++ (show f2) ++ ")"
+    show (Equiv f1 f2)      = "(" ++ (show f1) ++ " <=> " ++ (show f2) ++ ")"
     show (Not f1)           = "( ~ " ++ (show f1) ++ ")"
-    show (Predicate n vars) = n ++ "(" ++ (intercalate ", " vars) ++ ")"
+    show (Predicate n vars) = "( " ++ (Prelude.map Data.Char.toLower n) ++ "(" ++ (intercalate ", " (Prelude.map (Prelude.map Data.Char.toUpper) vars)) ++ "))"
 
 
 applyFofFormula :: [String]

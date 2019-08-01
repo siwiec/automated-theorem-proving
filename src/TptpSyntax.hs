@@ -35,14 +35,14 @@ instance Show Role where
 
 instance Show TptpFormula where
     show (TptpFofFormula n r f Nothing) = "fof("
-                                            ++ (show n)
+                                            ++ n
                                             ++ ", "
                                             ++ (show r)
                                             ++ ", "
                                             ++ (show f)
                                             ++ ").\n"
     show (TptpFofFormula n r f (Just a)) = "fof("
-                                            ++ (show n)
+                                            ++ n
                                             ++ ", "
                                             ++ (show r)
                                             ++ ", "

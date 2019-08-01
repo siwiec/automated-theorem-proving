@@ -140,7 +140,7 @@ translateSelect qeSelectList qeFrom qeWhere qeGroupBy qeHaving = do
     -- translateQeGroupBy qeGroupBy
     -- translateQeHaving qeHaving
     let existsIdents = [ x | x <- idents, notElem x forAllIdents ]
-    let formula = Equiv selectFormula (And (Exists existsIdents fromFormula) whereFormula)
+    let formula = ForAll idents (Equiv selectFormula (And (Exists existsIdents fromFormula) whereFormula))
     fofEmit "select" Definition formula Nothing
 
 translateQeCombOp :: SetOperatorName
@@ -156,7 +156,7 @@ translateQeSelectList qeSelectList = do
                         ) qeSelectList
     -- idents holds the names of columns
     -- queryName <- getNewQueryName
-    return (idents, ForAll idents (Predicate "query1" idents))
+    return (idents, Predicate "query1" idents)
 
 translateQeFrom :: [TableRef]
                 -> Eval [ApplicableFofFormula]
