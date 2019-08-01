@@ -31,19 +31,20 @@ import FofFormula
 import DatabaseScheme
 
 
-import System.IO ( stdin, hGetContents, hPutStrLn, stderr )
-import System.Exit
-import Prelude
-import Data.Map
-import Data.Either
-import Data.Maybe
-import Data.List ( length, intercalate )
-import System.Environment ( getArgs )
-import Control.Monad.State
-import System.FilePath.Posix
 import Control.Monad.Error
+import Control.Monad.State
 import Data.Char
+import Data.Either
 import Data.Foldable
+import Data.List.Index
+import Data.List ( length, intercalate )
+import Data.Map
+import Data.Maybe
+import Prelude
+import System.Environment ( getArgs )
+import System.Exit
+import System.FilePath.Posix
+import System.IO ( stdin, hGetContents, hPutStrLn, stderr )
 
 -- | Translator state
 type Store = (DatabaseScheme
@@ -82,10 +83,7 @@ translateStatements inputAst = do
     putStrLn "% Database scheme:"
     putStrLn $ show databaseScheme
     -- translate all the queries
-    mapM_ (translateSingleQuery (databaseScheme, [], Data.Map.empty, 0)) (zip [0..] queriesAst)
-
-
-
+    imapM_ (translateSingleQuery (databaseScheme, [], Data.Map.empty, 0)) queriesAst
 
 getName :: String
         -> Eval String
@@ -96,32 +94,36 @@ getName s = if s == "main_query" then throwError "Reserved name" else do
 
 
 
-translateSingleQuery :: Store                -- ^ Initial store
-                     -> (Integer, Statement)  -- ^ Pair (query number, query AST)
+translateSingleQuery :: Store -- ^ Initial store
+                     -> Int -- ^ Query number
+                     -> Statement -- ^ Pair (query number, query AST)
                      -> IO () -- ^ Error message or the TPTP translation of the query
-translateSingleQuery initialStore (queryNumber, queryAst) = do
-    result <- runTranslate initialStore (translateStatement queryAst)
+translateSingleQuery initialStore queryNumber queryAst = do
+    result <- runTranslate initialStore (translateStatement ("main_query_" ++ show queryNumber) queryAst)
     case result of
         (Left errorMsg, _) -> do
             fail $ "Translation error: " ++ errorMsg
         (Right _, (_, queryTptp, _, _)) -> mapM_ (putStrLn . show) queryTptp
 
 
-translateStatement :: Statement
+translateStatement :: String -- ^ Query name
+                   -> Statement -- ^ Query AST
                    -> Eval ()
-translateStatement x = case x of
-    (SelectStatement queryExpr) -> translateQueryExpr queryExpr
+translateStatement queryName x = case x of
+    (SelectStatement queryExpr) -> do
+       (idents, fofFormula) <- translateQueryExpr queryExpr
+       fofEmit "select" Definition (ForAll idents (Equiv (Predicate queryName idents) fofFormula)) Nothing
     _ -> throwError "Unknown Statement"
 
 translateQueryExpr :: QueryExpr
-                   -> Eval ()
+                   -> Eval ApplicableFofFormula
 translateQueryExpr x = case x of
     (Select _ qeSelectList qeFrom qeWhere qeGroupBy qeHaving _ _ _) -> translateSelect qeSelectList qeFrom qeWhere qeGroupBy qeHaving
     (QueryExprSetOp qe0 qeCombOp _ _ qe1) -> do
         translateQueryExpr qe0
         translateQeCombOp qeCombOp
         translateQueryExpr qe1
-    (Table names) -> mapM_ translateTable names
+    (Table names) -> translateTable names
     _ -> throwError "Unknown QueryExpr"
 
 translateSelect :: [(ScalarExpr,Maybe Name)]
@@ -129,34 +131,30 @@ translateSelect :: [(ScalarExpr,Maybe Name)]
                 -> Maybe ScalarExpr
                 -> [GroupingExpr]
                 -> Maybe ScalarExpr
-                -> Eval ()
-translateSelect [] _ _ _ _ = return ()
+                -> Eval ApplicableFofFormula
+translateSelect [] _ _ _ _ = return ([], EmptyFormula)
 translateSelect qeSelectList qeFrom qeWhere qeGroupBy qeHaving = do
     fromApplicableFofFormulas <- translateQeFrom qeFrom
     let idents = concat $ Prelude.map (\(x, _) -> x) fromApplicableFofFormulas
-    (forAllIdents, selectFormula) <- translateQeSelectList qeSelectList
+    forAllIdents <- translateQeSelectList qeSelectList
     let fromFormula  = Data.Foldable.foldr (\x y -> And x y) EmptyFormula (Prelude.map (\(_, x) -> x) fromApplicableFofFormulas)
     whereFormula <- translateQeWhere qeWhere
     -- translateQeGroupBy qeGroupBy
     -- translateQeHaving qeHaving
     let existsIdents = [ x | x <- idents, notElem x forAllIdents ]
-    let formula = ForAll idents (Equiv selectFormula (And (Exists existsIdents fromFormula) whereFormula))
-    fofEmit "select" Definition formula Nothing
+    return (forAllIdents, (Exists existsIdents (And fromFormula whereFormula)))
 
 translateQeCombOp :: SetOperatorName
                   -> Eval ()
 translateQeCombOp qeCombOp = throwError "Function translateQeCombOp not yet implemented"
 
 translateQeSelectList :: [(ScalarExpr,Maybe Name)]
-                      -> Eval ([String], FofFormula)
+                      -> Eval [String]
 translateQeSelectList qeSelectList = do
-    let idents = Prelude.map (intercalate "_") $
-                    Prelude.map (\(Iden ns, _) ->
-                        Prelude.map (\(Name _ n) -> n) ns
-                        ) qeSelectList
-    -- idents holds the names of columns
-    -- queryName <- getNewQueryName
-    return (idents, Predicate "query1" idents)
+    return $ Prelude.map (intercalate "_") $
+        Prelude.map (\(Iden ns, _) ->
+            Prelude.map (\(Name _ n) -> n) ns
+        ) qeSelectList
 
 translateQeFrom :: [TableRef]
                 -> Eval [ApplicableFofFormula]
@@ -280,5 +278,5 @@ translateJoinCondition :: Maybe JoinCondition
                        -> Eval FofFormula
 translateJoinCondition _ = return EmptyFormula
 
-translateTable :: Name -> Eval ()
-translateTable name = throwError "Function translateTable not yet implemented"
+translateTable :: [Name] -> Eval ApplicableFofFormula
+translateTable names = throwError "Function translateTable not yet implemented"
