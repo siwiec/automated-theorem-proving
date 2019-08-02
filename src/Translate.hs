@@ -15,9 +15,8 @@ Currently only first-order logic statements are supported and only a small subse
 BNF of the accepted SQL queries
 @
 
-
-
 -}
+
 module Translate
     (
     -- * Functions
@@ -141,7 +140,7 @@ translateSelect qeSelectList qeFrom qeWhere qeGroupBy qeHaving = do
     let idents = concat $ Prelude.map (\(x, _) -> x) fromApplicableFofFormulas
     forAllIdents <- translateQeSelectList qeSelectList
     let fromFormula  = Data.Foldable.foldr (\x y -> And x y) EmptyFormula (Prelude.map (\(_, x) -> x) fromApplicableFofFormulas)
-    whereFormula <- translateQeWhere qeWhere
+    (_, whereFormula) <- translateQeWhere qeWhere
     -- translateQeGroupBy qeGroupBy
     -- translateQeHaving qeHaving
     let existsIdents = [ x | x <- idents, notElem x forAllIdents ]
@@ -180,24 +179,31 @@ translateTableRef alias tableRef = case tableRef of
             (Left errorMsg) -> throwError errorMsg
             (Right aliastedTableRefFofApplicableFormula) -> return (aliasedColumnNames, aliastedTableRefFofApplicableFormula) -}
     (TRAlias tableRef (Alias (Name _ name) _)) -> translateTableRef (Just name) tableRef
-    (TRQueryExpr queryExpr) -> translateTRQueryExpr queryExpr
+    (TRQueryExpr queryExpr) -> translateTRQueryExpr alias queryExpr
     (TRFunction names scalarExprs) -> throwError "Function translateTRFunction not yet implemented"
     (TRLateral tableRef) -> throwError "Function translateTRLateral not yet implemented"
     (TROdbc tableRef) -> throwError "Function translateTROdbc not yet implemented"
 
 
-translateTRQueryExpr :: QueryExpr
+translateTRQueryExpr :: Maybe String
+                     -> QueryExpr
                      -> Eval ApplicableFofFormula
-translateTRQueryExpr = translateQueryExpr
+translateTRQueryExpr (Just alias) queryExpr = do
+    (idents, fofFormula) <- translateQueryExpr queryExpr
+    let newIdents = Prelude.map (\x -> alias ++ "_" ++ x) idents
+    case applyFofFormula newIdents (idents, fofFormula) of
+        (Left errorMsg) -> throwError errorMsg
+        (Right newFofFormula) -> return (newIdents, newFofFormula)
+translateTRQueryExpr Nothing queryExpr = translateQueryExpr queryExpr
 
 translateQeWhere :: Maybe ScalarExpr
-                 -> Eval FofFormula
+                 -> Eval ApplicableFofFormula
 translateQeWhere qeWhere = case qeWhere of
-    Nothing -> return EmptyFormula
+    Nothing -> return ([], EmptyFormula)
     (Just scalarExpr) -> translateScalarExpr scalarExpr
 
 translateScalarExpr :: ScalarExpr
-                    -> Eval FofFormula
+                    -> Eval ApplicableFofFormula
 translateScalarExpr scalarExpr = do
     case scalarExpr of
         (NumLit _) -> throwError "Function translateScalarExpr not yet implemented for (NumLit _)"
@@ -213,23 +219,23 @@ translateScalarExpr scalarExpr = do
             let scalarExprFofFormula = namesToString names
             let scalarExprFofFormula2 = namesToString names2
             case binOpNames of
-                [Name _ "="]  -> return $ Predicate "Equal" [scalarExprFofFormula, scalarExprFofFormula2]
-                [Name _ "<"]  -> return $ Predicate "LessThan" [scalarExprFofFormula, scalarExprFofFormula2]
-                [Name _ ">"]  -> return $ Predicate "GreaterThan" [scalarExprFofFormula, scalarExprFofFormula2]
-                [Name _ "<="] -> return $ Predicate "LessThanOrEqual" [scalarExprFofFormula, scalarExprFofFormula2]
-                [Name _ ">="] -> return $ Predicate "GreaterThanOrEqual" [scalarExprFofFormula, scalarExprFofFormula2]
-                [Name _ "!="] -> return $ Predicate "NotEqual" [scalarExprFofFormula, scalarExprFofFormula2]
+                [Name _ "="]  -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "Equal" [scalarExprFofFormula, scalarExprFofFormula2]))
+                [Name _ "<"]  -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "LessThan" [scalarExprFofFormula, scalarExprFofFormula2]))
+                [Name _ ">"]  -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "GreaterThan" [scalarExprFofFormula, scalarExprFofFormula2]))
+                [Name _ "<="] -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "LessThanOrEqual" [scalarExprFofFormula, scalarExprFofFormula2]))
+                [Name _ ">="] -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "GreaterThanOrEqual" [scalarExprFofFormula, scalarExprFofFormula2]))
+                [Name _ "!="] -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "NotEqual" [scalarExprFofFormula, scalarExprFofFormula2]))
                 _ -> throwError $ "Unknown BinOp expression: " ++ show (BinOp scalarExpr names scalarExpr)
         (BinOp scalarExpr binOpNames scalarExpr2) -> do
-            scalarExprFofFormula <- translateScalarExpr scalarExpr
-            scalarExprFofFormula2 <- translateScalarExpr scalarExpr2
+            (idents, scalarExprFofFormula) <- translateScalarExpr scalarExpr
+            (idents2, scalarExprFofFormula2) <- translateScalarExpr scalarExpr2
             case binOpNames of
-                [Name _ "&"] -> return $ And scalarExprFofFormula scalarExprFofFormula2
-                [Name _ "and"] -> return $ And scalarExprFofFormula scalarExprFofFormula2
-                [Name _ "|"] -> return $ Or scalarExprFofFormula scalarExprFofFormula2
-                [Name _ "or"] -> return $ Or scalarExprFofFormula scalarExprFofFormula2
-                [Name _ "=>"] -> return $ Implies scalarExprFofFormula scalarExprFofFormula2
-                [Name _ "<=>"] -> return $ Equiv scalarExprFofFormula scalarExprFofFormula2
+                [Name _ "&"] -> return ((idents ++ idents2),  (And scalarExprFofFormula scalarExprFofFormula2))
+                [Name _ "and"] -> return ((idents ++ idents2),  (And scalarExprFofFormula scalarExprFofFormula2))
+                [Name _ "|"] -> return ((idents ++ idents2),  (Or scalarExprFofFormula scalarExprFofFormula2))
+                [Name _ "or"] -> return ((idents ++ idents2),  (Or scalarExprFofFormula scalarExprFofFormula2))
+                [Name _ "=>"] -> return ((idents ++ idents2),  (Implies scalarExprFofFormula scalarExprFofFormula2))
+                [Name _ "<=>"] -> return ((idents ++ idents2),  (Equiv scalarExprFofFormula scalarExprFofFormula2))
                 _ -> throwError $ "Unknown BinOp expression: " ++ show (BinOp scalarExpr binOpNames scalarExpr)
 
         (PrefixOp names _) -> throwError "Function translateScalarExpr not yet implemented for (PrefixOp names _)"
