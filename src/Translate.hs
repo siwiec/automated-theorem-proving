@@ -74,7 +74,7 @@ fofEmit n r f a = modify $ \(databaseScheme, store, queriesMap, counter) -> (dat
 
     Statement structure described here: https://github.com/JakeWheat/simple-sql-parser/blob/master/Language/SQL/SimpleSQL/Syntax.lhs
 -}
-translateStatements :: [Statement]
+translateStatements :: [Statement] -- ^ List of SQL statements -- either queries or database schema description
                     -> IO () -- ^ Either error or database scheme description and translated query
 translateStatements inputAst = do
     let databaseSchemeAst = [(CreateTable names tableElements) | (CreateTable names tableElements) <- inputAst]
@@ -82,7 +82,6 @@ translateStatements inputAst = do
     let databaseScheme = databaseSchemeFromAst databaseSchemeAst
     putStrLn "% Database scheme:"
     putStrLn $ show databaseScheme
-    -- translate all the queries
     imapM_ (translateSingleQuery (databaseScheme, [], Data.Map.empty, 0)) queriesAst
 
 getName :: String
@@ -149,7 +148,7 @@ translateSelect qeSelectList qeFrom qeWhere qeGroupBy qeHaving = do
     return (forAllIdents, (Exists existsIdents (And fromFormula whereFormula)))
 
 translateQeCombOp :: SetOperatorName
-                  -> Eval ()
+                  -> Eval ApplicableFofFormula
 translateQeCombOp qeCombOp = throwError "Function translateQeCombOp not yet implemented"
 
 translateQeSelectList :: [(ScalarExpr,Maybe Name)]
@@ -170,7 +169,7 @@ translateTableRef :: Maybe String -- ^ Alias of the table
                   -> Eval ApplicableFofFormula
 translateTableRef alias tableRef = case tableRef of
     (TRSimple names) -> translateTRSimple alias names
-    (TRJoin tableRef1 nautral joinType tableRef2 joinCondition) ->  throwError "Function translateTRJoin not yet implemented"
+    (TRJoin tableRef1 nautral joinType tableRef2 joinCondition) -> throwError "Function translateTRJoin not yet implemented"
     (TRParens tableRef) -> throwError "Function translateTRParens not yet implemented"
     {-(TRAlias tableRef (Alias (Name _ name) _)) -> do
         tableRefApplicableFofFormula <- translateTableRef tableRef
@@ -181,10 +180,15 @@ translateTableRef alias tableRef = case tableRef of
             (Left errorMsg) -> throwError errorMsg
             (Right aliastedTableRefFofApplicableFormula) -> return (aliasedColumnNames, aliastedTableRefFofApplicableFormula) -}
     (TRAlias tableRef (Alias (Name _ name) _)) -> translateTableRef (Just name) tableRef
-    (TRQueryExpr queryExpr) -> throwError "Function translateTRQueryExpr not yet implemented"
+    (TRQueryExpr queryExpr) -> translateTRQueryExpr queryExpr
     (TRFunction names scalarExprs) -> throwError "Function translateTRFunction not yet implemented"
     (TRLateral tableRef) -> throwError "Function translateTRLateral not yet implemented"
     (TROdbc tableRef) -> throwError "Function translateTROdbc not yet implemented"
+
+
+translateTRQueryExpr :: QueryExpr
+                     -> Eval ApplicableFofFormula
+translateTRQueryExpr = translateQueryExpr
 
 translateQeWhere :: Maybe ScalarExpr
                  -> Eval FofFormula
@@ -279,8 +283,8 @@ namesToString :: [Name] -> String
 namesToString names = intercalate "_" (Prelude.map (\(Name _ name) -> name) names)
 
 translateJoinCondition :: Maybe JoinCondition
-                       -> Eval FofFormula
-translateJoinCondition _ = return EmptyFormula
+                       -> Eval ApplicableFofFormula
+translateJoinCondition _ = throwError "Function translateJoinCondition not yet implemented"
 
 translateTable :: [Name] -> Eval ApplicableFofFormula
 translateTable names = throwError "Function translateTable not yet implemented"

@@ -17,20 +17,16 @@ setup: ## Install all system dependencies (necessary for `make build` and `make 
 	cabal install simple-sql-parser
 	cabal install pretty-show
 
-test: build
-	for f in $(TEST_FILES); do \
-		echo "Running automated-theorem-prover for file $$f..."; \
-		./dist/build/automated-theorem-proving/automated-theorem-proving $$f | tee tmp.tptp; \
-		echo "Running tptp4X for file $$f..."; \
-		./tptp4X tmp.tptp | tee $(addsuffix .tptp, $$f); \
-		rm tmp.tptp; \
-		if grep -q equivalence_check "$(addsuffix .tptp, $$f)" ; then \
-			./vampire4.2.2 $(addsuffix .tptp, $$f) | tee $(addsuffix .vampire, $$f); \
-		fi \
-	done
+test: build install
+	./run_tests.sh
 
 clean-tests: ## Remove all .tptp files in the tests/ directory
 	rm -f tests/*.tptp
+	rm -f tests/*.vampire
+	rm -f tests/*.translated
+	rm -f tests/*.times
+
+
 
 clean-build: ## Remove the dist/ directory
 	rm -rf dist
