@@ -1,0 +1,33 @@
+% Equivallence check for file tests/test6.sql...
+% Database scheme:
+% tab:
+%	fst: Number
+%	snd: Number
+%	trd: Number
+
+fof(main_query_0_definition_0,definition,(
+    ! [A_FST,B_FST] :
+      ( main_query_0(A_FST,B_FST)
+    <=> ? [A_SND,A_TRD,B_SND,B_TRD] :
+          ( tab(A_FST,A_SND,A_TRD)
+          & tab(B_FST,B_SND,B_TRD)
+          & $true
+          & equal(A_FST,B_SND)
+          & equal(B_FST,A_SND)
+          & lessthan(A_SND,B_SND) ) ) )).
+
+fof(main_query_1_definition_0,definition,(
+    ! [A_FST,B_FST] :
+      ( main_query_1(A_FST,B_FST)
+    <=> ? [A_SND,A_TRD,B_SND,B_TRD] :
+          ( tab(A_FST,A_SND,A_TRD)
+          & tab(B_FST,B_SND,B_TRD)
+          & $true
+          & equal(A_FST,B_SND)
+          & equal(B_FST,A_SND) ) ) )).
+
+fof(equivalence_check_1,conjecture,(
+    ! [A_FST,B_FST] :
+      ( main_query_0(A_FST,B_FST)
+    <=> main_query_1(A_FST,B_FST) ) )).
+

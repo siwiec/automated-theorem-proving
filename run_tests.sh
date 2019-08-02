@@ -11,5 +11,8 @@ for f in tests/*.sql; do
         echo "Running equivalence checks for file ${f/.sql/.tptp}"
         /usr/bin/time --format="%C:\n\t%E real, %U user, %S sys" --output=${f/.sql/.times} --append \
             ./vampire4.2.2 ${f/.sql/.tptp} > ${f/.sql/.vampire}
+
+        /usr/bin/time --format="%C:\n\t%E real, %U user, %S sys" --output=${f/.sql/.times} --append \
+            ./eprover ${f/.sql/.tptp} > ${f/.sql/.e}
     fi
 done

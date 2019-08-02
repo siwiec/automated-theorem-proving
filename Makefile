@@ -25,6 +25,7 @@ clean-tests: ## Remove all .tptp files in the tests/ directory
 	rm -f tests/*.vampire
 	rm -f tests/*.translated
 	rm -f tests/*.times
+	rm -f tests/*.e
 
 
 

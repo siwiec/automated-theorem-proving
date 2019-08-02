@@ -1,0 +1,24 @@
+% Equivallence check for file tests/test5.sql...
+% Database scheme:
+% tab:
+%	fst: Number
+%	snd: Number
+%	trd: Number
+% tab2:
+%	fst: Number
+%	snd: Number
+%	trd: Number
+%	fourth: Number
+%	fifth: Number
+
+fof(main_query_0_definition_0,definition,(
+    ! [A_FST,B_FST] :
+      ( main_query_0(A_FST,B_FST)
+    <=> ? [A_SND,A_TRD,B_SND,B_TRD,B_FOURTH,B_FIFTH] :
+          ( tab(A_FST,A_SND,A_TRD)
+          & tab2(B_FST,B_SND,B_TRD,B_FOURTH,B_FIFTH)
+          & $true
+          & equal(A_FST,B_SND)
+          & equal(B_FST,A_SND)
+          & lessthan(A_SND,B_SND) ) ) )).
+
