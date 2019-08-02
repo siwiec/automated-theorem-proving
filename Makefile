@@ -17,7 +17,7 @@ setup: ## Install all system dependencies (necessary for `make build` and `make 
 	cabal install simple-sql-parser
 	cabal install pretty-show
 
-test: build install
+test: clean-tests build install
 	./run_tests.sh
 
 clean-tests: ## Remove all .tptp files in the tests/ directory
