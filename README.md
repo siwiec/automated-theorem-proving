@@ -2,6 +2,7 @@
 
 ## Documentation
 Haddock documentation is available here: http://htmlpreview.github.io/?https://github.com/siwiec/automated-theorem-proving/blob/master/docs/index.html
+
 Overleaf: https://www.overleaf.com/read/dcwmswrxkfnr
 
 ## Bibliography
