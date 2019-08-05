@@ -21,11 +21,11 @@ test: clean-tests build install
 	./run_tests.sh
 
 clean-tests: ## Remove all .tptp files in the tests/ directory
-	rm -f tests/*.tptp
-	rm -f tests/*.vampire
-	rm -f tests/*.translated
-	rm -f tests/*.times
-	rm -f tests/*.e
+	rm -f tests/*/*.tptp
+	rm -f tests/*/*.vampire
+	rm -f tests/*/*.translated
+	rm -f tests/*/*.times
+	rm -f tests/*/*.e
 
 
 

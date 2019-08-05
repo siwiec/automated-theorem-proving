@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for f in tests/*.sql; do
+for f in tests/*/*.sql; do
     echo "Running automated-theorem-prover for file $f...";
     /usr/bin/time --format="%C:\n\t%E real, %U user, %S sys" --output=${f/.sql/.times} --append \
         ./dist/build/automated-theorem-proving/automated-theorem-proving $f > ${f/.sql/.translated}

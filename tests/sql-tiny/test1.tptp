@@ -1,4 +1,4 @@
-% Equivallence check for file tests/test1_symm.sql...
+% Equivallence check for file tests/sql-tiny/test1.sql...
 % Database scheme:
 % tab:
 %	fst: Number
@@ -15,24 +15,6 @@ fof(main_query_0_definition_0,definition,(
           & a_fst = b_snd
           & b_fst = a_snd
           & lessthan(A_SND,B_SND) ) ) )).
-
-fof(main_query_1_definition_0,definition,(
-    ! [A_FST,B_FST] :
-      ( main_query_1(A_FST,B_FST)
-    <=> ? [A_SND,A_TRD,B_SND,B_TRD,C_FST,C_SND,C_TRD] :
-          ( tab(A_FST,A_SND,A_TRD)
-          & tab(B_FST,B_SND,B_TRD)
-          & tab(C_FST,C_SND,C_TRD)
-          & $true
-          & a_fst = b_snd
-          & b_fst = a_snd
-          & c_fst = c_fst
-          & lessthan(A_SND,B_SND) ) ) )).
-
-fof(equivalence_check_1,conjecture,(
-    ! [A_FST,B_FST] :
-      ( main_query_0(A_FST,B_FST)
-    <=> main_query_1(A_FST,B_FST) ) )).
 
 fof(tab_substitution_1,axiom,(
     ! [X_0,X_1,X_2,X_3] :

@@ -157,7 +157,7 @@
 ####
 #cnf(i_0_1702, plain, (main_query_0(X1,X2)|~main_query_1(X3,X4)|~tab(X1,X5,X7)|~main_query_0(X8,X9))).
 ################################################
-#cnf(i_0_97, plain, (lessthan(X1,X2)|~lessthan(X5,X6)|~tab(X4,X6,X7)|~tab(X3,X5,X8))).
+#cnf(i_0_98, plain, (lessthan(X1,X2)|~lessthan(X5,X6)|~tab(X4,X6,X7)|~tab(X3,X5,X8))).
 #######
 #cnf(i_0_109, plain, (main_query_0(X1,X2)|~main_query_1(X7,X8)|~tab(X2,X4,X5)|~tab(X1,X3,X6))).
 #######
@@ -175,7 +175,7 @@
 #
 #cnf(i_0_3305, negated_conjecture, (main_query_0(X1,X2)|~main_query_0(X4,X3))).
 ###
-#cnf(i_0_3337, negated_conjecture, (tab(X1,X2,X3)|~main_query_0(X5,X6))).
+#cnf(i_0_3335, negated_conjecture, (tab(X1,X2,X3)|~main_query_0(X5,X6))).
 ########
 #cnf(i_0_3340, negated_conjecture, (main_query_0(X1,X2)|~main_query_1(X5,X6)|~lessthan(X7,X8)|~tab(X4,X8,X9))).
 ###
@@ -197,7 +197,7 @@
 #
 #cnf(i_0_49, plain, (lessthan(X1,X2))).
 #
-#cnf(i_0_3337, negated_conjecture, (tab(X1,X2,X3))).
+#cnf(i_0_3335, negated_conjecture, (tab(X1,X2,X3))).
 #
 # Proof found!
 # SZS status Theorem

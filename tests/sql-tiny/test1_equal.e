@@ -95,7 +95,7 @@
 #
 #cnf(i_0_31, negated_conjecture, (~main_query_1(X1,X2))).
 #
-#cnf(i_0_47, plain, (tab(X1,X2,X3))).
+#cnf(i_0_53, plain, (tab(X1,X2,X3))).
 ##
 # Proof found!
 # SZS status Theorem
