@@ -12,8 +12,8 @@ fof(main_query_0_definition_0,definition,(
           ( tab(A_FST,A_SND,A_TRD)
           & tab(B_FST,B_SND,B_TRD)
           & $true
-          & equal(A_FST,B_SND)
-          & equal(B_FST,A_SND)
+          & a_fst = b_snd
+          & b_fst = a_snd
           & lessthan(A_SND,B_SND) ) ) )).
 
 fof(main_query_1_definition_0,definition,(
@@ -24,9 +24,9 @@ fof(main_query_1_definition_0,definition,(
           & tab(B_FST,B_SND,B_TRD)
           & tab(C_FST,C_SND,C_TRD)
           & $true
-          & equal(A_FST,B_SND)
-          & equal(B_FST,A_SND)
-          & equal(C_FST,C_FST)
+          & a_fst = b_snd
+          & b_fst = a_snd
+          & c_fst = c_fst
           & lessthan(A_SND,B_SND) ) ) )).
 
 fof(equivalence_check_1,conjecture,(

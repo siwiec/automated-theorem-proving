@@ -219,7 +219,7 @@ translateScalarExpr scalarExpr = do
             let scalarExprFofFormula = namesToString names
             let scalarExprFofFormula2 = namesToString names2
             case binOpNames of
-                [Name _ "="]  -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "Equal" [scalarExprFofFormula, scalarExprFofFormula2]))
+                [Name _ "="]  -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Equal scalarExprFofFormula scalarExprFofFormula2))
                 [Name _ "<"]  -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "LessThan" [scalarExprFofFormula, scalarExprFofFormula2]))
                 [Name _ ">"]  -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "GreaterThan" [scalarExprFofFormula, scalarExprFofFormula2]))
                 [Name _ "<="] -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "LessThanOrEqual" [scalarExprFofFormula, scalarExprFofFormula2]))

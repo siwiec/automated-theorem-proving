@@ -38,6 +38,7 @@ data FofFormula = EmptyFormula
                 | Equiv FofFormula FofFormula
                 | Not FofFormula
                 | Predicate String [String]
+                | Equal String String
 
 
 instance Show FofFormula where
@@ -50,6 +51,7 @@ instance Show FofFormula where
     show (Equiv f1 f2)      = "(" ++ (show f1) ++ " <=> " ++ (show f2) ++ ")"
     show (Not f1)           = "( ~ " ++ (show f1) ++ ")"
     show (Predicate n vars) = "( " ++ (Prelude.map Data.Char.toLower n) ++ "(" ++ (intercalate ", " (Prelude.map (Prelude.map Data.Char.toUpper) vars)) ++ "))"
+    show (Equal s1 s2)    = "(" ++ s1 ++ " = " ++ s2 ++ ")"
 
 
 applyFofFormula :: [String]
