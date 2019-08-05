@@ -24,6 +24,7 @@ module Translate
     translateStatements
     ) where
 
+import Axiom
 import Language.SQL.SimpleSQL.Syntax
 import TptpSyntax
 import FofFormula
@@ -82,6 +83,10 @@ translateStatements inputAst = do
     putStrLn "% Database scheme:"
     putStrLn $ show databaseScheme
     imapM_ (translateSingleQuery (databaseScheme, [], Data.Map.empty, 0)) queriesAst
+    mapM_ putStrLn (Prelude.map show (buildAxioms [("tab", 3)
+                                                  ,("tab2", 3)
+                                                  ,("lessthan", 2)
+                                                  ]))
 
 getName :: String
         -> Eval String
@@ -219,12 +224,12 @@ translateScalarExpr scalarExpr = do
             let scalarExprFofFormula = namesToString names
             let scalarExprFofFormula2 = namesToString names2
             case binOpNames of
-                [Name _ "="]  -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Equal scalarExprFofFormula scalarExprFofFormula2))
-                [Name _ "<"]  -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "LessThan" [scalarExprFofFormula, scalarExprFofFormula2]))
-                [Name _ ">"]  -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "GreaterThan" [scalarExprFofFormula, scalarExprFofFormula2]))
-                [Name _ "<="] -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "LessThanOrEqual" [scalarExprFofFormula, scalarExprFofFormula2]))
-                [Name _ ">="] -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "GreaterThanOrEqual" [scalarExprFofFormula, scalarExprFofFormula2]))
-                [Name _ "!="] -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "NotEqual" [scalarExprFofFormula, scalarExprFofFormula2]))
+                [Name _ "="]  -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "equal" [scalarExprFofFormula, scalarExprFofFormula2]))
+                [Name _ "<"]  -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "lessthan" [scalarExprFofFormula, scalarExprFofFormula2]))
+                [Name _ ">"]  -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "lessthan" [scalarExprFofFormula2, scalarExprFofFormula]))
+                [Name _ "<="] -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Or (Predicate "lessthan" [scalarExprFofFormula, scalarExprFofFormula2]) (Predicate "equal" [scalarExprFofFormula, scalarExprFofFormula2])))
+                [Name _ ">="] -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Or (Predicate "lessthan" [scalarExprFofFormula2, scalarExprFofFormula]) (Predicate "equal" [scalarExprFofFormula, scalarExprFofFormula2])))
+                [Name _ "!="] -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Not (Predicate "equal" [scalarExprFofFormula, scalarExprFofFormula2])))
                 _ -> throwError $ "Unknown BinOp expression: " ++ show (BinOp scalarExpr names scalarExpr)
         (BinOp scalarExpr binOpNames scalarExpr2) -> do
             (idents, scalarExprFofFormula) <- translateScalarExpr scalarExpr

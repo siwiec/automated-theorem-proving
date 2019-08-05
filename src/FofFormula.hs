@@ -38,20 +38,19 @@ data FofFormula = EmptyFormula
                 | Equiv FofFormula FofFormula
                 | Not FofFormula
                 | Predicate String [String]
-                | Equal String String
 
 
 instance Show FofFormula where
-    show (EmptyFormula)     = "$true"
-    show (ForAll vars f1)   = "( ! [" ++ (intercalate ", " (Prelude.map (Prelude.map Data.Char.toUpper) vars)) ++ "] : (" ++ (show f1) ++ "))"
-    show (Exists vars f1)   = "( ? [" ++ (intercalate ", " (Prelude.map (Prelude.map Data.Char.toUpper) vars)) ++ "] : (" ++ (show f1) ++ "))"
-    show (And f1 f2)        = "(" ++ (show f1) ++ " & " ++ (show f2) ++ ")"
-    show (Or f1 f2)         = "(" ++ (show f1) ++ " | " ++ (show f2) ++ ")"
-    show (Implies f1 f2)    = "(" ++ (show f1) ++ " => " ++ (show f2) ++ ")"
-    show (Equiv f1 f2)      = "(" ++ (show f1) ++ " <=> " ++ (show f2) ++ ")"
-    show (Not f1)           = "( ~ " ++ (show f1) ++ ")"
-    show (Predicate n vars) = "( " ++ (Prelude.map Data.Char.toLower n) ++ "(" ++ (intercalate ", " (Prelude.map (Prelude.map Data.Char.toUpper) vars)) ++ "))"
-    show (Equal s1 s2)    = "(" ++ s1 ++ " = " ++ s2 ++ ")"
+    show (EmptyFormula)               = "$true"
+    show (ForAll vars f1)             = "( ! [" ++ (intercalate ", " (Prelude.map (Prelude.map Data.Char.toUpper) vars)) ++ "] : (" ++ (show f1) ++ "))"
+    show (Exists vars f1)             = "( ? [" ++ (intercalate ", " (Prelude.map (Prelude.map Data.Char.toUpper) vars)) ++ "] : (" ++ (show f1) ++ "))"
+    show (And f1 f2)                  = "(" ++ (show f1) ++ " & " ++ (show f2) ++ ")"
+    show (Or f1 f2)                   = "(" ++ (show f1) ++ " | " ++ (show f2) ++ ")"
+    show (Implies f1 f2)              = "(" ++ (show f1) ++ " => " ++ (show f2) ++ ")"
+    show (Equiv f1 f2)                = "(" ++ (show f1) ++ " <=> " ++ (show f2) ++ ")"
+    show (Not f1)                     = "( ~ " ++ (show f1) ++ ")"
+    show (Predicate "equal" [s1, s2]) = "(" ++ s1 ++ " = " ++ s2 ++ ")"
+    show (Predicate n vars)           = "( " ++ (Prelude.map Data.Char.toLower n) ++ "(" ++ (intercalate ", " (Prelude.map (Prelude.map Data.Char.toUpper) vars)) ++ "))"
 
 
 applyFofFormula :: [String]
@@ -86,7 +85,7 @@ applyFofFormula (v:vs) ((g:gs), (Not f1))         = do
     return (Not f1_new)
 applyFofFormula (v:vs) ((g:gs), (Predicate n vars)) = do
     let substitutionMap = Map.fromList $ zip (v:vs) (g:gs)
-    let defaultLookup substitutionMap v = fromMaybe v (Map.lookup v substitutionMap)
-    let vars_new = List.map (defaultLookup substitutionMap) vars
+    let defaultLookup substitutionMap var = fromMaybe var (Map.lookup var substitutionMap)
+    let vars_new = Prelude.map (defaultLookup substitutionMap) vars
     return (Predicate n vars_new)
 applyFofFormula _ _ = fail "Incorrect number of variables when applying a FofFormula"
