@@ -1,5 +1,10 @@
 ./dist/build/automated-theorem-proving/automated-theorem-proving tests/sql-tiny/test7.sql:
-	0:00.01 real, 0.00 user, 0.00 sys
-Command exited with non-zero status 1
+	0:00.02 real, 0.01 user, 0.00 sys
 ./tptp4X tests/sql-tiny/test7.translated:
+	0:00.00 real, 0.00 user, 0.00 sys
+Command exited with non-zero status 3
+./vampire4.2.2 tests/sql-tiny/test7.tptp:
+	0:05.76 real, 5.55 user, 0.03 sys
+Command exited with non-zero status 3
+./eprover tests/sql-tiny/test7.tptp:
 	0:00.00 real, 0.00 user, 0.00 sys

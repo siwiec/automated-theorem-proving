@@ -1,4 +1,4 @@
-% Equivallence check for file tests/sql-tiny/test2.sql...
+% Equivallence check for file tests/sql-tiny/test10.sql...
 % CREATE TABLE tab (
 %   fst NUMBER(4),
 %   snd NUMBER(4),
@@ -6,12 +6,13 @@
 %   CONSTRAINT tab_pk PRIMARY KEY (fst, snd)
 % );
 % 
-% SELECT a.fst,
-%        b.fst
-% FROM   tab a,
-%        tab b
-% WHERE  ( a.fst = b.snd
-%          AND b.fst = a.snd );
+% 
+% SELECT c.snd, a.fst
+% FROM tab AS a,
+%      (SELECT tab.snd, tab.fst from tab) AS c
+% WHERE
+%     c.fst = a.snd
+%     AND c.snd = a.snd
 
 % Database scheme:
 % tab:
@@ -24,30 +25,43 @@
 %   Select
 %     { qeSetQuantifier = SQDefault
 %     , qeSelectList =
-%         [ ( Iden [ Name Nothing "a" , Name Nothing "fst" ] , Nothing )
-%         , ( Iden [ Name Nothing "b" , Name Nothing "fst" ] , Nothing )
+%         [ ( Iden [ Name Nothing "c" , Name Nothing "snd" ] , Nothing )
+%         , ( Iden [ Name Nothing "a" , Name Nothing "fst" ] , Nothing )
 %         ]
 %     , qeFrom =
 %         [ TRAlias
 %             (TRSimple [ Name Nothing "tab" ])
 %             (Alias (Name Nothing "a") Nothing)
 %         , TRAlias
-%             (TRSimple [ Name Nothing "tab" ])
-%             (Alias (Name Nothing "b") Nothing)
+%             (TRQueryExpr
+%                Select
+%                  { qeSetQuantifier = SQDefault
+%                  , qeSelectList =
+%                      [ ( Iden [ Name Nothing "tab" , Name Nothing "snd" ] , Nothing )
+%                      , ( Iden [ Name Nothing "tab" , Name Nothing "fst" ] , Nothing )
+%                      ]
+%                  , qeFrom = [ TRSimple [ Name Nothing "tab" ] ]
+%                  , qeWhere = Nothing
+%                  , qeGroupBy = []
+%                  , qeHaving = Nothing
+%                  , qeOrderBy = []
+%                  , qeOffset = Nothing
+%                  , qeFetchFirst = Nothing
+%                  })
+%             (Alias (Name Nothing "c") Nothing)
 %         ]
 %     , qeWhere =
 %         Just
-%           (Parens
+%           (BinOp
 %              (BinOp
-%                 (BinOp
-%                    (Iden [ Name Nothing "a" , Name Nothing "fst" ])
-%                    [ Name Nothing "=" ]
-%                    (Iden [ Name Nothing "b" , Name Nothing "snd" ]))
-%                 [ Name Nothing "and" ]
-%                 (BinOp
-%                    (Iden [ Name Nothing "b" , Name Nothing "fst" ])
-%                    [ Name Nothing "=" ]
-%                    (Iden [ Name Nothing "a" , Name Nothing "snd" ]))))
+%                 (Iden [ Name Nothing "c" , Name Nothing "fst" ])
+%                 [ Name Nothing "=" ]
+%                 (Iden [ Name Nothing "a" , Name Nothing "snd" ]))
+%              [ Name Nothing "and" ]
+%              (BinOp
+%                 (Iden [ Name Nothing "c" , Name Nothing "snd" ])
+%                 [ Name Nothing "=" ]
+%                 (Iden [ Name Nothing "a" , Name Nothing "snd" ])))
 %     , qeGroupBy = []
 %     , qeHaving = Nothing
 %     , qeOrderBy = []
@@ -55,7 +69,7 @@
 %     , qeFetchFirst = Nothing
 %     }
 
-fof(main_query_0_definition_0, definition, ( ! [A_FST, B_FST] : ((( main_query_0(A_FST, B_FST)) <=> ( ? [A_SND, A_TRD, B_SND, B_TRD] : (((( tab(A_FST, A_SND, A_TRD)) & (( tab(B_FST, B_SND, B_TRD)) & $true)) & ((A_FST = B_SND) & (B_FST = A_SND))))))))).
+fof(main_query_0_definition_0, definition, ( ! [A_FST, C_FST, C_SND] : ((( main_query_0(A_FST, C_FST, C_SND)) <=> ( ? [A_SND, A_TRD] : (((( tab(A_FST, A_SND, A_TRD)) & (( ? [C_FST, C_SND, C_TRD] : (((( tab(C_FST, C_SND, C_TRD)) & $true) & $true))) & $true)) & ((C_FST = A_SND) & (C_SND = A_SND))))))))).
 
 fof(tab_substitution_1, axiom, ( ! [X_0, X_1, X_2, X_3] : ((((X_0 = X_1) & ( tab(X_1, X_2, X_3))) => ( tab(X_0, X_2, X_3)))))).
 

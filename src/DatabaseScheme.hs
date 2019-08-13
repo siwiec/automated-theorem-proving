@@ -21,6 +21,8 @@ module DatabaseScheme (
                       ,databaseSchemeFromAst
                       -- ** getColumnNames
                       ,getColumnNames
+                      -- ** getTablesWithArity
+                      ,getTablesWithArity
                       ) where
 
 import Language.SQL.SimpleSQL.Parse
@@ -59,4 +61,5 @@ getColumnNames tableName (Database databaseScheme) = case Map.lookup tableName d
     Nothing -> []
     (Just table) -> Prelude.map fst $ Map.assocs table
 
-
+getTablesWithArity :: DatabaseScheme -> [(String, Int)]
+getTablesWithArity (Database databaseScheme) = Prelude.map (\(x, y) -> (x, length (Map.assocs y))) (Map.assocs databaseScheme)

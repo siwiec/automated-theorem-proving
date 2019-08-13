@@ -1,13 +1,118 @@
 % Equivallence check for file tests/sql-tiny/test1_equal.sql...
+% CREATE TABLE tab (
+%   fst NUMBER(4),
+%   snd NUMBER(4),
+%   trd NUMBER(4),
+%   CONSTRAINT tab_pk PRIMARY KEY (fst, snd)
+% );
+% 
+% SELECT a.fst,
+%        b.fst
+% FROM   tab a,
+%        tab b
+% WHERE  ( a.fst = b.snd
+%          AND b.fst = a.snd );
+% 
+% 
+% SELECT a.fst,
+%        b.fst
+% FROM   tab a,
+%        tab b,
+%        tab c
+% WHERE  ( a.fst = b.snd
+%          AND b.fst = a.snd
+%          AND c.fst = c.fst );
+
 % Database scheme:
 % tab:
 %	fst: Number
 %	snd: Number
 %	trd: Number
 
-fof(main_query_0_definition_0, definition, ( ! [A_FST, B_FST] : ((( main_query_0(A_FST, B_FST)) <=> ( ? [A_SND, A_TRD, B_SND, B_TRD] : (((( tab(A_FST, A_SND, A_TRD)) & (( tab(B_FST, B_SND, B_TRD)) & $true)) & ((a_fst = b_snd) & (b_fst = a_snd))))))))).
+% Translating query 0...
+% SelectStatement
+%   Select
+%     { qeSetQuantifier = SQDefault
+%     , qeSelectList =
+%         [ ( Iden [ Name Nothing "a" , Name Nothing "fst" ] , Nothing )
+%         , ( Iden [ Name Nothing "b" , Name Nothing "fst" ] , Nothing )
+%         ]
+%     , qeFrom =
+%         [ TRAlias
+%             (TRSimple [ Name Nothing "tab" ])
+%             (Alias (Name Nothing "a") Nothing)
+%         , TRAlias
+%             (TRSimple [ Name Nothing "tab" ])
+%             (Alias (Name Nothing "b") Nothing)
+%         ]
+%     , qeWhere =
+%         Just
+%           (Parens
+%              (BinOp
+%                 (BinOp
+%                    (Iden [ Name Nothing "a" , Name Nothing "fst" ])
+%                    [ Name Nothing "=" ]
+%                    (Iden [ Name Nothing "b" , Name Nothing "snd" ]))
+%                 [ Name Nothing "and" ]
+%                 (BinOp
+%                    (Iden [ Name Nothing "b" , Name Nothing "fst" ])
+%                    [ Name Nothing "=" ]
+%                    (Iden [ Name Nothing "a" , Name Nothing "snd" ]))))
+%     , qeGroupBy = []
+%     , qeHaving = Nothing
+%     , qeOrderBy = []
+%     , qeOffset = Nothing
+%     , qeFetchFirst = Nothing
+%     }
 
-fof(main_query_1_definition_0, definition, ( ! [A_FST, B_FST] : ((( main_query_1(A_FST, B_FST)) <=> ( ? [A_SND, A_TRD, B_SND, B_TRD, C_FST, C_SND, C_TRD] : (((( tab(A_FST, A_SND, A_TRD)) & (( tab(B_FST, B_SND, B_TRD)) & (( tab(C_FST, C_SND, C_TRD)) & $true))) & (((a_fst = b_snd) & (b_fst = a_snd)) & (c_fst = c_fst))))))))).
+fof(main_query_0_definition_0, definition, ( ! [A_FST, B_FST] : ((( main_query_0(A_FST, B_FST)) <=> ( ? [A_SND, A_TRD, B_SND, B_TRD] : (((( tab(A_FST, A_SND, A_TRD)) & (( tab(B_FST, B_SND, B_TRD)) & $true)) & ((A_FST = B_SND) & (B_FST = A_SND))))))))).
+
+% Translating query 1...
+% SelectStatement
+%   Select
+%     { qeSetQuantifier = SQDefault
+%     , qeSelectList =
+%         [ ( Iden [ Name Nothing "a" , Name Nothing "fst" ] , Nothing )
+%         , ( Iden [ Name Nothing "b" , Name Nothing "fst" ] , Nothing )
+%         ]
+%     , qeFrom =
+%         [ TRAlias
+%             (TRSimple [ Name Nothing "tab" ])
+%             (Alias (Name Nothing "a") Nothing)
+%         , TRAlias
+%             (TRSimple [ Name Nothing "tab" ])
+%             (Alias (Name Nothing "b") Nothing)
+%         , TRAlias
+%             (TRSimple [ Name Nothing "tab" ])
+%             (Alias (Name Nothing "c") Nothing)
+%         ]
+%     , qeWhere =
+%         Just
+%           (Parens
+%              (BinOp
+%                 (BinOp
+%                    (BinOp
+%                       (Iden [ Name Nothing "a" , Name Nothing "fst" ])
+%                       [ Name Nothing "=" ]
+%                       (Iden [ Name Nothing "b" , Name Nothing "snd" ]))
+%                    [ Name Nothing "and" ]
+%                    (BinOp
+%                       (Iden [ Name Nothing "b" , Name Nothing "fst" ])
+%                       [ Name Nothing "=" ]
+%                       (Iden [ Name Nothing "a" , Name Nothing "snd" ])))
+%                 [ Name Nothing "and" ]
+%                 (BinOp
+%                    (Iden [ Name Nothing "c" , Name Nothing "fst" ])
+%                    [ Name Nothing "=" ]
+%                    (Iden [ Name Nothing "c" , Name Nothing "fst" ]))))
+%     , qeGroupBy = []
+%     , qeHaving = Nothing
+%     , qeOrderBy = []
+%     , qeOffset = Nothing
+%     , qeFetchFirst = Nothing
+%     }
+
+fof(main_query_1_definition_0, definition, ( ! [A_FST, B_FST] : ((( main_query_1(A_FST, B_FST)) <=> ( ? [A_SND, A_TRD, B_SND, B_TRD, C_FST, C_SND, C_TRD] : (((( tab(A_FST, A_SND, A_TRD)) & (( tab(B_FST, B_SND, B_TRD)) & (( tab(C_FST, C_SND, C_TRD)) & $true))) & (((A_FST = B_SND) & (B_FST = A_SND)) & (C_FST = C_FST))))))))).
 
 fof(equivalence_check_1, conjecture, ( ! [A_FST, B_FST] : ((( main_query_0(A_FST, B_FST)) <=> ( main_query_1(A_FST, B_FST)))))).
 
@@ -17,19 +122,19 @@ fof(tab_substitution_2, axiom, ( ! [X_0, X_1, X_2, X_3] : ((((X_0 = X_2) & ( tab
 
 fof(tab_substitution_3, axiom, ( ! [X_0, X_1, X_2, X_3] : ((((X_0 = X_3) & ( tab(X_1, X_2, X_3))) => ( tab(X_1, X_2, X_0)))))).
 
-fof(tab2_substitution_1, axiom, ( ! [X_0, X_1, X_2, X_3] : ((((X_0 = X_1) & ( tab2(X_1, X_2, X_3))) => ( tab2(X_0, X_2, X_3)))))).
+fof(lessThanOrEqual_substitution_1, axiom, ( ! [X_0, X_1, X_2] : ((((X_0 = X_1) & ( lessthanorequal(X_1, X_2))) => ( lessthanorequal(X_0, X_2)))))).
 
-fof(tab2_substitution_2, axiom, ( ! [X_0, X_1, X_2, X_3] : ((((X_0 = X_2) & ( tab2(X_1, X_2, X_3))) => ( tab2(X_1, X_0, X_3)))))).
-
-fof(tab2_substitution_3, axiom, ( ! [X_0, X_1, X_2, X_3] : ((((X_0 = X_3) & ( tab2(X_1, X_2, X_3))) => ( tab2(X_1, X_2, X_0)))))).
-
-fof(lessthan_substitution_1, axiom, ( ! [X_0, X_1, X_2] : ((((X_0 = X_1) & ( lessthan(X_1, X_2))) => ( lessthan(X_0, X_2)))))).
-
-fof(lessthan_substitution_2, axiom, ( ! [X_0, X_1, X_2] : ((((X_0 = X_2) & ( lessthan(X_1, X_2))) => ( lessthan(X_1, X_0)))))).
+fof(lessThanOrEqual_substitution_2, axiom, ( ! [X_0, X_1, X_2] : ((((X_0 = X_2) & ( lessthanorequal(X_1, X_2))) => ( lessthanorequal(X_1, X_0)))))).
 
 fof(reflexivity_of_equality, axiom, ( ! [X] : ((X = X)))).
 
 fof(symmetry_of_equality, axiom, ( ! [X, Y] : (((X = Y) => (Y = X))))).
 
-fof(transitivity_of_equality, axiom, ( ! [X, Y, Z] : ((((X = Y) & (Y = X)) => (X = Z))))).
+fof(transitivity_of_equality, axiom, ( ! [X, Y, Z] : ((((X = Y) & (Y = Z)) => (X = Z))))).
+
+fof(reflexivity_of_less_than_or_equal, axiom, ( ! [X] : (( lessthanorequal(X, X))))).
+
+fof(antisymmetry_of_less_than_or_equal, axiom, ( ! [X, Y] : (((( lessthanorequal(X, Y)) & ( lessthanorequal(Y, X))) => (X = Y))))).
+
+fof(transitivity_of_less_than_or_equal, axiom, ( ! [X, Y, Z] : (((( lessthanorequal(X, Y)) & ( lessthanorequal(Y, Z))) => ( lessthanorequal(X, Z)))))).
 

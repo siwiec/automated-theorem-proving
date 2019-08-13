@@ -36,6 +36,7 @@ main = do
             putStrLn $ "% Equivallence check for file " ++ inputFile ++ "..."
             withFile inputFile ReadMode (\k -> do
                 rawInput <- hGetContents k
+                putStrLn $ unlines $ Prelude.map ((++) "% ") $ lines rawInput
                 runEquivalenceCheck rawInput)
         _ -> do
             putStrLn "Usage: automated-theorem-proving inputFile"

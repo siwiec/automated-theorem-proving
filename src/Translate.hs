@@ -45,11 +45,12 @@ import System.Environment ( getArgs )
 import System.Exit
 import System.FilePath.Posix
 import System.IO ( stdin, hGetContents, hPutStrLn, stderr )
+import Text.Show.Pretty ( ppShow )
 
 -- | Translator state
 type Store = (DatabaseScheme
              ,[TptpFormula]
-             ,Data.Map.Map String ApplicableFofFormula
+             ,String -- ^ Current prefix
              ,Integer
              )
 
@@ -64,7 +65,7 @@ fofEmit :: String       -- ^ Formula name
         -> FofFormula   -- ^ first-order logic formula
         -> Maybe String -- ^ Optional annotations
         -> Eval ()      -- ^ Translator state
-fofEmit n r f a = modify $ \(databaseScheme, store, queriesMap, counter) -> (databaseScheme, store ++ [TptpFofFormula (n ++ "_" ++ ( show (length store))) r f a], queriesMap, counter)
+fofEmit n r f a = modify $ \(databaseScheme, store, currentPrefix, counter) -> (databaseScheme, store ++ [TptpFofFormula (n ++ "_" ++ ( show (length store))) r f a], currentPrefix, counter)
 
 
 {- |
@@ -82,26 +83,16 @@ translateStatements inputAst = do
     let databaseScheme = databaseSchemeFromAst databaseSchemeAst
     putStrLn "% Database scheme:"
     putStrLn $ show databaseScheme
-    imapM_ (translateSingleQuery (databaseScheme, [], Data.Map.empty, 0)) queriesAst
-    mapM_ putStrLn (Prelude.map show (buildAxioms [("tab", 3)
-                                                  ,("tab2", 3)
-                                                  ,("lessthan", 2)
-                                                  ]))
+    imapM_ (translateSingleQuery (databaseScheme, [], "", 0)) queriesAst
+    mapM_ putStrLn (Prelude.map show (buildAxioms $ (getTablesWithArity databaseScheme) ++ [ ("lessThanOrEqual", 2) ]))
 
-getName :: String
-        -> Eval String
-getName s = if s == "main_query" then throwError "Reserved name" else do
-    (databaseScheme, tptpFormulas, formulasMap, counter) <- get
-    put (databaseScheme, tptpFormulas, formulasMap, counter + 1)
-    return $ s ++ "_" ++ show counter
-
-
-
-translateSingleQuery :: Store -- ^ Initial store
-                     -> Int -- ^ Query number
+translateSingleQuery :: Store     -- ^ Initial store
+                     -> Int       -- ^ Query number
                      -> Statement -- ^ Pair (query number, query AST)
-                     -> IO () -- ^ Error message or the TPTP translation of the query
+                     -> IO ()     -- ^ Error message or the TPTP translation of the query
 translateSingleQuery initialStore queryNumber queryAst = do
+    putStrLn $ "% Translating query " ++ show queryNumber ++ "..."
+    putStrLn . unlines $ Prelude.map ((++) "% ") $ lines $ ppShow queryAst
     result <- runTranslate initialStore (translateStatement ("main_query_" ++ show queryNumber) queryAst)
     case result of
         (Left errorMsg, _) -> do
@@ -109,12 +100,13 @@ translateSingleQuery initialStore queryNumber queryAst = do
         (Right _, (_, queryTptp, _, _)) -> mapM_ (putStrLn . show) queryTptp
 
 
-translateStatement :: String -- ^ Query name
+translateStatement :: String    -- ^ Query name
                    -> Statement -- ^ Query AST
                    -> Eval ()
 translateStatement queryName x = case x of
     (SelectStatement queryExpr) -> do
-        (idents, fofFormula) <- translateQueryExpr queryExpr
+        fofFormula <- translateQueryExpr queryExpr
+        let idents = getFreeVariables fofFormula
         fofEmit (queryName ++ "_definition") Definition (ForAll idents (Equiv (Predicate queryName idents) fofFormula)) Nothing
         if queryName == "main_query_1" then do
             fofEmit "equivalence_check" Conjecture (ForAll idents (Equiv (Predicate "main_query_0" idents) (Predicate "main_query_1" idents))) Nothing
@@ -123,7 +115,7 @@ translateStatement queryName x = case x of
     _ -> throwError "Unknown Statement"
 
 translateQueryExpr :: QueryExpr
-                   -> Eval ApplicableFofFormula
+                   -> Eval FofFormula
 translateQueryExpr x = case x of
     (Select _ qeSelectList qeFrom qeWhere qeGroupBy qeHaving _ _ _) -> translateSelect qeSelectList qeFrom qeWhere qeGroupBy qeHaving
     (QueryExprSetOp qe0 qeCombOp _ _ qe1) -> do
@@ -133,82 +125,73 @@ translateQueryExpr x = case x of
     (Table names) -> translateTable names
     _ -> throwError "Unknown QueryExpr"
 
-translateSelect :: [(ScalarExpr,Maybe Name)]
+translateSelect :: [(ScalarExpr, Maybe Name)]
                 -> [TableRef]
                 -> Maybe ScalarExpr
                 -> [GroupingExpr]
                 -> Maybe ScalarExpr
-                -> Eval ApplicableFofFormula
-translateSelect [] _ _ _ _ = return ([], EmptyFormula)
+                -> Eval FofFormula
+translateSelect [] _ _ _ _ = return EmptyFormula
 translateSelect qeSelectList qeFrom qeWhere qeGroupBy qeHaving = do
-    fromApplicableFofFormulas <- translateQeFrom qeFrom
-    let idents = concat $ Prelude.map (\(x, _) -> x) fromApplicableFofFormulas
-    forAllIdents <- translateQeSelectList qeSelectList
-    let fromFormula  = Data.Foldable.foldr (\x y -> And x y) EmptyFormula (Prelude.map (\(_, x) -> x) fromApplicableFofFormulas)
-    (_, whereFormula) <- translateQeWhere qeWhere
+    fromFofFormulas <- translateQeFrom qeFrom
+    (databaseScheme, tptpFormulas, currentPrefix, counter) <- get
+    selectList <- translateQeSelectList qeSelectList
+    let forAllIdents = toVariables $ Prelude.map ((++) currentPrefix) selectList
+    let fromFormula  = Data.Foldable.foldr (\x y -> And x y) EmptyFormula fromFofFormulas
+    let idents = toVariables $ getFreeVariables fromFormula
+    whereFormula <- translateQeWhere qeWhere
     -- translateQeGroupBy qeGroupBy
     -- translateQeHaving qeHaving
-    let existsIdents = [ x | x <- idents, notElem x forAllIdents ]
-    return (forAllIdents, (Exists existsIdents (And fromFormula whereFormula)))
+    let existsIdents = [ x | x <- idents, x `notElem` forAllIdents ]
+    return (Exists existsIdents (And fromFormula whereFormula))
 
 translateQeCombOp :: SetOperatorName
-                  -> Eval ApplicableFofFormula
+                  -> Eval FofFormula
 translateQeCombOp qeCombOp = throwError "Function translateQeCombOp not yet implemented"
 
 translateQeSelectList :: [(ScalarExpr,Maybe Name)]
                       -> Eval [String]
 translateQeSelectList qeSelectList = do
-    return $ Prelude.map (intercalate "_") $
+    return $ toVariables $ Prelude.map  (intercalate "_") $
         Prelude.map (\(Iden ns, _) ->
             Prelude.map (\(Name _ n) -> n) ns
         ) qeSelectList
 
 translateQeFrom :: [TableRef]
-                -> Eval [ApplicableFofFormula]
-translateQeFrom qeFrom = mapM (translateTableRef Nothing) qeFrom
+                -> Eval [FofFormula]
+translateQeFrom qeFrom = mapM translateTableRef qeFrom
 
 
-translateTableRef :: Maybe String -- ^ Alias of the table
-                  -> TableRef
-                  -> Eval ApplicableFofFormula
-translateTableRef alias tableRef = case tableRef of
-    (TRSimple names) -> translateTRSimple alias names
+translateTableRef :: TableRef
+                  -> Eval FofFormula
+translateTableRef tableRef = case tableRef of
+    (TRSimple names) -> translateTRSimple names
     (TRJoin tableRef1 nautral joinType tableRef2 joinCondition) -> throwError "Function translateTRJoin not yet implemented"
     (TRParens tableRef) -> throwError "Function translateTRParens not yet implemented"
-    {-(TRAlias tableRef (Alias (Name _ name) _)) -> do
-        tableRefApplicableFofFormula <- translateTableRef tableRef
-        --(databaseScheme, store, queriesMap, counter) <- get
-        --put (databaseScheme, store, (Data.Map.insert name tableRefApplicableFofFormula queriesMap), counter)
-        let aliasedColumnNames = Prelude.map (\x -> name ++ "_" ++ x) columnNames
-        case applyFofFormula aliasedColumnNames tableRefApplicableFofFormula of
-            (Left errorMsg) -> throwError errorMsg
-            (Right aliastedTableRefFofApplicableFormula) -> return (aliasedColumnNames, aliastedTableRefFofApplicableFormula) -}
-    (TRAlias tableRef (Alias (Name _ name) _)) -> translateTableRef (Just name) tableRef
-    (TRQueryExpr queryExpr) -> translateTRQueryExpr alias queryExpr
+    (TRAlias tableRef (Alias (Name _ name) _)) -> do
+        (databaseScheme, tptpFormulas, currentPrefix, counter) <- get
+        put (databaseScheme, tptpFormulas, currentPrefix ++ name ++ "_", counter)
+        ret <- translateTableRef tableRef
+        put (databaseScheme, tptpFormulas, currentPrefix, counter)
+        return ret
+    (TRQueryExpr queryExpr) -> translateTRQueryExpr queryExpr
     (TRFunction names scalarExprs) -> throwError "Function translateTRFunction not yet implemented"
     (TRLateral tableRef) -> throwError "Function translateTRLateral not yet implemented"
     (TROdbc tableRef) -> throwError "Function translateTROdbc not yet implemented"
 
 
-translateTRQueryExpr :: Maybe String
-                     -> QueryExpr
-                     -> Eval ApplicableFofFormula
-translateTRQueryExpr (Just alias) queryExpr = do
-    (idents, fofFormula) <- translateQueryExpr queryExpr
-    let newIdents = Prelude.map (\x -> alias ++ "_" ++ x) idents
-    case applyFofFormula newIdents (idents, fofFormula) of
-        (Left errorMsg) -> throwError errorMsg
-        (Right newFofFormula) -> return (newIdents, newFofFormula)
-translateTRQueryExpr Nothing queryExpr = translateQueryExpr queryExpr
+translateTRQueryExpr :: QueryExpr
+                     -> Eval FofFormula
+translateTRQueryExpr = translateQueryExpr
 
 translateQeWhere :: Maybe ScalarExpr
-                 -> Eval ApplicableFofFormula
+                 -> Eval FofFormula
 translateQeWhere qeWhere = case qeWhere of
-    Nothing -> return ([], EmptyFormula)
+    Nothing -> return EmptyFormula
     (Just scalarExpr) -> translateScalarExpr scalarExpr
 
 translateScalarExpr :: ScalarExpr
-                    -> Eval ApplicableFofFormula
+                    -> Eval FofFormula
 translateScalarExpr scalarExpr = do
     case scalarExpr of
         (NumLit _) -> throwError "Function translateScalarExpr not yet implemented for (NumLit _)"
@@ -221,26 +204,27 @@ translateScalarExpr scalarExpr = do
         (PositionalArg _) -> throwError "Function translateScalarExpr not yet implemented for (PositionalArg _)"
         (HostParameter _ _) -> throwError "Function translateScalarExpr not yet implemented for (HostParameter _ _)"
         (BinOp (Iden names) binOpNames (Iden names2)) -> do
-            let scalarExprFofFormula = namesToString names
-            let scalarExprFofFormula2 = namesToString names2
+            (databaseScheme, tptpFormulas, currentPrefix, counter) <- get
+            let scalarExprFofFormula = toVariable $ currentPrefix ++ (namesToString names)
+            let scalarExprFofFormula2 = toVariable $ currentPrefix ++ (namesToString names2)
             case binOpNames of
-                [Name _ "="]  -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "equal" [scalarExprFofFormula, scalarExprFofFormula2]))
-                [Name _ "<"]  -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "lessthan" [scalarExprFofFormula, scalarExprFofFormula2]))
-                [Name _ ">"]  -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Predicate "lessthan" [scalarExprFofFormula2, scalarExprFofFormula]))
-                [Name _ "<="] -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Or (Predicate "lessthan" [scalarExprFofFormula, scalarExprFofFormula2]) (Predicate "equal" [scalarExprFofFormula, scalarExprFofFormula2])))
-                [Name _ ">="] -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Or (Predicate "lessthan" [scalarExprFofFormula2, scalarExprFofFormula]) (Predicate "equal" [scalarExprFofFormula, scalarExprFofFormula2])))
-                [Name _ "!="] -> return ([scalarExprFofFormula, scalarExprFofFormula2], (Not (Predicate "equal" [scalarExprFofFormula, scalarExprFofFormula2])))
+                [Name _ "="]  -> return (Predicate "equal" [scalarExprFofFormula, scalarExprFofFormula2])
+                [Name _ "<="]  -> return (Predicate "lessThanOrEqual" [scalarExprFofFormula, scalarExprFofFormula2])
+                [Name _ ">="]  -> return (Predicate "lessThanOrEqual" [scalarExprFofFormula2, scalarExprFofFormula])
+                [Name _ "<"] -> return (And (Predicate "lessThanOrEqual" [scalarExprFofFormula, scalarExprFofFormula2]) (Not (Predicate "equal" [scalarExprFofFormula, scalarExprFofFormula2])))
+                [Name _ ">"] -> return (And (Predicate "lessThanOrEqual" [scalarExprFofFormula2, scalarExprFofFormula]) (Not (Predicate "equal" [scalarExprFofFormula, scalarExprFofFormula2])))
+                [Name _ "!="] -> return (Not (Predicate "equal" [scalarExprFofFormula, scalarExprFofFormula2]))
                 _ -> throwError $ "Unknown BinOp expression: " ++ show (BinOp scalarExpr names scalarExpr)
         (BinOp scalarExpr binOpNames scalarExpr2) -> do
-            (idents, scalarExprFofFormula) <- translateScalarExpr scalarExpr
-            (idents2, scalarExprFofFormula2) <- translateScalarExpr scalarExpr2
+            scalarExprFofFormula <- translateScalarExpr scalarExpr
+            scalarExprFofFormula2 <- translateScalarExpr scalarExpr2
             case binOpNames of
-                [Name _ "&"] -> return ((idents ++ idents2),  (And scalarExprFofFormula scalarExprFofFormula2))
-                [Name _ "and"] -> return ((idents ++ idents2),  (And scalarExprFofFormula scalarExprFofFormula2))
-                [Name _ "|"] -> return ((idents ++ idents2),  (Or scalarExprFofFormula scalarExprFofFormula2))
-                [Name _ "or"] -> return ((idents ++ idents2),  (Or scalarExprFofFormula scalarExprFofFormula2))
-                [Name _ "=>"] -> return ((idents ++ idents2),  (Implies scalarExprFofFormula scalarExprFofFormula2))
-                [Name _ "<=>"] -> return ((idents ++ idents2),  (Equiv scalarExprFofFormula scalarExprFofFormula2))
+                [Name _ "&"] -> return (And scalarExprFofFormula scalarExprFofFormula2)
+                [Name _ "and"] -> return (And scalarExprFofFormula scalarExprFofFormula2)
+                [Name _ "|"] -> return (Or scalarExprFofFormula scalarExprFofFormula2)
+                [Name _ "or"] -> return (Or scalarExprFofFormula scalarExprFofFormula2)
+                [Name _ "=>"] -> return (Implies scalarExprFofFormula scalarExprFofFormula2)
+                [Name _ "<=>"] -> return (Equiv scalarExprFofFormula scalarExprFofFormula2)
                 _ -> throwError $ "Unknown BinOp expression: " ++ show (BinOp scalarExpr binOpNames scalarExpr)
 
         (PrefixOp names _) -> throwError "Function translateScalarExpr not yet implemented for (PrefixOp names _)"
@@ -277,25 +261,21 @@ translateQeHaving :: Maybe ScalarExpr
                   -> Eval ()
 translateQeHaving qeHaving = throwError "Function translateQeHaving not yet implemented"
 
-translateTRSimple :: Maybe String -- ^ Optional alias
-                  -> [Name]
-                  -> Eval ApplicableFofFormula
-translateTRSimple alias names = do
-    (databaseScheme, _, _, _) <- get
+translateTRSimple :: [Name]
+                  -> Eval FofFormula
+translateTRSimple names = do
+    (databaseScheme, tptpFormulas, currentPrefix, counter) <- get
     let tableName = namesToString names
     let columnNames = getColumnNames tableName databaseScheme
-    aliasedColumnNames <- do
-        return $ case alias of
-            (Nothing) -> Prelude.map (\x -> tableName ++ "_" ++ x) columnNames
-            (Just a) -> Prelude.map (\x -> a ++ "_" ++ x) columnNames
-    return $ (aliasedColumnNames, Predicate tableName aliasedColumnNames)
+    let aliasedColumnNames = Prelude.map ((++) currentPrefix) columnNames
+    return $ Predicate tableName aliasedColumnNames
 
 namesToString :: [Name] -> String
 namesToString names = intercalate "_" (Prelude.map (\(Name _ name) -> name) names)
 
 translateJoinCondition :: Maybe JoinCondition
-                       -> Eval ApplicableFofFormula
+                       -> Eval FofFormula
 translateJoinCondition _ = throwError "Function translateJoinCondition not yet implemented"
 
-translateTable :: [Name] -> Eval ApplicableFofFormula
+translateTable :: [Name] -> Eval FofFormula
 translateTable names = throwError "Function translateTable not yet implemented"

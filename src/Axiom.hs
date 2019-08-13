@@ -26,8 +26,33 @@ buildAxioms [] = [
                    (ForAll ["X", "Y", "Z"] (
                        Implies
                            (And (Predicate "equal" ["X", "Y"])
-                               (Predicate "equal" ["Y", "X"]))
+                               (Predicate "equal" ["Y", "Z"]))
                            (Predicate "equal" ["X", "Z"])
+                   ))
+                   Nothing,
+
+    TptpFofFormula "reflexivity_of_less_than_or_equal"
+                   Axiom
+                   (ForAll ["X"] (Predicate "lessThanOrEqual" ["X", "X"]))
+                   Nothing,
+
+    TptpFofFormula "antisymmetry_of_less_than_or_equal"
+                   Axiom
+                   (ForAll ["X", "Y"] (
+                       Implies
+                           (And (Predicate "lessThanOrEqual" ["X", "Y"])
+                               (Predicate "lessThanOrEqual" ["Y", "X"]))
+                           (Predicate "equal" ["X", "Y"])
+                   ))
+                   Nothing,
+
+    TptpFofFormula "transitivity_of_less_than_or_equal"
+                   Axiom
+                   (ForAll ["X", "Y", "Z"] (
+                       Implies
+                           (And (Predicate "lessThanOrEqual" ["X", "Y"])
+                               (Predicate "lessThanOrEqual" ["Y", "Z"]))
+                           (Predicate "lessThanOrEqual" ["X", "Z"])
                    ))
                    Nothing
     ]
