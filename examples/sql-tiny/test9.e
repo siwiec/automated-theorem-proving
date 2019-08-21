@@ -49,11 +49,11 @@
 #######
 #cnf(i_0_16, plain, (main_query_0(X4)|X4!=X5|X2!=X4|~tab(X4,X5,X6)|~tab(X1,X2,X3))).
 #
-#cnf(i_0_84, plain, (main_query_0(X1)|X2!=X1|~tab(X3,X2,X4)|~main_query_1(X1))).
+#cnf(i_0_85, plain, (main_query_0(X1)|X2!=X1|~tab(X3,X2,X4)|~main_query_1(X1))).
 #
 #cnf(i_0_86, plain, (main_query_0(X1)|~tab(X2,X1,X3)|~main_query_1(X1))).
 #
-#cnf(i_0_100, plain, (main_query_0(X1)|~main_query_1(X1))).
+#cnf(i_0_101, plain, (main_query_0(X1)|~main_query_1(X1))).
 
 # Proof found!
 # SZS status Theorem

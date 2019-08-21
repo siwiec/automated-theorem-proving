@@ -36,6 +36,8 @@ module FofFormula (
                   ,toPredicates
                   -- ** toVariables
                   ,toVariables
+                  -- ** simplifyFofFormula
+                  ,simplifyFofFormula
                   ) where
 
 import Data.Maybe ( fromMaybe )
@@ -53,7 +55,7 @@ data FofFormula = EmptyFormula
                 | Equiv FofFormula FofFormula
                 | Not FofFormula
                 | Predicate String [String]
-                deriving Eq
+                deriving (Eq, Ord)
 
 
 instance Show FofFormula where
@@ -152,6 +154,51 @@ toVariable = Prelude.map Data.Char.toUpper
 toPredicates = Prelude.map toPredicate
 toVariables = Prelude.map toVariable
 
-
 removeDuplicates :: (Eq a) => [a] -> [a]
 removeDuplicates = List.foldl (\seen x -> if x `elem` seen then seen else seen ++ [x]) []
+
+simplifyFofFormula :: FofFormula
+                   -> FofFormula
+simplifyFofFormula formula
+    | formula /= basicSimplified = simplifyFofFormula basicSimplified
+    | otherwise                  = formula
+    where
+        basicSimplified = basicSimplify formula
+
+basicSimplify :: FofFormula
+              -> FofFormula
+basicSimplify (ForAll vars EmptyFormula) = EmptyFormula
+basicSimplify (ForAll vars f1)           = ForAll vars (basicSimplify f1)
+basicSimplify (Exists vars EmptyFormula) = EmptyFormula
+basicSimplify (Exists vars f1)           = Exists vars (basicSimplify f1)
+basicSimplify (And f1 f2)
+    | f1 == EmptyFormula = basicSimplify f2
+    | f2 == EmptyFormula = basicSimplify f1
+    | f1 == f2           = basicSimplify f1
+    | f1 < f2            = And (basicSimplify f1) (basicSimplify f2)
+    | f1 > f2            = And (basicSimplify f2) (basicSimplify f1)
+basicSimplify (Or f1 f2)
+    | f1 == EmptyFormula = EmptyFormula
+    | f2 == EmptyFormula = EmptyFormula
+    | f1 == f2           = basicSimplify f1
+    | f1 < f2            = Or (basicSimplify f1) (basicSimplify f2)
+    | f1 > f2            = Or (basicSimplify f2) (basicSimplify f1)
+basicSimplify (Implies EmptyFormula f2)  = basicSimplify f2
+basicSimplify (Implies f1 f2)            = Implies (basicSimplify f1) (basicSimplify f2)
+basicSimplify (Equiv f1 f2)
+    | f1 == EmptyFormula = basicSimplify f2
+    | f2 == EmptyFormula = basicSimplify f1
+    | f1 == f2           = EmptyFormula
+    | f1 < f2            = Equiv (basicSimplify f1) (basicSimplify f2)
+    | f1 > f2            = Equiv (basicSimplify f2) (basicSimplify f1)
+basicSimplify (Not (Not f1))             = basicSimplify f1
+basicSimplify (Not f1)                   = Not (basicSimplify f1)
+basicSimplify (Predicate "equal" [v1,v2])
+    | v1 == v2           = EmptyFormula
+    | v1 < v2            = Predicate "equal" [v1,v2]
+    | v1 > v2            = Predicate "equal" [v2,v1]
+basicSimplify formula = formula
+
+
+
+
