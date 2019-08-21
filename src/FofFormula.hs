@@ -83,8 +83,8 @@ getVariables (Predicate predicate vars) = removeDuplicates $ toVariables vars
 getFreeVariables :: FofFormula
                  -> [String]
 getFreeVariables EmptyFormula               = []
-getFreeVariables (ForAll vars f1)           = removeDuplicates $ (getFreeVariables f1) List.\\ (toVariables vars)
-getFreeVariables (Exists vars f1)           = removeDuplicates $ (getFreeVariables f1) List.\\ (toVariables vars)
+getFreeVariables (ForAll vars f1)           = removeDuplicates [v | v <- (getFreeVariables f1), v `notElem` (toVariables vars)]
+getFreeVariables (Exists vars f1)           = removeDuplicates [v | v <- (getFreeVariables f1), v `notElem` (toVariables vars)]
 getFreeVariables (And f1 f2)                = removeDuplicates $ (getFreeVariables f1) ++ (getFreeVariables f2)
 getFreeVariables (Or f1 f2)                 = removeDuplicates $ (getFreeVariables f1) ++ (getFreeVariables f2)
 getFreeVariables (Implies f1 f2)            = removeDuplicates $ (getFreeVariables f1) ++ (getFreeVariables f2)
@@ -94,7 +94,7 @@ getFreeVariables (Predicate predicate vars) = removeDuplicates $ toVariables var
 
 getBoundVariables :: FofFormula
                   -> [String]
-getBoundVariables x = removeDuplicates $ (getVariables x) List.\\ (getFreeVariables x)
+getBoundVariables x = [v | v <- (getVariables x), v `notElem` (getFreeVariables x)]
 
 getPredicatesWithArity :: FofFormula
               -> [(String, Int)]

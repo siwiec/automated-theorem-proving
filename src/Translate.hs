@@ -188,7 +188,7 @@ translateTableRef state tableRef = case tableRef of
     (TRSimple names) -> translateTRSimple state names
     (TRJoin tableRef1 nautral joinType tableRef2 joinCondition) -> fail "Function translateTRJoin not yet implemented"
     (TRParens tableRef) -> fail "Function translateTRParens not yet implemented"
-    (TRAlias tableRef (Alias (Name _ name) _)) -> translateTableRef state{prefix = prefix state ++ name ++ "_"}tableRef
+    (TRAlias tableRef (Alias (Name _ name) _)) -> translateTableRef state{prefix = prefix state ++ name ++ "_"} tableRef
     (TRQueryExpr queryExpr) -> translateTRQueryExpr state queryExpr
     (TRFunction names scalarExprs) -> fail "Function translateTRFunction not yet implemented"
     (TRLateral tableRef) -> fail "Function translateTRLateral not yet implemented"
