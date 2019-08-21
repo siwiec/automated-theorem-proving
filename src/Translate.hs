@@ -1,4 +1,4 @@
-{-|
+{- |
 Module      : Translate
 Description : Core module for translating queries into the TPTP syntax
 Copyright   : n/a
@@ -47,7 +47,7 @@ import System.FilePath.Posix
 import System.IO ( stdin, hGetContents, hPutStrLn, stderr )
 import Text.Show.Pretty ( ppShow )
 
---| Translator state
+-- | Translator state
 data Store = Store { databaseScheme :: DatabaseScheme
                    , translation :: [TptpFormula]
                    , prefix :: String
@@ -57,12 +57,12 @@ data Store = Store { databaseScheme :: DatabaseScheme
 
 type Eval a = ErrorT String (StateT Store IO) a
 
-{-|
+{- |
     runTranslate starts a single translation (translation of a single query)
 -}
 runTranslate initStore error = runStateT (runErrorT error) initStore
 
---| The function adds a new first-order logic formula entry to the translator's state
+-- | The function adds a new first-order logic formula entry to the translator's state
 fofEmit :: String       -- ^ Formula name
         -> Role         -- ^ Formula role
         -> FofFormula   -- ^ first-order logic formula
@@ -75,7 +75,7 @@ fofEmit name role formula annotations = do
     put store {translation = t ++ [TptpFofFormula newName role formula annotations]}
     where
 
-{-|
+{- |
     The translateStatements function takes two lists of statements (the abstract syntax tree of a DDL and a query)
     and returns either an error message, when an eror occured during the translation of the query or two strings
     one of which contains the description of the database scheme, and the other contains the query translated to the TPTP syntax
@@ -85,15 +85,15 @@ fofEmit name role formula annotations = do
 translateStatements :: [Statement] -- ^ List of SQL statements -- either queries or database schema description
                     -> IO () -- ^ Either error or database scheme description and translated query
 translateStatements inputAst = do
-    let databaseSchemeAst = [(CreateTable names tableElements)| (CreateTable names tableElements) <- inputAst]
-    let queriesAst = [(SelectStatement queryExpr)| (SelectStatement queryExpr) <- inputAst]
+    let databaseSchemeAst = [(CreateTable names tableElements) | (CreateTable names tableElements) <- inputAst]
+    let queriesAst = [(SelectStatement queryExpr) | (SelectStatement queryExpr) <- inputAst]
     let databaseScheme = databaseSchemeFromAst databaseSchemeAst
     putStrLn "% Database scheme:"
     putStrLn $ show databaseScheme
     imapM_ (translateSingleQuery (Store databaseScheme [] "" 0)) queriesAst
     mapM_ putStrLn (Prelude.map show (buildAxioms $ (getTablesWithArity databaseScheme) ++ [ ("lessThanOrEqual", 2) ]))
 
-{-|
+{- |
     translateSingleQuery
 -}
 translateSingleQuery :: Store     -- ^ Initial store
@@ -110,7 +110,7 @@ translateSingleQuery initialState queryNumber queryAst = do
         (Right _, (Store _ queryTptp _ _)) -> mapM_ (putStrLn . show) queryTptp
 
 
-{-|
+{- |
     translateStatement
 -}
 translateStatement :: String    -- ^ Query name
@@ -127,7 +127,7 @@ translateStatement queryName x = case x of
         else return ()
     _ -> throwError "Unknown Statement"
 
-{-|
+{- |
     translateQueryExpr
 -}
 translateQueryExpr :: QueryExpr
@@ -141,7 +141,7 @@ translateQueryExpr x = case x of
     (Table names) -> translateTable names
     _ -> throwError "Unknown QueryExpr"
 
-{-|
+{- |
     translateSelect translates an AST of an expression of form
     ```
     SELECT ...
@@ -169,17 +169,17 @@ translateSelect qeSelectList qeFrom qeWhere qeGroupBy qeHaving = do
     whereFormula <- translateQeWhere qeWhere
     -- translateQeGroupBy qeGroupBy
     -- translateQeHaving qeHaving
-    let existsIdents = [ x| x <- idents, x `notElem` forAllIdents ]
+    let existsIdents = [ x | x <- idents, x `notElem` forAllIdents ]
     return (Exists existsIdents (And fromFormula whereFormula))
 
-{-|
+{- |
     translateQeCombOp
 -}
 translateQeCombOp :: SetOperatorName
                   -> Eval FofFormula
 translateQeCombOp qeCombOp = throwError "Function translateQeCombOp not yet implemented"
 
-{-|
+{- |
     translateQeSelectList
 -}
 translateQeSelectList :: [(ScalarExpr,Maybe Name)]
@@ -190,7 +190,7 @@ translateQeSelectList qeSelectList = do
             Prelude.map (\(Name _ n) -> n) ns
         ) qeSelectList
 
-{-|
+{- |
     translateQeFrom translates the entire FROM clause to an FOF formula
 -}
 translateQeFrom :: [TableRef]
@@ -198,7 +198,7 @@ translateQeFrom :: [TableRef]
 translateQeFrom qeFrom = mapM translateTableRef qeFrom
 
 
-{-|
+{- |
     translateTableRef translates every entry in the FROM clause (table reference) to an FOF formula
 -}
 translateTableRef :: TableRef
@@ -219,14 +219,14 @@ translateTableRef tableRef = case tableRef of
     (TROdbc tableRef) -> throwError "Function translateTROdbc not yet implemented"
 
 
-{-|
+{- |
     translateTRQueryExpr
 -}
 translateTRQueryExpr :: QueryExpr
                      -> Eval FofFormula
 translateTRQueryExpr = translateQueryExpr
 
-{-|
+{- |
     translateQeWhere
 -}
 translateQeWhere :: Maybe ScalarExpr
@@ -235,7 +235,7 @@ translateQeWhere qeWhere = case qeWhere of
     Nothing -> return EmptyFormula
     (Just scalarExpr) -> translateScalarExpr scalarExpr
 
-{-|
+{- |
     translateScalarExpr
 -}
 translateScalarExpr :: ScalarExpr
@@ -269,7 +269,7 @@ translateScalarExpr scalarExpr = do
             case binOpNames of
                 [Name _ "&"] -> return (And scalarExprFofFormula scalarExprFofFormula2)
                 [Name _ "and"] -> return (And scalarExprFofFormula scalarExprFofFormula2)
-                [Name _ "|"] -> return (Or scalarExprFofFormula scalarExprFofFormula2)
+                [Name _ " |"] -> return (Or scalarExprFofFormula scalarExprFofFormula2)
                 [Name _ "or"] -> return (Or scalarExprFofFormula scalarExprFofFormula2)
                 [Name _ "=>"] -> return (Implies scalarExprFofFormula scalarExprFofFormula2)
                 [Name _ "<=>"] -> return (Equiv scalarExprFofFormula scalarExprFofFormula2)
@@ -301,21 +301,21 @@ translateScalarExpr scalarExpr = do
         (OdbcLiteral odbcLiteralType str) -> throwError "Function translateScalarExpr not yet implemented for (OdbcLiteral odbcLiteralType str)"
         (OdbcFunc scalarExpr) -> throwError "Function translateScalarExpr not yet implemented for (OdbcFunc scalarExpr)"
 
-{-|
+{- |
     translateQeGroupBy
 -}
 translateQeGroupBy :: [GroupingExpr]
                    -> Eval ()
 translateQeGroupBy qeGroupBy = throwError "Function translateQeGroupBy not yet implemented"
 
-{-|
+{- |
     translateQeHaving
 -}
 translateQeHaving :: Maybe ScalarExpr
                   -> Eval ()
 translateQeHaving qeHaving = throwError "Function translateQeHaving not yet implemented"
 
-{-|
+{- |
     translateTRSimple translates a simple table reference (table name)
 -}
 translateTRSimple :: [Name]
@@ -327,20 +327,20 @@ translateTRSimple names = do
     let aliasedColumnNames = Prelude.map ((++) currentPrefix) columnNames
     return $ Predicate tableName aliasedColumnNames
 
-{-|
+{- |
     namesToString
 -}
 namesToString :: [Name] -> String
 namesToString names = intercalate "_" (Prelude.map (\(Name _ name) -> name) names)
 
-{-|
+{- |
     translateJoinCondition
 -}
 translateJoinCondition :: Maybe JoinCondition
                        -> Eval FofFormula
 translateJoinCondition _ = throwError "Function translateJoinCondition not yet implemented"
 
-{-|
+{- |
     translateTable
 -}
 translateTable :: [Name] -> Eval FofFormula
