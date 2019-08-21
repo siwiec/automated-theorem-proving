@@ -20,6 +20,8 @@ module FofFormula (
                   ,getFreeVariables
                   -- ** getBoundVariables
                   ,getBoundVariables
+                  -- ** getPredicatesWithArity
+                  ,getPredicatesWithArity
                   -- ** getPredicates
                   ,getPredicates
                   -- ** substituteVariable
@@ -51,6 +53,7 @@ data FofFormula = EmptyFormula
                 | Equiv FofFormula FofFormula
                 | Not FofFormula
                 | Predicate String [String]
+                deriving Eq
 
 
 instance Show FofFormula where
@@ -93,17 +96,21 @@ getBoundVariables :: FofFormula
                   -> [String]
 getBoundVariables x = removeDuplicates $ (getVariables x) List.\\ (getFreeVariables x)
 
+getPredicatesWithArity :: FofFormula
+              -> [(String, Int)]
+getPredicatesWithArity EmptyFormula       = []
+getPredicatesWithArity (ForAll vars f1)   = getPredicatesWithArity f1
+getPredicatesWithArity (Exists vars f1)   = getPredicatesWithArity f1
+getPredicatesWithArity (And f1 f2)        = removeDuplicates $ (getPredicatesWithArity f1) ++ (getPredicatesWithArity f2)
+getPredicatesWithArity (Or f1 f2)         = removeDuplicates $ (getPredicatesWithArity f1) ++ (getPredicatesWithArity f2)
+getPredicatesWithArity (Implies f1 f2)    = removeDuplicates $ (getPredicatesWithArity f1) ++ (getPredicatesWithArity f2)
+getPredicatesWithArity (Equiv f1 f2)      = removeDuplicates $ (getPredicatesWithArity f1) ++ (getPredicatesWithArity f2)
+getPredicatesWithArity (Not f1)           = getPredicatesWithArity f1
+getPredicatesWithArity (Predicate predicate vars) = [(toPredicate predicate, length vars)]
+
 getPredicates :: FofFormula
               -> [String]
-getPredicates EmptyFormula       = []
-getPredicates (ForAll vars f1)   = getPredicates f1
-getPredicates (Exists vars f1)   = getPredicates f1
-getPredicates (And f1 f2)        = removeDuplicates $ (getPredicates f1) ++ (getPredicates f2)
-getPredicates (Or f1 f2)         = removeDuplicates $ (getPredicates f1) ++ (getPredicates f2)
-getPredicates (Implies f1 f2)    = removeDuplicates $ (getPredicates f1) ++ (getPredicates f2)
-getPredicates (Equiv f1 f2)      = removeDuplicates $ (getPredicates f1) ++ (getPredicates f2)
-getPredicates (Not f1)           = getPredicates f1
-getPredicates (Predicate predicate vars) = [toPredicate predicate]
+getPredicates = (Prelude.map fst) . getPredicatesWithArity
 
 substituteVariable :: String
                    -> String
@@ -148,4 +155,3 @@ toVariables = Prelude.map toVariable
 
 removeDuplicates :: (Eq a) => [a] -> [a]
 removeDuplicates = List.foldl (\seen x -> if x `elem` seen then seen else seen ++ [x]) []
-

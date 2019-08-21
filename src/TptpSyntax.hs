@@ -20,13 +20,13 @@ module TptpSyntax (
 import FofFormula
 
 -- | Definition of the TPTP formula role.
-data Role = Axiom | Conjecture | Definition
+data Role = Axiom | Conjecture | Definition deriving Eq
 -- | TptpFormula stores all the parameters for the TPTP predicates.
 data TptpFormula = TptpFofFormula {name        :: String
                                   ,role        :: Role
                                   ,formula     :: FofFormula
                                   ,annotations :: Maybe String
-                                  }
+                                  } deriving Eq
 
 instance Show Role where
     show Axiom      = "axiom"

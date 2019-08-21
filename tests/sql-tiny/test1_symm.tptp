@@ -27,164 +27,9 @@
 
 % Database scheme:
 % tab:
-%	fst: Number
-%	snd: Number
-%	trd: Number
-
-% Translating query 0...
-% SelectStatement
-%   Select
-%     { qeSetQuantifier = SQDefault
-%     , qeSelectList =
-%         [ ( Iden [ Name Nothing "a" , Name Nothing "fst" ] , Nothing )
-%         , ( Iden [ Name Nothing "b" , Name Nothing "fst" ] , Nothing )
-%         ]
-%     , qeFrom =
-%         [ TRAlias
-%             (TRSimple [ Name Nothing "tab" ])
-%             (Alias (Name Nothing "a") Nothing)
-%         , TRAlias
-%             (TRSimple [ Name Nothing "tab" ])
-%             (Alias (Name Nothing "b") Nothing)
-%         ]
-%     , qeWhere =
-%         Just
-%           (Parens
-%              (BinOp
-%                 (BinOp
-%                    (BinOp
-%                       (Iden [ Name Nothing "a" , Name Nothing "fst" ])
-%                       [ Name Nothing "=" ]
-%                       (Iden [ Name Nothing "b" , Name Nothing "snd" ]))
-%                    [ Name Nothing "and" ]
-%                    (BinOp
-%                       (Iden [ Name Nothing "b" , Name Nothing "fst" ])
-%                       [ Name Nothing "=" ]
-%                       (Iden [ Name Nothing "a" , Name Nothing "snd" ])))
-%                 [ Name Nothing "and" ]
-%                 (BinOp
-%                    (Iden [ Name Nothing "a" , Name Nothing "snd" ])
-%                    [ Name Nothing "<" ]
-%                    (Iden [ Name Nothing "b" , Name Nothing "snd" ]))))
-%     , qeGroupBy = []
-%     , qeHaving = Nothing
-%     , qeOrderBy = []
-%     , qeOffset = Nothing
-%     , qeFetchFirst = Nothing
-%     }
-
-fof(main_query_0_definition_0,definition,(
-    ! [A_FST,B_FST] :
-      ( main_query_0(A_FST,B_FST)
-    <=> ? [A_SND,A_TRD,B_SND,B_TRD] :
-          ( tab(A_FST,A_SND,A_TRD)
-          & tab(B_FST,B_SND,B_TRD)
-          & $true
-          & A_FST = B_SND
-          & B_FST = A_SND
-          & lessthanorequal(A_SND,B_SND)
-          & A_SND != B_SND ) ) )).
-
-% Translating query 1...
-% SelectStatement
-%   Select
-%     { qeSetQuantifier = SQDefault
-%     , qeSelectList =
-%         [ ( Iden [ Name Nothing "a" , Name Nothing "fst" ] , Nothing )
-%         , ( Iden [ Name Nothing "b" , Name Nothing "fst" ] , Nothing )
-%         ]
-%     , qeFrom =
-%         [ TRAlias
-%             (TRSimple [ Name Nothing "tab" ])
-%             (Alias (Name Nothing "a") Nothing)
-%         , TRAlias
-%             (TRSimple [ Name Nothing "tab" ])
-%             (Alias (Name Nothing "b") Nothing)
-%         , TRAlias
-%             (TRSimple [ Name Nothing "tab" ])
-%             (Alias (Name Nothing "c") Nothing)
-%         ]
-%     , qeWhere =
-%         Just
-%           (Parens
-%              (BinOp
-%                 (BinOp
-%                    (BinOp
-%                       (BinOp
-%                          (Iden [ Name Nothing "a" , Name Nothing "fst" ])
-%                          [ Name Nothing "=" ]
-%                          (Iden [ Name Nothing "b" , Name Nothing "snd" ]))
-%                       [ Name Nothing "and" ]
-%                       (BinOp
-%                          (Iden [ Name Nothing "b" , Name Nothing "fst" ])
-%                          [ Name Nothing "=" ]
-%                          (Iden [ Name Nothing "a" , Name Nothing "snd" ])))
-%                    [ Name Nothing "and" ]
-%                    (BinOp
-%                       (Iden [ Name Nothing "c" , Name Nothing "fst" ])
-%                       [ Name Nothing "=" ]
-%                       (Iden [ Name Nothing "c" , Name Nothing "fst" ])))
-%                 [ Name Nothing "and" ]
-%                 (BinOp
-%                    (Iden [ Name Nothing "a" , Name Nothing "snd" ])
-%                    [ Name Nothing "<" ]
-%                    (Iden [ Name Nothing "b" , Name Nothing "snd" ]))))
-%     , qeGroupBy = []
-%     , qeHaving = Nothing
-%     , qeOrderBy = []
-%     , qeOffset = Nothing
-%     , qeFetchFirst = Nothing
-%     }
-
-fof(main_query_1_definition_0,definition,(
-    ! [A_FST,B_FST] :
-      ( main_query_1(A_FST,B_FST)
-    <=> ? [A_SND,A_TRD,B_SND,B_TRD,C_FST,C_SND,C_TRD] :
-          ( tab(A_FST,A_SND,A_TRD)
-          & tab(B_FST,B_SND,B_TRD)
-          & tab(C_FST,C_SND,C_TRD)
-          & $true
-          & A_FST = B_SND
-          & B_FST = A_SND
-          & C_FST = C_FST
-          & lessthanorequal(A_SND,B_SND)
-          & A_SND != B_SND ) ) )).
-
-fof(equivalence_check_1,conjecture,(
-    ! [A_FST,B_FST] :
-      ( main_query_0(A_FST,B_FST)
-    <=> main_query_1(A_FST,B_FST) ) )).
-
-fof(tab_substitution_1,axiom,(
-    ! [X_0,X_1,X_2,X_3] :
-      ( ( X_0 = X_1
-        & tab(X_1,X_2,X_3) )
-     => tab(X_0,X_2,X_3) ) )).
-
-fof(tab_substitution_2,axiom,(
-    ! [X_0,X_1,X_2,X_3] :
-      ( ( X_0 = X_2
-        & tab(X_1,X_2,X_3) )
-     => tab(X_1,X_0,X_3) ) )).
-
-fof(tab_substitution_3,axiom,(
-    ! [X_0,X_1,X_2,X_3] :
-      ( ( X_0 = X_3
-        & tab(X_1,X_2,X_3) )
-     => tab(X_1,X_2,X_0) ) )).
-
-fof(lessThanOrEqual_substitution_1,axiom,(
-    ! [X_0,X_1,X_2] :
-      ( ( X_0 = X_1
-        & lessthanorequal(X_1,X_2) )
-     => lessthanorequal(X_0,X_2) ) )).
-
-fof(lessThanOrEqual_substitution_2,axiom,(
-    ! [X_0,X_1,X_2] :
-      ( ( X_0 = X_2
-        & lessthanorequal(X_1,X_2) )
-     => lessthanorequal(X_1,X_0) ) )).
-
+%   fst: Number
+%   snd: Number
+%   trd: Number
 fof(reflexivity_of_equality,axiom,(
     ! [X] : X = X )).
 
@@ -213,4 +58,101 @@ fof(transitivity_of_less_than_or_equal,axiom,(
       ( ( lessthanorequal(X,Y)
         & lessthanorequal(Y,Z) )
      => lessthanorequal(X,Z) ) )).
+
+fof(main_query_0_substitution_1,axiom,(
+    ! [X_0,X_1,X_2] :
+      ( ( X_0 = X_1
+        & main_query_0(X_1,X_2) )
+     => main_query_0(X_0,X_2) ) )).
+
+fof(main_query_0_substitution_2,axiom,(
+    ! [X_0,X_1,X_2] :
+      ( ( X_0 = X_2
+        & main_query_0(X_1,X_2) )
+     => main_query_0(X_1,X_0) ) )).
+
+fof(main_query_1_substitution_1,axiom,(
+    ! [X_0,X_1,X_2] :
+      ( ( X_0 = X_1
+        & main_query_1(X_1,X_2) )
+     => main_query_1(X_0,X_2) ) )).
+
+fof(main_query_1_substitution_2,axiom,(
+    ! [X_0,X_1,X_2] :
+      ( ( X_0 = X_2
+        & main_query_1(X_1,X_2) )
+     => main_query_1(X_1,X_0) ) )).
+
+fof(tab_substitution_1,axiom,(
+    ! [X_0,X_1,X_2,X_3] :
+      ( ( X_0 = X_1
+        & tab(X_1,X_2,X_3) )
+     => tab(X_0,X_2,X_3) ) )).
+
+fof(tab_substitution_2,axiom,(
+    ! [X_0,X_1,X_2,X_3] :
+      ( ( X_0 = X_2
+        & tab(X_1,X_2,X_3) )
+     => tab(X_1,X_0,X_3) ) )).
+
+fof(tab_substitution_3,axiom,(
+    ! [X_0,X_1,X_2,X_3] :
+      ( ( X_0 = X_3
+        & tab(X_1,X_2,X_3) )
+     => tab(X_1,X_2,X_0) ) )).
+
+fof(equal_substitution_1,axiom,(
+    ! [X_0,X_1,X_2] :
+      ( ( X_0 = X_1
+        & X_1 = X_2 )
+     => X_0 = X_2 ) )).
+
+fof(equal_substitution_2,axiom,(
+    ! [X_0,X_1,X_2] :
+      ( ( X_0 = X_2
+        & X_1 = X_2 )
+     => X_1 = X_0 ) )).
+
+fof(lessthanorequal_substitution_1,axiom,(
+    ! [X_0,X_1,X_2] :
+      ( ( X_0 = X_1
+        & lessthanorequal(X_1,X_2) )
+     => lessthanorequal(X_0,X_2) ) )).
+
+fof(lessthanorequal_substitution_2,axiom,(
+    ! [X_0,X_1,X_2] :
+      ( ( X_0 = X_2
+        & lessthanorequal(X_1,X_2) )
+     => lessthanorequal(X_1,X_0) ) )).
+
+fof(equivalence_check,conjecture,(
+    ! [A_FST,B_FST] :
+      ( main_query_0(A_FST,B_FST)
+    <=> main_query_1(A_FST,B_FST) ) )).
+
+fof(main_query_0_definition,definition,(
+    ! [A_FST,B_FST] :
+      ( main_query_0(A_FST,B_FST)
+    <=> ? [A_SND,A_TRD,B_SND,B_TRD] :
+          ( tab(A_FST,A_SND,A_TRD)
+          & tab(B_FST,B_SND,B_TRD)
+          & $true
+          & A_FST = B_SND
+          & B_FST = A_SND
+          & lessthanorequal(A_SND,B_SND)
+          & A_SND != B_SND ) ) )).
+
+fof(main_query_1_definition,definition,(
+    ! [A_FST,B_FST] :
+      ( main_query_1(A_FST,B_FST)
+    <=> ? [A_SND,A_TRD,B_SND,B_TRD,C_FST,C_SND,C_TRD] :
+          ( tab(A_FST,A_SND,A_TRD)
+          & tab(B_FST,B_SND,B_TRD)
+          & tab(C_FST,C_SND,C_TRD)
+          & $true
+          & A_FST = B_SND
+          & B_FST = A_SND
+          & C_FST = C_FST
+          & lessthanorequal(A_SND,B_SND)
+          & A_SND != B_SND ) ) )).
 

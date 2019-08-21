@@ -39,7 +39,7 @@ instance Show DatabaseScheme where
     show (Database databaseScheme) = concat $ map showTable $ Map.toAscList databaseScheme
         where
             showTable :: (String, (Map.OMap String DataType)) -> String
-            showTable (tableName, columns) = "% " ++ tableName ++ ":\n" ++ (unlines ["%\t" ++ columnName ++ ": " ++ show columnType | (columnName, columnType) <- (Map.assocs columns)])
+            showTable (tableName, columns) = "% " ++ tableName ++ ":\n" ++ (unlines ["%   " ++ columnName ++ ": " ++ show columnType | (columnName, columnType) <- (Map.assocs columns)])
 
 -- | databaseSchemeFromAst creates the DatabaseScheme value based on the abstract syntax tree of the DDL.
 databaseSchemeFromAst :: [Statement] -> DatabaseScheme

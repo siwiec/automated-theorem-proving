@@ -3,10 +3,13 @@ module Axiom (buildAxioms) where
 
 import TptpSyntax
 import FofFormula
-import Data.Either
 
-buildAxioms :: [(String, Int)] -> [TptpFormula]
-buildAxioms [] = [
+import Data.Either
+import Data.List as List
+
+buildAxioms :: [TptpFormula] -> [TptpFormula]
+buildAxioms xs =
+    [
     TptpFofFormula "reflexivity_of_equality"
                    Axiom
                    (ForAll ["X"] (Predicate "equal" ["X", "X"]))
@@ -55,11 +58,10 @@ buildAxioms [] = [
                            (Predicate "lessThanOrEqual" ["X", "Z"])
                    ))
                    Nothing
-    ]
-buildAxioms ((predicate, arity):xs) = (buildEqualAxiom predicate arity) ++ (buildAxioms xs)
+    ] ++ (concat $ Prelude.map buildEqualAxiom $ removeDuplicates $ concat $ Prelude.map getPredicatesWithArity [x | (TptpFofFormula _ _ x _) <- xs])
     where
-        buildEqualAxiom :: String -> Int -> [TptpFormula]
-        buildEqualAxiom predicate arity =
+        buildEqualAxiom :: (String, Int) -> [TptpFormula]
+        buildEqualAxiom (predicate, arity) =
                 (map (\(p, a)->
                     TptpFofFormula (predicate ++ "_substitution_" ++ (show a))
                         Axiom
@@ -70,3 +72,7 @@ buildAxioms ((predicate, arity):xs) = (buildEqualAxiom predicate arity) ++ (buil
                                     (Predicate p ["X_" ++ show i | i <- [1..arity]]))
                                 (Predicate p ["X_" ++ show i | i <- [1..(a-1)] ++ [0] ++ [(a+1)..arity]])
                 )) Nothing) (zip (cycle [predicate]) [1..arity]))
+        
+
+removeDuplicates :: (Eq a) => [a] -> [a]
+removeDuplicates = List.foldl (\seen x -> if x `elem` seen then seen else seen ++ [x]) []

@@ -28,7 +28,6 @@ import Translate
 import TptpSyntax (TptpFormula)
 
 -- | main
-main :: IO ()
 main = do
     args <- getArgs
     case args of
@@ -37,15 +36,19 @@ main = do
             withFile inputFile ReadMode (\k -> do
                 rawInput <- hGetContents k
                 putStrLn $ unlines $ Prelude.map ((++) "% ") $ lines rawInput
-                runEquivalenceCheck rawInput)
+                case runEquivalenceCheck rawInput of
+                    (Left err) -> putStrLn err >> exitFailure
+                    (Right tptp) -> putStrLn tptp >> exitWith ExitSuccess)
         _ -> do
-            putStrLn "Usage: automated-theorem-proving inputFile"
+            putStrLn "Usage: automated-theorem-proving inputFile" >> exitSuccess
 
 -- | runEquivalenceCheck
-runEquivalenceCheck :: String -> IO ()
+runEquivalenceCheck :: String -> Either String String
 runEquivalenceCheck rawInput = do
     let parsedInput :: Either ParseError [Statement]
         parsedInput = parseStatements ansi2011 "" Nothing rawInput
     case parsedInput of
-        (Left err) -> (error . peFormattedError) err
-        (Right sqlAst) -> translateStatements sqlAst
+        (Left err) -> fail $ peFormattedError err
+        (Right sqlAst) -> case translateStatements sqlAst of
+            (Left err) -> fail err
+            (Right tptp) -> return tptp
