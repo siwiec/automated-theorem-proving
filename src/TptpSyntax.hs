@@ -9,44 +9,40 @@ Portability : POSIX
 
 Module for managing the TPTP syntax formulas
 -}
-module TptpSyntax (
+module TptpSyntax
                   -- * Types
                   -- ** TptpFormula
-                  TptpFormula(..)
+    ( TptpFormula(..)
                   -- ** Role
-                  ,Role(..)
-                  ) where
+    , Role(..)
+    ) where
 
 import FofFormula
 
 -- | Definition of the TPTP formula role.
-data Role = Axiom | Conjecture | Definition deriving Eq
+data Role
+    = Axiom
+    | Conjecture
+    | Definition
+    deriving (Eq)
+
 -- | TptpFormula stores all the parameters for the TPTP predicates.
-data TptpFormula = TptpFofFormula {name        :: String
-                                  ,role        :: Role
-                                  ,formula     :: FofFormula
-                                  ,annotations :: Maybe String
-                                  } deriving Eq
+data TptpFormula =
+    TptpFofFormula
+        { name :: String
+        , role :: Role
+        , formula :: FofFormula
+        , annotations :: Maybe String
+        }
+    deriving (Eq)
 
 instance Show Role where
-    show Axiom      = "axiom"
+    show Axiom = "axiom"
     show Conjecture = "conjecture"
     show Definition = "definition"
 
 instance Show TptpFormula where
-    show (TptpFofFormula n r f Nothing) = "fof("
-                                            ++ n
-                                            ++ ", "
-                                            ++ (show r)
-                                            ++ ", "
-                                            ++ (show f)
-                                            ++ ").\n"
-    show (TptpFofFormula n r f (Just a)) = "fof("
-                                            ++ n
-                                            ++ ", "
-                                            ++ (show r)
-                                            ++ ", "
-                                            ++ (show f)
-                                            ++ ", "
-                                            ++ (show a)
-                                            ++ ").\n"
+    show (TptpFofFormula n r f Nothing) =
+        "fof(" ++ n ++ ", " ++ (show r) ++ ", " ++ (show f) ++ ").\n"
+    show (TptpFofFormula n r f (Just a)) =
+        "fof(" ++ n ++ ", " ++ (show r) ++ ", " ++ (show f) ++ ", " ++ (show a) ++ ").\n"
