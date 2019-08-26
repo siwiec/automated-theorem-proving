@@ -63,17 +63,17 @@
 #
 #cnf(i_0_51, plain, (main_query_1(X1)|X1!=X2|~b(X1,X2,X3)|~b(X1,X2,X5)|~main_query_0(X4)|~main_query_0(X6))).
 #
-#cnf(i_0_62, plain, (main_query_1(X1)|~b(X1,X1,X2)|~main_query_0(X3)|~main_query_0(X4)|~main_query_0(X1))).
+#cnf(i_0_61, plain, (main_query_1(X1)|~b(X1,X1,X2)|~main_query_0(X3)|~main_query_0(X4)|~main_query_0(X1))).
 #
-#cnf(i_0_74, plain, (main_query_1(X1)|~main_query_0(X2)|~main_query_0(X3)|~main_query_0(X1))).
+#cnf(i_0_73, plain, (main_query_1(X1)|~main_query_0(X2)|~main_query_0(X3)|~main_query_0(X1))).
 #
 #cnf(i_0_75, negated_conjecture, (~main_query_0(esk1_0)|~main_query_0(X1)|~main_query_0(X2))).
 #####
 #cnf(i_0_52, plain, (main_query_1(X1)|X1!=X2|~b(X1,X2,X3)|~b(X1,X2,X5)|~main_query_1(X6)|~main_query_0(X4))).
 #
-#cnf(i_0_93, plain, (main_query_1(X1)|~b(X1,X1,X2)|~main_query_1(X3)|~main_query_0(X4)|~main_query_0(X1))).
+#cnf(i_0_92, plain, (main_query_1(X1)|~b(X1,X1,X2)|~main_query_1(X3)|~main_query_0(X4)|~main_query_0(X1))).
 #
-#cnf(i_0_106, plain, (main_query_1(X1)|~main_query_1(X2)|~main_query_0(X3)|~main_query_0(X1))).
+#cnf(i_0_105, plain, (main_query_1(X1)|~main_query_1(X2)|~main_query_0(X3)|~main_query_0(X1))).
 #
 #cnf(i_0_107, negated_conjecture, (~main_query_1(X1)|~main_query_0(esk1_0)|~main_query_0(X2))).
 #
@@ -83,9 +83,9 @@
 ##
 #cnf(i_0_137, plain, (main_query_1(X1)|X1!=X2|~b(X1,X2,X3)|~b(X1,X2,X5)|~main_query_1(X4)|~main_query_1(X6))).
 #
-#cnf(i_0_153, plain, (main_query_1(X1)|~b(X1,X1,X2)|~main_query_1(X3)|~main_query_1(X4)|~main_query_0(X1))).
+#cnf(i_0_152, plain, (main_query_1(X1)|~b(X1,X1,X2)|~main_query_1(X3)|~main_query_1(X4)|~main_query_0(X1))).
 #
-#cnf(i_0_171, plain, (main_query_1(X1)|~main_query_1(X2)|~main_query_1(X3)|~main_query_0(X1))).
+#cnf(i_0_170, plain, (main_query_1(X1)|~main_query_1(X2)|~main_query_1(X3)|~main_query_0(X1))).
 #
 #cnf(i_0_172, negated_conjecture, (~main_query_1(X1)|~main_query_1(X2)|~main_query_0(esk1_0))).
 #

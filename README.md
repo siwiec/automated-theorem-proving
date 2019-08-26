@@ -19,17 +19,24 @@ make test
 ## Current test output
 ```
 $ make test
-rm -f tests/*/*.tptp
-rm -f tests/*/*.vampire
-rm -f tests/*/*.translated
-rm -f tests/*/*.times
-rm -f tests/*/*.e
+rm -f examples/*/*.tptp
+rm -f examples/*/*.vampire
+rm -f examples/*/*.translated
+rm -f examples/*/*.times
+rm -f examples/*/*.e
 cabal configure
 Resolving dependencies...
 Configuring automated-theorem-proving-0.1.0.0...
 cabal build
 Preprocessing executable 'automated-theorem-proving' for automated-theorem-proving-0.1.0.0..
 Building executable 'automated-theorem-proving' for automated-theorem-proving-0.1.0.0..
+[1 of 6] Compiling DatabaseScheme   ( src/DatabaseScheme.hs, dist/build/automated-theorem-proving/automated-theorem-proving-tmp/DatabaseScheme.o )
+[2 of 6] Compiling FofFormula       ( src/FofFormula.hs, dist/build/automated-theorem-proving/automated-theorem-proving-tmp/FofFormula.o )
+[3 of 6] Compiling TptpSyntax       ( src/TptpSyntax.hs, dist/build/automated-theorem-proving/automated-theorem-proving-tmp/TptpSyntax.o )
+[4 of 6] Compiling Axiom            ( src/Axiom.hs, dist/build/automated-theorem-proving/automated-theorem-proving-tmp/Axiom.o )
+[5 of 6] Compiling Translate        ( src/Translate.hs, dist/build/automated-theorem-proving/automated-theorem-proving-tmp/Translate.o )
+[6 of 6] Compiling Main             ( src/Main.hs, dist/build/automated-theorem-proving/automated-theorem-proving-tmp/Main.o )
+Linking dist/build/automated-theorem-proving/automated-theorem-proving ...
 cabal install
 Resolving dependencies...
 Configuring automated-theorem-proving-0.1.0.0...
@@ -91,4 +98,5 @@ Running tptp4X for file examples/sql-tiny/test9.translated...
      SUCCESS: tptp4X exited with code 0
 Running equivalence checks (vampire) for file examples/sql-tiny/test9.tptp
 Running equivalence checks (E) for file examples/sql-tiny/test9.tptp
+^Cmake: *** [Makefile:19: test] Error 130
 ```
