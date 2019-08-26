@@ -22,6 +22,8 @@ module DatabaseScheme
     , getColumnNames
                       -- ** getTablesWithArity
     , getTablesWithArity
+                      -- ** addTables
+    , addTables
     ) where
 
 import qualified Data.Map.Ordered as Map
@@ -52,17 +54,23 @@ instance Show DatabaseScheme where
 
 -- | databaseSchemeFromAst creates the DatabaseScheme value based on the abstract syntax tree of the DDL.
 databaseSchemeFromAst :: [Statement] -> DatabaseScheme
-databaseSchemeFromAst ss = Database (Map.fromList [x | Just x <- (map addTable ss)])
+databaseSchemeFromAst ss = Database (Map.fromList [x | Just x <- (map addTableFromAst ss)])
+    where
+        addTableFromAst :: Statement -> Maybe (String, Map.OMap String DataType)
+        addTableFromAst (CreateTable [Name _ name] tableElements) =
+            Just (name, Map.fromList [x | Just x <- (map addTableElementFromAst tableElements)])
+        addTableFromAst _ = Nothing
+        addTableElementFromAst :: TableElement -> Maybe (String, DataType)
+        addTableElementFromAst (TableColumnDef (ColumnDef (Name _ name) (PrecTypeName [Name _ "NUMBER"] _) _ _)) =
+            Just (name, Number)
+        addTableElementFromAst _ = Nothing
 
-addTable :: Statement -> Maybe (String, Map.OMap String DataType)
-addTable (CreateTable [Name _ name] tableElements) =
-    Just (name, Map.fromList [x | Just x <- (map addTableElement tableElements)])
-addTable _ = Nothing
 
-addTableElement :: TableElement -> Maybe (String, DataType)
-addTableElement (TableColumnDef (ColumnDef (Name _ name) (PrecTypeName [Name _ "NUMBER"] _) _ _)) =
-    Just (name, Number)
-addTableElement _ = Nothing
+addTables :: [(String, [String])]
+          -> DatabaseScheme
+          -> DatabaseScheme
+addTables tables (Database databaseScheme) = Database $ (Map.fromList [(name, Map.fromList [(columnName, Number) | columnName <- columnNames]) | (name, columnNames) <- tables]) Map.<>| databaseScheme
+
 
 -- | Function returns the list of column names for the given table. If the table does not exist and empty list is returned.
 getColumnNames ::

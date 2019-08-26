@@ -46,9 +46,18 @@ data State =
         }
 
 {- |
+    Translation is a query expression represented as an FofFormula and is in the folloing format:
+    (query_name, list of exposed columns, query_definition), where
+    query_definition is in format (! [column_names] : query_name(column_names) <=> formula)
+-}
+type Translation = (String, -- ^ Name of the predicate defined in the formula
+                    [String], -- ^ List of exposed column names
+                    FofFormula) -- ^ Partial translation
+
+
+{- |
     The translateStatements function takes two lists of statements (the abstract syntax tree of a DDL and a query)
-    and returns either an error message, when an eror occured during the translation of the query or two strings
-    one of which contains the description of the database scheme, and the other contains the query translated to the TPTP syntax
+    and returns either an error message, when an eror occured during the translation of the query or a TPTP translation of the queries.
 
     Statement structure described here: https://github.com/JakeWheat/simple-sql-parser/blob/master/Language/SQL/SimpleSQL/Syntax.lhs
 -}
@@ -66,7 +75,7 @@ translateStatements inputAst = do
             return $
                 "% Database scheme:\n" ++
                 show (databaseScheme initialState) ++
-                (unlines $ Prelude.map show $ (buildAxioms [output]) ++ [output])
+                (unlines $ Prelude.map show $ {-(buildAxioms [output]) ++-} [output])
         queriesAst -> do
             queriesTptp <- imapM (translateSingleQuery initialState) queriesAst
             let idents = (\(TptpFofFormula _ _ (ForAll x _) _) -> x) (head queriesTptp)
@@ -84,7 +93,7 @@ translateStatements inputAst = do
             return $
                 "% Database scheme:\n" ++
                 show (databaseScheme initialState) ++
-                (unlines $ Prelude.map show $ (buildAxioms output) ++ output)
+                (unlines $ Prelude.map show $ {-(buildAxioms output) ++-} output)
   where
     initialState =
         State
@@ -93,7 +102,7 @@ translateStatements inputAst = do
             ""
 
 {- |
-    translateSingleQuery
+    translateSingleQuery translates the AST of a single query into a TPTP formula
 -}
 translateSingleQuery ::
        State -- ^ Initial state
@@ -101,44 +110,41 @@ translateSingleQuery ::
     -> Statement -- ^ Query AST
     -> Either String TptpFormula -- ^ Error message or the TPTP translation of the query
 translateSingleQuery state queryNumber queryAst = do
-    queryFofFormula <- translateStatement state ("main_query_" ++ show queryNumber) queryAst
+    (queryName, _, queryFofFormula) <- translateStatement state ("main_query_" ++ show queryNumber) queryAst
     return $
         TptpFofFormula
-            ("main_query_" ++ show queryNumber ++ "_definition")
+            queryName
             Definition
             queryFofFormula
             Nothing
 
 {- |
-    translateStatement
+    translateStatement translates the AST of a SELECT statement into a FOF formula
 -}
 translateStatement ::
        State
     -> String -- ^ Query name
     -> Statement -- ^ Query AST
-    -> Either String FofFormula
+    -> Either String Translation -- ^ error or a tuple with table name, list of column names and the FofFormula with table definition
 translateStatement state queryName stmt =
     case stmt of
-        (SelectStatement (Select _ qeSelectList qeFrom qeWhere qeGroupBy qeHaving _ _ _)) -> do
-            (selectList, queryFofFormula) <-
-                translateSelect state qeSelectList qeFrom qeWhere qeGroupBy qeHaving
-            return $ ForAll selectList (Equiv (Predicate queryName selectList) queryFofFormula)
+        (SelectStatement (Select _ qeSelectList qeFrom qeWhere qeGroupBy qeHaving _ _ _)) -> translateSelect state queryName qeSelectList qeFrom qeWhere qeGroupBy qeHaving
         _ -> fail "Unknown Statement"
 
 {- |
-    translateQueryExpr
+    translateQueryExpr translates a single query expression (a SELECT statement or a na EXISTS/UNION etc statement)
 -}
-translateQueryExpr :: State -> QueryExpr -> Either String FofFormula
-translateQueryExpr state x =
-    case x of
-        (Select _ qeSelectList qeFrom qeWhere qeGroupBy qeHaving _ _ _) -> do
-            (_, selectFofFormula) <-
-                translateSelect state qeSelectList qeFrom qeWhere qeGroupBy qeHaving
-            return selectFofFormula
-        (QueryExprSetOp qe0 qeCombOp _ _ qe1) -> do
-            translateQueryExpr state qe0
-            translateQeCombOp state qeCombOp
-            translateQueryExpr state qe1
+translateQueryExpr :: State
+    -> String
+    -> QueryExpr
+    -> Either String Translation -- ^ error or a tuple with table name, list of column names and the FofFormula with table definition
+translateQueryExpr state name queryExpr =
+    case queryExpr of
+        (Select _ qeSelectList qeFrom qeWhere qeGroupBy qeHaving _ _ _) -> translateSelect state name qeSelectList qeFrom qeWhere qeGroupBy qeHaving
+        (QueryExprSetOp qe0 qeCombOp _ _ qe1) -> fail "Joins are not yet implemented"
+            -- translateQueryExpr state qe0
+            -- translateQeCombOp state qeCombOp
+            -- translateQueryExpr state qe1
         (Table names) -> translateTable state names
         _ -> fail "Unknown QueryExpr"
 
@@ -155,23 +161,21 @@ translateQueryExpr state x =
 -}
 translateSelect ::
        State
-    -> [(ScalarExpr, Maybe Name)]
-    -> [TableRef]
-    -> Maybe ScalarExpr
-    -> [GroupingExpr]
-    -> Maybe ScalarExpr
-    -> Either String ([String], FofFormula)
-translateSelect _ [] _ _ _ _ = return ([], EmptyFormula)
-translateSelect state qeSelectList qeFrom qeWhere qeGroupBy qeHaving = do
-    fromFofFormulas <- translateQeFrom state qeFrom
-    forAllIdents <- translateQeSelectList state qeSelectList
-    let fromFormula = Data.Foldable.foldr (\x y -> And x y) EmptyFormula fromFofFormulas
-    let idents = getVariables fromFormula -- All idents in FofFormula
-    let existsIdents = [x | x <- idents, x `notElem` forAllIdents]
-    whereFormula <- translateQeWhere state qeWhere
-    -- translateQeGroupBy state qeGroupBy
-    -- translateQeHaving state qeHaving
-    return (forAllIdents, Exists existsIdents (And fromFormula whereFormula))
+    -> String -- ^ Name/alias of the query
+    -> [(ScalarExpr, Maybe Name)] -- ^ List of selected values (with optional aliases)
+    -> [TableRef] -- ^ List of tables in the FROM clause
+    -> Maybe ScalarExpr -- ^ Optional WHERE clause
+    -> [GroupingExpr] -- ^ Optional GROUP BY clause
+    -> Maybe ScalarExpr -- ^ Optional HAVING clause
+    -> Either String Translation -- ^ error or a tuple with table name, list of column names and the FofFormula with table definition
+translateSelect _ name [] _ _ _ _ = return (name, [], EmptyFormula)
+translateSelect state name qeSelectList qeFrom qeWhere _ _ = do
+    (newState, fromFormula) <- translateQeFrom state qeFrom
+    (columnNames, forAllIdents) <- translateQeSelectList newState qeSelectList
+    let freeIdents = getFreeVariables fromFormula
+    let existsIdents = [x | x <- freeIdents, x `notElem` forAllIdents]
+    whereFormula <- translateQeWhere newState qeWhere
+    return (name, columnNames, ForAll forAllIdents (Equiv (Predicate name forAllIdents) (Exists existsIdents (And fromFormula whereFormula))))
 
 {- |
     translateQeCombOp
@@ -182,36 +186,56 @@ translateQeCombOp state qeCombOp = fail "Function translateQeCombOp not yet impl
 {- |
     translateQeSelectList
 -}
-translateQeSelectList :: State -> [(ScalarExpr, Maybe Name)] -> Either String [String]
+translateQeSelectList :: State -> [(ScalarExpr, Maybe Name)] -> Either String ([String], [String])
 translateQeSelectList state qeSelectList = do
-    mapM (translateSelectListElem state) qeSelectList
+    translatedSelectListElems <- mapM (translateSelectListElem state) qeSelectList
+    return $ Prelude.foldr (\(x0, y0) (x, y) -> (x0 ++ x, y0 ++ y)) ([], []) translatedSelectListElems
   where
-    translateSelectListElem :: State -> (ScalarExpr, Maybe Name) -> Either String String
+    translateSelectListElem :: State -> (ScalarExpr, Maybe Name) -> Either String ([String], [String])
     translateSelectListElem state ((Iden names), Nothing) =
-        return $ toVariable $ (prefix state) ++ (intercalate "_" (Prelude.map nameToString names))
-    translateSelectListElem _ selectListElem =
-        fail $ "Unknown selectListElem: " ++ show selectListElem
+        return ([nameToString (last names)], [addVariablePrefix state "" $ (intercalate "_" (Prelude.map nameToString names))])
+    translateSelectListElem state (BinOp (Iden [Name _ tableName]) [Name Nothing "."] Star, Nothing) = do
+        let columnNames = getColumnNames tableName (databaseScheme state)
+        let variables = Prelude.map (addVariablePrefix state tableName) columnNames
+        --let variables = Prelude.map (toVariable . ((++) (tableName ++ "_"))) columnNames
+        return (columnNames, variables)
     nameToString (Name _ name) = name
 
 {- |
     translateQeFrom translates the entire FROM clause to an FOF formula
 -}
-translateQeFrom :: State -> [TableRef] -> Either String [FofFormula]
-translateQeFrom state qeFrom = mapM (translateTableRef state) qeFrom
+translateQeFrom :: State -> [TableRef] -> Either String (State, FofFormula)
+translateQeFrom state qeFrom = do
+    tables <- mapM (translateTableRef state Nothing) qeFrom
+    let fromFormulas = Prelude.map (\(name, columnNames, formula) -> And formula (Predicate name (Prelude.map (addVariablePrefix state name) columnNames))) tables
+    let fromFormula = Data.Foldable.foldr (\x y -> And x y) EmptyFormula fromFormulas
+    let newState = state {databaseScheme = addTables (Prelude.map (\(name, columnNames, _) -> (name, columnNames)) tables) (databaseScheme state)}
+    return (newState, fromFormula)
+
+
+
+addVariablePrefix :: State -> String -> String -> String
+addVariablePrefix state "" name = toVariable $ (prefix state) ++ name
+addVariablePrefix state p name = toVariable $ (prefix state) ++ p ++ "_" ++ name
 
 {- |
     translateTableRef translates every entry in the FROM clause (table reference) to an FOF formula
 -}
-translateTableRef :: State -> TableRef -> Either String FofFormula
-translateTableRef state tableRef =
+translateTableRef :: State
+    -> Maybe String -- ^
+    -> TableRef -- ^
+    -> Either String Translation -- ^ error or a tuple with table name, list of column names and the FofFormula with table definition
+translateTableRef state name tableRef =
     case tableRef of
-        (TRSimple names) -> translateTRSimple state names
+        (TRSimple names) -> translateTRSimple state name names
         (TRJoin tableRef1 nautral joinType tableRef2 joinCondition) ->
             fail "Function translateTRJoin not yet implemented"
         (TRParens tableRef) -> fail "Function translateTRParens not yet implemented"
-        (TRAlias tableRef (Alias (Name _ name) _)) ->
-            translateTableRef state {prefix = prefix state ++ name ++ "_"} tableRef
-        (TRQueryExpr queryExpr) -> translateTRQueryExpr state queryExpr
+        (TRAlias tableRef (Alias (Name _ name) _)) -> do
+            translateTableRef state {prefix = prefix state ++ name ++ "_"} (Just name) tableRef
+        (TRQueryExpr queryExpr) -> case name of
+            (Just n) -> translateTRQueryExpr state n queryExpr
+            Nothing -> fail "Unaliased query expression"
         (TRFunction names scalarExprs) -> fail "Function translateTRFunction not yet implemented"
         (TRLateral tableRef) -> fail "Function translateTRLateral not yet implemented"
         (TROdbc tableRef) -> fail "Function translateTROdbc not yet implemented"
@@ -219,7 +243,7 @@ translateTableRef state tableRef =
 {- |
     translateTRQueryExpr
 -}
-translateTRQueryExpr :: State -> QueryExpr -> Either String FofFormula
+translateTRQueryExpr :: State -> String -> QueryExpr -> Either String (String, [String], FofFormula)
 translateTRQueryExpr = translateQueryExpr
 
 {- |
@@ -360,12 +384,15 @@ translateQeHaving state qeHaving = fail "Function translateQeHaving not yet impl
 {- |
     translateTRSimple translates a simple table reference (table name)
 -}
-translateTRSimple :: State -> [Name] -> Either String FofFormula
-translateTRSimple state names = do
+translateTRSimple :: State -> Maybe String -> [Name] -> Either String Translation
+translateTRSimple state name names = do
     let tableName = namesToString names
     let columnNames = getColumnNames tableName (databaseScheme state)
-    let aliasedColumnNames = Prelude.map ((++) (prefix state)) columnNames
-    return $ Predicate tableName aliasedColumnNames
+    case name of
+        (Just n) -> do
+            let aliasedColumnNames = Prelude.map (addVariablePrefix state tableName) columnNames
+            return (n, columnNames, ForAll aliasedColumnNames (Equiv (Predicate n aliasedColumnNames) (Predicate tableName aliasedColumnNames)))
+        Nothing -> return (tableName, columnNames, EmptyFormula)
 
 {- |
     namesToString
@@ -382,5 +409,5 @@ translateJoinCondition state _ = fail "Function translateJoinCondition not yet i
 {- |
     translateTable
 -}
-translateTable :: State -> [Name] -> Either String FofFormula
+translateTable :: State -> [Name] -> Either String Translation
 translateTable state names = fail "Function translateTable not yet implemented"

@@ -19,32 +19,6 @@
 %   fst: Number
 %   snd: Number
 %   trd: Number
-fof(reflexivity_of_equality, axiom, ( ! [X] : ((X = X)))).
-
-fof(symmetry_of_equality, axiom, ( ! [X, Y] : (((X = Y) => (Y = X))))).
-
-fof(transitivity_of_equality, axiom, ( ! [X, Y, Z] : ((((X = Y) & (Y = Z)) => (X = Z))))).
-
-fof(reflexivity_of_less_than_or_equal, axiom, ( ! [X] : (( lessthanorequal(X, X))))).
-
-fof(antisymmetry_of_less_than_or_equal, axiom, ( ! [X, Y] : (((( lessthanorequal(X, Y)) & ( lessthanorequal(Y, X))) => (X = Y))))).
-
-fof(transitivity_of_less_than_or_equal, axiom, ( ! [X, Y, Z] : (((( lessthanorequal(X, Y)) & ( lessthanorequal(Y, Z))) => ( lessthanorequal(X, Z)))))).
-
-fof(main_query_0_substitution_1, axiom, ( ! [X_0, X_1, X_2] : ((((X_0 = X_1) & ( main_query_0(X_1, X_2))) => ( main_query_0(X_0, X_2)))))).
-
-fof(main_query_0_substitution_2, axiom, ( ! [X_0, X_1, X_2] : ((((X_0 = X_2) & ( main_query_0(X_1, X_2))) => ( main_query_0(X_1, X_0)))))).
-
-fof(tab_substitution_1, axiom, ( ! [X_0, X_1, X_2, X_3] : ((((X_0 = X_1) & ( tab(X_1, X_2, X_3))) => ( tab(X_0, X_2, X_3)))))).
-
-fof(tab_substitution_2, axiom, ( ! [X_0, X_1, X_2, X_3] : ((((X_0 = X_2) & ( tab(X_1, X_2, X_3))) => ( tab(X_1, X_0, X_3)))))).
-
-fof(tab_substitution_3, axiom, ( ! [X_0, X_1, X_2, X_3] : ((((X_0 = X_3) & ( tab(X_1, X_2, X_3))) => ( tab(X_1, X_2, X_0)))))).
-
-fof(equal_substitution_1, axiom, ( ! [X_0, X_1, X_2] : ((((X_0 = X_1) & (X_1 = X_2)) => (X_0 = X_2))))).
-
-fof(equal_substitution_2, axiom, ( ! [X_0, X_1, X_2] : ((((X_0 = X_2) & (X_1 = X_2)) => (X_1 = X_0))))).
-
-fof(main_query_0_definition, definition, ( ! [C_SND, A_FST] : ((( main_query_0(C_SND, A_FST)) <=> ( ? [A_SND, A_TRD, C_FST, C_TRD] : (((( tab(A_FST, A_SND, A_TRD)) & (( ? [C_FST, C_SND, C_TRD] : (((( tab(C_FST, C_SND, C_TRD)) & $true) & $true))) & $true)) & ((C_FST = A_SND) & (C_SND = A_SND))))))))).
+fof(main_query_0, definition, ( ! [C_SND, A_FST] : ((( main_query_0(C_SND, A_FST)) <=> ( ? [A_SND, A_TRD, C_FST] : ((((( ! [A_TAB_FST, A_TAB_SND, A_TAB_TRD] : ((( a(A_TAB_FST, A_TAB_SND, A_TAB_TRD)) <=> ( tab(A_TAB_FST, A_TAB_SND, A_TAB_TRD))))) & ( a(A_FST, A_SND, A_TRD))) & ((( ! [C_TAB_SND, C_TAB_FST] : ((( c(C_TAB_SND, C_TAB_FST)) <=> ( ? [C_TAB_TRD] : (((($true & ( tab(C_TAB_FST, C_TAB_SND, C_TAB_TRD))) & $true) & $true)))))) & ( c(C_SND, C_FST))) & $true)) & ((C_FST = A_SND) & (C_SND = A_SND))))))))).
 
 

@@ -66,7 +66,6 @@ buildAxioms xs =
                   TptpFofFormula
                       (predicate ++ "_substitution_" ++ (show a))
                       Axiom
-                        --(let substitutedFofFormula = Data.Either.fromRight EmptyFormula (applyFofFormula ["X_0"] (["X_" ++ (show a)], (Predicate p ["X_" ++ (show i) | i <- [1..arity]]))) in
                       (ForAll
                            ["X_" ++ show i | i <- [0 .. arity]]
                            (Implies
@@ -80,6 +79,10 @@ buildAxioms xs =
                       Nothing)
              (zip (cycle [predicate]) [1 .. arity]))
 
+
+{- |
+    Removes suplicated values from list (only the first occurence is preserved).
+-}
 removeDuplicates :: (Eq a) => [a] -> [a]
 removeDuplicates =
     List.foldl

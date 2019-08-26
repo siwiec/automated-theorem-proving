@@ -13,3 +13,11 @@
 %          AND b.fst = a.snd
 %          AND a.snd < b.snd );
 
+% Database scheme:
+% tab:
+%   fst: Number
+%   snd: Number
+%   trd: Number
+fof(main_query_0, definition, ( ! [A_FST, A_SND, A_TRD] : ((( main_query_0(A_FST, A_SND, A_TRD)) <=> ( ? [B_FST, B_SND, B_TRD] : ((((( ! [A_TAB_FST, A_TAB_SND, A_TAB_TRD] : ((( a(A_TAB_FST, A_TAB_SND, A_TAB_TRD)) <=> ( tab(A_TAB_FST, A_TAB_SND, A_TAB_TRD))))) & ( a(A_FST, A_SND, A_TRD))) & ((( ! [B_TAB_FST, B_TAB_SND, B_TAB_TRD] : ((( b(B_TAB_FST, B_TAB_SND, B_TAB_TRD)) <=> ( tab(B_TAB_FST, B_TAB_SND, B_TAB_TRD))))) & ( b(B_FST, B_SND, B_TRD))) & $true)) & (((A_FST = B_SND) & (B_FST = A_SND)) & (( lessthanorequal(A_SND, B_SND)) & ( ~ (A_SND = B_SND))))))))))).
+
+
