@@ -319,7 +319,7 @@
 #
 #cnf(i_0_1373, plain, (main_query_1(X1,X2)|~b(X2,X1,X3)|~b(X2,X1,X4)|~b(X2,X1,X5)|~b(X2,X1,X6)|~a(X1,X2,X7)|~main_query_1(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23))).
 #
-#cnf(i_0_1533, plain, (main_query_1(X1,X2)|~b(X2,X1,X3)|~b(X2,X1,X4)|~b(X2,X1,X5)|~b(X2,X1,X6)|~main_query_1(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X1,X2))).
+#cnf(i_0_1530, plain, (main_query_1(X1,X2)|~b(X2,X1,X3)|~b(X2,X1,X4)|~b(X2,X1,X5)|~b(X2,X1,X6)|~main_query_1(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X1,X2))).
 #
 #cnf(i_0_1614, plain, (main_query_1(X1,X2)|~b(X2,X1,X3)|~b(X2,X1,X4)|~b(X2,X1,X5)|~main_query_1(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X1,X2))).
 #
@@ -339,4 +339,200 @@
 #
 #cnf(i_0_2437, plain, (main_query_1(X1,X2)|X1!=X3|~b(X2,X3,X4)|~a(X1,X2,X5)|~main_query_1(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X3,X2))).
 #
-#cnf(i_0_2522, plain, (main_query_1(X1,X2)|X1!=X3|~a(X1,X2,X4)|~main_query_1(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_que
+#cnf(i_0_2522, plain, (main_query_1(X1,X2)|X1!=X3|~a(X1,X2,X4)|~main_query_1(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X3,X2))).
+###
+#cnf(i_0_2567, plain, (main_query_1(X1,esk13_2(X1,X2))|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X1,X2)|~main_query_0(X3,esk13_2(X1,X2))|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19))).
+##
+#cnf(i_0_2832, plain, (main_query_1(X1,esk13_2(X1,X2))|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X1,X2)|~main_query_0(X3,X2)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19))).
+#
+#cnf(i_0_2837, plain, (main_query_1(X1,esk13_2(X1,X2))|~main_query_1(X3,X4)|~main_query_1(X1,X2)|~main_query_0(X1,X2)|~main_query_0(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18))).
+#########
+#cnf(i_0_2571, plain, (main_query_1(X1,esk3_2(X1,X2))|X1!=X3|~main_query_1(X4,X5)|~main_query_0(X3,esk3_2(X1,X2))|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X1,X2))).
+###
+#cnf(i_0_3611, plain, (main_query_1(X1,esk3_2(X1,X2))|X1!=X3|~main_query_1(X4,X5)|~main_query_0(X3,X2)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X1,X2))).
+#
+#cnf(i_0_3619, plain, (main_query_1(X1,esk3_2(X1,X2))|~main_query_1(X3,X4)|~main_query_0(X1,X2)|~main_query_0(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18))).
+###########################
+#cnf(i_0_2573, plain, (main_query_1(X1,X2)|X1!=X3|~main_query_1(X4,X5)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X3,X2)|~main_query_0(X20,X21)|~main_query_0(X22,X23)|~main_query_0(X2,X1))).
+###
+#cnf(i_0_2574, plain, (main_query_1(X1,X2)|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X20,X21)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X3,X2)|~main_query_0(X22,X23)|~main_query_0(X2,X1))).
+##
+#cnf(i_0_2575, plain, (main_query_1(X1,X2)|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X20,X21)|~main_query_1(X22,X23)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X3,X2)|~main_query_0(X2,X1))).
+########
+#cnf(i_0_2576, plain, (main_query_1(X1,X2)|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X2,X1)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X3,X2)|~main_query_0(X20,X21)|~main_query_0(X22,X23))).
+###
+#cnf(i_0_2577, plain, (main_query_1(X1,X2)|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X20,X21)|~main_query_1(X2,X1)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X3,X2)|~main_query_0(X22,X23))).
+###
+#cnf(i_0_2578, plain, (main_query_1(X1,X2)|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X20,X21)|~main_query_1(X22,X23)|~main_query_1(X2,X1)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X3,X2))).
+######################
+#cnf(i_0_4404, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X1!=X3|~main_query_0(X4,X5)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X3,X2)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X2,X1))).
+###
+#cnf(i_0_4672, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X1!=X3|~main_query_1(X4,X5)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X3,X2)|~main_query_0(X20,X21)|~main_query_0(X2,X1))).
+#
+#cnf(i_0_6431, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X1!=X3|~main_query_0(X4,X5)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X3,X2)|~main_query_0(X18,X19)|~main_query_0(X2,X1))).
+####
+#cnf(i_0_4953, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X3,X2)|~main_query_0(X2,X1))).
+#
+#cnf(i_0_6992, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X1!=X3|~main_query_1(X4,X5)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X3,X2)|~main_query_0(X2,X1))).
+#
+#cnf(i_0_7295, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X1!=X3|~main_query_0(X4,X5)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X3,X2)|~main_query_0(X2,X1))).
+###########
+#cnf(i_0_5255, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X1!=X3|~main_query_1(X2,X1)|~main_query_0(X4,X5)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X3,X2)|~main_query_0(X18,X19)|~main_query_0(X20,X21))).
+##
+#cnf(i_0_7855, negated_conjecture, (main_query_1(esk2_0,esk1_0)|main_query_0(esk1_0,esk2_0)|esk2_0!=X1|~main_query_0(X1,esk1_0)|~main_query_0(X2,X3)|~main_query_0(X4,X5)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19))).
+#
+#cnf(i_0_5542, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X2,X1)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X3,X2)|~main_query_0(X20,X21))).
+#
+#cnf(i_0_8168, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X1!=X3|~main_query_1(X2,X1)|~main_query_0(X4,X5)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X3,X2)|~main_query_0(X18,X19))).
+##
+#cnf(i_0_8457, negated_conjecture, (main_query_1(esk2_0,esk1_0)|main_query_0(esk1_0,esk2_0)|esk2_0!=X1|~main_query_0(X1,esk1_0)|~main_query_0(X2,X3)|~main_query_0(X4,X5)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17))).
+##
+#cnf(i_0_5847, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X6,X7)|~main_query_1(X2,X1)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X3,X2))).
+#
+#cnf(i_0_8771, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X2,X1)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X3,X2))).
+#
+#cnf(i_0_9092, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X1!=X3|~main_query_1(X2,X1)|~main_query_0(X4,X5)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X3,X2))).
+##
+#cnf(i_0_9381, negated_conjecture, (main_query_1(esk2_0,esk1_0)|main_query_0(esk1_0,esk2_0)|esk2_0!=X1|~main_query_0(X1,esk1_0)|~main_query_0(X2,X3)|~main_query_0(X4,X5)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15))).
+#####################################################
+#cnf(i_0_2564, plain, (main_query_1(X1,esk15_2(X2,X1))|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X2,X1)|~main_query_0(X3,esk15_2(X2,X1))|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23))).
+#
+#cnf(i_0_9690, plain, (main_query_1(X1,X2)|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X2,X1)|~main_query_0(X3,esk15_2(X2,X1))|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23))).
+###
+#cnf(i_0_9674, plain, (main_query_1(X1,esk15_2(X2,X1))|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X2,X1)|~main_query_0(X3,X2)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23))).
+#
+#cnf(i_0_9708, plain, (main_query_1(X1,esk15_2(X2,X1))|~main_query_1(X3,X4)|~main_query_1(X2,X1)|~main_query_0(X1,X2)|~main_query_0(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22))).
+############
+#cnf(i_0_2565, plain, (main_query_1(X1,esk15_2(X2,X1))|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X20,X21)|~main_query_1(X2,X1)|~main_query_0(X3,esk15_2(X2,X1))|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X22,X23))).
+#
+#cnf(i_0_10595, plain, (main_query_1(X1,X2)|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X6,X7)|~main_query_1(X2,X1)|~main_query_0(X3,esk15_2(X2,X1))|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23))).
+###
+#cnf(i_0_10558, plain, (main_query_1(X1,esk15_2(X2,X1))|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X6,X7)|~main_query_1(X2,X1)|~main_query_0(X3,X2)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23))).
+#
+#cnf(i_0_10635, plain, (main_query_1(X1,esk15_2(X2,X1))|~main_query_1(X3,X4)|~main_query_1(X5,X6)|~main_query_1(X2,X1)|~main_query_0(X1,X2)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22))).
+############
+#cnf(i_0_2566, plain, (main_query_1(X1,esk15_2(X2,X1))|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X20,X21)|~main_query_1(X22,X23)|~main_query_1(X2,X1)|~main_query_0(X3,esk15_2(X2,X1))|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19))).
+##
+#cnf(i_0_11618, plain, (main_query_1(X1,X2)|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X6,X7)|~main_query_1(X8,X9)|~main_query_1(X2,X1)|~main_query_0(X3,esk15_2(X2,X1))|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23))).
+##
+#cnf(i_0_11554, plain, (main_query_1(X1,esk15_2(X2,X1))|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X6,X7)|~main_query_1(X8,X9)|~main_query_1(X2,X1)|~main_query_0(X3,X2)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23))).
+##
+#cnf(i_0_11686, plain, (main_query_1(X1,esk15_2(X2,X1))|~main_query_1(X3,X4)|~main_query_1(X5,X6)|~main_query_1(X7,X8)|~main_query_1(X2,X1)|~main_query_0(X1,X2)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22))).
+##########
+#cnf(i_0_2568, plain, (main_query_1(X1,esk5_2(X2,X1))|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X20,X21)|~main_query_1(X22,X23)|~main_query_0(X3,esk5_2(X2,X1))|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X2,X1))).
+##
+#cnf(i_0_12770, plain, (main_query_1(X1,X2)|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X6,X7)|~main_query_1(X8,X9)|~main_query_0(X3,esk5_2(X2,X1))|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23)|~main_query_0(X2,X1))).
+##
+#cnf(i_0_12697, plain, (main_query_1(X1,esk5_2(X2,X1))|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X6,X7)|~main_query_1(X8,X9)|~main_query_0(X3,X2)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23)|~main_query_0(X2,X1))).
+##
+#cnf(i_0_12847, plain, (main_query_1(X1,esk5_2(X2,X1))|~main_query_1(X3,X4)|~main_query_1(X5,X6)|~main_query_1(X7,X8)|~main_query_0(X1,X2)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X2,X1))).
+##########
+#cnf(i_0_2569, plain, (main_query_1(X1,esk5_2(X2,X1))|X1!=X3|~main_query_1(X4,X5)|~main_query_0(X3,esk5_2(X2,X1))|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23)|~main_query_0(X2,X1))).
+##
+#cnf(i_0_13938, plain, (main_query_1(X1,X2)|X1!=X3|~main_query_1(X4,X5)|~main_query_0(X3,esk5_2(X2,X1))|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23)|~main_query_0(X2,X1))).
+##
+#cnf(i_0_13910, plain, (main_query_1(X1,esk5_2(X2,X1))|X1!=X3|~main_query_1(X4,X5)|~main_query_0(X3,X2)|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23)|~main_query_0(X2,X1))).
+##
+#cnf(i_0_13968, plain, (main_query_1(X1,esk5_2(X2,X1))|~main_query_1(X3,X4)|~main_query_0(X1,X2)|~main_query_0(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X2,X1))).
+##########
+#cnf(i_0_2570, plain, (main_query_1(X1,esk5_2(X2,X1))|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X20,X21)|~main_query_0(X3,esk5_2(X2,X1))|~main_query_0(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X22,X23)|~main_query_0(X2,X1))).
+##
+#cnf(i_0_15011, plain, (main_query_1(X1,X2)|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X6,X7)|~main_query_0(X3,esk5_2(X2,X1))|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23)|~main_query_0(X2,X1))).
+##
+#cnf(i_0_14950, plain, (main_query_1(X1,esk5_2(X2,X1))|X1!=X3|~main_query_1(X4,X5)|~main_query_1(X6,X7)|~main_query_0(X3,X2)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23)|~main_query_0(X2,X1))).
+##
+#cnf(i_0_15075, plain, (main_query_1(X1,esk5_2(X2,X1))|~main_query_1(X3,X4)|~main_query_1(X5,X6)|~main_query_0(X1,X2)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X2,X1))).
+#############################################################################################################################################
+#cnf(i_0_1013, plain, (main_query_1(X1,X2)|X2!=X3|~b(X2,X1,X4)|~b(X2,X1,X5)|~b(X2,X1,X6)|~b(X2,X1,X7)|~a(X1,X3,X8)|~main_query_1(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X23,X24))).
+######
+#cnf(i_0_15907, plain, (main_query_1(X1,X2)|X2!=X3|~b(X2,X1,X4)|~b(X2,X1,X5)|~b(X2,X1,X6)|~b(X2,X1,X7)|~main_query_1(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23)|~main_query_0(X1,X3))).
+###################################################################################################################
+#cnf(i_0_15902, plain, (main_query_1(X1,X2)|X2!=esk13_2(X1,X3)|~b(X2,X1,X4)|~b(X2,X1,X5)|~b(X2,X1,X6)|~b(X2,X1,X7)|~main_query_1(X8,X9)|~main_query_1(X1,X3)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23))).
+######
+#cnf(i_0_15906, plain, (main_query_1(X1,X2)|X2!=esk3_2(X1,X3)|~b(X2,X1,X4)|~b(X2,X1,X5)|~b(X2,X1,X6)|~b(X2,X1,X7)|~main_query_1(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23)|~main_query_0(X1,X3))).
+######
+#cnf(i_0_1320, plain, (main_query_1(X1,X2)|X2!=X3|X1!=X4|~b(X2,X4,X5)|~b(X2,X4,X6)|~b(X2,X4,X7)|~a(X1,X3,X8)|~main_query_1(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X23,X24)|~main_query_0(X4,X2))).
+##
+#cnf(i_0_16694, plain, (main_query_1(X1,X2)|X2!=X3|X1!=X4|~b(X2,X4,X5)|~b(X2,X4,X6)|~a(X1,X3,X7)|~main_query_1(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X22,X23)|~main_query_0(X4,X2))).
+#
+#cnf(i_0_17150, plain, (main_query_1(X1,X2)|X2!=X3|X1!=X4|~b(X2,X4,X5)|~a(X1,X3,X6)|~main_query_1(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X4,X2))).
+#
+#cnf(i_0_17590, plain, (main_query_1(X1,X2)|X2!=X3|X1!=X4|~a(X1,X3,X5)|~main_query_1(X6,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)|~main_query_0(X16,X17)|~main_query_0(X18,X19)|~main_query_0(X20,X21)|~main_query_0(X4,X2))).
+####
+#cnf(i_0_17995, plain, (main_query_1(X1,X2)|X2!=X3|X1!=X4|~main_query_1(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2)|~main_query_0(X1,X3))).
+######
+#cnf(i_0_18332, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X2!=X3|X1!=X4|~main_query_0(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X4,X2)|~main_query_0(X1,X3))).
+###
+#cnf(i_0_17990, plain, (main_query_1(X1,X2)|X2!=esk13_2(X1,X3)|X1!=X4|~main_query_1(X5,X6)|~main_query_1(X1,X3)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2))).
+#####
+#cnf(i_0_17994, plain, (main_query_1(X1,X2)|X2!=esk3_2(X1,X3)|X1!=X4|~main_query_1(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2)|~main_query_0(X1,X3))).
+#################
+#cnf(i_0_17996, plain, (main_query_1(X1,X2)|X2!=X3|X1!=X4|~main_query_1(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2)|~main_query_0(X21,X22)|~main_query_0(X23,X24)|~main_query_0(X3,X1))).
+####
+#cnf(i_0_17997, plain, (main_query_1(X1,X2)|X2!=X3|X1!=X4|~main_query_1(X5,X6)|~main_query_1(X21,X22)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2)|~main_query_0(X23,X24)|~main_query_0(X3,X1))).
+####
+#cnf(i_0_17998, plain, (main_query_1(X1,X2)|X2!=X3|X1!=X4|~main_query_1(X5,X6)|~main_query_1(X21,X22)|~main_query_1(X23,X24)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2)|~main_query_0(X3,X1))).
+####
+#cnf(i_0_17999, plain, (main_query_1(X1,X2)|X2!=X3|X1!=X4|~main_query_1(X5,X6)|~main_query_1(X3,X1)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2)|~main_query_0(X21,X22)|~main_query_0(X23,X24))).
+####
+#cnf(i_0_18000, plain, (main_query_1(X1,X2)|X2!=X3|X1!=X4|~main_query_1(X5,X6)|~main_query_1(X21,X22)|~main_query_1(X3,X1)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2)|~main_query_0(X23,X24))).
+####
+#cnf(i_0_18001, plain, (main_query_1(X1,X2)|X2!=X3|X1!=X4|~main_query_1(X5,X6)|~main_query_1(X21,X22)|~main_query_1(X23,X24)|~main_query_1(X3,X1)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2))).
+#######################
+#cnf(i_0_19759, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X2!=X3|X1!=X4|~main_query_0(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X4,X2)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X3,X1))).
+####
+#cnf(i_0_20132, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X2!=X3|X1!=X4|~main_query_1(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2)|~main_query_0(X21,X22)|~main_query_0(X3,X1))).
+#
+#cnf(i_0_22786, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X2!=X3|X1!=X4|~main_query_0(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X4,X2)|~main_query_0(X19,X20)|~main_query_0(X3,X1))).
+####
+#cnf(i_0_20550, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X2!=X3|X1!=X4|~main_query_1(X5,X6)|~main_query_1(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X4,X2)|~main_query_0(X3,X1))).
+#
+#cnf(i_0_23525, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X2!=X3|X1!=X4|~main_query_1(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2)|~main_query_0(X3,X1))).
+#
+#cnf(i_0_23965, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X2!=X3|X1!=X4|~main_query_0(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X4,X2)|~main_query_0(X3,X1))).
+#########
+#cnf(i_0_21056, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X2!=X3|X1!=X4|~main_query_1(X3,X1)|~main_query_0(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X4,X2)|~main_query_0(X19,X20)|~main_query_0(X21,X22))).
+###
+#cnf(i_0_24702, negated_conjecture, (main_query_1(esk2_0,X1)|main_query_0(esk1_0,esk2_0)|X1!=esk1_0|esk2_0!=X2|~main_query_0(X3,X4)|~main_query_0(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X2,X1)|~main_query_0(X17,X18)|~main_query_0(X19,X20))).
+#
+#cnf(i_0_21483, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X2!=X3|X1!=X4|~main_query_1(X5,X6)|~main_query_1(X3,X1)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2)|~main_query_0(X21,X22))).
+#
+#cnf(i_0_25489, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X2!=X3|X1!=X4|~main_query_1(X3,X1)|~main_query_0(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X4,X2)|~main_query_0(X19,X20))).
+###
+#cnf(i_0_25883, negated_conjecture, (main_query_1(esk2_0,X1)|main_query_0(esk1_0,esk2_0)|X1!=esk1_0|esk2_0!=X2|~main_query_0(X3,X4)|~main_query_0(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X2,X1)|~main_query_0(X17,X18))).
+######
+#cnf(i_0_21960, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X2!=X3|X1!=X4|~main_query_1(X5,X6)|~main_query_1(X7,X8)|~main_query_1(X3,X1)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X4,X2))).
+#
+#cnf(i_0_26671, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X2!=X3|X1!=X4|~main_query_1(X5,X6)|~main_query_1(X3,X1)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2))).
+#
+#cnf(i_0_27165, negated_conjecture, (main_query_1(X1,X2)|main_query_0(esk1_0,esk2_0)|X2!=X3|X1!=X4|~main_query_1(X3,X1)|~main_query_0(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X4,X2))).
+###
+#cnf(i_0_27559, negated_conjecture, (main_query_1(esk2_0,X1)|main_query_0(esk1_0,esk2_0)|X1!=esk1_0|esk2_0!=X2|~main_query_0(X3,X4)|~main_query_0(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X2,X1))).
+#####################
+#cnf(i_0_17987, plain, (main_query_1(X1,X2)|X2!=esk15_2(X3,X1)|X1!=X4|~main_query_1(X5,X6)|~main_query_1(X3,X1)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2)|~main_query_0(X21,X22)|~main_query_0(X23,X24))).
+#####
+#cnf(i_0_17988, plain, (main_query_1(X1,X2)|X2!=esk15_2(X3,X1)|X1!=X4|~main_query_1(X5,X6)|~main_query_1(X21,X22)|~main_query_1(X3,X1)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2)|~main_query_0(X23,X24))).
+#####
+#cnf(i_0_17989, plain, (main_query_1(X1,X2)|X2!=esk15_2(X3,X1)|X1!=X4|~main_query_1(X5,X6)|~main_query_1(X21,X22)|~main_query_1(X23,X24)|~main_query_1(X3,X1)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2))).
+######
+#cnf(i_0_17991, plain, (main_query_1(X1,X2)|X2!=esk5_2(X3,X1)|X1!=X4|~main_query_1(X5,X6)|~main_query_1(X21,X22)|~main_query_1(X23,X24)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2)|~main_query_0(X3,X1))).
+#####
+#cnf(i_0_17992, plain, (main_query_1(X1,X2)|X2!=esk5_2(X3,X1)|X1!=X4|~main_query_1(X5,X6)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2)|~main_query_0(X21,X22)|~main_query_0(X23,X24)|~main_query_0(X3,X1))).
+#####
+#cnf(i_0_17993, plain, (main_query_1(X1,X2)|X2!=esk5_2(X3,X1)|X1!=X4|~main_query_1(X5,X6)|~main_query_1(X21,X22)|~main_query_0(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X4,X2)|~main_query_0(X23,X24)|~main_query_0(X3,X1))).
+####################################################################################################################################
+#cnf(i_0_1301, plain, (main_query_1(X1,X2)|X2!=X3|X1!=X4|~b(X2,X4,X5)|~b(X2,X4,X6)|~b(X2,X4,X7)|~b(X2,X4,X8)|~main_query_1(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X23,X24)|~main_query_0(X1,X3))).
+###########################################################
+#cnf(i_0_1531, plain, (main_query_1(X1,X2)|~b(X2,X1,X3)|~b(X2,X1,X4)|~b(X2,X1,X5)|~b(X2,X1,X6)|~main_query_1(X7,X8)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X23,X24)|~main_query_0(X25,X26)|~main_query_0(X2,X1))).
+#####
+#cnf(i_0_1532, plain, (main_query_1(X1,X2)|~b(X2,X1,X3)|~b(X2,X1,X4)|~b(X2,X1,X5)|~b(X2,X1,X6)|~main_query_1(X7,X8)|~main_query_1(X23,X24)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X25,X26)|~main_query_0(X2,X1))).
+######
+#cnf(i_0_1533, plain, (main_query_1(X1,X2)|~b(X2,X1,X3)|~b(X2,X1,X4)|~b(X2,X1,X5)|~b(X2,X1,X6)|~main_query_1(X7,X8)|~main_query_1(X23,X24)|~main_query_1(X25,X26)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X2,X1))).
+#####
+#cnf(i_0_1534, plain, (main_query_1(X1,X2)|~b(X2,X1,X3)|~b(X2,X1,X4)|~b(X2,X1,X5)|~b(X2,X1,X6)|~main_query_1(X7,X8)|~main_query_1(X2,X1)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X23,X24)|~main_query_0(X25,X26))).
+#####
+#cnf(i_0_1535, plain, (main_query_1(X1,X2)|~b(X2,X1,X3)|~b(X2,X1,X4)|~b(X2,X1,X5)|~b(X2,X1,X6)|~main_query_1(X7,X8)|~main_query_1(X23,X24)|~main_query_1(X2,X1)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22)|~main_query_0(X25,X26))).
+######
+#cnf(i_0_1536, plain, (main_query_1(X1,X2)|~b(X2,X1,X3)|~b(X2,X1,X4)|~b(X2,X1,X5)|~b(X2,X1,X6)|~main_query_1(X7,X8)|~main_query_1(X23,X24)|~main_query_1(X25,X26)|~main_query_1(X2,X1)|~main_query_0(X9,X10)|~main_query_0(X11,X12)|~main_query_0(X13,X14)|~main_query_0(X15,X16)|~main_query_0(X17,X18)|~main_query_0(X19,X20)|~main_query_0(X21,X22))).
+###################################################################################################################################################
+#cnf(i_0_934, plain, (main_query_1(X1,X2)|X2!=X3|X1!=X4|~b(X2,X4,X5)|~b(X2,X4,X6)|~b(X2,X4,X16)|~b(X2,X4,X17)|~a(X1,X3,X7)|~main_query_0(X8,X9)|~main_query_0(X10,X11)|~main_query_0(X12,X13)|~main_query_0(X14,X15)

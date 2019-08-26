@@ -26,10 +26,10 @@ for f in examples/*/*.sql; do
     if grep -q equivalence_check ${f/.sql/.tptp} ; then
         echo "Running equivalence checks (vampire) for file ${f/.sql/.tptp}"
         /usr/bin/time --format="%C:\n\t%E real, %U user, %S sys" --output=${f/.sql/.times} --append \
-            ./vampire4.2.2 ${f/.sql/.tptp} > ${f/.sql/.vampire}
+            ./provers/vampire/vampire4.2.2 ${f/.sql/.tptp} > ${f/.sql/.vampire}
 
         echo "Running equivalence checks (E) for file ${f/.sql/.tptp}"
         /usr/bin/time --format="%C:\n\t%E real, %U user, %S sys" --output=${f/.sql/.times} --append \
-            ./eprover ${f/.sql/.tptp} > ${f/.sql/.e}
+            ./provers/E/eprover ${f/.sql/.tptp} > ${f/.sql/.e}
     fi
 done
