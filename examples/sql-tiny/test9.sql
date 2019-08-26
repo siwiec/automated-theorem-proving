@@ -12,7 +12,7 @@ FROM tab AS a,
 WHERE
     b.fst = a.snd
     AND b.fst=b.snd
-    
+
 SELECT b.fst
 FROM tab AS b
 WHERE b.fst =b.snd

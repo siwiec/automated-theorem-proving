@@ -13,13 +13,11 @@ WHERE  ( a.fst = b.snd
          AND b.fst = a.snd
          AND a.snd < b.snd );
 
-
 SELECT a.fst,
        b.fst
-FROM   tab a,
-       tab b,
-	   tab c
+FROM
+    (SELECT c.fst, c.snd
+    FROM tab as c) as a,
+       tab b
 WHERE  ( a.fst = b.snd
-         AND b.fst = a.snd
-		 AND c.fst = c.fst
-         AND a.snd < b.snd );
+         AND b.fst = a.snd );

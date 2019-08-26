@@ -1,4 +1,4 @@
-% Equivallence check for file examples/sql-tiny/test2.sql...
+% Equivallence check for file examples/sql-tiny/single_query1.sql...
 % CREATE TABLE tab (
 %   fst NUMBER(4),
 %   snd NUMBER(4),
@@ -11,7 +11,8 @@
 % FROM   tab a,
 %        tab b
 % WHERE  ( a.fst = b.snd
-%          AND b.fst = a.snd );
+%          AND b.fst = a.snd
+%          AND a.snd < b.snd );
 
 % Database scheme:
 % tab:
@@ -32,5 +33,7 @@ fof(main_query_0,definition,(
           & b(B_FST,B_SND,B_TRD)
           & $true
           & A_FST = B_SND
-          & B_FST = A_SND ) ) )).
+          & B_FST = A_SND
+          & lessthanorequal(A_SND,B_SND)
+          & A_SND != B_SND ) ) )).
 
