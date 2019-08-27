@@ -2,9 +2,9 @@ module Axiom
     ( buildAxioms
     ) where
 
+import DatabaseScheme
 import FofFormula
 import TptpSyntax
-import DatabaseScheme
 
 import Data.Either
 import Data.List as List
@@ -55,36 +55,24 @@ buildAxioms databaseScheme =
                          (Predicate "lessThanOrEqual" ["Y", "Z"]))
                     (Predicate "lessThanOrEqual" ["X", "Z"])))
           Nothing
-    ] ++ (concat $ Prelude.map buildEqualAxiom (getTablesWithArity databaseScheme))
-        where
-            buildEqualAxiom :: (String, Int) -> [TptpFormula]
-            buildEqualAxiom (predicate, arity) =
-                (map (\(p, a) ->
-                        TptpFofFormula
-                            (predicate ++ "_substitution_" ++ (show a))
-                            Axiom
-                            (ForAll
-                                ["X_" ++ show i | i <- [0 .. arity]]
-                                (Implies
-                                        (And (Predicate "equal" ["X_0", "X_" ++ (show a)])
-                                            (Predicate p ["X_" ++ show i | i <- [1 .. arity]]))
-                                        (Predicate
-                                            p
-                                            [ "X_" ++ show i
-                                            | i <- [1 .. (a - 1)] ++ [0] ++ [(a + 1) .. arity]
-                                            ])))
-                            Nothing)
-                    (zip (cycle [predicate]) [1 .. arity]))
-
-
-{- |
-    Removes suplicated values from list (only the first occurence is preserved).
-removeDuplicates :: (Eq a) => [a] -> [a]
-removeDuplicates =
-    List.foldl
-        (\seen x ->
-             if x `elem` seen
-                 then seen
-                 else seen ++ [x])
-        []
--}
+    ] ++
+    (concat $ Prelude.map buildEqualAxiom (getTablesWithArity databaseScheme))
+  where
+    buildEqualAxiom :: (String, Int) -> [TptpFormula]
+    buildEqualAxiom (predicate, arity) =
+        (map (\(p, a) ->
+                  TptpFofFormula
+                      (predicate ++ "_substitution_" ++ (show a))
+                      Axiom
+                      (ForAll
+                           ["X_" ++ show i | i <- [0 .. arity]]
+                           (Implies
+                                (And (Predicate "equal" ["X_0", "X_" ++ (show a)])
+                                     (Predicate p ["X_" ++ show i | i <- [1 .. arity]]))
+                                (Predicate
+                                     p
+                                     [ "X_" ++ show i
+                                     | i <- [1 .. (a - 1)] ++ [0] ++ [(a + 1) .. arity]
+                                     ])))
+                      Nothing)
+             (zip (cycle [predicate]) [1 .. arity]))
