@@ -4,12 +4,13 @@ module Axiom
 
 import FofFormula
 import TptpSyntax
+import DatabaseScheme
 
 import Data.Either
 import Data.List as List
 
-buildAxioms :: [TptpFormula] -> [TptpFormula]
-buildAxioms xs =
+buildAxioms :: DatabaseScheme -> [TptpFormula]
+buildAxioms databaseScheme =
     [ TptpFofFormula
           "reflexivity_of_equality"
           Axiom
@@ -54,35 +55,30 @@ buildAxioms xs =
                          (Predicate "lessThanOrEqual" ["Y", "Z"]))
                     (Predicate "lessThanOrEqual" ["X", "Z"])))
           Nothing
-    ] ++
-    (concat $
-     Prelude.map buildEqualAxiom $
-     removeDuplicates $
-     concat $ Prelude.map getPredicatesWithArity [x | (TptpFofFormula _ _ x _) <- xs])
-  where
-    buildEqualAxiom :: (String, Int) -> [TptpFormula]
-    buildEqualAxiom (predicate, arity) =
-        (map (\(p, a) ->
-                  TptpFofFormula
-                      (predicate ++ "_substitution_" ++ (show a))
-                      Axiom
-                      (ForAll
-                           ["X_" ++ show i | i <- [0 .. arity]]
-                           (Implies
-                                (And (Predicate "equal" ["X_0", "X_" ++ (show a)])
-                                     (Predicate p ["X_" ++ show i | i <- [1 .. arity]]))
-                                (Predicate
-                                     p
-                                     [ "X_" ++ show i
-                                     | i <- [1 .. (a - 1)] ++ [0] ++ [(a + 1) .. arity]
-                                     ])))
-                      Nothing)
-             (zip (cycle [predicate]) [1 .. arity]))
+    ] ++ (concat $ Prelude.map buildEqualAxiom (getTablesWithArity databaseScheme))
+        where
+            buildEqualAxiom :: (String, Int) -> [TptpFormula]
+            buildEqualAxiom (predicate, arity) =
+                (map (\(p, a) ->
+                        TptpFofFormula
+                            (predicate ++ "_substitution_" ++ (show a))
+                            Axiom
+                            (ForAll
+                                ["X_" ++ show i | i <- [0 .. arity]]
+                                (Implies
+                                        (And (Predicate "equal" ["X_0", "X_" ++ (show a)])
+                                            (Predicate p ["X_" ++ show i | i <- [1 .. arity]]))
+                                        (Predicate
+                                            p
+                                            [ "X_" ++ show i
+                                            | i <- [1 .. (a - 1)] ++ [0] ++ [(a + 1) .. arity]
+                                            ])))
+                            Nothing)
+                    (zip (cycle [predicate]) [1 .. arity]))
 
 
 {- |
     Removes suplicated values from list (only the first occurence is preserved).
--}
 removeDuplicates :: (Eq a) => [a] -> [a]
 removeDuplicates =
     List.foldl
@@ -91,3 +87,4 @@ removeDuplicates =
                  then seen
                  else seen ++ [x])
         []
+-}

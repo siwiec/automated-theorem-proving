@@ -75,7 +75,7 @@ translateStatements inputAst = do
             return $
                 "% Database scheme:\n" ++
                 show (databaseScheme initialState) ++
-                (unlines $ Prelude.map show $ {-(buildAxioms [output]) ++-} [output])
+                (unlines $ Prelude.map show $ output:(buildAxioms (databaseScheme initialState)))
         queriesAst -> do
             queriesTptp <- imapM (translateSingleQuery initialState) queriesAst
             let idents = (\(TptpFofFormula _ _ (ForAll x _) _) -> x) (head queriesTptp)
@@ -93,7 +93,7 @@ translateStatements inputAst = do
             return $
                 "% Database scheme:\n" ++
                 show (databaseScheme initialState) ++
-                (unlines $ Prelude.map show $ {-(buildAxioms output) ++-} output)
+                (unlines $ Prelude.map show $ output ++ (buildAxioms (databaseScheme initialState)))
   where
     initialState =
         State
