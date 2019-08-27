@@ -41,7 +41,7 @@
 #
 #cnf(i_0_48, plain, (a(esk2_1(X1),X1,esk4_1(X1))|~main_query_0(X1))).
 #
-#cnf(i_0_32, plain, (X1=X2|~lessthanorequal(X1,X2)|~lessthanorequal(X3,X1)|~lessthanorequal(X2,X3))).
+#cnf(i_0_33, plain, (X1=X2|~lessthanorequal(X1,X2)|~lessthanorequal(X3,X1)|~lessthanorequal(X2,X3))).
 ####
 #cnf(i_0_40, plain, (b(X1,X2,X3)|~a(X1,X2,X3)|~main_query_0(X4)|~main_query_0(X5))).
 #
@@ -51,7 +51,7 @@
 #
 #cnf(i_0_45, plain, (a(X1,X2,X3)|~b(X1,X2,X3)|~main_query_1(X5)|~main_query_0(X4))).
 #
-#cnf(i_0_33, plain, (lessthanorequal(X1,X2)|~lessthanorequal(X3,X2)|~lessthanorequal(X4,X3)|~lessthanorequal(X1,X4))).
+#cnf(i_0_32, plain, (lessthanorequal(X1,X2)|~lessthanorequal(X3,X2)|~lessthanorequal(X4,X3)|~lessthanorequal(X1,X4))).
 #####
 #cnf(i_0_55, plain, (b(esk2_1(X1),X1,esk4_1(X1))|~main_query_0(X2)|~main_query_0(X3)|~main_query_0(X1))).
 #
@@ -63,15 +63,15 @@
 #####
 #cnf(i_0_54, plain, (b(esk2_1(X1),esk3_1(X1),esk4_1(X1))|~main_query_0(X2)|~main_query_0(X3)|~main_query_0(X1))).
 ##
-#cnf(i_0_66, plain, (lessthanorequal(X1,X2)|~lessthanorequal(X3,X2)|~lessthanorequal(X4,X3)|~lessthanorequal(X5,X4)|~lessthanorequal(X1,X5))).
+#cnf(i_0_64, plain, (lessthanorequal(X1,X2)|~lessthanorequal(X3,X2)|~lessthanorequal(X4,X3)|~lessthanorequal(X5,X4)|~lessthanorequal(X1,X5))).
 ######
 #cnf(i_0_56, plain, (b(esk2_1(X1),esk3_1(X1),esk4_1(X1))|~main_query_1(X2)|~main_query_0(X3)|~main_query_0(X1))).
 #####
-#cnf(i_0_63, plain, (X1=X2|~lessthanorequal(X1,X2)|~lessthanorequal(X2,X3)|~lessthanorequal(X4,X1)|~lessthanorequal(X5,X4)|~lessthanorequal(X3,X5))).
+#cnf(i_0_62, plain, (X1=X2|~lessthanorequal(X1,X2)|~lessthanorequal(X2,X3)|~lessthanorequal(X4,X1)|~lessthanorequal(X5,X4)|~lessthanorequal(X3,X5))).
 ###########
-#cnf(i_0_68, plain, (X1=X2|~lessthanorequal(X3,X1)|~lessthanorequal(X2,X3)|~lessthanorequal(X4,X2)|~lessthanorequal(X5,X4)|~lessthanorequal(X1,X5))).
+#cnf(i_0_71, plain, (X1=X2|~lessthanorequal(X3,X1)|~lessthanorequal(X2,X3)|~lessthanorequal(X4,X2)|~lessthanorequal(X5,X4)|~lessthanorequal(X1,X5))).
 ###########
-#cnf(i_0_64, plain, (lessthanorequal(X1,X2)|~lessthanorequal(X3,X2)|~lessthanorequal(X1,X4)|~lessthanorequal(X5,X3)|~lessthanorequal(X6,X5)|~lessthanorequal(X4,X6))).
+#cnf(i_0_63, plain, (lessthanorequal(X1,X2)|~lessthanorequal(X3,X2)|~lessthanorequal(X1,X4)|~lessthanorequal(X5,X3)|~lessthanorequal(X6,X5)|~lessthanorequal(X4,X6))).
 ##############
 #cnf(i_0_91, plain, (X2=X1|~lessthanorequal(esk13_1(X1),X3)|~lessthanorequal(X4,esk13_1(X1))|~lessthanorequal(X3,X2)|~lessthanorequal(X2,X4)|~main_query_1(X1))).
 #
@@ -241,7 +241,7 @@
 #######
 #cnf(i_0_537, plain, (X1=X2|~lessthanorequal(X3,esk13_1(X2))|~lessthanorequal(X1,X3)|~lessthanorequal(X4,X1)|~lessthanorequal(X5,X4)|~lessthanorequal(X2,X5)|~main_query_1(X2))).
 #######
-#cnf(i_0_148, plain, (lessthanorequal(X1,X2)|~lessthanorequal(X3,X2)|~lessthanorequal(X1,X4)|~lessthanorequal(X5,X3)|~lessthanorequal(X6,X5)|~lessthanorequal(X7,X6)|~lessthanorequal(X4,X7))).
+#cnf(i_0_150, plain, (lessthanorequal(X1,X2)|~lessthanorequal(X3,X2)|~lessthanorequal(X1,X4)|~lessthanorequal(X5,X3)|~lessthanorequal(X6,X5)|~lessthanorequal(X7,X6)|~lessthanorequal(X4,X7))).
 #######
 #cnf(i_0_600, plain, (X1=X2|~lessthanorequal(esk13_1(X2),X5)|~lessthanorequal(X3,X2)|~lessthanorequal(X1,X3)|~lessthanorequal(X4,X1)|~lessthanorequal(X5,X4)|~main_query_1(X2))).
 #######################
@@ -615,4 +615,236 @@
 ########
 #cnf(i_0_900, plain, (X2=X1|~lessthanorequal(X3,esk13_1(X2))|~lessthanorequal(X4,esk3_1(X1))|~lessthanorequal(esk3_1(X1),X3)|~lessthanorequal(X2,X4)|~main_query_1(X2)|~main_query_0(X1))).
 #
-#cnf(i_0_49221, plain, (X1=X2|~lessthanorequal(X3,esk13_1(X1))|~lessthanorequal(X1,esk3_1(X2))|~lessthanorequ
+#cnf(i_0_49221, plain, (X1=X2|~lessthanorequal(X3,esk13_1(X1))|~lessthanorequal(X1,esk3_1(X2))|~lessthanorequal(esk3_1(X2),X3)|~main_query_1(X1)|~main_query_0(X2))).
+#
+#cnf(i_0_49611, plain, (X1=X2|~lessthanorequal(esk3_1(X2),esk13_1(X1))|~lessthanorequal(X1,esk3_1(X2))|~main_query_1(X1)|~main_query_0(X2))).
+##
+#cnf(i_0_50000, plain, (X1=X2|~lessthanorequal(X2,esk13_1(X1))|~lessthanorequal(X1,esk3_1(X2))|~main_query_1(X1)|~main_query_0(X2))).
+######
+#cnf(i_0_49610, plain, (X1=X2|~lessthanorequal(X3,esk13_1(X1))|~lessthanorequal(X1,esk3_1(X2))|~lessthanorequal(X2,X3)|~main_query_1(X1)|~main_query_0(X2))).
+######
+#cnf(i_0_49709, plain, (X1=X2|~lessthanorequal(X3,esk13_1(X1))|~lessthanorequal(esk3_1(X2),X3)|~lessthanorequal(X1,X2)|~main_query_1(X1)|~main_query_0(X2))).
+#
+#cnf(i_0_50506, plain, (X1=X2|~lessthanorequal(esk3_1(X2),esk13_1(X1))|~lessthanorequal(X1,X2)|~main_query_1(X1)|~main_query_0(X2))).
+#######
+#cnf(i_0_50100, plain, (X1=X2|~lessthanorequal(X2,esk13_1(X1))|~lessthanorequal(X3,esk3_1(X2))|~lessthanorequal(X1,X3)|~main_query_1(X1)|~main_query_0(X2))).
+#########
+#cnf(i_0_49318, plain, (X1=X2|~lessthanorequal(esk3_1(X2),esk13_1(X1))|~lessthanorequal(X3,esk3_1(X2))|~lessthanorequal(X1,X3)|~main_query_1(X1)|~main_query_0(X2))).
+###
+#cnf(i_0_51104, plain, (X1=X2|~lessthanorequal(esk3_1(X2),esk13_1(X1))|~lessthanorequal(X3,X2)|~lessthanorequal(X1,X3)|~main_query_1(X1)|~main_query_0(X2))).
+##########
+#cnf(i_0_50101, plain, (X1=X2|~lessthanorequal(X2,esk13_1(X1))|~lessthanorequal(X3,esk3_1(X2))|~lessthanorequal(X4,X3)|~lessthanorequal(X1,X4)|~main_query_1(X1)|~main_query_0(X2))).
+#######
+#cnf(i_0_50200, plain, (X1=X2|~lessthanorequal(X1,esk3_1(X2))|~lessthanorequal(X3,esk13_1(X1))|~lessthanorequal(X4,X3)|~lessthanorequal(X2,X4)|~main_query_1(X1)|~main_query_0(X2))).
+#########
+#cnf(i_0_50507, plain, (X1=X2|~lessthanorequal(X3,esk13_1(X1))|~lessthanorequal(esk3_1(X2),X4)|~lessthanorequal(X1,X2)|~lessthanorequal(X4,X3)|~main_query_1(X1)|~main_query_0(X2))).
+##########
+#cnf(i_0_51303, plain, (X1=X2|~lessthanorequal(esk3_1(X2),esk13_1(X1))|~lessthanorequal(X3,X2)|~lessthanorequal(X4,X3)|~lessthanorequal(X1,X4)|~main_query_1(X1)|~main_query_0(X2))).
+#######
+#cnf(i_0_49317, plain, (X1=X2|~lessthanorequal(X3,esk13_1(X1))|~lessthanorequal(X4,esk3_1(X2))|~lessthanorequal(X2,X3)|~lessthanorequal(X1,X4)|~main_query_1(X1)|~main_query_0(X2))).
+#######
+#cnf(i_0_49414, plain, (X1=X2|~lessthanorequal(X3,esk13_1(X1))|~lessthanorequal(esk3_1(X2),X3)|~lessthanorequal(X4,X2)|~lessthanorequal(X1,X4)|~main_query_1(X1)|~main_query_0(X2))).
+############
+#cnf(i_0_49612, plain, (X1=X2|~lessthanorequal(X3,esk13_1(X1))|~lessthanorequal(X1,esk3_1(X2))|~lessthanorequal(esk3_1(X2),X4)|~lessthanorequal(X4,X3)|~main_query_1(X1)|~main_query_0(X2))).
+##########
+#cnf(i_0_51007, plain, (X1=X2|~lessthanorequal(esk3_1(X2),esk13_1(X1))|~lessthanorequal(X3,esk3_1(X2))|~lessthanorequal(X4,X3)|~lessthanorequal(X1,X4)|~main_query_1(X1)|~main_query_0(X2))).
+########
+#cnf(i_0_1628, plain, (X2=X1|~lessthanorequal(esk5_1(X2),X3)|~lessthanorequal(X3,esk13_1(X1))|~lessthanorequal(esk13_1(X1),X4)|~lessthanorequal(X4,X2)|~main_query_1(X1)|~main_query_0(X2))).
+#
+#cnf(i_0_56458, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(X3,esk13_1(X2))|~lessthanorequal(esk13_1(X2),X1)|~main_query_1(X2)|~main_query_0(X1))).
+#
+#cnf(i_0_56977, plain, (X1=X2|~lessthanorequal(esk5_1(X1),esk13_1(X2))|~lessthanorequal(esk13_1(X2),X1)|~main_query_1(X2)|~main_query_0(X1))).
+#########
+#cnf(i_0_56664, plain, (X1=X2|~lessthanorequal(esk5_1(X1),esk13_1(X2))|~lessthanorequal(esk13_1(X2),X3)|~lessthanorequal(X3,X1)|~main_query_1(X2)|~main_query_0(X1))).
+###########
+#cnf(i_0_56978, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(esk13_1(X2),X1)|~lessthanorequal(X4,esk13_1(X2))|~lessthanorequal(X3,X4)|~main_query_1(X2)|~main_query_0(X1))).
+##########
+#cnf(i_0_57292, plain, (X1=X2|~lessthanorequal(esk5_1(X1),esk13_1(X2))|~lessthanorequal(esk13_1(X2),X3)|~lessthanorequal(X4,X1)|~lessthanorequal(X3,X4)|~main_query_1(X2)|~main_query_0(X1))).
+########
+#cnf(i_0_1656, plain, (X2=X1|~lessthanorequal(esk5_1(X2),X3)|~lessthanorequal(X3,esk5_1(X1))|~lessthanorequal(esk5_1(X1),X4)|~lessthanorequal(X4,X2)|~main_query_0(X1)|~main_query_0(X2))).
+#
+#cnf(i_0_59314, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(X3,esk5_1(X2))|~lessthanorequal(esk5_1(X2),X1)|~main_query_0(X2)|~main_query_0(X1))).
+#
+#cnf(i_0_59843, plain, (X1=X2|~lessthanorequal(esk5_1(X1),esk5_1(X2))|~lessthanorequal(esk5_1(X2),X1)|~main_query_0(X2)|~main_query_0(X1))).
+#
+#cnf(i_0_60056, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X2)|~lessthanorequal(esk5_1(X2),X1)|~main_query_0(X2)|~main_query_0(X1))).
+#####
+#cnf(i_0_59735, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(X3,esk5_1(X2))|~lessthanorequal(X2,X1)|~main_query_0(X2)|~main_query_0(X1))).
+#
+#cnf(i_0_60481, plain, (X1=X2|~lessthanorequal(esk5_1(X1),esk5_1(X2))|~lessthanorequal(X2,X1)|~main_query_0(X2)|~main_query_0(X1))).
+######
+#cnf(i_0_59842, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(esk5_1(X2),X1)|~lessthanorequal(X3,X2)|~main_query_0(X2)|~main_query_0(X1))).
+############
+#cnf(i_0_59524, plain, (X1=X2|~lessthanorequal(esk5_1(X1),esk5_1(X2))|~lessthanorequal(esk5_1(X2),X3)|~lessthanorequal(X3,X1)|~main_query_0(X2)|~main_query_0(X1))).
+###
+#cnf(i_0_61127, plain, (X1=X2|~lessthanorequal(esk5_1(X1),esk5_1(X2))|~lessthanorequal(X2,X3)|~lessthanorequal(X3,X1)|~main_query_0(X2)|~main_query_0(X1))).
+#########
+#cnf(i_0_60265, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X2)|~lessthanorequal(esk5_1(X2),X4)|~lessthanorequal(X3,X1)|~lessthanorequal(X4,X3)|~main_query_0(X2)|~main_query_0(X1))).
+########
+#cnf(i_0_60482, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(X4,esk5_1(X2))|~lessthanorequal(X2,X1)|~lessthanorequal(X3,X4)|~main_query_0(X2)|~main_query_0(X1))).
+##########
+#cnf(i_0_61342, plain, (X1=X2|~lessthanorequal(esk5_1(X1),esk5_1(X2))|~lessthanorequal(X2,X3)|~lessthanorequal(X4,X1)|~lessthanorequal(X3,X4)|~main_query_0(X2)|~main_query_0(X1))).
+#######
+#cnf(i_0_59418, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(X3,esk5_1(X2))|~lessthanorequal(X2,X4)|~lessthanorequal(X4,X1)|~main_query_0(X2)|~main_query_0(X1))).
+#######
+#cnf(i_0_59523, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(esk5_1(X2),X4)|~lessthanorequal(X3,X2)|~lessthanorequal(X4,X1)|~main_query_0(X2)|~main_query_0(X1))).
+###########
+#cnf(i_0_59844, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(esk5_1(X2),X1)|~lessthanorequal(X4,esk5_1(X2))|~lessthanorequal(X3,X4)|~main_query_0(X2)|~main_query_0(X1))).
+##########
+#cnf(i_0_61022, plain, (X1=X2|~lessthanorequal(esk5_1(X1),esk5_1(X2))|~lessthanorequal(esk5_1(X2),X3)|~lessthanorequal(X4,X1)|~lessthanorequal(X3,X4)|~main_query_0(X2)|~main_query_0(X1))).
+########
+#cnf(i_0_1683, plain, (X2=X1|~lessthanorequal(esk5_1(X2),X3)|~lessthanorequal(X3,esk3_1(X1))|~lessthanorequal(esk3_1(X1),X4)|~lessthanorequal(X4,X2)|~main_query_0(X1)|~main_query_0(X2))).
+#
+#cnf(i_0_66755, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(X3,esk3_1(X2))|~lessthanorequal(esk3_1(X2),X1)|~main_query_0(X2)|~main_query_0(X1))).
+#
+#cnf(i_0_67314, plain, (X1=X2|~lessthanorequal(esk5_1(X1),esk3_1(X2))|~lessthanorequal(esk3_1(X2),X1)|~main_query_0(X2)|~main_query_0(X1))).
+#
+#cnf(i_0_67539, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X2)|~lessthanorequal(esk3_1(X2),X1)|~main_query_0(X2)|~main_query_0(X1))).
+#####
+#cnf(i_0_67200, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(X3,esk3_1(X2))|~lessthanorequal(X2,X1)|~main_query_0(X2)|~main_query_0(X1))).
+#
+#cnf(i_0_67988, plain, (X1=X2|~lessthanorequal(esk5_1(X1),esk3_1(X2))|~lessthanorequal(X2,X1)|~main_query_0(X2)|~main_query_0(X1))).
+######
+#cnf(i_0_67313, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(esk3_1(X2),X1)|~lessthanorequal(X3,X2)|~main_query_0(X2)|~main_query_0(X1))).
+#######
+#cnf(i_0_67759, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X2)|~lessthanorequal(esk3_1(X2),X3)|~lessthanorequal(X3,X1)|~main_query_0(X2)|~main_query_0(X1))).
+##########
+#cnf(i_0_66977, plain, (X1=X2|~lessthanorequal(esk5_1(X1),esk3_1(X2))|~lessthanorequal(esk3_1(X2),X3)|~lessthanorequal(X3,X1)|~main_query_0(X2)|~main_query_0(X1))).
+###
+#cnf(i_0_68902, plain, (X1=X2|~lessthanorequal(esk5_1(X1),esk3_1(X2))|~lessthanorequal(X2,X3)|~lessthanorequal(X3,X1)|~main_query_0(X2)|~main_query_0(X1))).
+#########
+#cnf(i_0_67760, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X2)|~lessthanorequal(esk3_1(X2),X4)|~lessthanorequal(X3,X1)|~lessthanorequal(X4,X3)|~main_query_0(X2)|~main_query_0(X1))).
+#######
+#cnf(i_0_67872, plain, (X1=X2|~lessthanorequal(esk3_1(X2),X1)|~lessthanorequal(esk5_1(X1),X4)|~lessthanorequal(X3,X2)|~lessthanorequal(X4,X3)|~main_query_0(X2)|~main_query_0(X1))).
+#######
+#cnf(i_0_67989, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(X4,esk3_1(X2))|~lessthanorequal(X2,X1)|~lessthanorequal(X3,X4)|~main_query_0(X2)|~main_query_0(X1))).
+############
+#cnf(i_0_69129, plain, (X1=X2|~lessthanorequal(esk5_1(X1),esk3_1(X2))|~lessthanorequal(X2,X3)|~lessthanorequal(X4,X1)|~lessthanorequal(X3,X4)|~main_query_0(X2)|~main_query_0(X1))).
+#######
+#cnf(i_0_66865, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(X3,esk3_1(X2))|~lessthanorequal(X2,X4)|~lessthanorequal(X4,X1)|~main_query_0(X2)|~main_query_0(X1))).
+#######
+#cnf(i_0_66976, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(esk3_1(X2),X4)|~lessthanorequal(X3,X2)|~lessthanorequal(X4,X1)|~main_query_0(X2)|~main_query_0(X1))).
+############
+#cnf(i_0_67315, plain, (X1=X2|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(esk3_1(X2),X1)|~lessthanorequal(X4,esk3_1(X2))|~lessthanorequal(X3,X4)|~main_query_0(X2)|~main_query_0(X1))).
+##########
+#cnf(i_0_68791, plain, (X1=X2|~lessthanorequal(esk5_1(X1),esk3_1(X2))|~lessthanorequal(esk3_1(X2),X3)|~lessthanorequal(X4,X1)|~lessthanorequal(X3,X4)|~main_query_0(X2)|~main_query_0(X1))).
+########
+#cnf(i_0_1796, plain, (X2=X1|~lessthanorequal(X3,esk5_1(X2))|~lessthanorequal(X4,esk13_1(X1))|~lessthanorequal(esk13_1(X1),X3)|~lessthanorequal(X2,X4)|~main_query_1(X1)|~main_query_0(X2))).
+#
+#cnf(i_0_75134, plain, (X1=X2|~lessthanorequal(X3,esk5_1(X1))|~lessthanorequal(X1,esk13_1(X2))|~lessthanorequal(esk13_1(X2),X3)|~main_query_1(X2)|~main_query_0(X1))).
+#
+#cnf(i_0_75604, plain, (X1=X2|~lessthanorequal(esk13_1(X2),esk5_1(X1))|~lessthanorequal(X1,esk13_1(X2))|~main_query_1(X2)|~main_query_0(X1))).
+########
+#cnf(i_0_75251, plain, (X1=X2|~lessthanorequal(esk13_1(X2),esk5_1(X1))|~lessthanorequal(X3,esk13_1(X2))|~lessthanorequal(X1,X3)|~main_query_1(X2)|~main_query_0(X1))).
+############
+#cnf(i_0_75605, plain, (X1=X2|~lessthanorequal(X3,esk5_1(X1))|~lessthanorequal(X1,esk13_1(X2))|~lessthanorequal(esk13_1(X2),X4)|~lessthanorequal(X4,X3)|~main_query_1(X2)|~main_query_0(X1))).
+##########
+#cnf(i_0_76080, plain, (X1=X2|~lessthanorequal(esk13_1(X2),esk5_1(X1))|~lessthanorequal(X3,esk13_1(X2))|~lessthanorequal(X4,X3)|~lessthanorequal(X1,X4)|~main_query_1(X2)|~main_query_0(X1))).
+########
+#cnf(i_0_1824, plain, (X2=X1|~lessthanorequal(X3,esk5_1(X2))|~lessthanorequal(X4,esk5_1(X1))|~lessthanorequal(esk5_1(X1),X3)|~lessthanorequal(X2,X4)|~main_query_0(X1)|~main_query_0(X2))).
+#
+#cnf(i_0_78418, plain, (X1=X2|~lessthanorequal(X3,esk5_1(X1))|~lessthanorequal(X1,esk5_1(X2))|~lessthanorequal(esk5_1(X2),X3)|~main_query_0(X2)|~main_query_0(X1))).
+#
+#cnf(i_0_78896, plain, (X1=X2|~lessthanorequal(esk5_1(X2),esk5_1(X1))|~lessthanorequal(X1,esk5_1(X2))|~main_query_0(X2)|~main_query_0(X1))).
+##
+#cnf(i_0_79373, plain, (X1=X2|~lessthanorequal(X2,esk5_1(X1))|~lessthanorequal(X1,esk5_1(X2))|~main_query_0(X2)|~main_query_0(X1))).
+######
+#cnf(i_0_78895, plain, (X1=X2|~lessthanorequal(X3,esk5_1(X1))|~lessthanorequal(X1,esk5_1(X2))|~lessthanorequal(X2,X3)|~main_query_0(X2)|~main_query_0(X1))).
+###########
+#cnf(i_0_78537, plain, (X1=X2|~lessthanorequal(esk5_1(X2),esk5_1(X1))|~lessthanorequal(X3,esk5_1(X2))|~lessthanorequal(X1,X3)|~main_query_0(X2)|~main_query_0(X1))).
+#########
+#cnf(i_0_79496, plain, (X1=X2|~lessthanorequal(X2,esk5_1(X1))|~lessthanorequal(X3,esk5_1(X2))|~lessthanorequal(X4,X3)|~lessthanorequal(X1,X4)|~main_query_0(X2)|~main_query_0(X1))).
+##########
+#cnf(i_0_78536, plain, (X1=X2|~lessthanorequal(X3,esk5_1(X1))|~lessthanorequal(X4,esk5_1(X2))|~lessthanorequal(X2,X3)|~lessthanorequal(X1,X4)|~main_query_0(X2)|~main_query_0(X1))).
+##########
+#cnf(i_0_78897, plain, (X1=X2|~lessthanorequal(X3,esk5_1(X1))|~lessthanorequal(X1,esk5_1(X2))|~lessthanorequal(esk5_1(X2),X4)|~lessthanorequal(X4,X3)|~main_query_0(X2)|~main_query_0(X1))).
+##########
+#cnf(i_0_79870, plain, (X1=X2|~lessthanorequal(esk5_1(X2),esk5_1(X1))|~lessthanorequal(X3,esk5_1(X2))|~lessthanorequal(X4,X3)|~lessthanorequal(X1,X4)|~main_query_0(X2)|~main_query_0(X1))).
+########
+#cnf(i_0_1852, plain, (X2=X1|~lessthanorequal(X3,esk5_1(X2))|~lessthanorequal(X4,esk3_1(X1))|~lessthanorequal(esk3_1(X1),X3)|~lessthanorequal(X2,X4)|~main_query_0(X1)|~main_query_0(X2))).
+#
+#cnf(i_0_84086, plain, (X1=X2|~lessthanorequal(X3,esk5_1(X1))|~lessthanorequal(X1,esk3_1(X2))|~lessthanorequal(esk3_1(X2),X3)|~main_query_0(X2)|~main_query_0(X1))).
+#
+#cnf(i_0_84580, plain, (X1=X2|~lessthanorequal(esk3_1(X2),esk5_1(X1))|~lessthanorequal(X1,esk3_1(X2))|~main_query_0(X2)|~main_query_0(X1))).
+##
+#cnf(i_0_85073, plain, (X1=X2|~lessthanorequal(X2,esk5_1(X1))|~lessthanorequal(X1,esk3_1(X2))|~main_query_0(X2)|~main_query_0(X1))).
+######
+#cnf(i_0_84579, plain, (X1=X2|~lessthanorequal(X3,esk5_1(X1))|~lessthanorequal(X1,esk3_1(X2))|~lessthanorequal(X2,X3)|~main_query_0(X2)|~main_query_0(X1))).
+######
+#cnf(i_0_84704, plain, (X1=X2|~lessthanorequal(X3,esk5_1(X1))|~lessthanorequal(esk3_1(X2),X3)|~lessthanorequal(X1,X2)|~main_query_0(X2)|~main_query_0(X1))).
+#
+#cnf(i_0_85709, plain, (X1=X2|~lessthanorequal(esk3_1(X2),esk5_1(X1))|~lessthanorequal(X1,X2)|~main_query_0(X2)|~main_query_0(X1))).
+#######
+#cnf(i_0_85199, plain, (X1=X2|~lessthanorequal(X2,esk5_1(X1))|~lessthanorequal(X3,esk3_1(X2))|~lessthanorequal(X1,X3)|~main_query_0(X2)|~main_query_0(X1))).
+#########
+#cnf(i_0_84209, plain, (X1=X2|~lessthanorequal(esk3_1(X2),esk5_1(X1))|~lessthanorequal(X3,esk3_1(X2))|~lessthanorequal(X1,X3)|~main_query_0(X2)|~main_query_0(X1))).
+###
+#cnf(i_0_86463, plain, (X1=X2|~lessthanorequal(esk3_1(X2),esk5_1(X1))|~lessthanorequal(X3,X2)|~lessthanorequal(X1,X3)|~main_query_0(X2)|~main_query_0(X1))).
+##########
+#cnf(i_0_85200, plain, (X1=X2|~lessthanorequal(X2,esk5_1(X1))|~lessthanorequal(X3,esk3_1(X2))|~lessthanorequal(X4,X3)|~lessthanorequal(X1,X4)|~main_query_0(X2)|~main_query_0(X1))).
+#######
+#cnf(i_0_85325, plain, (X1=X2|~lessthanorequal(X1,esk3_1(X2))|~lessthanorequal(X3,esk5_1(X1))|~lessthanorequal(X4,X3)|~lessthanorequal(X2,X4)|~main_query_0(X2)|~main_query_0(X1))).
+#########
+#cnf(i_0_85710, plain, (X1=X2|~lessthanorequal(X3,esk5_1(X1))|~lessthanorequal(esk3_1(X2),X4)|~lessthanorequal(X1,X2)|~lessthanorequal(X4,X3)|~main_query_0(X2)|~main_query_0(X1))).
+##########
+#cnf(i_0_86714, plain, (X1=X2|~lessthanorequal(esk3_1(X2),esk5_1(X1))|~lessthanorequal(X3,X2)|~lessthanorequal(X4,X3)|~lessthanorequal(X1,X4)|~main_query_0(X2)|~main_query_0(X1))).
+#######
+#cnf(i_0_84208, plain, (X1=X2|~lessthanorequal(X3,esk5_1(X1))|~lessthanorequal(X4,esk3_1(X2))|~lessthanorequal(X2,X3)|~lessthanorequal(X1,X4)|~main_query_0(X2)|~main_query_0(X1))).
+#######
+#cnf(i_0_84331, plain, (X1=X2|~lessthanorequal(X3,esk5_1(X1))|~lessthanorequal(esk3_1(X2),X3)|~lessthanorequal(X4,X2)|~lessthanorequal(X1,X4)|~main_query_0(X2)|~main_query_0(X1))).
+############
+#cnf(i_0_84581, plain, (X1=X2|~lessthanorequal(X3,esk5_1(X1))|~lessthanorequal(X1,esk3_1(X2))|~lessthanorequal(esk3_1(X2),X4)|~lessthanorequal(X4,X3)|~main_query_0(X2)|~main_query_0(X1))).
+##########
+#cnf(i_0_86340, plain, (X1=X2|~lessthanorequal(esk3_1(X2),esk5_1(X1))|~lessthanorequal(X3,esk3_1(X2))|~lessthanorequal(X4,X3)|~lessthanorequal(X1,X4)|~main_query_0(X2)|~main_query_0(X1))).
+########
+#cnf(i_0_2790, plain, (X2=X1|~lessthanorequal(esk3_1(X2),X3)|~lessthanorequal(X3,esk13_1(X1))|~lessthanorequal(esk13_1(X1),X4)|~lessthanorequal(X4,X2)|~main_query_1(X1)|~main_query_0(X2))).
+#
+#cnf(i_0_93457, plain, (X1=X2|~lessthanorequal(esk3_1(X1),X3)|~lessthanorequal(X3,esk13_1(X2))|~lessthanorequal(esk13_1(X2),X1)|~main_query_1(X2)|~main_query_0(X1))).
+#
+#cnf(i_0_94106, plain, (X1=X2|~lessthanorequal(esk3_1(X1),esk13_1(X2))|~lessthanorequal(esk13_1(X2),X1)|~main_query_1(X2)|~main_query_0(X1))).
+#########
+#cnf(i_0_93715, plain, (X1=X2|~lessthanorequal(esk3_1(X1),esk13_1(X2))|~lessthanorequal(esk13_1(X2),X3)|~lessthanorequal(X3,X1)|~main_query_1(X2)|~main_query_0(X1))).
+###########
+#cnf(i_0_94107, plain, (X1=X2|~lessthanorequal(esk3_1(X1),X3)|~lessthanorequal(esk13_1(X2),X1)|~lessthanorequal(X4,esk13_1(X2))|~lessthanorequal(X3,X4)|~main_query_1(X2)|~main_query_0(X1))).
+##########
+#cnf(i_0_94499, plain, (X1=X2|~lessthanorequal(esk3_1(X1),esk13_1(X2))|~lessthanorequal(esk13_1(X2),X3)|~lessthanorequal(X4,X1)|~lessthanorequal(X3,X4)|~main_query_1(X2)|~main_query_0(X1))).
+########
+#cnf(i_0_2818, plain, (X2=X1|~lessthanorequal(esk3_1(X2),X3)|~lessthanorequal(X3,esk5_1(X1))|~lessthanorequal(esk5_1(X1),X4)|~lessthanorequal(X4,X2)|~main_query_0(X1)|~main_query_0(X2))).
+#
+#cnf(i_0_97111, plain, (X1=X2|~lessthanorequal(esk3_1(X1),X3)|~lessthanorequal(X3,esk5_1(X2))|~lessthanorequal(esk5_1(X2),X1)|~main_query_0(X2)|~main_query_0(X1))).
+#
+#cnf(i_0_97770, plain, (X1=X2|~lessthanorequal(esk3_1(X1),esk5_1(X2))|~lessthanorequal(esk5_1(X2),X1)|~main_query_0(X2)|~main_query_0(X1))).
+#########
+#cnf(i_0_97373, plain, (X1=X2|~lessthanorequal(esk3_1(X1),esk5_1(X2))|~lessthanorequal(esk5_1(X2),X3)|~lessthanorequal(X3,X1)|~main_query_0(X2)|~main_query_0(X1))).
+###########
+#cnf(i_0_97771, plain, (X1=X2|~lessthanorequal(esk3_1(X1),X3)|~lessthanorequal(esk5_1(X2),X1)|~lessthanorequal(X4,esk5_1(X2))|~lessthanorequal(X3,X4)|~main_query_0(X2)|~main_query_0(X1))).
+##########
+#cnf(i_0_98169, plain, (X1=X2|~lessthanorequal(esk3_1(X1),esk5_1(X2))|~lessthanorequal(esk5_1(X2),X3)|~lessthanorequal(X4,X1)|~lessthanorequal(X3,X4)|~main_query_0(X2)|~main_query_0(X1))).
+########
+#cnf(i_0_2850, plain, (X2=X1|~lessthanorequal(esk3_1(X2),X3)|~lessthanorequal(X3,esk3_1(X1))|~lessthanorequal(esk3_1(X1),X4)|~lessthanorequal(X4,X2)|~main_query_0(X1)|~main_query_0(X2))).
+#
+#cnf(i_0_100833, plain, (X1=X2|~lessthanorequal(esk3_1(X1),X3)|~lessthanorequal(X3,esk3_1(X2))|~lessthanorequal(esk3_1(X2),X1)|~main_query_0(X2)|~main_query_0(X1))).
+#
+#cnf(i_0_101502, plain, (X1=X2|~lessthanorequal(esk3_1(X1),esk3_1(X2))|~lessthanorequal(esk3_1(X2),X1)|~main_query_0(X2)|~main_query_0(X1))).
+#
+#cnf(i_0_101771, plain, (X1=X2|~lessthanorequal(esk3_1(X1),X2)|~lessthanorequal(esk3_1(X2),X1)|~main_query_0(X2)|~main_query_0(X1))).
+#####
+#cnf(i_0_101366, plain, (X1=X2|~lessthanorequal(esk3_1(X1),X3)|~lessthanorequal(X3,esk3_1(X2))|~lessthanorequal(X2,X1)|~main_query_0(X2)|~main_query_0(X1))).
+#
+#cnf(i_0_102308, plain, (X1=X2|~lessthanorequal(esk3_1(X1),esk3_1(X2))|~lessthanorequal(X2,X1)|~main_query_0(X2)|~main_query_0(X1))).
+######
+#cnf(i_0_101501, plain, (X1=X2|~lessthanorequal(esk3_1(X1),X3)|~lessthanorequal(esk3_1(X2),X1)|~lessthanorequal(X3,X2)|~main_query_0(X2)|~main_query_0(X1))).
+############
+#cnf(i_0_101099, plain, (X1=X2|~lessthanorequal(esk3_1(X1),esk3_1(X2))|~lessthanorequal(esk3_1(X2),X3)|~lessthanorequal(X3,X1)|~main_query_0(X2)|~main_query_0(X1))).
+###
+#cnf(i_0_103122, plain, (X1=X2|~lessthanorequal(esk3_1(X1),esk3_1(X2))|~lessthanorequal(X2,X3)|~lessthanorequal(X3,X1)|~main_query_0(X2)|~main_query_0(X1))).
+#########
+#cnf(i_0_102036, plain, (X1=X2|~lessthanorequal(esk3_1(X1),X2)|~lessthanorequal(esk3_1(X2),X4)|~lessthanorequal(X3,X1)|~lessthanorequal(X4,X3)|~main_query_0(X2)|~main_query_0(X1))).
+########
+#cnf(i_0_102309, plain, (X1=X2|~lessthanorequal(esk3_1(X1),X3)|~lessthanorequal(X4,esk3_1(X2))|~lessthanorequal(X2,X1)|~lessthanorequal(X3,X4)|~main_query_0(X2)|~main_query_0(X1))).
+##########
+#cnf(i_0_103393, plain, (X1=X2|~lessthanorequal(esk3_1(X1),esk3_1(X2))|~lessthanorequal(X2,X3)|~lessthanorequal(X4,X1)|~lessthanorequal(X3,X4)|~main_query_0(X2)|~main_query_0(X1))).
+#######
+#cnf(i_0_100965, plain, (X1=X2|~lessthanorequal(esk3_1(X1),X3)|~lessthanorequal(X3,esk3_1(X2))|~lessthanorequal(X2,X4)|~lessthanorequal(X4,X1)|~main_query_0(X2)|~main_query_0(X1))).
+#######
+#cnf(i_0_101098, plain, (X1=X2|~lessthanorequal(esk3_1(X1),X3)|~lessthanorequal(esk3_1(X2),X4)|~lessthanorequal(X3,X2)|~lessthanorequal(X4,X1)|~main_query_0(X2)|~mai
