@@ -29,19 +29,19 @@ fof(equivalence_check,conjecture,(
 fof(main_query_0,definition,(
     ! [A_FST] :
       ( main_query_0(A_FST)
-    <=> ? [A_SND,A_TRD] :
+    <=> ( ? [A_SND,A_TRD] :
           ( tab(A_FST,A_SND,A_TRD)
           & $true
-          & A_FST = A_SND ) ) )).
+          & A_FST = A_SND )) ) )).
 
 fof(main_query_1,definition,(
     ! [A_FST] :
       ( main_query_1(A_FST)
-    <=> ? [A_SND,A_TRD,B_FST,B_SND,B_TRD] :
+    <=> (? [A_SND,A_TRD,B_FST,B_SND,B_TRD] :
           ( tab(A_FST,A_SND,A_TRD)
-          & ! [B_TAB_FST,B_TAB_SND,B_TAB_TRD] :
+          &( (! [B_TAB_FST,B_TAB_SND,B_TAB_TRD] :
               ( b(B_TAB_FST,B_TAB_SND,B_TAB_TRD)
-            <=> tab(B_TAB_FST,B_TAB_SND,B_TAB_TRD) )
-          & b(B_FST,B_SND,B_TRD)
+            <=> tab(B_TAB_FST,B_TAB_SND,B_TAB_TRD) ))
+          => (b(B_FST,B_SND,B_TRD)
           & $true
-          & A_FST = A_SND ) ) )).
+          & A_FST = A_SND )) ) )))).
