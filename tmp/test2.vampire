@@ -1,0 +1,39 @@
+Satisfiable!
+% SZS status CounterSatisfiable for test2
+% # SZS output start Saturation.
+tff(u111,negated_conjecture,
+    ((~~main_query_0(sK0)) | ~main_query_0(sK0))).
+
+tff(u110,axiom,
+    (![X0] : ((~main_query_0(X0) | (sK1(X0) = X0))))).
+
+tff(u109,axiom,
+    ((~(![X1] : (main_query_1(X1)))) | (![X1] : (main_query_1(X1))))).
+
+tff(u108,axiom,
+    ((~~tab(sK3,sK4,sK5)) | ~tab(sK3,sK4,sK5))).
+
+tff(u107,axiom,
+    (![X1, X2] : ((~tab(X1,X1,X2) | main_query_0(X1))))).
+
+tff(u106,axiom,
+    (![X1, X0, X2] : ((tab(X0,X1,X2) | main_query_1(X0))))).
+
+tff(u105,axiom,
+    (![X0] : ((tab(X0,sK1(X0),sK2(X0)) | ~main_query_0(X0))))).
+
+tff(u104,axiom,
+    ((~~k) | ~k)).
+
+tff(u103,axiom,
+    ((~b(sK3,sK4,sK5)) | b(sK3,sK4,sK5))).
+
+% # SZS output end Saturation.
+% ------------------------------
+% Version: Vampire 4.2.2 (commit e1949dd on 2017-12-14 18:39:21 +0000)
+% Termination reason: Satisfiable
+
+% Memory used [KB]: 4861
+% Time elapsed: 0.059 s
+% ------------------------------
+% ------------------------------
