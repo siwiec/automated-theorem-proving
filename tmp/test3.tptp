@@ -1,0 +1,53 @@
+% Equivallence check for file examples/sql-tiny/equivalent4.sql...
+% CREATE TABLE tab (
+%   fst NUMBER(4),
+%   snd NUMBER(4),
+%   trd NUMBER(4),
+%   CONSTRAINT tab_pk PRIMARY KEY (fst, snd)
+% );
+% 
+% SELECT a.fst
+% FROM   tab a
+% WHERE  ( a.fst = a.snd );
+% 
+% 
+% SELECT a.fst
+% FROM   tab a,
+%        tab b
+% WHERE (a.fst = a.snd);
+
+% Database scheme:
+% tab:
+%   fst: Number
+%   snd: Number
+%   trd: Number
+fof(equivalence_check,conjecture,(
+    ! [A_FST] :
+      ( main_query_0(A_FST)
+    <=> main_query_1(A_FST) ) )).
+
+fof(main_query_0,definition,(
+    ! [A_FST] :
+      ( main_query_0(A_FST)
+    <=> ( ? [A_SND,A_TRD] :
+          ( tab(A_FST,A_SND,A_TRD)
+          & $true
+          & A_FST = A_SND )) ) )).
+
+fof(aux, axiom, k <=>
+(! [B_TAB_FST,B_TAB_SND,B_TAB_TRD] :
+              ( b(B_TAB_FST,B_TAB_SND,B_TAB_TRD) <=> tab(B_TAB_FST,B_TAB_SND,B_TAB_TRD) ) 
+ )
+   ).
+
+fof(main_query_1,definition,(
+    ! [A_FST] :
+      ( main_query_1(A_FST)
+    <=> (? [A_SND,A_TRD,B_FST,B_SND,B_TRD] :
+          (   A_FST = A_SND &  tab(A_FST,A_SND,A_TRD) & 
+          (k => b(B_FST,B_SND,B_TRD)  )
+          )
+        )
+      )
+                              )
+    ).
