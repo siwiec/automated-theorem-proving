@@ -10,16 +10,14 @@ Portability : POSIX
 Module FofFormula implements the functions to translate first-order logic statements into the TPTP syntax.
 -}
 module FofFormula
-                  -- * Types
-                  -- ** FofFormula
     ( FofFormula(..)
                   -- * Functions
-                  -- ** getVariables
-    , getVariables
-                  -- ** getFreeVariables
-    , getFreeVariables
-                  -- ** getBoundVariables
-    , getBoundVariables
+                  -- ** getVars
+    , getVars
+                  -- ** getFreeVars
+    , getFreeVars
+                  -- ** getBoundVars
+    , getBoundVars
                   -- ** getPredicatesWithArity
     , getPredicatesWithArity
                   -- ** getPredicates
@@ -73,46 +71,40 @@ instance Show FofFormula where
     show (Predicate predicate vars) =
         "( " ++ toPredicate predicate ++ "(" ++ (intercalate ", " (toVariables vars)) ++ "))"
 
-getVariables :: FofFormula -> [String]
-getVariables EmptyFormula = []
-getVariables (ForAll vars f1) = removeDuplicates $ (toVariables vars) ++ (getVariables f1)
-getVariables (Exists vars f1) = removeDuplicates $ (toVariables vars) ++ (getVariables f1)
-getVariables (And f1 f2) = removeDuplicates $ (getVariables f1) ++ (getVariables f2)
-getVariables (Or f1 f2) = removeDuplicates $ (getVariables f1) ++ (getVariables f2)
-getVariables (Implies f1 f2) = removeDuplicates $ (getVariables f1) ++ (getVariables f2)
-getVariables (Equiv f1 f2) = removeDuplicates $ (getVariables f1) ++ (getVariables f2)
-getVariables (Not f1) = getVariables f1
-getVariables (Predicate predicate vars) = removeDuplicates $ toVariables vars
+getVars :: FofFormula -> [String]
+getVars EmptyFormula       = []
+getVars (ForAll vars f1)   = removeDuplicates $ (toVariables vars) ++ (getVars f1)
+getVars (Exists vars f1)   = removeDuplicates $ (toVariables vars) ++ (getVars f1)
+getVars (And f1 f2)        = removeDuplicates $ (getVars f1) ++ (getVars f2)
+getVars (Or f1 f2)         = removeDuplicates $ (getVars f1) ++ (getVars f2)
+getVars (Implies f1 f2)    = removeDuplicates $ (getVars f1) ++ (getVars f2)
+getVars (Equiv f1 f2)      = removeDuplicates $ (getVars f1) ++ (getVars f2)
+getVars (Not f1)           = getVars f1
+getVars (Predicate _ vars) = removeDuplicates $ toVariables vars
 
-getFreeVariables :: FofFormula -> [String]
-getFreeVariables EmptyFormula = []
-getFreeVariables (ForAll vars f1) =
-    removeDuplicates [v | v <- (getFreeVariables f1), v `notElem` (toVariables vars)]
-getFreeVariables (Exists vars f1) =
-    removeDuplicates [v | v <- (getFreeVariables f1), v `notElem` (toVariables vars)]
-getFreeVariables (And f1 f2) = removeDuplicates $ (getFreeVariables f1) ++ (getFreeVariables f2)
-getFreeVariables (Or f1 f2) = removeDuplicates $ (getFreeVariables f1) ++ (getFreeVariables f2)
-getFreeVariables (Implies f1 f2) = removeDuplicates $ (getFreeVariables f1) ++ (getFreeVariables f2)
-getFreeVariables (Equiv f1 f2) = removeDuplicates $ (getFreeVariables f1) ++ (getFreeVariables f2)
-getFreeVariables (Not f1) = getFreeVariables f1
-getFreeVariables (Predicate predicate vars) = removeDuplicates $ toVariables vars
+getFreeVars :: FofFormula -> [String]
+getFreeVars EmptyFormula       = []
+getFreeVars (ForAll vars f1)   = removeDuplicates [v | v <- (getFreeVars f1), v `notElem` (toVariables vars)]
+getFreeVars (Exists vars f1)   = removeDuplicates [v | v <- (getFreeVars f1), v `notElem` (toVariables vars)]
+getFreeVars (And f1 f2)        = removeDuplicates $ (getFreeVars f1) ++ (getFreeVars f2)
+getFreeVars (Or f1 f2)         = removeDuplicates $ (getFreeVars f1) ++ (getFreeVars f2)
+getFreeVars (Implies f1 f2)    = removeDuplicates $ (getFreeVars f1) ++ (getFreeVars f2)
+getFreeVars (Equiv f1 f2)      = removeDuplicates $ (getFreeVars f1) ++ (getFreeVars f2)
+getFreeVars (Not f1)           = getFreeVars f1
+getFreeVars (Predicate _ vars) = removeDuplicates $ toVariables vars
 
-getBoundVariables :: FofFormula -> [String]
-getBoundVariables x = [v | v <- (getVariables x), v `notElem` (getFreeVariables x)]
+getBoundVars :: FofFormula -> [String]
+getBoundVars x = [v | v <- (getVars x), v `notElem` (getFreeVars x)]
 
 getPredicatesWithArity :: FofFormula -> [(String, Int)]
-getPredicatesWithArity EmptyFormula = []
-getPredicatesWithArity (ForAll vars f1) = getPredicatesWithArity f1
-getPredicatesWithArity (Exists vars f1) = getPredicatesWithArity f1
-getPredicatesWithArity (And f1 f2) =
-    removeDuplicates $ (getPredicatesWithArity f1) ++ (getPredicatesWithArity f2)
-getPredicatesWithArity (Or f1 f2) =
-    removeDuplicates $ (getPredicatesWithArity f1) ++ (getPredicatesWithArity f2)
-getPredicatesWithArity (Implies f1 f2) =
-    removeDuplicates $ (getPredicatesWithArity f1) ++ (getPredicatesWithArity f2)
-getPredicatesWithArity (Equiv f1 f2) =
-    removeDuplicates $ (getPredicatesWithArity f1) ++ (getPredicatesWithArity f2)
-getPredicatesWithArity (Not f1) = getPredicatesWithArity f1
+getPredicatesWithArity EmptyFormula               = []
+getPredicatesWithArity (ForAll vars f1)           = getPredicatesWithArity f1
+getPredicatesWithArity (Exists vars f1)           = getPredicatesWithArity f1
+getPredicatesWithArity (And f1 f2)                = removeDuplicates $ (getPredicatesWithArity f1) ++ (getPredicatesWithArity f2)
+getPredicatesWithArity (Or f1 f2)                 = removeDuplicates $ (getPredicatesWithArity f1) ++ (getPredicatesWithArity f2)
+getPredicatesWithArity (Implies f1 f2)            = removeDuplicates $ (getPredicatesWithArity f1) ++ (getPredicatesWithArity f2)
+getPredicatesWithArity (Equiv f1 f2)              = removeDuplicates $ (getPredicatesWithArity f1) ++ (getPredicatesWithArity f2)
+getPredicatesWithArity (Not f1)                   = getPredicatesWithArity f1
 getPredicatesWithArity (Predicate predicate vars) = [(toPredicate predicate, length vars)]
 
 getPredicates :: FofFormula -> [String]
@@ -120,7 +112,7 @@ getPredicates = (Prelude.map fst) . getPredicatesWithArity
 
 substituteVariable :: String -> String -> FofFormula -> Either String FofFormula
 substituteVariable old new formula
-    | new `elem` (getVariables formula) =
+    | new `elem` (getVars formula) =
         fail $ "Cannot use variable name \"" ++ new ++ "\"; variable alredy exists in the formula"
     | otherwise =
         case formula of
@@ -200,13 +192,10 @@ substitutePredicate old new formula
                               else toPredicate predicate)
                          vars)
 
-toPredicate = Prelude.map Data.Char.toLower
-
-toVariable = Prelude.map Data.Char.toUpper
-
+toPredicate  = Prelude.map Data.Char.toLower
+toVariable   = Prelude.map Data.Char.toUpper
 toPredicates = Prelude.map toPredicate
-
-toVariables = Prelude.map toVariable
+toVariables  = Prelude.map toVariable
 
 removeDuplicates :: (Eq a) => [a] -> [a]
 removeDuplicates =
@@ -217,6 +206,7 @@ removeDuplicates =
                  else seen ++ [x])
         []
 
+-- Simplify until nothing more to do
 simplifyFofFormula :: FofFormula -> FofFormula
 simplifyFofFormula formula
     | formula /= basicSimplified = simplifyFofFormula basicSimplified

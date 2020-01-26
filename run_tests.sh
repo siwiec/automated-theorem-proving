@@ -4,9 +4,9 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
-for f in examples/*/*.sql; do
+for f in tests/sql/*/*.sql; do
     echo "Running automated-theorem-prover for file $f...";
-    ./dist/build/automated-theorem-proving/automated-theorem-proving $f > ${f/.sql/.translated}
+    ./dist-newstyle/build/x86_64-linux/ghc-8.6.5/automated-theorem-proving-0.1.0.0/x/automated-theorem-proving/build/automated-theorem-proving/automated-theorem-proving $f > ${f/.sql/.translated}
     retval=$?
     if [ $retval -ne 0 ]; then
         echo -e "     ${RED}FAILURE:${NC} automated-theorem-proving exited with code $retval"

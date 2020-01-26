@@ -1,0 +1,255 @@
+Satisfiable!
+% SZS status CounterSatisfiable for simple_nested_query2
+% # SZS output start Saturation.
+tff(u654,axiom,
+    (![X1, X0] : (((sK12(X0,X1) != sK14(X0,X1)) | ~main_query_0(X0,X1))))).
+
+tff(u653,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | (sK5 = sK19(sK5,sK4)))).
+
+tff(u652,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | (~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (~(![X3, X2, X4] : ((~b(X2,X3,X4) | ~a(X3,X2) | sP3(X2,X3))))) | (~(![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9))))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10, X12] : ((~c(X10,X11,X12) | a(X10,X11))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | (sK5 = sK20(sK4,sK5)))).
+
+tff(u651,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | (sK4 = sK20(sK5,sK4)))).
+
+tff(u650,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | (~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (~(![X3, X2, X4] : ((~b(X2,X3,X4) | ~a(X3,X2) | sP3(X2,X3))))) | (~(![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9))))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10, X12] : ((~c(X10,X11,X12) | a(X10,X11))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | (sK4 = sK19(sK4,sK5)))).
+
+tff(u649,axiom,
+    ((~(![X1, X0] : (~main_query_0(X0,X1)))) | (![X1, X0] : (~main_query_0(X0,X1))))).
+
+tff(u648,axiom,
+    (![X1, X0] : ((~main_query_0(X0,X1) | (sK12(X0,X1) = X1))))).
+
+tff(u647,axiom,
+    (![X1, X0] : ((~main_query_0(X0,X1) | (sK14(X0,X1) = X0))))).
+
+tff(u646,axiom,
+    (![X1, X0] : ((~main_query_1(X0,X1) | sP3(X1,X0))))).
+
+tff(u645,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | main_query_1(sK4,sK5))).
+
+tff(u644,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | (~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (~(![X3, X2, X4] : ((~b(X2,X3,X4) | ~a(X3,X2) | sP3(X2,X3))))) | (~(![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9))))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10, X12] : ((~c(X10,X11,X12) | a(X10,X11))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | main_query_1(sK5,sK4))).
+
+tff(u643,axiom,
+    ((~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (~(![X3, X5, X2, X4] : ((~b(X2,X4,X5) | ~a(X4,X2,X3) | main_query_0(X4,X2) | ~lessthanorequal(X2,X4) | (X2 = X4))))) | (~(![X1, X0] : (~main_query_0(X0,X1)))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | (![X1, X3, X2] : ((~a(X1,X2,X3) | ~lessthanorequal(X2,X1) | (X1 = X2) | ~a(X2,X1)))))).
+
+tff(u642,axiom,
+    ((~(![X3, X5, X4] : ((~a(X3,X4,X5) | tab(X3,X4,X5))))) | (![X3, X5, X4] : ((~a(X3,X4,X5) | tab(X3,X4,X5)))))).
+
+tff(u641,axiom,
+    ((~(![X3, X5, X2, X4] : ((~b(X2,X4,X5) | ~a(X4,X2,X3) | main_query_0(X4,X2) | ~lessthanorequal(X2,X4) | (X2 = X4))))) | (~(![X1, X0] : (~main_query_0(X0,X1)))) | (![X9, X7, X8] : ((~a(sK20(X7,X8),X7,X9) | ~lessthanorequal(X7,sK20(X7,X8)) | (sK20(X7,X8) = X7) | ~sP3(X7,X8)))))).
+
+tff(u640,axiom,
+    ((~(![X3, X5, X4] : ((~tab(X3,X4,X5) | a(X3,X4,X5))))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | (![X3, X2] : ((a(X2,X3,sK31(X2,X3)) | ~a(X2,X3)))))).
+
+tff(u639,axiom,
+    (![X1, X0] : ((a(X0,sK12(X0,X1),sK13(X0,X1)) | ~main_query_0(X0,X1))))).
+
+tff(u638,axiom,
+    ((~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (~(![X3, X5, X4] : ((~tab(X3,X4,X5) | a(X3,X4,X5))))) | (![X3, X2] : ((a(X2,sK20(X2,X3),sK21(X2,X3)) | ~sP3(X2,X3)))))).
+
+tff(u637,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | (~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (~(![X3, X5, X4] : ((~tab(X3,X4,X5) | a(X3,X4,X5))))) | (~(![X3, X2, X4] : ((~b(X2,X3,X4) | ~a(X3,X2) | sP3(X2,X3))))) | (~(![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9))))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10, X12] : ((~c(X10,X11,X12) | a(X10,X11))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | a(sK4,sK5,sK21(sK4,sK5)))).
+
+tff(u636,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | (~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (~(![X3, X5, X4] : ((~tab(X3,X4,X5) | a(X3,X4,X5))))) | a(sK5,sK4,sK21(sK5,sK4)))).
+
+tff(u635,axiom,
+    ((~(![X3, X5, X4] : ((~tab(X3,X4,X5) | a(X3,X4,X5))))) | (~tab(sK16,sK17,sK18)) | a(sK16,sK17,sK18))).
+
+tff(u634,axiom,
+    ((~(![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9))))) | (![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9)))))).
+
+tff(u633,axiom,
+    ((~(![X3, X5, X4] : ((~tab(X3,X4,X5) | a(X3,X4,X5))))) | (![X3, X5, X4] : ((~tab(X3,X4,X5) | a(X3,X4,X5)))))).
+
+tff(u632,axiom,
+    ((~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5)))))).
+
+tff(u631,axiom,
+    ((~~tab(sK6,sK7,sK8)) | ~tab(sK6,sK7,sK8))).
+
+tff(u630,axiom,
+    ((~~tab(sK24,sK25,sK26)) | ~tab(sK24,sK25,sK26))).
+
+tff(u629,axiom,
+    ((~~tab(sK28,sK29,sK30)) | ~tab(sK28,sK29,sK30))).
+
+tff(u628,axiom,
+    ((~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | (![X1, X0] : ((tab(X0,X1,sK31(X0,X1)) | ~a(X0,X1)))))).
+
+tff(u627,axiom,
+    ((~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (![X3, X2] : ((tab(X2,sK20(X2,X3),sK21(X2,X3)) | ~sP3(X2,X3)))))).
+
+tff(u626,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | (~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (~(![X3, X2, X4] : ((~b(X2,X3,X4) | ~a(X3,X2) | sP3(X2,X3))))) | (~(![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9))))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10, X12] : ((~c(X10,X11,X12) | a(X10,X11))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | tab(sK4,sK5,sK21(sK4,sK5)))).
+
+tff(u625,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | (~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | tab(sK5,sK4,sK21(sK5,sK4)))).
+
+tff(u624,axiom,
+    ((~tab(sK16,sK17,sK18)) | tab(sK16,sK17,sK18))).
+
+tff(u623,axiom,
+    ((~(![X3, X5, X2, X4] : ((~b(X2,X4,X5) | ~a(X4,X2,X3) | main_query_0(X4,X2) | ~lessthanorequal(X2,X4) | (X2 = X4))))) | (![X3, X5, X2, X4] : ((~b(X2,X4,X5) | ~a(X4,X2,X3) | main_query_0(X4,X2) | ~lessthanorequal(X2,X4) | (X2 = X4)))))).
+
+tff(u622,axiom,
+    ((~(![X3, X2, X4] : ((~b(X2,X3,X4) | ~a(X3,X2) | sP3(X2,X3))))) | (![X3, X2, X4] : ((~b(X2,X3,X4) | ~a(X3,X2) | sP3(X2,X3)))))).
+
+tff(u621,axiom,
+    ((~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5)))))).
+
+tff(u620,axiom,
+    ((~~b(sK6,sK7,sK8)) | ~b(sK6,sK7,sK8))).
+
+tff(u619,axiom,
+    ((~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | (![X5, X4] : ((b(X4,X5,sK31(X4,X5)) | ~a(X4,X5)))))).
+
+tff(u618,axiom,
+    (![X1, X0] : ((b(X1,sK14(X0,X1),sK15(X0,X1)) | ~main_query_0(X0,X1))))).
+
+tff(u617,axiom,
+    (![X1, X0] : ((b(X0,sK20(X0,X1),sK21(X0,X1)) | ~sP3(X0,X1))))).
+
+tff(u616,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | (~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (~(![X3, X2, X4] : ((~b(X2,X3,X4) | ~a(X3,X2) | sP3(X2,X3))))) | (~(![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9))))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10, X12] : ((~c(X10,X11,X12) | a(X10,X11))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | b(sK4,sK5,sK21(sK4,sK5)))).
+
+tff(u615,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | b(sK5,sK4,sK21(sK5,sK4)))).
+
+tff(u614,axiom,
+    ((~b(sK16,sK17,sK18)) | b(sK16,sK17,sK18))).
+
+tff(u613,axiom,
+    (![X1, X0, X2] : ((~lessthanorequal(X1,X2) | lessthanorequal(X0,X2) | ~lessthanorequal(X0,X1))))).
+
+tff(u612,axiom,
+    (![X1, X0] : ((~lessthanorequal(X1,X0) | (X0 = X1) | ~lessthanorequal(X0,X1))))).
+
+tff(u611,negated_conjecture,
+    ((~~lessthanorequal(sK4,sK5)) | ~lessthanorequal(sK4,sK5))).
+
+tff(u610,negated_conjecture,
+    ((~~lessthanorequal(sK5,sK4)) | ~lessthanorequal(sK5,sK4))).
+
+tff(u609,axiom,
+    ((~~lessthanorequal(sK16,sK17)) | ~lessthanorequal(sK16,sK17))).
+
+tff(u608,axiom,
+    (![X0] : (lessthanorequal(X0,X0)))).
+
+tff(u607,axiom,
+    (![X1, X0] : ((lessthanorequal(sK12(X0,X1),sK14(X0,X1)) | ~main_query_0(X0,X1))))).
+
+tff(u606,axiom,
+    ((~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (~(![X3, X5, X4] : ((~tab(X3,X4,X5) | a(X3,X4,X5))))) | (~(![X3, X5, X2, X4] : ((~b(X2,X4,X5) | ~a(X4,X2,X3) | main_query_0(X4,X2) | ~lessthanorequal(X2,X4) | (X2 = X4))))) | (~(![X1, X0] : (~main_query_0(X0,X1)))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | (![X1, X0] : ((~a(X1,X0) | (X0 = X1) | ~a(X0,X1) | ~lessthanorequal(X0,X1)))))).
+
+tff(u605,axiom,
+    ((~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (~(![X3, X2, X4] : ((~b(X2,X3,X4) | ~a(X3,X2) | sP3(X2,X3))))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | (![X1, X0] : ((~a(X1,X0) | ~a(X0,X1) | sP3(X0,X1)))))).
+
+tff(u604,axiom,
+    ((~~a(sK17,sK16)) | ~a(sK17,sK16))).
+
+tff(u603,axiom,
+    ((~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (~(![X3, X5, X4] : ((~tab(X3,X4,X5) | a(X3,X4,X5))))) | (~(![X3, X5, X2, X4] : ((~b(X2,X4,X5) | ~a(X4,X2,X3) | main_query_0(X4,X2) | ~lessthanorequal(X2,X4) | (X2 = X4))))) | (~(![X1, X0] : (~main_query_0(X0,X1)))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | (![X1, X0] : ((~a(sK19(X0,X1),X1) | (sK19(X0,X1) = X1) | ~lessthanorequal(sK19(X0,X1),X1) | ~sP3(X0,X1)))))).
+
+tff(u602,axiom,
+    ((~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (~(![X3, X2, X4] : ((~b(X2,X3,X4) | ~a(X3,X2) | sP3(X2,X3))))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | (![X1, X0] : ((~a(sK19(X0,X1),X1) | sP3(sK19(X0,X1),X1) | ~sP3(X0,X1)))))).
+
+tff(u601,axiom,
+    ((~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (~(![X3, X5, X4] : ((~tab(X3,X4,X5) | a(X3,X4,X5))))) | (~(![X3, X5, X2, X4] : ((~b(X2,X4,X5) | ~a(X4,X2,X3) | main_query_0(X4,X2) | ~lessthanorequal(X2,X4) | (X2 = X4))))) | (~(![X1, X0] : (~main_query_0(X0,X1)))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | (![X5, X4] : ((~a(sK20(X4,X5),X4) | (sK20(X4,X5) = X4) | ~lessthanorequal(sK20(X4,X5),X4) | ~sP3(X4,X5)))))).
+
+tff(u600,axiom,
+    ((~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (~(![X3, X2, X4] : ((~b(X2,X3,X4) | ~a(X3,X2) | sP3(X2,X3))))) | (~(![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9))))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10, X12] : ((~c(X10,X11,X12) | a(X10,X11))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | (![X1, X0] : ((~a(sK20(X0,X1),X0) | ~sP3(X0,X1) | sP3(sK20(X0,X1),X0)))))).
+
+tff(u599,axiom,
+    ((~(![X3, X5, X4] : ((~tab(X3,X4,X5) | a(X3,X4,X5))))) | (~(![X3, X5, X2, X4] : ((~b(X2,X4,X5) | ~a(X4,X2,X3) | main_query_0(X4,X2) | ~lessthanorequal(X2,X4) | (X2 = X4))))) | (~(![X1, X0] : (~main_query_0(X0,X1)))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | (![X1, X0] : ((~a(sK20(X0,X1),X0) | (sK20(X0,X1) = X0) | ~sP3(X0,X1) | ~lessthanorequal(X0,sK20(X0,X1))))))).
+
+tff(u598,axiom,
+    ((~(![X3, X2, X4] : ((~b(X2,X3,X4) | ~a(X3,X2) | sP3(X2,X3))))) | (![X1, X0] : ((~a(sK20(X0,X1),X0) | ~sP3(X0,X1) | sP3(X0,sK20(X0,X1))))))).
+
+tff(u597,axiom,
+    ((~~a(sK23,sK22)) | ~a(sK23,sK22))).
+
+tff(u596,axiom,
+    (![X1, X0] : ((a(X1,sK19(X0,X1)) | ~sP3(X0,X1))))).
+
+tff(u595,axiom,
+    ((~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (~(![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9))))) | (~(![X11, X10, X12] : ((~c(X10,X11,X12) | a(X10,X11))))) | (![X3, X2] : ((a(X2,sK20(X2,X3)) | ~sP3(X2,X3)))))).
+
+tff(u594,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | a(sK4,sK5))).
+
+tff(u593,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | (~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (~(![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9))))) | (~(![X11, X10, X12] : ((~c(X10,X11,X12) | a(X10,X11))))) | a(sK5,sK4))).
+
+tff(u592,axiom,
+    ((~tab(sK16,sK17,sK18)) | (~(![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9))))) | (~(![X11, X10, X12] : ((~c(X10,X11,X12) | a(X10,X11))))) | a(sK16,sK17))).
+
+tff(u591,axiom,
+    ((~a(sK22,sK23)) | a(sK22,sK23))).
+
+tff(u590,axiom,
+    ((~~c(sK24,sK25,sK26)) | ~c(sK24,sK25,sK26))).
+
+tff(u589,axiom,
+    ((~~c(sK28,sK29,sK30)) | ~c(sK28,sK29,sK30))).
+
+tff(u588,axiom,
+    ((~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9)))))).
+
+tff(u587,axiom,
+    ((~(![X11, X10, X12] : ((~c(X10,X11,X12) | a(X10,X11))))) | (![X11, X10, X12] : ((~c(X10,X11,X12) | a(X10,X11)))))).
+
+tff(u586,axiom,
+    ((~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | (![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11)))))).
+
+tff(u585,axiom,
+    ((~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (~(![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9))))) | (![X1, X0] : ((c(X0,sK20(X0,X1),sK21(X0,X1)) | ~sP3(X0,X1)))))).
+
+tff(u584,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | (~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (~(![X3, X2, X4] : ((~b(X2,X3,X4) | ~a(X3,X2) | sP3(X2,X3))))) | (~(![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9))))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10, X12] : ((~c(X10,X11,X12) | a(X10,X11))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | c(sK4,sK5,sK21(sK4,sK5)))).
+
+tff(u583,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | (~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (~(![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9))))) | c(sK5,sK4,sK21(sK5,sK4)))).
+
+tff(u582,axiom,
+    ((~tab(sK16,sK17,sK18)) | (~(![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9))))) | c(sK16,sK17,sK18))).
+
+tff(u581,axiom,
+    ((~sP0) | sP0)).
+
+tff(u580,axiom,
+    ((~sP1) | sP1)).
+
+tff(u579,axiom,
+    ((~sP2) | sP2)).
+
+tff(u578,axiom,
+    (![X1, X0] : ((~sP3(X0,X1) | (sK19(X0,X1) = X0))))).
+
+tff(u577,axiom,
+    (![X1, X0] : ((~sP3(X0,X1) | (sK20(X0,X1) = X1))))).
+
+tff(u576,axiom,
+    (![X1, X0] : ((~sP3(X1,X0) | main_query_1(X0,X1))))).
+
+tff(u575,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | sP3(sK5,sK4))).
+
+tff(u574,negated_conjecture,
+    ((~main_query_1(sK4,sK5)) | (~(![X3, X5, X4] : ((~tab(X3,X4,X5) | b(X3,X4,X5))))) | (~(![X3, X5, X4] : ((~b(X3,X4,X5) | tab(X3,X4,X5))))) | (~(![X3, X2, X4] : ((~b(X2,X3,X4) | ~a(X3,X2) | sP3(X2,X3))))) | (~(![X9, X7, X8] : ((~tab(X7,X8,X9) | c(X7,X8,X9))))) | (~(![X9, X7, X8] : ((~c(X7,X8,X9) | tab(X7,X8,X9))))) | (~(![X11, X10, X12] : ((~c(X10,X11,X12) | a(X10,X11))))) | (~(![X11, X10] : ((c(X10,X11,sK31(X10,X11)) | ~a(X10,X11))))) | sP3(sK4,sK5))).
+
+% # SZS output end Saturation.
+% ------------------------------
+% Version: Vampire 4.2.2 (commit e1949dd on 2017-12-14 18:39:21 +0000)
+% Termination reason: Satisfiable
+
+% Memory used [KB]: 5117
+% Time elapsed: 0.064 s
+% ------------------------------
+% ------------------------------

@@ -10,8 +10,6 @@ Portability : POSIX
 Module for managing the TPTP syntax formulas
 -}
 module TptpSyntax
-                  -- * Types
-                  -- ** TptpFormula
     ( TptpFormula(..)
                   -- ** Role
     , Role(..)

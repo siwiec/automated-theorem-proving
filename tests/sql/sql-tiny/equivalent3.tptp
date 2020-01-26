@@ -1,0 +1,115 @@
+% Equivallence check for file tests/sql/sql-tiny/equivalent3.sql...
+% CREATE TABLE tab (
+%   fst NUMBER(4),
+%   snd NUMBER(4),
+%   trd NUMBER(4),
+%   CONSTRAINT tab_pk PRIMARY KEY (fst, snd)
+% );
+% 
+% SELECT a.fst,
+%        b.fst
+% FROM   tab a,
+%        tab b
+% WHERE  ( a.fst = b.snd
+%          AND b.fst = a.snd
+%          AND a.snd <= b.snd
+%          AND b.snd >= b.snd );
+% 
+% SELECT a.fst,
+%        b.fst
+% FROM   tab a,
+%        tab b
+% WHERE  ( a.fst = b.snd
+%          AND b.fst = a.snd );
+
+% Database scheme:
+% tab:%   fst: Number
+%   snd: Number
+%   trd: Number
+
+fof(equivalence_check,conjecture,(
+    ! [A_FST,B_FST] :
+      ( main_query_0(A_FST,B_FST)
+    <=> main_query_1(A_FST,B_FST) ) )).
+
+fof(main_query_0,definition,(
+    ! [A_FST,B_FST] :
+      ( main_query_0(A_FST,B_FST)
+    <=> ? [A_SND,A_TRD,B_SND,B_TRD] :
+          ( ! [A_TAB_FST,A_TAB_SND,A_TAB_TRD] :
+              ( a(A_TAB_FST,A_TAB_SND,A_TAB_TRD)
+            <=> tab(A_TAB_FST,A_TAB_SND,A_TAB_TRD) )
+          & a(A_FST,A_SND,A_TRD)
+          & ! [B_TAB_FST,B_TAB_SND,B_TAB_TRD] :
+              ( b(B_TAB_FST,B_TAB_SND,B_TAB_TRD)
+            <=> tab(B_TAB_FST,B_TAB_SND,B_TAB_TRD) )
+          & b(B_FST,B_SND,B_TRD)
+          & $true
+          & A_FST = B_SND
+          & B_FST = A_SND
+          & lessthanorequal(A_SND,B_SND)
+          & lessthanorequal(B_SND,B_SND) ) ) )).
+
+fof(main_query_1,definition,(
+    ! [A_FST,B_FST] :
+      ( main_query_1(A_FST,B_FST)
+    <=> ? [A_SND,A_TRD,B_SND,B_TRD] :
+          ( ! [A_TAB_FST,A_TAB_SND,A_TAB_TRD] :
+              ( a(A_TAB_FST,A_TAB_SND,A_TAB_TRD)
+            <=> tab(A_TAB_FST,A_TAB_SND,A_TAB_TRD) )
+          & a(A_FST,A_SND,A_TRD)
+          & ! [B_TAB_FST,B_TAB_SND,B_TAB_TRD] :
+              ( b(B_TAB_FST,B_TAB_SND,B_TAB_TRD)
+            <=> tab(B_TAB_FST,B_TAB_SND,B_TAB_TRD) )
+          & b(B_FST,B_SND,B_TRD)
+          & $true
+          & A_FST = B_SND
+          & B_FST = A_SND ) ) )).
+
+fof(reflexivity_of_equality,axiom,(
+    ! [X] : X = X )).
+
+fof(symmetry_of_equality,axiom,(
+    ! [X,Y] :
+      ( X = Y
+     => Y = X ) )).
+
+fof(transitivity_of_equality,axiom,(
+    ! [X,Y,Z] :
+      ( ( X = Y
+        & Y = Z )
+     => X = Z ) )).
+
+fof(reflexivity_of_less_than_or_equal,axiom,(
+    ! [X] : lessthanorequal(X,X) )).
+
+fof(antisymmetry_of_less_than_or_equal,axiom,(
+    ! [X,Y] :
+      ( ( lessthanorequal(X,Y)
+        & lessthanorequal(Y,X) )
+     => X = Y ) )).
+
+fof(transitivity_of_less_than_or_equal,axiom,(
+    ! [X,Y,Z] :
+      ( ( lessthanorequal(X,Y)
+        & lessthanorequal(Y,Z) )
+     => lessthanorequal(X,Z) ) )).
+
+fof(tab_substitution_1,axiom,(
+    ! [X_0,X_1,X_2,X_3] :
+      ( ( X_0 = X_1
+        & tab(X_1,X_2,X_3) )
+     => tab(X_0,X_2,X_3) ) )).
+
+fof(tab_substitution_2,axiom,(
+    ! [X_0,X_1,X_2,X_3] :
+      ( ( X_0 = X_2
+        & tab(X_1,X_2,X_3) )
+     => tab(X_1,X_0,X_3) ) )).
+
+fof(tab_substitution_3,axiom,(
+    ! [X_0,X_1,X_2,X_3] :
+      ( ( X_0 = X_3
+        & tab(X_1,X_2,X_3) )
+     => tab(X_1,X_2,X_0) ) )).
+

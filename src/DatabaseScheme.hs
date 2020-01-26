@@ -9,10 +9,8 @@ Portability : POSIX
 
 DatabaseScheme exports basic types and function for creating, storing and analyzing the DatabaseScheme for analysed queries.
 -}
-module DatabaseScheme
-                      -- * Types
-                      -- ** DatabaseScheme
-    ( DatabaseScheme
+module DatabaseScheme (
+      DatabaseScheme
                       -- ** DataType
     , DataType
                       -- * Functions
@@ -46,7 +44,7 @@ instance Show DatabaseScheme where
         showTable (tableName, columns) =
             "% " ++
             tableName ++
-            ":\n" ++
+            ":" ++
             (unlines
                  [ "%   " ++ columnName ++ ": " ++ show columnType
                  | (columnName, columnType) <- (Map.assocs columns)

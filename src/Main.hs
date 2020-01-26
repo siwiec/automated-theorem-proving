@@ -18,7 +18,8 @@ import Text.Show.Pretty
 
 import Language.SQL.SimpleSQL.Parse (ParseError, parseStatements, peFormattedError)
 
-import Language.SQL.SimpleSQL.Syntax (Statement, ansi2011)
+import Language.SQL.SimpleSQL.Syntax (Statement)
+import Language.SQL.SimpleSQL.Dialect (ansi2011)
 
 import Translate
 

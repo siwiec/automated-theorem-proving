@@ -17,8 +17,6 @@ BNF of the accepted SQL queries
 
 -}
 module Translate
-    -- * Functions
-    -- ** translateStatements
     ( translateStatements
     ) where
 
@@ -42,7 +40,7 @@ import Text.Show.Pretty (ppShow)
 data State =
     State
         { databaseScheme :: DatabaseScheme
-        , prefix :: String
+        , prefix         :: String
         }
 
 {- |
@@ -51,9 +49,9 @@ data State =
     query_definition is in format (! [column_names] : query_name(column_names) <=> formula)
 -}
 type Translation
-     = ( String -- ^ Name of the predicate defined in the formula
-       , [String] -- ^ List of exposed column names
-       , FofFormula -- ^ Partial translation
+     = ( String     -- Name of the predicate defined in the formula
+       , [String]   -- List of exposed column names
+       , FofFormula -- Partial translation
         )
 
 {- |
@@ -63,21 +61,21 @@ type Translation
     Statement structure described here: https://github.com/JakeWheat/simple-sql-parser/blob/master/Language/SQL/SimpleSQL/Syntax.lhs
 -}
 translateStatements ::
-       [Statement] -- ^ List of SQL statements -- either queries or database schema description
+       [Statement]          -- ^ List of SQL statements -- either queries or database schema description
     -> Either String String -- ^ Either error or database scheme description and translated query
 translateStatements inputAst = do
     case [(SelectStatement queryExpr) | (SelectStatement queryExpr) <- inputAst] of
-        [] ->
+        [] -> -- no queries to translate
             return $
             "% Database scheme:\n" ++
             show (databaseScheme initialState) ++ "% NO QUERIES TO TRANSLATE"
-        [queryAst] -> do
-            output <- translateSingleQuery initialState 0 queryAst
+        [queryAst] -> do -- one query to be translated
+            output <- translateSingleQuery initialState 0 queryAst -- TODO: output should be a list of queries + subqueries translated to fof
             return $
                 "% Database scheme:\n" ++
                 show (databaseScheme initialState) ++
-                (unlines $ Prelude.map show $ output : (buildAxioms (databaseScheme initialState)))
-        queriesAst -> do
+                (unlines $ Prelude.map show $ output : (buildAxioms (databaseScheme initialState))) -- TODO: s/:/++/
+        queriesAst -> do -- more than one query to be transalted
             queriesTptp <- imapM (translateSingleQuery initialState) queriesAst
             let idents = (\(TptpFofFormula _ _ (ForAll x _) _) -> x) (head queriesTptp)
             let output =
@@ -93,12 +91,12 @@ translateStatements inputAst = do
                     queriesTptp
             return $
                 "% Database scheme:\n" ++
-                show (databaseScheme initialState) ++
+                show (databaseScheme initialState) ++ "\n\n" ++
                 (unlines $ Prelude.map show $ output ++ (buildAxioms (databaseScheme initialState)))
   where
     initialState =
         State
-            (databaseSchemeFromAst
+            (databaseSchemeFromAst -- calculate the database scheme
                  [(CreateTable names tableElements) | (CreateTable names tableElements) <- inputAst])
             ""
 
@@ -106,9 +104,9 @@ translateStatements inputAst = do
     translateSingleQuery translates the AST of a single query into a TPTP formula
 -}
 translateSingleQuery ::
-       State -- ^ Initial state
-    -> Int -- ^ Query number
-    -> Statement -- ^ Query AST
+       State                     -- ^ Initial state
+    -> Int                       -- ^ Query number
+    -> Statement                 -- ^ Query AST
     -> Either String TptpFormula -- ^ Error message or the TPTP translation of the query
 translateSingleQuery state queryNumber queryAst = do
     (queryName, _, queryFofFormula) <-
@@ -120,8 +118,8 @@ translateSingleQuery state queryNumber queryAst = do
 -}
 translateStatement ::
        State
-    -> String -- ^ Query name
-    -> Statement -- ^ Query AST
+    -> String                    -- ^ Query name
+    -> Statement                 -- ^ Query AST
     -> Either String Translation -- ^ error or a tuple with table name, list of column names and the FofFormula with table definition
 translateStatement state queryName stmt =
     case stmt of
@@ -161,18 +159,18 @@ translateQueryExpr state name queryExpr =
 -}
 translateSelect ::
        State
-    -> String -- ^ Name/alias of the query
+    -> String                     -- ^ Name/alias of the query
     -> [(ScalarExpr, Maybe Name)] -- ^ List of selected values (with optional aliases)
-    -> [TableRef] -- ^ List of tables in the FROM clause
-    -> Maybe ScalarExpr -- ^ Optional WHERE clause
-    -> [GroupingExpr] -- ^ Optional GROUP BY clause
-    -> Maybe ScalarExpr -- ^ Optional HAVING clause
-    -> Either String Translation -- ^ error or a tuple with table name, list of column names and the FofFormula with table definition
+    -> [TableRef]                 -- ^ List of tables in the FROM clause
+    -> Maybe ScalarExpr           -- ^ Optional WHERE clause
+    -> [GroupingExpr]             -- ^ Optional GROUP BY clause
+    -> Maybe ScalarExpr           -- ^ Optional HAVING clause
+    -> Either String Translation  -- ^ error or a tuple with table name, list of column names and the FofFormula with table definition
 translateSelect _ name [] _ _ _ _ = return (name, [], EmptyFormula)
 translateSelect state name qeSelectList qeFrom qeWhere _ _ = do
     (newState, fromFormula) <- translateQeFrom state qeFrom
     (columnNames, forAllIdents) <- translateQeSelectList newState qeSelectList
-    let freeIdents = getFreeVariables fromFormula
+    let freeIdents = getFreeVars fromFormula
     let existsIdents = [x | x <- freeIdents, x `notElem` forAllIdents]
     whereFormula <- translateQeWhere newState qeWhere
     return
@@ -237,15 +235,15 @@ translateQeFrom state qeFrom = do
 
 addVariablePrefix :: State -> String -> String -> String
 addVariablePrefix state "" name = toVariable $ (prefix state) ++ name
-addVariablePrefix state p name = toVariable $ (prefix state) ++ p ++ "_" ++ name
+addVariablePrefix state p  name = toVariable $ (prefix state) ++ p ++ "_" ++ name
 
 {- |
     translateTableRef translates every entry in the FROM clause (table reference) to an FOF formula
 -}
 translateTableRef ::
        State
-    -> Maybe String -- ^
-    -> TableRef -- ^
+    -> Maybe String              -- ^
+    -> TableRef                  -- ^
     -> Either String Translation -- ^ error or a tuple with table name, list of column names and the FofFormula with table definition
 translateTableRef state name tableRef =
     case tableRef of
@@ -330,11 +328,11 @@ translateScalarExpr state scalarExpr = do
             scalarExprFofFormula <- translateScalarExpr state scalarExpr
             scalarExprFofFormula2 <- translateScalarExpr state scalarExpr2
             case binOpNames of
-                [Name _ "&"] -> return (And scalarExprFofFormula scalarExprFofFormula2)
+                [Name _ "&"  ] -> return (And scalarExprFofFormula scalarExprFofFormula2)
                 [Name _ "and"] -> return (And scalarExprFofFormula scalarExprFofFormula2)
-                [Name _ " |"] -> return (Or scalarExprFofFormula scalarExprFofFormula2)
-                [Name _ "or"] -> return (Or scalarExprFofFormula scalarExprFofFormula2)
-                [Name _ "=>"] -> return (Implies scalarExprFofFormula scalarExprFofFormula2)
+                [Name _ "|"  ] -> return (Or scalarExprFofFormula scalarExprFofFormula2)
+                [Name _ "or" ] -> return (Or scalarExprFofFormula scalarExprFofFormula2)
+                [Name _ "=>" ] -> return (Implies scalarExprFofFormula scalarExprFofFormula2)
                 [Name _ "<=>"] -> return (Equiv scalarExprFofFormula scalarExprFofFormula2)
                 _ ->
                     fail $
