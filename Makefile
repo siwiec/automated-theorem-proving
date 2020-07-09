@@ -4,11 +4,11 @@ help: ## Print help
 all: install docs ## Install automated-theorem-prover and create the documentation
 
 install: build ## Build and install the automated-theorem-prover
-	cabal new-install
+	cabal install
 
 build: src/* ## Build package (executable file will be in the dist/ directory)
-	cabal new-configure
-	cabal new-build
+	cabal configure
+	cabal build
 
 setup: ## Install all system dependencies (necessary for `make build` and `make install`)
 	sudo apt-get install ghc cabal-install

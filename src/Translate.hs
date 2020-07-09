@@ -52,7 +52,7 @@ type Translation
      = ( String     -- Name of the predicate defined in the formula
        , [String]   -- List of exposed column names
        , FofFormula -- Partial translation
-        )
+       )
 
 {- |
     The translateStatements function takes two lists of statements (the abstract syntax tree of a DDL and a query)
