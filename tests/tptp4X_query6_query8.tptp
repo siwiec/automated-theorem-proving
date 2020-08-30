@@ -1,0 +1,88 @@
+% [
+%     {
+%         "value": "tab",
+%         "name": "a"
+%     },
+%     {
+%         "value": "tab2",
+%         "name": "b"
+%     }
+% ]
+fof(from_2,definition,(
+    ! [A_FST,A_SND,A_TRD,B_COL21,B_COL22,B_COL23,B_COL24,B_COL25] :
+      ( from_2(A_FST,A_SND,A_TRD,B_COL21,B_COL22,B_COL23,B_COL24,B_COL25)
+    <=> ( tab(A_FST,A_SND,A_TRD)
+        & tab2(B_COL21,B_COL22,B_COL23,B_COL24,B_COL25) ) ) )).
+
+% {
+%     "and": [
+%         {
+%             "eq": [
+%                 "a.fst",
+%                 "b.snd"
+%             ]
+%         },
+%         {
+%             "eq": [
+%                 "b.fst",
+%                 "a.snd"
+%             ]
+%         },
+%         {
+%             "lt": [
+%                 "a.snd",
+%                 "b.snd"
+%             ]
+%         }
+%     ]
+% }
+fof(where_3,definition,(
+    ! [B_FST,B_SND,A_FST,A_SND] :
+      ( where_3(B_FST,B_SND,A_FST,A_SND)
+    <=> ( eq(A_FST,B_SND)
+        & eq(B_FST,A_SND) ) ) )).
+
+% {
+%     "select": [
+%         {
+%             "value": "a.fst"
+%         },
+%         {
+%             "value": "b.fst"
+%         }
+%     ],
+%     "from": [
+%         {
+%             "value": "tab",
+%             "name": "a"
+%         },
+%         {
+%             "value": "tab2",
+%             "name": "b"
+%         }
+%     ],
+%     "where": {
+%         "and": [
+%             {
+%                 "eq": [
+%                     "a.fst",
+%                     "b.snd"
+%                 ]
+%             },
+%             {
+%                 "eq": [
+%                     "b.fst",
+%                     "a.snd"
+%                 ]
+%             },
+%             {
+%                 "lt": [
+%                     "a.snd",
+%                     "b.snd"
+%                 ]
+%             }
+%         ]
+%     }
+% }
+ERROR: Line 80 Char 222 Token "," continuing with "A_FST,A_SND)))))).
+"

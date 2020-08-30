@@ -10,12 +10,17 @@ debug = True
 comments = True
 
 
+
+def make_variable(x):
+	return x.replace('.', '_').upper()
+
+def make_predicate(x):
+	return x.replace('.', '_').lower()
+
 def log(*args):
 	if debug:
 		print(*args, file=sys.stderr)
 
-"""
-"""
 output = []
 def save(x, comment=None):
 	global debug
@@ -56,15 +61,15 @@ def build_axioms():
 
 def get_columns(name):
 	global tables
-	#log('getting', name, tables[name.lower()])
-	return [x.upper() for x in tables[name.lower()]]
+	#log('getting', name, tables[make_predicate(name)])
+	return [make_variable(x) for x in tables[make_predicate(name)]]
 
 def set_columns(name, columns):
 	global tables
 	if not isinstance(columns, list):
 		columns = [columns]
-	tables[name.lower()] = [x.upper() for x in columns]
-	log('setting', name, tables[name.lower()])
+	tables[make_predicate(name)] = [make_variable(x) for x in columns]
+	log('setting', name, tables[make_predicate(name)])
 
 
 
@@ -104,17 +109,24 @@ def parse_from(statement):
 	for subquery in statement:
 
 		log('subquery', subquery)
-		value = subquery['value'] # TODO: TypeError: string indices must be integers (query8.sql)
-		alias = subquery.get('name', None)
-		if isinstance(value, dict):
-			table_name = parse_query(value)
-		else:
-			table_name = value
+		if isinstance(subquery, dict):
+			value = subquery['value'] # TODO: TypeError: string indices must be integers (query8.sql)
+			alias = subquery.get('name', None)
 
-		if alias:
-			table_columns = [alias.upper() + "_" + x for x in get_columns(table_name)]
+			if isinstance(value, dict):
+				table_name = parse_query(value) # Nested subquery
+				assert(alias is not None)
+			else:
+				table_name = value # Aliased simple table reference
+
+			if alias:
+				table_columns = [make_variable(alias) + "_" + x for x in get_columns(table_name)]
+			else:
+				table_columns = [make_variable(table_name) + "_" + x for x in get_columns(table_name)]
 		else:
-			table_columns = [table_name.upper() + "_" + x for x in get_columns(table_name)]
+			table_name = subquery # Unaliased simple table
+			table_columns = [make_variable(table_name) + "_" + x for x in get_columns(table_name)]
+		
 		predicates.append((table_name, table_columns))
 		columns += table_columns
 
@@ -132,7 +144,7 @@ def parse_from(statement):
 			+ "(" + ",".join(get_columns(name))
 			+ ") <=> ("
 			+ " & ".join([predicate + "(" + ",".join(table_columns) + ")" for (predicate, table_columns) in predicates])
-			+ " ))))", comment = json.dumps(statement, indent=4))
+			+ " )))).", comment = json.dumps(statement, indent=4))
 	
 	return name # return variables as seen in scope
 
@@ -149,8 +161,8 @@ def parse_where(statement, aliases={}):
 	def parse_where_item(item, aliases):
 		for x in ['eq', 'neq', 'lt', 'lte', 'gt', 'gte']:
 			if x in item:
-				fst = item[x][0]
-				snd = item[x][1]
+				fst = make_variable(item[x][0])
+				snd = make_variable(item[x][1])
 				fst = aliases.get(fst, fst) # if aliased, replace with original value
 				snd = aliases.get(snd, snd) # if aliased, replace with original value
 				variables = list(set([fst, snd]))
@@ -163,7 +175,7 @@ def parse_where(statement, aliases={}):
 				vars2, snd = parse_where_item(item[x][1], aliases)
 				variables = list(set(vars1 + vars2))
 				if x == 'and': symbol = '&'
-				if x == 'or': symbol = '|'
+				if x == 'or':  symbol = '|'
 				if x == 'and': symbol = '&' #TODO
 				if x == 'and': symbol = '&'
 				if x == 'and': symbol = '&'
@@ -188,7 +200,7 @@ def parse_where(statement, aliases={}):
 			+ "(" + ",".join(get_columns(name))
 			+ ") <=> ("
 			+ fof_formula
-			+ ")", comment = json.dumps(statement, indent=4))
+			+ ")))).", comment = json.dumps(statement, indent=4))
 
 	return name
 
@@ -218,8 +230,8 @@ def parse_select(statement):
 	if not isinstance(selected, list):
 		selected = [selected]
 
-	values  = [x['value'].replace('.', '_').upper() for x in selected] # non-aliased values selected
-	aliases = {x['name'].upper() : x['value'].upper() for x in selected if 'name' in x}
+	values  = [make_variable(x['value']) for x in selected] # non-aliased values selected
+	aliases = {make_variable(x['name']) : make_variable(x['value']) for x in selected if 'name' in x}
 
 	columns = [] # all externally visible columns
 	for item in selected:
@@ -230,7 +242,7 @@ def parse_select(statement):
 		else:
 			columns.append(item['value'])
 
-	columns = [x.upper() for x in columns] # all externally visible columns
+	columns = [make_variable(x) for x in columns] # all externally visible columns
 
 	# Parsing of the FROM clause
 	from_name = parse_from(statement['from'])
@@ -247,23 +259,22 @@ def parse_select(statement):
 
 	from_predicate = from_name + "(" + ",".join(get_columns(from_name)) + ")"
 	if where_name:
-		where_predicate = where_name + "(" + ",".join(get_columns(where_name)) + ")" 
+		where_predicate = where_name + "(" + ",".join(get_columns(where_name)) + ")"
 	else:
 		where_predicate = "$true"
 
-	save("fof(" + name + ",definition,( ! ["
-		+ ",".join(values)
-		+ "] : ("
-		+ name
-		+ "("
-		+ ",".join(values)
-		+ ") <=> ( ? ["
-		+ ",".join(exists)
-		+ "] : ("
-		+ from_predicate
-		+ " & "
-		+ where_predicate
-		+ "))))", comment=json.dumps(statement, indent=4))
+	save("fof(" + name + ", definition, ( ! ["
+				+ ",".join(values)
+			+ "] : ("
+				+ name
+				+ "("
+					+ ",".join(values)
+				+ ") <=> ( ? ["
+					+ ",".join(exists)
+					+ "] : (" + from_predicate + " & " + where_predicate + ")"
+				+")"
+			+ ")"
+		+ ")).", comment=json.dumps(statement, indent=4))
 
 	set_columns(name, columns)
 	return name
@@ -289,7 +300,7 @@ def parse_query(statement, name=None):
 			+ ") <=> ("
 			+ query_name
 			+ "(" + ",".join(get_columns(query_name))
-			+ ") )))", comment=json.dumps(statement, indent=4))
+			+ "))))).", comment=json.dumps(statement, indent=4))
 
 	return name
 

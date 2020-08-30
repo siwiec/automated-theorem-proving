@@ -1,0 +1,146 @@
+% [
+%     {
+%         "value": "tab",
+%         "name": "a"
+%     }
+% ]
+fof(from_2,definition,(
+    ! [A_FST,A_SND,A_TRD] :
+      ( from_2(A_FST,A_SND,A_TRD)
+    <=> tab(A_FST,A_SND,A_TRD) ) )).
+
+% {
+%     "eq": [
+%         "a.fst",
+%         "a.snd"
+%     ]
+% }
+fof(where_3,definition,(
+    ! [A_FST,A_SND] :
+      ( where_3(A_FST,A_SND)
+    <=> eq(A_FST,A_SND) ) )).
+
+% {
+%     "select": {
+%         "value": "a.fst"
+%     },
+%     "from": {
+%         "value": "tab",
+%         "name": "a"
+%     },
+%     "where": {
+%         "eq": [
+%             "a.fst",
+%             "a.snd"
+%         ]
+%     }
+% }
+fof(select_1,definition,(
+    ! [A_FST] :
+      ( select_1(A_FST)
+    <=> ? [A_SND,A_TRD] :
+          ( from_2(A_FST,A_SND,A_TRD)
+          & where_3(A_FST,A_SND) ) ) )).
+
+% {
+%     "select": {
+%         "value": "a.fst"
+%     },
+%     "from": {
+%         "value": "tab",
+%         "name": "a"
+%     },
+%     "where": {
+%         "eq": [
+%             "a.fst",
+%             "a.snd"
+%         ]
+%     }
+% }
+fof(main_query_1,definition,(
+    ! [FST] :
+      ( main_query_1(FST)
+    <=> select_1(FST) ) )).
+
+% [
+%     {
+%         "value": "tab",
+%         "name": "a"
+%     },
+%     {
+%         "value": "tab",
+%         "name": "b"
+%     }
+% ]
+fof(from_5,definition,(
+    ! [A_FST,A_SND,A_TRD,B_FST,B_SND,B_TRD] :
+      ( from_5(A_FST,A_SND,A_TRD,B_FST,B_SND,B_TRD)
+    <=> ( tab(A_FST,A_SND,A_TRD)
+        & tab(B_FST,B_SND,B_TRD) ) ) )).
+
+% {
+%     "and": [
+%         {
+%             "eq": [
+%                 "a.fst",
+%                 "b.snd"
+%             ]
+%         },
+%         {
+%             "eq": [
+%                 "b.fst",
+%                 "a.snd"
+%             ]
+%         },
+%         {
+%             "lt": [
+%                 "a.snd",
+%                 "b.snd"
+%             ]
+%         }
+%     ]
+% }
+fof(where_6,definition,(
+    ! [B_FST,A_FST,B_SND,A_SND] :
+      ( where_6(B_FST,A_FST,B_SND,A_SND)
+    <=> ( eq(A_FST,B_SND)
+        & eq(B_FST,A_SND) ) ) )).
+
+% {
+%     "select": {
+%         "value": "a.*"
+%     },
+%     "from": [
+%         {
+%             "value": "tab",
+%             "name": "a"
+%         },
+%         {
+%             "value": "tab",
+%             "name": "b"
+%         }
+%     ],
+%     "where": {
+%         "and": [
+%             {
+%                 "eq": [
+%                     "a.fst",
+%                     "b.snd"
+%                 ]
+%             },
+%             {
+%                 "eq": [
+%                     "b.fst",
+%                     "a.snd"
+%                 ]
+%             },
+%             {
+%                 "lt": [
+%                     "a.snd",
+%                     "b.snd"
+%                 ]
+%             }
+%         ]
+%     }
+% }
+ERROR: Line 125 Char 34 Token "*" continuing with "] : (select_4(A_*) "

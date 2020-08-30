@@ -1,4 +1,4 @@
-SELECT a.fst,
+SELECT a.fst as snd,
        b.fst
 FROM   tab a,
        tab b,

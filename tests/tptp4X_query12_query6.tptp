@@ -1,0 +1,200 @@
+% [
+%     {
+%         "value": "tab",
+%         "name": "a"
+%     },
+%     {
+%         "value": "tab",
+%         "name": "b"
+%     }
+% ]
+fof(from_2,definition,(
+    ! [A_FST,A_SND,A_TRD,B_FST,B_SND,B_TRD] :
+      ( from_2(A_FST,A_SND,A_TRD,B_FST,B_SND,B_TRD)
+    <=> ( tab(A_FST,A_SND,A_TRD)
+        & tab(B_FST,B_SND,B_TRD) ) ) )).
+
+% {
+%     "and": [
+%         {
+%             "eq": [
+%                 "b.fst",
+%                 "a.snd"
+%             ]
+%         },
+%         {
+%             "eq": [
+%                 "b.fst",
+%                 "b.snd"
+%             ]
+%         }
+%     ]
+% }
+fof(where_3,definition,(
+    ! [B_FST,A_SND,B_SND] :
+      ( where_3(B_FST,A_SND,B_SND)
+    <=> ( eq(B_FST,A_SND)
+        & eq(B_FST,B_SND) ) ) )).
+
+% {
+%     "select": {
+%         "value": "b.fst"
+%     },
+%     "from": [
+%         {
+%             "value": "tab",
+%             "name": "a"
+%         },
+%         {
+%             "value": "tab",
+%             "name": "b"
+%         }
+%     ],
+%     "where": {
+%         "and": [
+%             {
+%                 "eq": [
+%                     "b.fst",
+%                     "a.snd"
+%                 ]
+%             },
+%             {
+%                 "eq": [
+%                     "b.fst",
+%                     "b.snd"
+%                 ]
+%             }
+%         ]
+%     }
+% }
+fof(select_1,definition,(
+    ! [B_FST] :
+      ( select_1(B_FST)
+    <=> ? [A_FST,A_SND,A_TRD,B_SND,B_TRD] :
+          ( from_2(A_FST,A_SND,A_TRD,B_FST,B_SND,B_TRD)
+          & where_3(B_FST,A_SND,B_SND) ) ) )).
+
+% {
+%     "select": {
+%         "value": "b.fst"
+%     },
+%     "from": [
+%         {
+%             "value": "tab",
+%             "name": "a"
+%         },
+%         {
+%             "value": "tab",
+%             "name": "b"
+%         }
+%     ],
+%     "where": {
+%         "and": [
+%             {
+%                 "eq": [
+%                     "b.fst",
+%                     "a.snd"
+%                 ]
+%             },
+%             {
+%                 "eq": [
+%                     "b.fst",
+%                     "b.snd"
+%                 ]
+%             }
+%         ]
+%     }
+% }
+fof(main_query_1,definition,(
+    ! [FST] :
+      ( main_query_1(FST)
+    <=> select_1(FST) ) )).
+
+% [
+%     {
+%         "value": "tab",
+%         "name": "a"
+%     },
+%     {
+%         "value": "tab2",
+%         "name": "b"
+%     }
+% ]
+fof(from_5,definition,(
+    ! [A_FST,A_SND,A_TRD,B_COL21,B_COL22,B_COL23,B_COL24,B_COL25] :
+      ( from_5(A_FST,A_SND,A_TRD,B_COL21,B_COL22,B_COL23,B_COL24,B_COL25)
+    <=> ( tab(A_FST,A_SND,A_TRD)
+        & tab2(B_COL21,B_COL22,B_COL23,B_COL24,B_COL25) ) ) )).
+
+% {
+%     "and": [
+%         {
+%             "eq": [
+%                 "a.fst",
+%                 "b.snd"
+%             ]
+%         },
+%         {
+%             "eq": [
+%                 "b.fst",
+%                 "a.snd"
+%             ]
+%         },
+%         {
+%             "lt": [
+%                 "a.snd",
+%                 "b.snd"
+%             ]
+%         }
+%     ]
+% }
+fof(where_6,definition,(
+    ! [B_FST,A_SND,B_SND,A_FST] :
+      ( where_6(B_FST,A_SND,B_SND,A_FST)
+    <=> ( eq(A_FST,B_SND)
+        & eq(B_FST,A_SND) ) ) )).
+
+% {
+%     "select": [
+%         {
+%             "value": "a.fst"
+%         },
+%         {
+%             "value": "b.fst"
+%         }
+%     ],
+%     "from": [
+%         {
+%             "value": "tab",
+%             "name": "a"
+%         },
+%         {
+%             "value": "tab2",
+%             "name": "b"
+%         }
+%     ],
+%     "where": {
+%         "and": [
+%             {
+%                 "eq": [
+%                     "a.fst",
+%                     "b.snd"
+%                 ]
+%             },
+%             {
+%                 "eq": [
+%                     "b.fst",
+%                     "a.snd"
+%                 ]
+%             },
+%             {
+%                 "lt": [
+%                     "a.snd",
+%                     "b.snd"
+%                 ]
+%             }
+%         ]
+%     }
+% }
+ERROR: Line 176 Char 228 Token "," continuing with "A_FST)))))).
+"
