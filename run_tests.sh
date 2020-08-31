@@ -8,8 +8,8 @@ for query1 in *.sql; do
 			echo "Creating ${output}..."
 			python3 ../translate.py database.schema "${query1}" "${query2}" > "${output}"
 			../tptp4X "${output}" > ${output/output/tptp4X}
+			../provers/vampire/vampire4.2.2 "${output}" > "vampire_${query1/.sql/}_${query2/.sql}.txt"
 			echo "DONE"
-			
 		fi
 	done
 done

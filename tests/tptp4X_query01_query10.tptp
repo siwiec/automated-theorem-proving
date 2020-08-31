@@ -1,0 +1,165 @@
+% [
+%     {
+%         "value": "tab",
+%         "name": "a"
+%     },
+%     {
+%         "value": "tab",
+%         "name": "b"
+%     }
+% ]
+fof(from_2,definition,(
+    ! [A_FST,A_SND,A_TRD,B_FST,B_SND,B_TRD] :
+      ( from_2(A_FST,A_SND,A_TRD,B_FST,B_SND,B_TRD)
+    <=> ( tab(A_FST,A_SND,A_TRD)
+        & tab(B_FST,B_SND,B_TRD) ) ) )).
+
+% {
+%     "and": [
+%         {
+%             "eq": [
+%                 "a.fst",
+%                 "b.snd"
+%             ]
+%         },
+%         {
+%             "eq": [
+%                 "b.fst",
+%                 "a.snd"
+%             ]
+%         }
+%     ]
+% }
+fof(where_3,definition,(
+    ! [B_FST,A_SND,A_FST,B_SND] :
+      ( where_3(B_FST,A_SND,A_FST,B_SND)
+    <=> ( eq(A_FST,B_SND)
+        & eq(B_FST,A_SND) ) ) )).
+
+% {
+%     "select": [
+%         {
+%             "value": "a.fst",
+%             "name": "fst"
+%         },
+%         {
+%             "value": "b.fst",
+%             "name": "fst1"
+%         }
+%     ],
+%     "from": [
+%         {
+%             "value": "tab",
+%             "name": "a"
+%         },
+%         {
+%             "value": "tab",
+%             "name": "b"
+%         }
+%     ],
+%     "where": {
+%         "and": [
+%             {
+%                 "eq": [
+%                     "a.fst",
+%                     "b.snd"
+%                 ]
+%             },
+%             {
+%                 "eq": [
+%                     "b.fst",
+%                     "a.snd"
+%                 ]
+%             }
+%         ]
+%     }
+% }
+fof(select_1,definition,(
+    ! [A_FST,B_FST] :
+      ( select_1(A_FST,B_FST)
+    <=> ? [A_SND,A_TRD,B_SND,B_TRD] :
+          ( from_2(A_FST,A_SND,A_TRD,B_FST,B_SND,B_TRD)
+          & where_3(B_FST,A_SND,A_FST,B_SND) ) ) )).
+
+% {
+%     "select": [
+%         {
+%             "value": "a.fst",
+%             "name": "fst"
+%         },
+%         {
+%             "value": "b.fst",
+%             "name": "fst1"
+%         }
+%     ],
+%     "from": [
+%         {
+%             "value": "tab",
+%             "name": "a"
+%         },
+%         {
+%             "value": "tab",
+%             "name": "b"
+%         }
+%     ],
+%     "where": {
+%         "and": [
+%             {
+%                 "eq": [
+%                     "a.fst",
+%                     "b.snd"
+%                 ]
+%             },
+%             {
+%                 "eq": [
+%                     "b.fst",
+%                     "a.snd"
+%                 ]
+%             }
+%         ]
+%     }
+% }
+fof(main_query_1,definition,(
+    ! [FST,FST1] :
+      ( main_query_1(FST,FST1)
+    <=> select_1(FST,FST1) ) )).
+
+% [
+%     {
+%         "value": "tab1",
+%         "name": "tabalias1"
+%     }
+% ]
+fof(from_5,definition,(
+    ! [TABALIAS1_COL11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15] :
+      ( from_5(TABALIAS1_COL11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15)
+    <=> tab1(TABALIAS1_COL11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15) ) )).
+
+% {
+%     "eq": [
+%         "tab1.col11",
+%         "col12"
+%     ]
+% }
+fof(where_6,definition,(
+    ! [TAB1_COL11,COL12] :
+      ( where_6(TAB1_COL11,COL12)
+    <=> eq(TAB1_COL11,COL12) ) )).
+
+% {
+%     "select": {
+%         "value": "tab1.col11"
+%     },
+%     "from": {
+%         "value": "tab1",
+%         "name": "tabalias1"
+%     },
+%     "where": {
+%         "eq": [
+%             "tab1.col11",
+%             "col12"
+%         ]
+%     }
+% }
+ERROR: Line 136 Char 275 Token ")" continuing with "))))).
+"

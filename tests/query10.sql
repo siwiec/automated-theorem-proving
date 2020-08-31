@@ -1,7 +1,3 @@
-SELECT a.fst,
-       b.fst
-FROM   tab a,
-       tab b
-WHERE  ( a.fst = b.snd
-         AND b.fst = a.snd
-         AND a.snd < b.snd );
+SELECT tab1.col11
+FROM tab1 as tabalias1
+WHERE tab1.col11 = col12

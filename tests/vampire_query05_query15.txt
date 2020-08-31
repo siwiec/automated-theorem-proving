@@ -1,0 +1,114 @@
+Satisfiable!
+% SZS status CounterSatisfiable for output_query05_query15
+% # SZS output start Saturation.
+tff(u424,axiom,
+    (![X1, X0, X2] : ((~from_2(X0,X1,X2) | ~where_3(X0,X1) | select_1(X0))))).
+
+tff(u423,axiom,
+    (![X1, X0, X2] : ((~from_2(X0,X1,X2) | tab(X0,X1,X2))))).
+
+tff(u422,axiom,
+    (![X0] : ((from_2(X0,sK0(X0),sK1(X0)) | ~select_1(X0))))).
+
+tff(u421,axiom,
+    (![X1, X0, X2] : ((~tab(X0,X1,X2) | from_2(X0,X1,X2))))).
+
+tff(u420,axiom,
+    (![X0] : ((tab(X0,sK0(X0),sK1(X0)) | ~select_1(X0))))).
+
+tff(u419,axiom,
+    (![X1, X0] : ((~where_3(X0,X1) | eq(X0,X1))))).
+
+tff(u418,axiom,
+    (![X0] : ((where_3(X0,sK0(X0)) | ~select_1(X0))))).
+
+tff(u417,axiom,
+    ((~(![X1, X3, X0, X2] : ((~where_6(X2,X3,X1,X0) | select_4(X2,X3))))) | (~(![X5, X4] : (lt(X4,X5)))) | (![X1, X0] : ((~eq(X0,X1) | select_4(X0,X1)))))).
+
+tff(u416,axiom,
+    (![X1, X0] : ((~eq(X0,X1) | where_3(X0,X1))))).
+
+tff(u415,axiom,
+    (![X0] : ((eq(X0,sK0(X0)) | ~select_1(X0))))).
+
+tff(u414,axiom,
+    (![X0] : ((~select_1(X0) | main_query_1(X0))))).
+
+tff(u413,negated_conjecture,
+    ((~~main_query_1(sK12)) | ~main_query_1(sK12))).
+
+tff(u412,axiom,
+    (![X0] : ((~main_query_1(X0) | select_1(X0))))).
+
+tff(u411,axiom,
+    (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((~from_5(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | tab2(X5,X6,X7,X8,X9))))).
+
+tff(u410,axiom,
+    (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((~from_5(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | tab1(X0,X1,X2,X3,X4))))).
+
+tff(u409,axiom,
+    (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((from_5(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | ~tab2(X5,X6,X7,X8,X9) | ~tab1(X0,X1,X2,X3,X4))))).
+
+tff(u408,axiom,
+    (![X1, X3, X0, X2] : ((from_5(sK2(X0,X1,X2,X3),sK3(X0,X1,X2,X3),sK4(X0,X1,X2,X3),sK5(X0,X1,X2,X3),sK6(X0,X1,X2,X3),sK7(X0,X1,X2,X3),sK8(X0,X1,X2,X3),sK9(X0,X1,X2,X3),sK10(X0,X1,X2,X3),sK11(X0,X1,X2,X3)) | ~select_4(X2,X3))))).
+
+tff(u407,axiom,
+    (![X5, X7, X4, X6] : ((tab1(sK2(X6,X7,X4,X5),sK3(X6,X7,X4,X5),sK4(X6,X7,X4,X5),sK5(X6,X7,X4,X5),sK6(X6,X7,X4,X5)) | ~select_4(X4,X5))))).
+
+tff(u406,axiom,
+    (![X1, X3, X0, X2] : ((tab2(sK7(X2,X3,X0,X1),sK8(X2,X3,X0,X1),sK9(X2,X3,X0,X1),sK10(X2,X3,X0,X1),sK11(X2,X3,X0,X1)) | ~select_4(X0,X1))))).
+
+tff(u405,axiom,
+    ((~(![X1, X3, X0, X2] : ((~where_6(X2,X3,X1,X0) | select_4(X2,X3))))) | (![X1, X3, X0, X2] : ((~where_6(X2,X3,X1,X0) | select_4(X2,X3)))))).
+
+tff(u404,axiom,
+    (![X1, X3, X0, X2] : ((~where_6(X0,X1,X2,X3) | eq(X0,X1))))).
+
+tff(u403,axiom,
+    (![X1, X3, X0, X2] : ((~where_6(X0,X1,X2,X3) | lt(X3,X2))))).
+
+tff(u402,axiom,
+    (![X1, X3, X0, X2] : ((where_6(X0,X1,X2,X3) | ~eq(X0,X1) | ~lt(X3,X2))))).
+
+tff(u401,axiom,
+    (![X1, X3, X0, X2] : ((where_6(X2,X3,X1,X0) | ~select_4(X2,X3))))).
+
+tff(u400,axiom,
+    ((~(![X5, X4] : (lt(X4,X5)))) | (![X5, X4] : (lt(X4,X5))))).
+
+tff(u399,axiom,
+    (![X1, X0] : ((~select_4(X0,X1) | eq(X0,X1))))).
+
+tff(u398,axiom,
+    (![X1, X0] : ((~select_4(X0,X1) | main_query_2(X0,X1))))).
+
+tff(u397,axiom,
+    ((~(![X1, X3, X0, X2] : ((~where_6(X2,X3,X1,X0) | select_4(X2,X3))))) | (~(![X5, X4] : (lt(X4,X5)))) | (![X0] : ((select_4(X0,sK0(X0)) | ~select_1(X0)))))).
+
+tff(u396,axiom,
+    (![X1, X0] : ((~main_query_2(X0,X1) | select_4(X0,X1))))).
+
+tff(u395,axiom,
+    ((~(![X1, X3, X0, X2] : ((~where_6(X2,X3,X1,X0) | select_4(X2,X3))))) | (~(![X5, X4] : (lt(X4,X5)))) | (![X1] : ((main_query_2(X1,sK0(X1)) | ~select_1(X1)))))).
+
+tff(u394,axiom,
+    (![X1, X0, X2] : ((~lessthanorequal(X1,X2) | lessthanorequal(X0,X2) | ~lessthanorequal(X0,X1))))).
+
+tff(u393,axiom,
+    (![X1, X0] : ((~lessthanorequal(X1,X0) | (X0 = X1) | ~lessthanorequal(X0,X1))))).
+
+tff(u392,axiom,
+    (![X0] : (lessthanorequal(X0,X0)))).
+
+tff(u391,negated_conjecture,
+    ((~main_query_0(sK12)) | main_query_0(sK12))).
+
+% # SZS output end Saturation.
+% ------------------------------
+% Version: Vampire 4.2.2 (commit e1949dd on 2017-12-14 18:39:21 +0000)
+% Termination reason: Satisfiable
+
+% Memory used [KB]: 4989
+% Time elapsed: 0.025 s
+% ------------------------------
+% ------------------------------
