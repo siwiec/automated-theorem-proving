@@ -1,348 +1,81 @@
 Satisfiable!
 % SZS status CounterSatisfiable for output_query04_query06
 % # SZS output start Saturation.
-tff(u701,axiom,
-    (![X1, X3, X5, X0, X2, X4] : ((~from_2(X0,X2,X3,X1,X4,X5) | ~where_3(X1,X2,X0,X4) | select_1(X0,X1))))).
+tff(u338,axiom,
+    (![X1, X3, X0, X2, X4] : ((~from_2(X0,X1,X2,X3,X4) | tab1(X0,X1,X2,X3,X4))))).
 
-tff(u700,axiom,
-    (![X1, X3, X5, X0, X2, X4] : ((~from_2(X0,X1,X2,X3,X4,X5) | tab(X3,X4,X5))))).
+tff(u337,axiom,
+    ((~(![X1, X3, X5, X2, X4] : (~from_2(X1,X2,X3,X4,X5)))) | (![X1, X3, X5, X2, X4] : (~from_2(X1,X2,X3,X4,X5))))).
 
-tff(u699,axiom,
-    (![X1, X3, X5, X0, X2, X4] : ((~from_2(X0,X1,X2,X3,X4,X5) | tab(X0,X1,X2))))).
+tff(u336,axiom,
+    (![X1, X3, X0, X2, X4] : ((~tab1(X0,X1,X2,X3,X4) | from_4(X0,X1,X2,X3,X4))))).
 
-tff(u698,axiom,
-    (![X1, X3, X5, X0, X2, X4] : ((from_2(X0,X1,X2,X3,X4,X5) | ~tab(X3,X4,X5) | ~tab(X0,X1,X2))))).
+tff(u335,axiom,
+    (![X1, X3, X0, X2, X4] : ((~tab1(X0,X1,X2,X3,X4) | from_2(X0,X1,X2,X3,X4))))).
 
-tff(u697,axiom,
-    (![X1, X0] : ((from_2(X0,sK0(X0,X1),sK1(X0,X1),X1,sK2(X0,X1),sK3(X0,X1)) | ~select_1(X0,X1))))).
+tff(u334,axiom,
+    (![X1, X0] : ((tab1(sK5(X1,X0),sK6(X1,X0),sK7(X1,X0),sK8(X1,X0),sK9(X1,X0)) | ~select_3(X0))))).
 
-tff(u696,axiom,
-    (![X1, X3, X0, X2] : ((~tab(X0,X1,X2) | ~eq(X3,X1) | select_4(X0,sK0(X3,X0)) | ~select_1(X3,X0))))).
+tff(u333,axiom,
+    (![X0] : ((~select_1(X0) | main_query_1(X0))))).
 
-tff(u695,axiom,
-    (![X1, X3, X0, X2] : ((~tab(X0,X1,X2) | ~eq(X3,X1) | select_4(X0,sK2(X0,X3)) | ~select_1(X0,X3))))).
+tff(u332,axiom,
+    ((~(![X0] : (~select_1(X0)))) | (![X0] : (~select_1(X0))))).
 
-tff(u694,axiom,
-    (![X1, X3, X0, X2] : ((~tab(X0,X1,X2) | ~eq(X3,X1) | select_1(X0,X3) | ~select_1(X3,X0))))).
+tff(u331,negated_conjecture,
+    ((~~main_query_1(sK10)) | ~main_query_1(sK10))).
 
-tff(u693,axiom,
-    (![X1, X3, X5, X0, X2, X4] : ((~tab(X2,X1,X3) | select_4(X0,X1) | ~tab(X0,X4,X5) | ~eq(X2,X4) | ~eq(X0,X1))))).
+tff(u330,axiom,
+    (![X0] : ((~main_query_1(X0) | select_1(X0))))).
 
-tff(u692,axiom,
-    (![X1, X3, X5, X0, X2, X4] : ((~tab(X1,X2,X3) | select_1(X0,X1) | ~tab(X0,X4,X5) | ~eq(X1,X4) | ~eq(X0,X2))))).
+tff(u329,axiom,
+    (![X1, X3, X0, X2, X4] : ((~from_4(X0,X1,X2,X3,X4) | tab1(X0,X1,X2,X3,X4))))).
 
-tff(u691,axiom,
-    (![X5, X7, X8, X4, X6] : ((~tab(X4,sK0(X5,sK6(X6,X7)),X8) | select_1(X4,sK6(X6,X7)) | ~eq(X4,X7) | ~select_4(X6,X7) | ~select_1(X5,sK6(X6,X7)))))).
+tff(u328,axiom,
+    ((~(![X3, X5, X2, X4, X6] : (~from_4(X2,X3,X4,X5,X6)))) | (![X3, X5, X2, X4, X6] : (~from_4(X2,X3,X4,X5,X6))))).
 
-tff(u690,axiom,
-    (![X5, X7, X8, X4, X6] : ((~tab(X4,sK0(X5,sK6(X6,X7)),X8) | select_4(X4,X7) | ~eq(X4,X7) | ~select_4(X6,X7) | ~select_1(X5,sK6(X6,X7)))))).
+tff(u327,axiom,
+    (![X1, X0] : ((from_4(sK5(X0,X1),sK6(X0,X1),sK7(X0,X1),sK8(X0,X1),sK9(X0,X1)) | ~select_3(X1))))).
 
-tff(u689,axiom,
-    (![X16, X18, X15, X17, X14] : ((~tab(X17,sK2(sK6(X15,X16),X14),X18) | ~select_1(X14,sK6(X15,X16)) | select_1(X17,sK6(X15,X16)) | ~eq(X17,X16) | ~select_4(X15,X16))))).
+tff(u326,axiom,
+    (![X1, X0] : ((~where_5(X0,X1) | eq(X1,X0))))).
 
-tff(u688,axiom,
-    (![X20, X22, X19, X21, X23] : ((~tab(X22,sK2(sK6(X20,X21),X19),X23) | ~select_1(X19,sK6(X20,X21)) | select_4(X22,X21) | ~eq(X22,X21) | ~select_4(X20,X21))))).
+tff(u325,axiom,
+    (![X1, X0] : ((where_5(X0,X1) | ~select_3(X1))))).
 
-tff(u687,axiom,
-    (![X9, X11, X13, X10, X12] : ((~tab(X9,sK2(sK6(X10,X11),X12),X13) | select_1(X9,sK6(X10,X11)) | ~eq(X9,X11) | ~select_4(X10,X11) | ~select_1(sK6(X10,X11),X12))))).
+tff(u324,axiom,
+    (![X1, X0] : ((~eq(X1,X0) | where_5(X0,X1))))).
 
-tff(u686,axiom,
-    (![X9, X11, X13, X10, X12] : ((~tab(X9,sK2(sK6(X10,X11),X12),X13) | select_4(X9,X11) | ~eq(X9,X11) | ~select_4(X10,X11) | ~select_1(sK6(X10,X11),X12))))).
+tff(u323,axiom,
+    (![X1, X0] : ((eq(X0,X1) | ~select_3(X0))))).
 
-tff(u685,axiom,
-    (![X1, X3, X0, X2] : ((~tab(X0,sK4(X1,X2),X3) | select_1(X0,sK6(X1,X2)) | ~eq(X0,X2) | ~select_4(X1,X2))))).
+tff(u322,axiom,
+    ((~(![X3, X5, X2, X4, X6] : (~from_4(X2,X3,X4,X5,X6)))) | (![X2] : (~select_3(X2))))).
 
-tff(u684,axiom,
-    (![X1, X3, X0, X2] : ((~tab(X0,sK4(X1,X2),X3) | select_4(X0,X2) | ~eq(X0,X2) | ~select_4(X1,X2))))).
+tff(u321,axiom,
+    (![X0] : ((~select_3(X0) | main_query_2(X0))))).
 
-tff(u683,axiom,
-    (![X1, X3, X0, X2] : ((~tab(sK6(X0,X1),X2,X3) | ~eq(X0,X2) | select_4(sK6(X0,X1),sK4(X0,X1)) | ~select_4(X0,X1))))).
+tff(u320,axiom,
+    (![X0] : ((~main_query_2(X0) | select_3(X0))))).
 
-tff(u682,axiom,
-    (![X1, X3, X0, X2] : ((~tab(sK6(X0,X1),X2,X3) | ~eq(X0,X2) | select_1(sK6(X0,X1),X0) | ~select_4(X0,X1))))).
-
-tff(u681,axiom,
-    (![X3, X2] : ((tab(X3,sK2(X2,X3),sK3(X2,X3)) | ~select_1(X2,X3))))).
-
-tff(u680,axiom,
-    (![X5, X4] : ((tab(X4,sK0(X4,X5),sK1(X4,X5)) | ~select_1(X4,X5))))).
-
-tff(u679,axiom,
-    (![X5, X4] : ((tab(X4,sK4(X4,X5),sK5(X4,X5)) | ~select_4(X4,X5))))).
-
-tff(u678,axiom,
-    (![X3, X2] : ((tab(sK6(X2,X3),X3,sK7(X2,X3)) | ~select_4(X2,X3))))).
-
-tff(u677,axiom,
-    (![X1, X3, X5, X0, X2, X4] : ((~where_3(X0,X1,X2,X3) | select_1(X2,X0) | ~tab(X0,X3,X4) | ~tab(X2,X1,X5))))).
-
-tff(u676,axiom,
-    (![X1, X3, X0, X2] : ((~where_3(X0,X1,X2,X3) | eq(X0,X1))))).
-
-tff(u675,axiom,
-    (![X1, X3, X0, X2] : ((~where_3(X0,X1,X2,X3) | eq(X2,X3))))).
-
-tff(u674,axiom,
-    (![X1, X3, X0, X2] : ((where_3(X0,X1,X2,X3) | ~eq(X0,X1) | ~eq(X2,X3))))).
-
-tff(u673,axiom,
-    (![X1, X0] : ((where_3(X1,sK0(X0,X1),X0,sK2(X0,X1)) | ~select_1(X0,X1))))).
-
-tff(u672,axiom,
-    (![X1, X0, X2] : ((~eq(X0,sK2(X1,X2)) | select_4(X2,sK0(X0,X2)) | ~select_1(X0,X2) | ~select_1(X1,X2))))).
-
-tff(u671,axiom,
-    (![X1, X0, X2] : ((~eq(X0,sK2(X1,X2)) | select_4(X2,sK2(X2,X0)) | ~select_1(X2,X0) | ~select_1(X1,X2))))).
-
-tff(u670,axiom,
-    (![X1, X3, X0, X2, X4] : ((~eq(X0,sK2(X1,X2)) | ~tab(X0,X3,X4) | ~eq(X2,X3) | select_4(X0,sK2(X1,X2)) | ~select_1(X1,X2))))).
-
-tff(u669,axiom,
-    (![X1, X0, X2] : ((~eq(X0,sK2(X1,X2)) | select_1(X2,X0) | ~select_1(X0,X2) | ~select_1(X1,X2))))).
-
-tff(u668,axiom,
-    (![X1, X3, X0, X2, X4] : ((~eq(X0,sK2(X4,X1)) | ~tab(X0,X2,X3) | ~eq(X1,X2) | select_1(X0,X1) | ~select_1(X4,X1))))).
-
-tff(u667,axiom,
-    (![X3, X5, X4] : ((~eq(X3,sK0(X4,X5)) | select_4(X4,sK0(X3,X4)) | ~select_1(X3,X4) | ~select_1(X4,X5))))).
-
-tff(u666,axiom,
-    (![X3, X5, X4] : ((~eq(X3,sK0(X4,X5)) | select_4(X4,sK2(X4,X3)) | ~select_1(X4,X3) | ~select_1(X4,X5))))).
-
-tff(u665,axiom,
-    (![X3, X5, X4] : ((~eq(X3,sK0(X4,X5)) | select_1(X4,X3) | ~select_1(X3,X4) | ~select_1(X4,X5))))).
-
-tff(u664,axiom,
-    (![X9, X5, X7, X8, X6] : ((~eq(X5,sK0(X6,X7)) | ~tab(X5,X8,X9) | ~eq(X6,X8) | select_4(X5,sK0(X6,X7)) | ~select_1(X6,X7))))).
-
-tff(u663,axiom,
-    (![X9, X5, X7, X8, X6] : ((~eq(X5,sK0(X6,X9)) | ~tab(X5,X7,X8) | ~eq(X6,X7) | select_1(X5,X6) | ~select_1(X6,X9))))).
-
-tff(u662,axiom,
-    (![X7, X8, X6] : ((~eq(X6,sK4(X7,X8)) | select_4(X7,sK0(X6,X7)) | ~select_1(X6,X7) | ~select_4(X7,X8))))).
-
-tff(u661,axiom,
-    (![X7, X8, X6] : ((~eq(X6,sK4(X7,X8)) | select_4(X7,sK2(X7,X6)) | ~select_1(X7,X6) | ~select_4(X7,X8))))).
-
-tff(u660,axiom,
-    (![X7, X8, X6] : ((~eq(X6,sK4(X7,X8)) | select_1(X7,X6) | ~select_1(X6,X7) | ~select_4(X7,X8))))).
-
-tff(u659,axiom,
-    (![X11, X13, X10, X12, X14] : ((~eq(X10,sK4(X11,X12)) | ~tab(X10,X13,X14) | ~eq(X11,X13) | select_4(X10,sK4(X11,X12)) | ~select_4(X11,X12))))).
-
-tff(u658,axiom,
-    (![X11, X13, X10, X12, X14] : ((~eq(X10,sK4(X11,X14)) | ~tab(X10,X12,X13) | ~eq(X11,X12) | select_1(X10,X11) | ~select_4(X11,X14))))).
-
-tff(u657,axiom,
-    (![X16, X18, X15, X17, X19] : ((~eq(sK6(X16,X17),X18) | ~tab(X15,X18,X19) | select_1(X15,sK6(X16,X17)) | ~eq(X15,X17) | ~select_4(X16,X17))))).
-
-tff(u656,axiom,
-    (![X16, X18, X15, X17, X19] : ((~eq(sK6(X19,X16),X17) | ~tab(X15,X17,X18) | select_4(X15,X16) | ~eq(X15,X16) | ~select_4(X19,X16))))).
-
-tff(u655,axiom,
-    (![X3, X2, X4] : ((~eq(sK6(X2,sK4(X3,X4)),X4) | select_4(sK6(X2,sK4(X3,X4)),X4) | ~select_4(X3,X4) | ~select_4(X2,sK4(X3,X4)))))).
-
-tff(u654,axiom,
-    (![X3, X5, X4, X6] : ((~eq(sK6(X6,sK2(sK6(X4,X5),X3)),X5) | select_4(sK6(X6,sK2(sK6(X4,X5),X3)),X5) | ~select_1(X3,sK6(X4,X5)) | ~select_4(X4,X5) | ~select_4(X6,sK2(sK6(X4,X5),X3)))))).
-
-tff(u653,axiom,
-    (![X3, X5, X4, X6] : ((~eq(sK6(X3,sK2(sK6(X4,X5),X6)),X5) | select_4(sK6(X3,sK2(sK6(X4,X5),X6)),X5) | ~select_4(X4,X5) | ~select_1(sK6(X4,X5),X6) | ~select_4(X3,sK2(sK6(X4,X5),X6)))))).
-
-tff(u652,axiom,
-    (![X3, X2, X4] : ((~eq(sK6(sK6(X2,X3),X4),X3) | ~select_4(X2,X3) | select_4(sK6(sK6(X2,X3),X4),X3) | ~select_4(sK6(X2,X3),X4))))).
-
-tff(u651,axiom,
-    (![X3, X5, X4, X6] : ((~eq(sK6(X3,sK0(X4,sK6(X5,X6))),X6) | select_4(sK6(X3,sK0(X4,sK6(X5,X6))),X6) | ~select_4(X5,X6) | ~select_1(X4,sK6(X5,X6)) | ~select_4(X3,sK0(X4,sK6(X5,X6))))))).
-
-tff(u650,axiom,
-    (![X1, X0] : ((eq(X1,sK0(X0,X1)) | ~select_1(X0,X1))))).
-
-tff(u649,axiom,
-    (![X1, X0] : ((eq(X1,sK2(X1,X0)) | ~select_1(X0,X1))))).
-
-tff(u648,axiom,
-    (![X3, X2] : ((eq(X2,sK2(X2,X3)) | ~select_1(X2,X3))))).
-
-tff(u647,axiom,
-    (![X1, X0] : ((eq(sK6(X0,X1),sK4(X0,X1)) | ~select_4(X0,X1))))).
-
-tff(u646,axiom,
-    (![X1, X0] : ((~select_1(X1,X0) | select_1(X0,X1))))).
-
-tff(u645,axiom,
-    (![X1, X0] : ((~select_1(X0,X1) | main_query_1(X0,X1))))).
-
-tff(u644,axiom,
-    (![X1, X0, X2] : ((~select_1(X0,sK6(X2,X1)) | ~eq(X0,X1) | ~select_4(X2,X1) | select_4(X0,X1))))).
-
-tff(u643,axiom,
-    (![X9, X11, X10] : ((~select_1(X9,sK6(X11,X10)) | select_1(sK6(X11,X10),X9) | ~eq(X9,X10) | ~select_4(X11,X10))))).
-
-tff(u642,axiom,
-    (![X1, X0, X2] : ((~select_1(sK6(X2,X1),X0) | ~eq(X0,X1) | ~select_4(X2,X1) | select_4(X0,X1))))).
-
-tff(u641,axiom,
-    (![X1, X0] : ((select_1(X0,sK6(X0,X1)) | ~select_4(X0,X1))))).
-
-tff(u640,axiom,
-    (![X1, X0] : ((select_1(sK6(X0,X1),X0) | ~select_4(X0,X1))))).
-
-tff(u639,axiom,
-    (![X7, X8, X6] : ((select_1(sK6(X7,X8),sK6(X6,sK4(X7,X8))) | ~select_4(X7,X8) | ~select_4(X6,sK4(X7,X8)) | ~eq(sK6(X6,sK4(X7,X8)),X8))))).
-
-tff(u638,axiom,
-    (![X9, X11, X8, X10] : ((select_1(sK6(X10,X11),sK6(X8,sK0(X9,sK6(X10,X11)))) | ~select_4(X10,X11) | ~select_1(X9,sK6(X10,X11)) | ~select_4(X8,sK0(X9,sK6(X10,X11))) | ~eq(sK6(X8,sK0(X9,sK6(X10,X11))),X11))))).
-
-tff(u637,axiom,
-    (![X9, X11, X8, X10] : ((select_1(sK6(X9,X10),sK6(X11,sK2(sK6(X9,X10),X8))) | ~eq(sK6(X11,sK2(sK6(X9,X10),X8)),X10) | ~select_4(X9,X10) | ~select_4(X11,sK2(sK6(X9,X10),X8)) | ~select_1(X8,sK6(X9,X10)))))).
-
-tff(u636,axiom,
-    (![X9, X11, X8, X10] : ((select_1(sK6(X9,X10),sK6(X8,sK2(sK6(X9,X10),X11))) | ~select_4(X9,X10) | ~select_1(sK6(X9,X10),X11) | ~select_4(X8,sK2(sK6(X9,X10),X11)) | ~eq(sK6(X8,sK2(sK6(X9,X10),X11)),X10))))).
-
-tff(u635,axiom,
-    (![X3, X5, X4, X6] : ((select_1(sK6(X3,sK0(X4,sK6(X5,X6))),sK6(X5,X6)) | ~eq(sK6(X3,sK0(X4,sK6(X5,X6))),X6) | ~select_4(X5,X6) | ~select_1(X4,sK6(X5,X6)) | ~select_4(X3,sK0(X4,sK6(X5,X6))))))).
-
-tff(u634,axiom,
-    (![X3, X5, X4, X6] : ((select_1(sK6(X6,sK2(sK6(X4,X5),X3)),sK6(X4,X5)) | ~select_1(X3,sK6(X4,X5)) | ~eq(sK6(X6,sK2(sK6(X4,X5),X3)),X5) | ~select_4(X4,X5) | ~select_4(X6,sK2(sK6(X4,X5),X3)))))).
-
-tff(u633,axiom,
-    (![X3, X5, X4, X6] : ((select_1(sK6(X3,sK2(sK6(X4,X5),X6)),sK6(X4,X5)) | ~eq(sK6(X3,sK2(sK6(X4,X5),X6)),X5) | ~select_4(X4,X5) | ~select_1(sK6(X4,X5),X6) | ~select_4(X3,sK2(sK6(X4,X5),X6)))))).
-
-tff(u632,axiom,
-    (![X3, X2, X4] : ((select_1(sK6(X2,sK4(X3,X4)),sK6(X3,X4)) | ~eq(sK6(X2,sK4(X3,X4)),X4) | ~select_4(X3,X4) | ~select_4(X2,sK4(X3,X4)))))).
-
-tff(u631,negated_conjecture,
-    ((~main_query_1(sK8,sK9)) | select_1(sK8,sK9))).
-
-tff(u630,negated_conjecture,
-    ((~main_query_1(sK8,sK9)) | select_1(sK9,sK8))).
-
-tff(u629,axiom,
-    (![X1, X0] : ((~main_query_1(X0,X1) | select_1(X0,X1))))).
-
-tff(u628,axiom,
-    (![X5, X4] : ((main_query_1(X4,sK6(X4,X5)) | ~select_4(X4,X5))))).
-
-tff(u627,axiom,
-    (![X3, X2] : ((main_query_1(sK6(X2,X3),X2) | ~select_4(X2,X3))))).
-
-tff(u626,axiom,
-    (![X13, X12, X14] : ((main_query_1(sK6(X12,X13),sK6(X14,sK4(X12,X13))) | ~select_4(X14,sK4(X12,X13)) | ~eq(sK6(X14,sK4(X12,X13)),X13) | ~select_4(X12,X13))))).
-
-tff(u625,axiom,
-    (![X16, X18, X17, X19] : ((main_query_1(sK6(X16,X17),sK6(X19,sK0(X18,sK6(X16,X17)))) | ~select_1(X18,sK6(X16,X17)) | ~select_4(X19,sK0(X18,sK6(X16,X17))) | ~eq(sK6(X19,sK0(X18,sK6(X16,X17))),X17) | ~select_4(X16,X17))))).
-
-tff(u624,axiom,
-    (![X16, X18, X17, X19] : ((main_query_1(sK6(X17,X18),sK6(X16,sK2(sK6(X17,X18),X19))) | ~select_4(X17,X18) | ~select_4(X16,sK2(sK6(X17,X18),X19)) | ~select_1(X19,sK6(X17,X18)) | ~eq(sK6(X16,sK2(sK6(X17,X18),X19)),X18))))).
-
-tff(u623,axiom,
-    (![X16, X18, X17, X19] : ((main_query_1(sK6(X16,X17),sK6(X19,sK2(sK6(X16,X17),X18))) | ~select_1(sK6(X16,X17),X18) | ~select_4(X19,sK2(sK6(X16,X17),X18)) | ~eq(sK6(X19,sK2(sK6(X16,X17),X18)),X17) | ~select_4(X16,X17))))).
-
-tff(u622,axiom,
-    (![X16, X18, X17, X19] : ((main_query_1(sK6(X16,sK0(X17,sK6(X18,X19))),sK6(X18,X19)) | ~select_4(X18,X19) | ~select_1(X17,sK6(X18,X19)) | ~select_4(X16,sK0(X17,sK6(X18,X19))) | ~eq(sK6(X16,sK0(X17,sK6(X18,X19))),X19))))).
-
-tff(u621,axiom,
-    (![X16, X18, X17, X19] : ((main_query_1(sK6(X19,sK2(sK6(X17,X18),X16)),sK6(X17,X18)) | ~eq(sK6(X19,sK2(sK6(X17,X18),X16)),X18) | ~select_4(X17,X18) | ~select_4(X19,sK2(sK6(X17,X18),X16)) | ~select_1(X16,sK6(X17,X18)))))).
-
-tff(u620,axiom,
-    (![X16, X18, X17, X19] : ((main_query_1(sK6(X16,sK2(sK6(X17,X18),X19)),sK6(X17,X18)) | ~select_4(X17,X18) | ~select_1(sK6(X17,X18),X19) | ~select_4(X16,sK2(sK6(X17,X18),X19)) | ~eq(sK6(X16,sK2(sK6(X17,X18),X19)),X18))))).
-
-tff(u619,axiom,
-    (![X13, X12, X14] : ((main_query_1(sK6(X12,sK4(X13,X14)),sK6(X13,X14)) | ~select_4(X13,X14) | ~select_4(X12,sK4(X13,X14)) | ~eq(sK6(X12,sK4(X13,X14)),X14))))).
-
-tff(u618,negated_conjecture,
-    ((~main_query_1(sK8,sK9)) | main_query_1(sK8,sK9))).
-
-tff(u617,negated_conjecture,
-    ((~main_query_1(sK8,sK9)) | main_query_1(sK9,sK8))).
-
-tff(u616,axiom,
-    (![X1, X3, X5, X0, X2, X4] : ((~from_5(X0,X2,X3,X4,X1,X5) | ~where_6(X4,X2,X0,X1) | select_4(X0,X1))))).
-
-tff(u615,axiom,
-    (![X1, X3, X5, X0, X2, X4] : ((~from_5(X0,X1,X2,X3,X4,X5) | tab(X3,X4,X5))))).
-
-tff(u614,axiom,
-    (![X1, X3, X5, X0, X2, X4] : ((~from_5(X0,X1,X2,X3,X4,X5) | tab(X0,X1,X2))))).
-
-tff(u613,axiom,
-    (![X1, X3, X5, X0, X2, X4] : ((from_5(X0,X1,X2,X3,X4,X5) | ~tab(X3,X4,X5) | ~tab(X0,X1,X2))))).
-
-tff(u612,axiom,
-    (![X1, X0] : ((from_5(X0,sK4(X0,X1),sK5(X0,X1),sK6(X0,X1),X1,sK7(X0,X1)) | ~select_4(X0,X1))))).
-
-tff(u611,axiom,
-    (![X1, X3, X5, X0, X2, X4] : ((~where_6(X0,X1,X2,X3) | select_4(X2,X3) | ~tab(X0,X3,X4) | ~tab(X2,X1,X5))))).
-
-tff(u610,axiom,
-    (![X1, X3, X0, X2] : ((~where_6(X0,X1,X2,X3) | eq(X0,X1))))).
-
-tff(u609,axiom,
-    (![X1, X3, X0, X2] : ((~where_6(X0,X1,X2,X3) | eq(X2,X3))))).
-
-tff(u608,axiom,
-    (![X1, X3, X0, X2] : ((where_6(X0,X1,X2,X3) | ~eq(X0,X1) | ~eq(X2,X3))))).
-
-tff(u607,axiom,
-    (![X1, X0] : ((where_6(sK6(X0,X1),sK4(X0,X1),X0,X1) | ~select_4(X0,X1))))).
-
-tff(u606,axiom,
-    (![X3, X2] : ((~select_4(X2,X3) | eq(X2,X3))))).
-
-tff(u605,axiom,
-    (![X1, X0] : ((~select_4(X0,X1) | main_query_2(X0,X1))))).
-
-tff(u604,axiom,
-    (![X1, X0] : ((select_4(sK6(X0,X1),sK4(X0,X1)) | ~select_4(X0,X1))))).
-
-tff(u603,axiom,
-    (![X9, X11, X10] : ((select_4(sK6(X11,X10),sK2(sK6(X11,X10),X9)) | ~eq(X9,X10) | ~select_1(sK6(X11,X10),X9) | ~select_4(X11,X10))))).
-
-tff(u602,axiom,
-    (![X9, X11, X10] : ((select_4(sK6(X11,X10),sK0(X9,sK6(X11,X10))) | ~eq(X9,X10) | ~select_1(X9,sK6(X11,X10)) | ~select_4(X11,X10))))).
-
-tff(u601,axiom,
-    (![X1, X0] : ((select_4(X0,sK2(X0,X1)) | ~select_1(X0,X1))))).
-
-tff(u600,axiom,
-    (![X1, X0] : ((select_4(X0,sK2(X0,X1)) | ~select_1(X1,X0))))).
-
-tff(u599,axiom,
-    (![X1, X0] : ((select_4(X0,sK0(X1,X0)) | ~select_1(X1,X0))))).
-
-tff(u598,axiom,
-    (![X1, X0] : ((~main_query_2(X0,X1) | select_4(X0,X1))))).
-
-tff(u597,axiom,
-    (![X3, X2] : ((main_query_2(sK6(X2,X3),sK4(X2,X3)) | ~select_4(X2,X3))))).
-
-tff(u596,axiom,
-    (![X3, X2] : ((main_query_2(X2,sK2(X2,X3)) | ~select_1(X2,X3))))).
-
-tff(u595,axiom,
-    (![X3, X2] : ((main_query_2(X3,sK2(X3,X2)) | ~select_1(X2,X3))))).
-
-tff(u594,axiom,
-    (![X3, X2] : ((main_query_2(X3,sK0(X2,X3)) | ~select_1(X2,X3))))).
-
-tff(u593,axiom,
+tff(u319,axiom,
     (![X1, X0, X2] : ((~lessthanorequal(X1,X2) | lessthanorequal(X0,X2) | ~lessthanorequal(X0,X1))))).
 
-tff(u592,axiom,
+tff(u318,axiom,
     (![X1, X0] : ((~lessthanorequal(X1,X0) | (X0 = X1) | ~lessthanorequal(X0,X1))))).
 
-tff(u591,axiom,
+tff(u317,axiom,
     (![X0] : (lessthanorequal(X0,X0)))).
 
-tff(u590,negated_conjecture,
-    ((~~main_query_0(sK8,sK9)) | ~main_query_0(sK8,sK9))).
+tff(u316,negated_conjecture,
+    ((~main_query_0(sK10)) | main_query_0(sK10))).
 
 % # SZS output end Saturation.
 % ------------------------------
 % Version: Vampire 4.2.2 (commit e1949dd on 2017-12-14 18:39:21 +0000)
 % Termination reason: Satisfiable
 
-% Memory used [KB]: 5117
-% Time elapsed: 0.029 s
+% Memory used [KB]: 4861
+% Time elapsed: 0.024 s
 % ------------------------------
 % ------------------------------

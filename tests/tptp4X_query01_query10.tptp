@@ -1,128 +1,36 @@
 % [
-%     {
-%         "value": "tab",
-%         "name": "a"
-%     },
-%     {
-%         "value": "tab",
-%         "name": "b"
-%     }
+%     "tab1"
 % ]
 fof(from_2,definition,(
-    ! [A_FST,A_SND,A_TRD,B_FST,B_SND,B_TRD] :
-      ( from_2(A_FST,A_SND,A_TRD,B_FST,B_SND,B_TRD)
-    <=> ( tab(A_FST,A_SND,A_TRD)
-        & tab(B_FST,B_SND,B_TRD) ) ) )).
+    ! [TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
+      ( from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15)
+    <=> tab1(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) ) )).
 
 % {
-%     "and": [
-%         {
-%             "eq": [
-%                 "a.fst",
-%                 "b.snd"
-%             ]
-%         },
-%         {
-%             "eq": [
-%                 "b.fst",
-%                 "a.snd"
-%             ]
-%         }
-%     ]
-% }
-fof(where_3,definition,(
-    ! [B_FST,A_SND,A_FST,B_SND] :
-      ( where_3(B_FST,A_SND,A_FST,B_SND)
-    <=> ( eq(A_FST,B_SND)
-        & eq(B_FST,A_SND) ) ) )).
-
-% {
-%     "select": [
-%         {
-%             "value": "a.fst",
-%             "name": "fst"
-%         },
-%         {
-%             "value": "b.fst",
-%             "name": "fst1"
-%         }
-%     ],
-%     "from": [
-%         {
-%             "value": "tab",
-%             "name": "a"
-%         },
-%         {
-%             "value": "tab",
-%             "name": "b"
-%         }
-%     ],
-%     "where": {
-%         "and": [
-%             {
-%                 "eq": [
-%                     "a.fst",
-%                     "b.snd"
-%                 ]
-%             },
-%             {
-%                 "eq": [
-%                     "b.fst",
-%                     "a.snd"
-%                 ]
-%             }
-%         ]
-%     }
+%     "select": {
+%         "value": "col11",
+%         "name": "alias1"
+%     },
+%     "from": "tab1"
 % }
 fof(select_1,definition,(
-    ! [A_FST,B_FST] :
-      ( select_1(A_FST,B_FST)
-    <=> ? [A_SND,A_TRD,B_SND,B_TRD] :
-          ( from_2(A_FST,A_SND,A_TRD,B_FST,B_SND,B_TRD)
-          & where_3(B_FST,A_SND,A_FST,B_SND) ) ) )).
+    ! [COL11] :
+      ( select_1(COL11)
+    <=> ? [TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
+          ( from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15)
+          & $true ) ) )).
 
 % {
-%     "select": [
-%         {
-%             "value": "a.fst",
-%             "name": "fst"
-%         },
-%         {
-%             "value": "b.fst",
-%             "name": "fst1"
-%         }
-%     ],
-%     "from": [
-%         {
-%             "value": "tab",
-%             "name": "a"
-%         },
-%         {
-%             "value": "tab",
-%             "name": "b"
-%         }
-%     ],
-%     "where": {
-%         "and": [
-%             {
-%                 "eq": [
-%                     "a.fst",
-%                     "b.snd"
-%                 ]
-%             },
-%             {
-%                 "eq": [
-%                     "b.fst",
-%                     "a.snd"
-%                 ]
-%             }
-%         ]
-%     }
+%     "select": {
+%         "value": "col11",
+%         "name": "alias1"
+%     },
+%     "from": "tab1"
 % }
 fof(main_query_1,definition,(
-    ! [FST,FST1] :
-      ( main_query_1(FST,FST1)
-    <=> select_1(FST,FST1) ) )).
+    ! [ALIAS1] :
+      ( main_query_1(ALIAS1)
+    <=> select_1(ALIAS1) ) )).
 
 % [
 %     {
@@ -130,9 +38,9 @@ fof(main_query_1,definition,(
 %         "name": "tabalias1"
 %     }
 % ]
-fof(from_5,definition,(
+fof(from_4,definition,(
     ! [TABALIAS1_COL11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15] :
-      ( from_5(TABALIAS1_COL11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15)
+      ( from_4(TABALIAS1_COL11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15)
     <=> tab1(TABALIAS1_COL11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15) ) )).
 
 % {
@@ -141,9 +49,9 @@ fof(from_5,definition,(
 %         "col12"
 %     ]
 % }
-fof(where_6,definition,(
-    ! [TAB1_COL11,COL12] :
-      ( where_6(TAB1_COL11,COL12)
+fof(where_5,definition,(
+    ! [COL12,TAB1_COL11] :
+      ( where_5(COL12,TAB1_COL11)
     <=> eq(TAB1_COL11,COL12) ) )).
 
 % {
@@ -161,5 +69,5 @@ fof(where_6,definition,(
 %         ]
 %     }
 % }
-ERROR: Line 136 Char 275 Token ")" continuing with "))))).
+ERROR: Line 50 Char 264 Token "," continuing with "TAB1_COL11)))))).
 "

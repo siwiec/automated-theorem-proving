@@ -1,0 +1,81 @@
+Satisfiable!
+% SZS status CounterSatisfiable for output_query13_query14
+% # SZS output start Saturation.
+tff(u478,axiom,
+    (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((~from_2(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | tab2(X5,X6,X7,X8,X9))))).
+
+tff(u477,axiom,
+    (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((~from_2(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | tab1(X0,X1,X2,X3,X4))))).
+
+tff(u476,axiom,
+    (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((from_2(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | ~tab2(X5,X6,X7,X8,X9) | ~tab1(X0,X1,X2,X3,X4))))).
+
+tff(u475,axiom,
+    (![X1, X0] : ((~where_3(X0,X1) | eq(X0,X1))))).
+
+tff(u474,axiom,
+    ((~(![X1, X0] : (~where_3(X1,X0)))) | (![X1, X0] : (~where_3(X1,X0))))).
+
+tff(u473,axiom,
+    (![X1, X0] : ((~eq(X0,X1) | where_3(X0,X1))))).
+
+tff(u472,axiom,
+    (![X1, X0] : ((~select_1(X0,X1) | main_query_1(X0,X1))))).
+
+tff(u471,axiom,
+    ((~(![X3, X2] : (~select_1(X2,X3)))) | (![X3, X2] : (~select_1(X2,X3))))).
+
+tff(u470,negated_conjecture,
+    ((~~main_query_1(sK20,sK21)) | ~main_query_1(sK20,sK21))).
+
+tff(u469,axiom,
+    (![X1, X0] : ((~main_query_1(X0,X1) | select_1(X0,X1))))).
+
+tff(u468,axiom,
+    (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((~from_5(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | tab2(X5,X6,X7,X8,X9))))).
+
+tff(u467,axiom,
+    (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((~from_5(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | tab1(X0,X1,X2,X3,X4))))).
+
+tff(u466,axiom,
+    (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((from_5(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | ~tab2(X5,X6,X7,X8,X9) | ~tab1(X0,X1,X2,X3,X4))))).
+
+tff(u465,axiom,
+    ((~(![X1, X0] : (~where_6(X1,X0)))) | (![X1, X0] : (~where_6(X1,X0))))).
+
+tff(u464,axiom,
+    (![X1, X0] : ((~where_6(X0,X1) | lt(X0,X1))))).
+
+tff(u463,axiom,
+    (![X1, X0] : ((~lt(X0,X1) | where_6(X0,X1))))).
+
+tff(u462,axiom,
+    (![X1, X0] : ((~select_4(X0,X1) | main_query_2(X0,X1))))).
+
+tff(u461,axiom,
+    ((~(![X3, X2] : (~select_4(X2,X3)))) | (![X3, X2] : (~select_4(X2,X3))))).
+
+tff(u460,axiom,
+    (![X1, X0] : ((~main_query_2(X0,X1) | select_4(X0,X1))))).
+
+tff(u459,axiom,
+    (![X1, X0, X2] : ((~lessthanorequal(X1,X2) | lessthanorequal(X0,X2) | ~lessthanorequal(X0,X1))))).
+
+tff(u458,axiom,
+    (![X1, X0] : ((~lessthanorequal(X1,X0) | (X0 = X1) | ~lessthanorequal(X0,X1))))).
+
+tff(u457,axiom,
+    (![X0] : (lessthanorequal(X0,X0)))).
+
+tff(u456,negated_conjecture,
+    ((~main_query_0(sK20,sK21)) | main_query_0(sK20,sK21))).
+
+% # SZS output end Saturation.
+% ------------------------------
+% Version: Vampire 4.2.2 (commit e1949dd on 2017-12-14 18:39:21 +0000)
+% Termination reason: Satisfiable
+
+% Memory used [KB]: 4989
+% Time elapsed: 0.023 s
+% ------------------------------
+% ------------------------------

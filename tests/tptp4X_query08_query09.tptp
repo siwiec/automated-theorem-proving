@@ -1,0 +1,34 @@
+% [
+%     "tab1"
+% ]
+fof(from_2,definition,(
+    ! [TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
+      ( from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15)
+    <=> tab1(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) ) )).
+
+% {
+%     "eq": [
+%         "alias1",
+%         "col12"
+%     ]
+% }
+fof(where_3,definition,(
+    ! [COL12,COL11] :
+      ( where_3(COL12,COL11)
+    <=> eq(COL11,COL12) ) )).
+
+% {
+%     "select": {
+%         "value": "col11",
+%         "name": "alias1"
+%     },
+%     "from": "tab1",
+%     "where": {
+%         "eq": [
+%             "alias1",
+%             "col12"
+%         ]
+%     }
+% }
+ERROR: Line 25 Char 204 Token "," continuing with "COL11)))))).
+"
