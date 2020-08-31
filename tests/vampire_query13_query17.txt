@@ -1,89 +1,101 @@
 Satisfiable!
 % SZS status CounterSatisfiable for output_query13_query17
 % # SZS output start Saturation.
-tff(u519,axiom,
+tff(u591,axiom,
     (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((~from_2(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | tab2(X5,X6,X7,X8,X9))))).
 
-tff(u518,axiom,
+tff(u590,axiom,
     (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((~from_2(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | tab1(X0,X1,X2,X3,X4))))).
 
-tff(u517,axiom,
+tff(u589,axiom,
     (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((from_2(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | ~tab2(X5,X6,X7,X8,X9) | ~tab1(X0,X1,X2,X3,X4))))).
 
-tff(u516,axiom,
-    ((~(![X25, X27, X29, X26, X28] : (~tab1(X25,X26,X27,X28,X29)))) | (![X25, X27, X29, X26, X28] : (~tab1(X25,X26,X27,X28,X29))))).
+tff(u588,axiom,
+    (![X5, X7, X4, X6] : ((tab1(sK10(X6,X7,X4,X5),sK11(X6,X7,X4,X5),sK12(X6,X7,X4,X5),sK13(X6,X7,X4,X5),sK14(X6,X7,X4,X5)) | ~select_4(X4,X5))))).
 
-tff(u515,axiom,
-    (![X1, X0] : ((~where_3(X0,X1) | eq(X0,X1))))).
+tff(u587,axiom,
+    (![X1, X3, X0, X2] : ((tab2(sK15(X2,X3,X0,X1),sK16(X2,X3,X0,X1),sK17(X2,X3,X0,X1),sK18(X2,X3,X0,X1),sK19(X2,X3,X0,X1)) | ~select_4(X0,X1))))).
 
-tff(u514,axiom,
+tff(u586,axiom,
     ((~(![X1, X0] : (~where_3(X1,X0)))) | (![X1, X0] : (~where_3(X1,X0))))).
 
-tff(u513,axiom,
+tff(u585,axiom,
+    (![X1, X0] : ((~where_3(X0,X1) | eq(X0,X1))))).
+
+tff(u584,axiom,
+    ((~(![X1, X3, X0, X2] : ((~where_6(X1,X3,X2,X0) | select_4(X2,X3))))) | (![X3, X2] : ((~eq(X2,X3) | select_4(X2,X3)))))).
+
+tff(u583,axiom,
     (![X1, X0] : ((~eq(X0,X1) | where_3(X0,X1))))).
 
-tff(u512,axiom,
-    (![X1, X0] : ((~select_1(X0,X1) | main_query_1(X0,X1))))).
-
-tff(u511,axiom,
+tff(u582,axiom,
     ((~(![X3, X2] : (~select_1(X2,X3)))) | (![X3, X2] : (~select_1(X2,X3))))).
 
-tff(u510,negated_conjecture,
-    ((~~main_query_1(sK20,sK21)) | ~main_query_1(sK20,sK21))).
+tff(u581,axiom,
+    (![X1, X0] : ((~select_1(X0,X1) | main_query_1(X0,X1))))).
 
-tff(u509,axiom,
+tff(u580,axiom,
     (![X1, X0] : ((~main_query_1(X0,X1) | select_1(X0,X1))))).
 
-tff(u508,axiom,
-    ((~(![X9, X11, X13, X5, X7, X8, X10, X12, X4, X6] : (~from_5(X4,X5,X6,X7,X8,X9,X10,X11,X12,X13)))) | (![X9, X11, X13, X5, X7, X8, X10, X12, X4, X6] : (~from_5(X4,X5,X6,X7,X8,X9,X10,X11,X12,X13))))).
+tff(u579,negated_conjecture,
+    ((~~main_query_1(sK20,sK21)) | ~main_query_1(sK20,sK21))).
 
-tff(u507,axiom,
+tff(u578,axiom,
     (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((~from_5(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | tab2(X5,X6,X7,X8,X9))))).
 
-tff(u506,axiom,
+tff(u577,axiom,
     (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((~from_5(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | tab1(X0,X1,X2,X3,X4))))).
 
-tff(u505,axiom,
+tff(u576,axiom,
     (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((from_5(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | ~tab2(X5,X6,X7,X8,X9) | ~tab1(X0,X1,X2,X3,X4))))).
 
-tff(u504,axiom,
+tff(u575,axiom,
     (![X1, X3, X0, X2] : ((from_5(sK10(X0,X1,X2,X3),sK11(X0,X1,X2,X3),sK12(X0,X1,X2,X3),sK13(X0,X1,X2,X3),sK14(X0,X1,X2,X3),sK15(X0,X1,X2,X3),sK16(X0,X1,X2,X3),sK17(X0,X1,X2,X3),sK18(X0,X1,X2,X3),sK19(X0,X1,X2,X3)) | ~select_4(X2,X3))))).
 
-tff(u503,axiom,
-    (![X1, X3, X0, X2] : ((~where_6(X0,X1,X2,X3) | lte(X0,X2) | eq(X1,X3))))).
+tff(u574,axiom,
+    ((~(![X1, X3, X0, X2] : ((~where_6(X1,X3,X2,X0) | select_4(X2,X3))))) | (![X1, X3, X0, X2] : ((~where_6(X1,X3,X2,X0) | select_4(X2,X3)))))).
 
-tff(u502,axiom,
-    (![X1, X3, X0, X2] : ((where_6(X1,X2,X0,X3) | ~select_4(X2,X3))))).
+tff(u573,axiom,
+    (![X1, X3, X0, X2] : ((~where_6(X0,X1,X2,X3) | lte(X0,X3) | eq(X2,X1))))).
 
-tff(u501,axiom,
-    (![X1, X3, X0, X2] : ((where_6(X0,X1,X2,X3) | ~eq(X1,X3))))).
+tff(u572,axiom,
+    (![X1, X3, X0, X2] : ((where_6(X1,X3,X2,X0) | ~select_4(X2,X3))))).
 
-tff(u500,axiom,
-    (![X1, X3, X0, X2] : ((where_6(X0,X1,X2,X3) | ~lte(X0,X2))))).
+tff(u571,axiom,
+    (![X1, X3, X0, X2] : ((where_6(X0,X1,X2,X3) | ~eq(X2,X1))))).
 
-tff(u499,axiom,
-    ((~(![X9, X11, X13, X5, X7, X8, X10, X12, X4, X6] : (~from_5(X4,X5,X6,X7,X8,X9,X10,X11,X12,X13)))) | (![X1, X0] : (~select_4(X0,X1))))).
+tff(u570,axiom,
+    (![X1, X3, X0, X2] : ((where_6(X0,X1,X2,X3) | ~lte(X0,X3))))).
 
-tff(u498,axiom,
-    ((~(![X3, X2] : ((~select_4(X2,X3) | eq(X2,X3))))) | (![X3, X2] : ((~select_4(X2,X3) | eq(X2,X3)))))).
+tff(u569,axiom,
+    ((~(![X1, X0] : (lte(X0,X1)))) | (![X1, X0] : (lte(X0,X1))))).
 
-tff(u497,axiom,
+tff(u568,axiom,
     (![X1, X0] : ((~select_4(X0,X1) | main_query_2(X0,X1))))).
 
-tff(u496,axiom,
+tff(u567,negated_conjecture,
+    ((~main_query_2(sK20,sK21)) | select_4(sK20,sK21))).
+
+tff(u566,axiom,
+    ((~(![X5, X4] : (select_4(X4,X5)))) | (![X5, X4] : (select_4(X4,X5))))).
+
+tff(u565,axiom,
     (![X1, X0] : ((~main_query_2(X0,X1) | select_4(X0,X1))))).
 
-tff(u495,axiom,
+tff(u564,negated_conjecture,
+    ((~main_query_2(sK20,sK21)) | main_query_2(sK20,sK21))).
+
+tff(u563,axiom,
+    ((~(![X5, X4] : (select_4(X4,X5)))) | (![X1, X0] : (main_query_2(X0,X1))))).
+
+tff(u562,axiom,
     (![X1, X0, X2] : ((~lessthanorequal(X1,X2) | lessthanorequal(X0,X2) | ~lessthanorequal(X0,X1))))).
 
-tff(u494,axiom,
+tff(u561,axiom,
     (![X1, X0] : ((~lessthanorequal(X1,X0) | (X0 = X1) | ~lessthanorequal(X0,X1))))).
 
-tff(u493,axiom,
+tff(u560,axiom,
     (![X0] : (lessthanorequal(X0,X0)))).
-
-tff(u492,negated_conjecture,
-    ((~main_query_0(sK20,sK21)) | main_query_0(sK20,sK21))).
 
 % # SZS output end Saturation.
 % ------------------------------
@@ -91,6 +103,6 @@ tff(u492,negated_conjecture,
 % Termination reason: Satisfiable
 
 % Memory used [KB]: 4989
-% Time elapsed: 0.029 s
+% Time elapsed: 0.028 s
 % ------------------------------
 % ------------------------------

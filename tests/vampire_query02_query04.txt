@@ -1,63 +1,108 @@
-Satisfiable!
-% SZS status CounterSatisfiable for output_query02_query04
-% # SZS output start Saturation.
-tff(u304,axiom,
-    (![X1, X3, X0, X2, X4] : ((~from_2(X0,X1,X2,X3,X4) | tab1(X0,X1,X2,X3,X4))))).
-
-tff(u303,axiom,
-    ((~(![X1, X3, X5, X2, X4] : (~from_2(X1,X2,X3,X4,X5)))) | (![X1, X3, X5, X2, X4] : (~from_2(X1,X2,X3,X4,X5))))).
-
-tff(u302,axiom,
-    (![X1, X3, X0, X2, X4] : ((~tab1(X0,X1,X2,X3,X4) | from_4(X0,X1,X2,X3,X4))))).
-
-tff(u301,axiom,
-    (![X1, X3, X0, X2, X4] : ((~tab1(X0,X1,X2,X3,X4) | from_2(X0,X1,X2,X3,X4))))).
-
-tff(u300,axiom,
-    (![X0] : ((~select_1(X0) | main_query_1(X0))))).
-
-tff(u299,axiom,
-    ((~(![X0] : (~select_1(X0)))) | (![X0] : (~select_1(X0))))).
-
-tff(u298,negated_conjecture,
-    ((~~main_query_1(sK10)) | ~main_query_1(sK10))).
-
-tff(u297,axiom,
-    (![X0] : ((~main_query_1(X0) | select_1(X0))))).
-
-tff(u296,axiom,
-    (![X1, X3, X0, X2, X4] : ((~from_4(X0,X1,X2,X3,X4) | tab1(X0,X1,X2,X3,X4))))).
-
-tff(u295,axiom,
-    ((~(![X1, X3, X5, X2, X4] : (~from_4(X1,X2,X3,X4,X5)))) | (![X1, X3, X5, X2, X4] : (~from_4(X1,X2,X3,X4,X5))))).
-
-tff(u294,axiom,
-    (![X0] : ((~select_3(X0) | main_query_2(X0))))).
-
-tff(u293,axiom,
-    ((~(![X0] : (~select_3(X0)))) | (![X0] : (~select_3(X0))))).
-
-tff(u292,axiom,
-    (![X0] : ((~main_query_2(X0) | select_3(X0))))).
-
-tff(u291,axiom,
-    (![X1, X0, X2] : ((~lessthanorequal(X1,X2) | lessthanorequal(X0,X2) | ~lessthanorequal(X0,X1))))).
-
-tff(u290,axiom,
-    (![X1, X0] : ((~lessthanorequal(X1,X0) | (X0 = X1) | ~lessthanorequal(X0,X1))))).
-
-tff(u289,axiom,
-    (![X0] : (lessthanorequal(X0,X0)))).
-
-tff(u288,negated_conjecture,
-    ((~main_query_0(sK10)) | main_query_0(sK10))).
-
-% # SZS output end Saturation.
+% Refutation found. Thanks to Tanya!
+% SZS status Theorem for output_query02_query04
+% SZS output start Proof for output_query02_query04
+1. ! [X0,X1,X2,X3,X4] : (from_2(X0,X1,X2,X3,X4) <=> tab1(X0,X1,X2,X3,X4)) [input]
+2. ! [X5] : (select_1(X5) <=> ? [X0,X1,X2,X3,X4] : ($true & from_2(X0,X1,X2,X3,X4))) [input]
+3. ! [X5] : (main_query_1(X5) <=> select_1(X5)) [input]
+4. ! [X0,X1,X2,X3,X4] : (from_4(X0,X1,X2,X3,X4) <=> tab1(X0,X1,X2,X3,X4)) [input]
+5. ! [X6] : (select_3(X6) <=> ? [X0,X1,X2,X3,X4] : ($true & from_4(X0,X1,X2,X3,X4))) [input]
+6. ! [X7] : (main_query_2(X7) <=> select_3(X7)) [input]
+40. ! [X5] : (main_query_1(X5) <=> main_query_2(X5)) [input]
+41. ~! [X5] : (main_query_1(X5) <=> main_query_2(X5)) [negated conjecture 40]
+42. ! [X0] : (select_1(X0) <=> ? [X1,X2,X3,X4,X5] : ($true & from_2(X1,X2,X3,X4,X5))) [rectify 2]
+43. ! [X0] : (select_1(X0) <=> ? [X1,X2,X3,X4,X5] : from_2(X1,X2,X3,X4,X5)) [true and false elimination 42]
+44. ! [X0] : (main_query_1(X0) <=> select_1(X0)) [rectify 3]
+45. ! [X0] : (select_3(X0) <=> ? [X1,X2,X3,X4,X5] : ($true & from_4(X1,X2,X3,X4,X5))) [rectify 5]
+46. ! [X0] : (select_3(X0) <=> ? [X1,X2,X3,X4,X5] : from_4(X1,X2,X3,X4,X5)) [true and false elimination 45]
+47. ! [X0] : (main_query_2(X0) <=> select_3(X0)) [rectify 6]
+81. ~! [X0] : (main_query_1(X0) <=> main_query_2(X0)) [rectify 41]
+143. ? [X0] : (main_query_1(X0) <~> main_query_2(X0)) [ennf transformation 81]
+144. ! [X0,X1,X2,X3,X4] : ((from_2(X0,X1,X2,X3,X4) | ~tab1(X0,X1,X2,X3,X4)) & (tab1(X0,X1,X2,X3,X4) | ~from_2(X0,X1,X2,X3,X4))) [nnf transformation 1]
+145. ! [X0] : ((select_1(X0) | ! [X1,X2,X3,X4,X5] : ~from_2(X1,X2,X3,X4,X5)) & (? [X1,X2,X3,X4,X5] : from_2(X1,X2,X3,X4,X5) | ~select_1(X0))) [nnf transformation 43]
+146. ! [X0] : ((select_1(X0) | ! [X1,X2,X3,X4,X5] : ~from_2(X1,X2,X3,X4,X5)) & (? [X6,X7,X8,X9,X10] : from_2(X6,X7,X8,X9,X10) | ~select_1(X0))) [rectify 145]
+147. ? [X6,X7,X8,X9,X10] : from_2(X6,X7,X8,X9,X10) => from_2(sK0,sK1,sK2,sK3,sK4) [choice axiom]
+148. ! [X0] : ((select_1(X0) | ! [X1,X2,X3,X4,X5] : ~from_2(X1,X2,X3,X4,X5)) & (from_2(sK0,sK1,sK2,sK3,sK4) | ~select_1(X0))) [skolemisation 146,147]
+149. ! [X0] : ((main_query_1(X0) | ~select_1(X0)) & (select_1(X0) | ~main_query_1(X0))) [nnf transformation 44]
+150. ! [X0,X1,X2,X3,X4] : ((from_4(X0,X1,X2,X3,X4) | ~tab1(X0,X1,X2,X3,X4)) & (tab1(X0,X1,X2,X3,X4) | ~from_4(X0,X1,X2,X3,X4))) [nnf transformation 4]
+151. ! [X0] : ((select_3(X0) | ! [X1,X2,X3,X4,X5] : ~from_4(X1,X2,X3,X4,X5)) & (? [X1,X2,X3,X4,X5] : from_4(X1,X2,X3,X4,X5) | ~select_3(X0))) [nnf transformation 46]
+152. ! [X0] : ((select_3(X0) | ! [X1,X2,X3,X4,X5] : ~from_4(X1,X2,X3,X4,X5)) & (? [X6,X7,X8,X9,X10] : from_4(X6,X7,X8,X9,X10) | ~select_3(X0))) [rectify 151]
+153. ? [X6,X7,X8,X9,X10] : from_4(X6,X7,X8,X9,X10) => from_4(sK5,sK6,sK7,sK8,sK9) [choice axiom]
+154. ! [X0] : ((select_3(X0) | ! [X1,X2,X3,X4,X5] : ~from_4(X1,X2,X3,X4,X5)) & (from_4(sK5,sK6,sK7,sK8,sK9) | ~select_3(X0))) [skolemisation 152,153]
+155. ! [X0] : ((main_query_2(X0) | ~select_3(X0)) & (select_3(X0) | ~main_query_2(X0))) [nnf transformation 47]
+156. ? [X0] : ((~main_query_2(X0) | ~main_query_1(X0)) & (main_query_2(X0) | main_query_1(X0))) [nnf transformation 143]
+157. ? [X0] : ((~main_query_2(X0) | ~main_query_1(X0)) & (main_query_2(X0) | main_query_1(X0))) => ((~main_query_2(sK10) | ~main_query_1(sK10)) & (main_query_2(sK10) | main_query_1(sK10))) [choice axiom]
+158. (~main_query_2(sK10) | ~main_query_1(sK10)) & (main_query_2(sK10) | main_query_1(sK10)) [skolemisation 156,157]
+159. ~from_2(X0,X1,X2,X3,X4) | tab1(X0,X1,X2,X3,X4) [cnf transformation 144]
+160. ~tab1(X0,X1,X2,X3,X4) | from_2(X0,X1,X2,X3,X4) [cnf transformation 144]
+161. from_2(sK0,sK1,sK2,sK3,sK4) | ~select_1(X0) [cnf transformation 148]
+162. select_1(X0) | ~from_2(X1,X2,X3,X4,X5) [cnf transformation 148]
+163. ~main_query_1(X0) | select_1(X0) [cnf transformation 149]
+164. ~select_1(X0) | main_query_1(X0) [cnf transformation 149]
+165. ~from_4(X0,X1,X2,X3,X4) | tab1(X0,X1,X2,X3,X4) [cnf transformation 150]
+166. ~tab1(X0,X1,X2,X3,X4) | from_4(X0,X1,X2,X3,X4) [cnf transformation 150]
+167. from_4(sK5,sK6,sK7,sK8,sK9) | ~select_3(X0) [cnf transformation 154]
+168. select_3(X0) | ~from_4(X1,X2,X3,X4,X5) [cnf transformation 154]
+169. ~main_query_2(X0) | select_3(X0) [cnf transformation 155]
+170. ~select_3(X0) | main_query_2(X0) [cnf transformation 155]
+204. main_query_2(sK10) | main_query_1(sK10) [cnf transformation 158]
+205. ~main_query_2(sK10) | ~main_query_1(sK10) [cnf transformation 158]
+237. 0 <=> ! [X1,X3,X5,X2,X4] : ~from_2(X1,X2,X3,X4,X5) [avatar definition]
+238. ~from_2(X1,X2,X3,X4,X5) <- {0} [avatar component clause 237]
+240. 2 <=> ! [X0] : select_1(X0) [avatar definition]
+241. select_1(X0) <- {2} [avatar component clause 240]
+242. 0 | 2 [avatar split clause 162,240,237]
+244. 4 <=> ! [X0] : ~select_1(X0) [avatar definition]
+245. ~select_1(X0) <- {4} [avatar component clause 244]
+250. 6 <=> from_2(sK0,sK1,sK2,sK3,sK4) [avatar definition]
+251. from_2(sK0,sK1,sK2,sK3,sK4) <- {6} [avatar component clause 250]
+252. 4 | 6 [avatar split clause 161,250,244]
+254. 8 <=> ! [X1,X3,X5,X2,X4] : ~from_4(X1,X2,X3,X4,X5) [avatar definition]
+255. ~from_4(X1,X2,X3,X4,X5) <- {8} [avatar component clause 254]
+257. 10 <=> ! [X0] : select_3(X0) [avatar definition]
+258. select_3(X0) <- {10} [avatar component clause 257]
+259. 8 | 10 [avatar split clause 168,257,254]
+261. 12 <=> ! [X0] : ~select_3(X0) [avatar definition]
+262. ~select_3(X0) <- {12} [avatar component clause 261]
+267. 14 <=> from_4(sK5,sK6,sK7,sK8,sK9) [avatar definition]
+268. from_4(sK5,sK6,sK7,sK8,sK9) <- {14} [avatar component clause 267]
+269. 12 | 14 [avatar split clause 167,267,261]
+271. 16 <=> main_query_1(sK10) [avatar definition]
+272. main_query_1(sK10) <- {16} [avatar component clause 271]
+274. 17 <=> ~main_query_1(sK10) [avatar definition]
+275. ~main_query_1(sK10) <- {17} [avatar component clause 274]
+277. 18 <=> main_query_2(sK10) [avatar definition]
+278. main_query_2(sK10) <- {18} [avatar component clause 277]
+280. 19 <=> ~main_query_2(sK10) [avatar definition]
+281. ~main_query_2(sK10) <- {19} [avatar component clause 280]
+282. ~17 | ~19 [avatar split clause 205,280,274]
+283. 16 | 18 [avatar split clause 204,277,271]
+286. select_1(sK10) <- {16} [resolution 163,272]
+287. $false <- {4, 16} [subsumption resolution 286,245]
+288. ~4 | ~16 [avatar contradiction clause 287]
+289. select_3(sK10) <- {18} [resolution 169,278]
+290. $false <- {12, 18} [subsumption resolution 289,262]
+291. ~12 | ~18 [avatar contradiction clause 290]
+297. main_query_2(X0) <- {10} [resolution 170,258]
+301. tab1(sK5,sK6,sK7,sK8,sK9) <- {14} [resolution 165,268]
+303. from_2(sK5,sK6,sK7,sK8,sK9) <- {14} [resolution 301,160]
+304. $false <- {0, 14} [subsumption resolution 303,238]
+305. ~0 | ~14 [avatar contradiction clause 304]
+306. $false <- {10, 19} [subsumption resolution 281,297]
+307. ~10 | 19 [avatar contradiction clause 306]
+311. main_query_1(X0) <- {2} [resolution 241,164]
+312. tab1(sK0,sK1,sK2,sK3,sK4) <- {6} [resolution 251,159]
+314. from_4(sK0,sK1,sK2,sK3,sK4) <- {6} [resolution 312,166]
+316. $false <- {6, 8} [subsumption resolution 314,255]
+317. ~6 | ~8 [avatar contradiction clause 316]
+318. $false <- {2, 17} [subsumption resolution 275,311]
+319. ~2 | 17 [avatar contradiction clause 318]
+320. $false [avatar sat refutation 242,252,259,269,282,283,288,291,305,307,317,319]
+% SZS output end Proof for output_query02_query04
 % ------------------------------
 % Version: Vampire 4.2.2 (commit e1949dd on 2017-12-14 18:39:21 +0000)
-% Termination reason: Satisfiable
+% Termination reason: Refutation
 
 % Memory used [KB]: 4861
-% Time elapsed: 0.024 s
+% Time elapsed: 0.027 s
 % ------------------------------
 % ------------------------------
