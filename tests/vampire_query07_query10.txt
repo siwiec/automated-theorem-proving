@@ -20,22 +20,22 @@ tff(u373,axiom,
     (![X1, X0] : ((tab1(sK5(X1,X0),sK6(X1,X0),sK7(X1,X0),sK8(X1,X0),sK9(X1,X0)) | ~select_4(X0))))).
 
 tff(u372,axiom,
-    (![X1, X0] : ((~where_3(X0,X1) | eq(X0,X1))))).
+    (![X1, X0] : ((~where_3(X0,X1) | eq(X1,X0))))).
 
 tff(u371,axiom,
-    ((~(![X1, X0] : ((~where_3(X1,X0) | select_1(X1))))) | (![X1, X0] : ((~where_3(X1,X0) | select_1(X1)))))).
+    ((~(![X1, X0] : ((~where_3(X0,X1) | select_1(X1))))) | (![X1, X0] : ((~where_3(X0,X1) | select_1(X1)))))).
 
 tff(u370,axiom,
-    (![X1, X0] : ((where_3(X0,X1) | ~select_4(X0))))).
+    (![X1, X0] : ((where_3(X1,X0) | ~select_4(X0))))).
 
 tff(u369,axiom,
-    (![X1, X0] : ((where_3(X1,X0) | ~select_1(X1))))).
+    (![X1, X0] : ((where_3(X0,X1) | ~select_1(X1))))).
 
 tff(u368,axiom,
-    (![X1, X0] : ((~eq(X0,X1) | where_6(X0,X1))))).
+    (![X1, X0] : ((~eq(X1,X0) | where_6(X0,X1))))).
 
 tff(u367,axiom,
-    (![X1, X0] : ((~eq(X0,X1) | where_3(X0,X1))))).
+    (![X1, X0] : ((~eq(X1,X0) | where_3(X0,X1))))).
 
 tff(u366,axiom,
     (![X1, X0] : ((eq(X0,X1) | ~select_4(X0))))).
@@ -65,19 +65,19 @@ tff(u358,axiom,
     (![X1, X0] : ((from_5(sK5(X0,X1),sK6(X0,X1),sK7(X0,X1),sK8(X0,X1),sK9(X0,X1)) | ~select_4(X1))))).
 
 tff(u357,axiom,
-    (![X1, X0] : ((~where_6(X0,X1) | eq(X0,X1))))).
+    (![X1, X0] : ((~where_6(X0,X1) | eq(X1,X0))))).
 
 tff(u356,axiom,
-    (![X3, X2] : ((where_6(X2,X3) | ~select_1(X2))))).
+    (![X3, X2] : ((where_6(X2,X3) | ~select_1(X3))))).
 
 tff(u355,axiom,
-    (![X1, X0] : ((where_6(X1,X0) | ~select_4(X1))))).
+    (![X1, X0] : ((where_6(X0,X1) | ~select_4(X1))))).
 
 tff(u354,axiom,
     ((~(![X3, X5, X2, X4, X6] : (~from_5(X2,X3,X4,X5,X6)))) | (![X2] : (~select_4(X2))))).
 
 tff(u353,axiom,
-    ((~(![X1, X0] : ((~where_3(X1,X0) | select_1(X1))))) | (![X2] : ((~select_4(X2) | select_1(X2)))))).
+    ((~(![X1, X0] : ((~where_3(X0,X1) | select_1(X1))))) | (![X2] : ((~select_4(X2) | select_1(X2)))))).
 
 tff(u352,axiom,
     (![X0] : ((~select_4(X0) | main_query_2(X0))))).
@@ -103,6 +103,6 @@ tff(u347,negated_conjecture,
 % Termination reason: Satisfiable
 
 % Memory used [KB]: 4861
-% Time elapsed: 0.029 s
+% Time elapsed: 0.027 s
 % ------------------------------
 % ------------------------------

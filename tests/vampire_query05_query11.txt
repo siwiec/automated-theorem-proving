@@ -47,7 +47,7 @@ tff(u311,axiom,
     (![X1, X3, X0, X2, X4] : ((~from_4(X0,X1,X2,X3,X4) | tab1(X0,X1,X2,X3,X4))))).
 
 tff(u310,axiom,
-    (![X1, X3, X5, X0, X2, X4] : ((~from_4(X1,X2,X3,X4,X5) | ~where_5(X2,X0) | select_3(X0))))).
+    (![X1, X3, X5, X0, X2, X4] : ((~from_4(X1,X2,X3,X4,X5) | ~where_5(X0,X2) | select_3(X0))))).
 
 tff(u309,axiom,
     (![X0] : ((from_4(sK4(X0),sK5(X0),sK6(X0),sK7(X0),sK8(X0)) | ~select_3(X0))))).
@@ -56,19 +56,19 @@ tff(u308,axiom,
     (![X0] : ((from_4(sK0(X0),X0,sK1(X0),sK2(X0),sK3(X0)) | ~select_1(X0))))).
 
 tff(u307,axiom,
-    (![X1, X2] : ((~where_5(X1,X2) | ~select_1(X1) | select_3(X2))))).
+    (![X1, X2] : ((~where_5(X2,X1) | ~select_1(X1) | select_3(X2))))).
 
 tff(u306,axiom,
-    (![X1, X0] : ((~where_5(X0,X1) | eq(X1,X0))))).
+    (![X1, X0] : ((~where_5(X0,X1) | eq(X0,X1))))).
 
 tff(u305,axiom,
-    (![X1, X2] : ((~where_5(sK5(X1),X2) | ~select_3(X1) | select_3(X2))))).
+    (![X1, X2] : ((~where_5(X2,sK5(X1)) | ~select_3(X1) | select_3(X2))))).
 
 tff(u304,axiom,
-    (![X0] : ((where_5(sK5(X0),X0) | ~select_3(X0))))).
+    (![X0] : ((where_5(X0,sK5(X0)) | ~select_3(X0))))).
 
 tff(u303,axiom,
-    (![X1, X0] : ((~eq(X1,X0) | where_5(X0,X1))))).
+    (![X1, X0] : ((~eq(X0,X1) | where_5(X0,X1))))).
 
 tff(u302,axiom,
     (![X0] : ((eq(X0,sK5(X0)) | ~select_3(X0))))).

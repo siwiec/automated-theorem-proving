@@ -17,19 +17,19 @@ tff(u428,axiom,
     (![X1, X0] : ((tab1(sK0(X1,X0),sK1(X1,X0),sK2(X1,X0),sK3(X1,X0),sK4(X1,X0)) | ~select_1(X0))))).
 
 tff(u427,axiom,
-    (![X1, X0] : ((~where_3(X0,X1) | eq(X0,X1))))).
+    (![X1, X0] : ((~where_3(X0,X1) | eq(X1,X0))))).
 
 tff(u426,axiom,
-    ((~(![X1, X0] : ((~where_3(X1,X0) | select_1(X1))))) | (![X1, X0] : ((~where_3(X1,X0) | select_1(X1)))))).
+    ((~(![X1, X0] : ((~where_3(X0,X1) | select_1(X1))))) | (![X1, X0] : ((~where_3(X0,X1) | select_1(X1)))))).
 
 tff(u425,axiom,
-    (![X1, X0] : ((where_3(X1,X0) | ~select_1(X1))))).
+    (![X1, X0] : ((where_3(X0,X1) | ~select_1(X1))))).
 
 tff(u424,axiom,
     (![X1, X0] : ((~eq(X0,X1) | where_6(X0,X1))))).
 
 tff(u423,axiom,
-    (![X1, X0] : ((~eq(X0,X1) | where_3(X0,X1))))).
+    (![X1, X0] : ((~eq(X1,X0) | where_3(X0,X1))))).
 
 tff(u422,axiom,
     (![X1, X0] : ((eq(X0,X1) | ~select_1(X0))))).
@@ -91,6 +91,6 @@ tff(u405,negated_conjecture,
 % Termination reason: Satisfiable
 
 % Memory used [KB]: 4989
-% Time elapsed: 0.025 s
+% Time elapsed: 0.029 s
 % ------------------------------
 % ------------------------------

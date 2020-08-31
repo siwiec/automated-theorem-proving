@@ -16,8 +16,8 @@ fof(from_2,definition,(
 %     ]
 % }
 fof(where_3,definition,(
-    ! [TAB1_COL11,TABALIAS1_COL12] :
-      ( where_3(TAB1_COL11,TABALIAS1_COL12)
+    ! [TABALIAS1_COL12,TAB1_COL11] :
+      ( where_3(TABALIAS1_COL12,TAB1_COL11)
     <=> eq(TAB1_COL11,TABALIAS1_COL12) ) )).
 
 % {
@@ -40,7 +40,7 @@ fof(select_1,definition,(
       ( select_1(TAB1_COL11)
     <=> ? [TABALIAS1_COL11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15] :
           ( from_2(TABALIAS1_COL11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15)
-          & where_3(TAB1_COL11,TABALIAS1_COL12) ) ) )).
+          & where_3(TABALIAS1_COL12,TAB1_COL11) ) ) )).
 
 % {
 %     "select": {
@@ -79,8 +79,8 @@ fof(from_5,definition,(
 %     ]
 % }
 fof(where_6,definition,(
-    ! [COL22,COL12] :
-      ( where_6(COL22,COL12)
+    ! [COL12,COL22] :
+      ( where_6(COL12,COL22)
     <=> eq(COL22,COL12) ) )).
 
 % {
@@ -103,5 +103,5 @@ fof(where_6,definition,(
 %         ]
 %     }
 % }
-ERROR: Line 79 Char 326 Token "," continuing with "COL12)))))).
+ERROR: Line 79 Char 326 Token "," continuing with "COL22)))))).
 "

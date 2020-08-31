@@ -1,0 +1,63 @@
+% [
+%     "tab1",
+%     "tab2"
+% ]
+fof(from_2,definition,(
+    ! [TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15,TAB2_COL21,TAB2_COL22,TAB2_COL23,TAB2_COL24,TAB2_COL25] :
+      ( from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15,TAB2_COL21,TAB2_COL22,TAB2_COL23,TAB2_COL24,TAB2_COL25)
+    <=> ( tab1(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15)
+        & tab2(TAB2_COL21,TAB2_COL22,TAB2_COL23,TAB2_COL24,TAB2_COL25) ) ) )).
+
+% {
+%     "or": [
+%         {
+%             "gte": [
+%                 "col22",
+%                 "col12"
+%             ]
+%         },
+%         {
+%             "eq": [
+%                 "col11",
+%                 "col21"
+%             ]
+%         }
+%     ]
+% }
+fof(where_3,definition,(
+    ! [COL22,COL11,COL12,COL21] :
+      ( where_3(COL22,COL11,COL12,COL21)
+    <=> ( gte(COL22,COL12)
+        | eq(COL11,COL21) ) ) )).
+
+% {
+%     "select": [
+%         {
+%             "value": "col11"
+%         },
+%         {
+%             "value": "col21"
+%         }
+%     ],
+%     "from": [
+%         "tab1",
+%         "tab2"
+%     ],
+%     "where": {
+%         "or": [
+%             {
+%                 "gte": [
+%                     "col22",
+%                     "col12"
+%                 ]
+%             },
+%             {
+%                 "eq": [
+%                     "col11",
+%                     "col21"
+%                 ]
+%             }
+%         ]
+%     }
+% }
+ERROR: Line 53 Char 326 Token "," continuing with "COL11,COL12,COL21))"

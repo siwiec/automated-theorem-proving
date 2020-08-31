@@ -50,16 +50,16 @@ tff(u411,axiom,
     (![X1, X3, X0, X2] : ((tab2(sK9(X2,X3,X0,X1),sK10(X2,X3,X0,X1),sK11(X2,X3,X0,X1),sK12(X2,X3,X0,X1),sK13(X2,X3,X0,X1)) | ~select_3(X0,X1))))).
 
 tff(u410,axiom,
-    (![X1, X3, X0, X2] : ((~where_5(X0,X1,X2,X3) | lt(X1,X0) | eq(X2,X3))))).
+    (![X1, X3, X0, X2] : ((~where_5(X0,X1,X2,X3) | lt(X0,X3) | eq(X2,X1))))).
 
 tff(u409,axiom,
-    (![X1, X3, X0, X2] : ((where_5(X1,X0,X2,X3) | ~select_3(X2,X3))))).
+    (![X1, X3, X0, X2] : ((where_5(X1,X3,X2,X0) | ~select_3(X2,X3))))).
 
 tff(u408,axiom,
-    (![X1, X3, X0, X2] : ((where_5(X0,X1,X2,X3) | ~eq(X2,X3))))).
+    (![X1, X3, X0, X2] : ((where_5(X0,X1,X2,X3) | ~eq(X2,X1))))).
 
 tff(u407,axiom,
-    (![X1, X3, X0, X2] : ((where_5(X0,X1,X2,X3) | ~lt(X1,X0))))).
+    (![X1, X3, X0, X2] : ((where_5(X0,X1,X2,X3) | ~lt(X0,X3))))).
 
 tff(u406,axiom,
     ((~(![X25, X27, X29, X26, X28] : (~tab1(X25,X26,X27,X28,X29)))) | (![X5, X4] : (~select_3(X4,X5))))).
@@ -91,6 +91,6 @@ tff(u399,negated_conjecture,
 % Termination reason: Satisfiable
 
 % Memory used [KB]: 4989
-% Time elapsed: 0.028 s
+% Time elapsed: 0.029 s
 % ------------------------------
 % ------------------------------

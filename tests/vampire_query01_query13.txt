@@ -35,10 +35,10 @@ tff(u387,axiom,
     ((~(![X1, X0] : (~where_5(X1,X0)))) | (![X1, X0] : (~where_5(X1,X0))))).
 
 tff(u386,axiom,
-    (![X1, X0] : ((~where_5(X0,X1) | eq(X0,X1))))).
+    (![X1, X0] : ((~where_5(X0,X1) | eq(X1,X0))))).
 
 tff(u385,axiom,
-    (![X1, X0] : ((~eq(X0,X1) | where_5(X0,X1))))).
+    (![X1, X0] : ((~eq(X1,X0) | where_5(X0,X1))))).
 
 tff(u384,axiom,
     (![X1, X0] : ((~select_3(X0,X1) | main_query_2(X0,X1))))).
@@ -67,6 +67,6 @@ tff(u378,negated_conjecture,
 % Termination reason: Satisfiable
 
 % Memory used [KB]: 4989
-% Time elapsed: 0.028 s
+% Time elapsed: 0.027 s
 % ------------------------------
 % ------------------------------

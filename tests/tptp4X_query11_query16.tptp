@@ -89,8 +89,8 @@ fof(from_5,definition,(
 %     ]
 % }
 fof(where_6,definition,(
-    ! [COL21,COL22,COL11,COL12] :
-      ( where_6(COL21,COL22,COL11,COL12)
+    ! [COL12,COL22,COL11,COL21] :
+      ( where_6(COL12,COL22,COL11,COL21)
     <=> ( lt(COL22,COL12)
         | eq(COL11,COL21) ) ) )).
 
@@ -124,5 +124,4 @@ fof(where_6,definition,(
 %         ]
 %     }
 % }
-ERROR: Line 99 Char 332 Token "," continuing with "COL11,COL12)))))).
-"
+ERROR: Line 99 Char 326 Token "," continuing with "COL22,COL11,COL21))"
