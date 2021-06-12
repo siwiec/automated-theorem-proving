@@ -3,24 +3,28 @@
 cd tests
 
 OUTPUT_DIR="output"
+REPORT="${OUTPUT_DIR}/report.txt"
 rm -rf "${OUTPUT_DIR}"
 mkdir -p "${OUTPUT_DIR}"
+touch "${REPORT}"
+
+
 
 # rm *.tptp
 # rm *.txt
 # rm *.log
 
 for query in *.sql; do
-    echo -e "\033[0;31m${query}\033[0m"
-    cat "${query}"
-    echo
+    echo -e "\033[0;31m${query}\033[0m" | tee -a "${REPORT}"
+    cat "${query}" | tee -a "${REPORT}"
+    echo | tee -a "${REPORT}"
 done;
 
 
-echo -e "\033[0;31m#############################################\033[0m"
+echo -e "\033[0;31m#############################################\033[0m" | tee -a "${REPORT}"
 
 
-#for query1 in query10.sql; do
+#for query1 in query20.sql; do
 for query1 in *.sql; do
     for query2 in *.sql; do
         if [[ "${query1}" < "${query2}" ]]; then
@@ -31,32 +35,52 @@ for query1 in *.sql; do
             log_file="${OUTPUT_DIR}/${query1/.sql/}_${query2/.sql}.log"
 
 
-            echo "${query1/.sql/} ${query2/.sql/}"
+            echo -n "${query1/.sql/} ${query2/.sql/} -- " | tee -a "${REPORT}"
 
             # run translation
             python ../translate.py database.schema "${query1}" "${query2}" > "${raw_file}" 2> "${log_file}"
+            CONJECTURE=$?
 
             # run tptp4X
             ../tptp4X "${raw_file}" > "${tptp_file}" 2>> "${log_file}"
             if [ ! -f "${tptp_file}" ]
             then
-                echo "tptpX4 failed" | tee -a "${log_file}"
+                echo "TPTPX4 FAILED" | tee -a "${REPORT}"
                 continue
             fi
             
+            if [ $CONJECTURE -ne 0 ]
+            then
+                echo -e "\033[0;31mNOT EQUIVALENT\033[0m (numbers of columns do not match)" | tee -a "${REPORT}"
+                continue
+            fi
 
             # run vampire4.2.2
             ../provers/vampire/vampire4.2.2 "${tptp_file}" > "${vampire_file}" 2>> "${log_file}"
             if [ ! -f "${vampire_file}" ]
             then
-                echo "vampire4.2.2 failed" | tee -a "${log_file}"
+                echo -e "\033[0;33mVAMPIRE FAILED; NO OUPUT FILE\033[0m" | tee -a "${REPORT}"
                 continue
             fi
+
+            if grep "Time limit reached" ${vampire_file} &> /dev/null
+            then
+                echo -e "\033[0;33mVAMPIRE TIMEOUT\033[0m" | tee -a "${REPORT}"
+                continue
+            fi
+
+            if grep "Refutation found" ${vampire_file} &> /dev/null
+            then
+                echo -e "\033[0;32mEQUIVALENT\033[0m" | tee -a "${REPORT}"
+                continue
+            fi
+
+            if grep "Refutation not found" ${vampire_file} &> /dev/null
+            then
+                echo -e "\033[0;33mPROOF NOT FOUND\033[0m" | tee -a "${REPORT}"
+                continue
+            fi
+            echo -e "\033[0;31mNOT EQUIVALENT\033[0m" | tee -a "${REPORT}"
         fi
     done
 done
-
-RESULTS_FILE="${OUTPUT_DIR}/results.txt"
-echo -e "\033[0;31mPairs of equivalent queries:\033[0m" > "$RESULTS_FILE"
-grep -nR "Refutation found" "${OUTPUT_DIR}" | \grep -o query.._query.. | sed "s/_/ /g" | sort | tee -a "$RESULTS_FILE"
-

@@ -60,8 +60,8 @@ fof(query_4,definition,(
 %     ]
 % }
 fof(where_3,definition,(
-    ! [TAB1_COL12,TAB1_COL11] :
-      ( where_3(TAB1_COL12,TAB1_COL11)
+    ! [TAB1_COL11,TAB1_COL12] :
+      ( where_3(TAB1_COL11,TAB1_COL12)
     <=> ( eq(TAB1_COL11,TAB1_COL12)
         & query_4(TAB1_COL11) ) ) )).
 
@@ -102,7 +102,7 @@ fof(select_1,definition,(
       ( select_1(TAB1_COL11,TAB1_COL12)
     <=> ? [TAB1_COL13,TAB1_COL14,TAB1_COL15] :
           ( from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15)
-          & where_3(TAB1_COL12,TAB1_COL11) ) ) )).
+          & where_3(TAB1_COL11,TAB1_COL12) ) ) )).
 
 % {
 %     "select": [
@@ -159,8 +159,8 @@ fof(from_8,definition,(
 %     ]
 % }
 fof(where_9,definition,(
-    ! [TAB1_COL12,TAB1_COL11] :
-      ( where_9(TAB1_COL12,TAB1_COL11)
+    ! [TAB1_COL11,TAB1_COL12] :
+      ( where_9(TAB1_COL11,TAB1_COL12)
     <=> eq(TAB1_COL11,TAB1_COL12) ) )).
 
 % {
@@ -178,5 +178,5 @@ fof(where_9,definition,(
 %         ]
 %     }
 % }
-ERROR: Line 140 Char 277 Token "," continuing with " TAB1_COL11)))))).
+ERROR: Line 140 Char 289 Token ")" continuing with "))))).
 "

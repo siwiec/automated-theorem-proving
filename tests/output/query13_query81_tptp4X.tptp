@@ -1,23 +1,36 @@
 % [
-%     "tab1",
-%     "tab2"
+%     "tab1"
 % ]
 fof(from_2,definition,(
-    ! [TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15,TAB2_COL21,TAB2_COL22,TAB2_COL23,TAB2_COL24,TAB2_COL25] :
-      ( from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15,TAB2_COL21,TAB2_COL22,TAB2_COL23,TAB2_COL24,TAB2_COL25)
-    <=> ( tab1(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15)
-        & tab2(TAB2_COL21,TAB2_COL22,TAB2_COL23,TAB2_COL24,TAB2_COL25) ) ) )).
+    ! [TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
+      ( from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15)
+    <=> tab1(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) ) )).
 
 % {
-%     "eq": [
-%         "tab1.col11",
-%         "tab1.col12"
+%     "and": [
+%         {
+%             "not": {
+%                 "lt": [
+%                     "tab1.col11",
+%                     "tab1.col12"
+%                 ]
+%             }
+%         },
+%         {
+%             "not": {
+%                 "gt": [
+%                     "tab1.col11",
+%                     "tab1.col12"
+%                 ]
+%             }
+%         }
 %     ]
 % }
 fof(where_3,definition,(
     ! [TAB1_COL12,TAB1_COL11] :
       ( where_3(TAB1_COL12,TAB1_COL11)
-    <=> eq(TAB1_COL11,TAB1_COL12) ) )).
+    <=> ( ~ lt(TAB1_COL11,TAB1_COL12)
+        & ~ gt(TAB1_COL11,TAB1_COL12) ) ) )).
 
 % {
 %     "select": [
@@ -28,22 +41,33 @@ fof(where_3,definition,(
 %             "value": "tab1.col12"
 %         }
 %     ],
-%     "from": [
-%         "tab1",
-%         "tab2"
-%     ],
+%     "from": "tab1",
 %     "where": {
-%         "eq": [
-%             "tab1.col11",
-%             "tab1.col12"
+%         "and": [
+%             {
+%                 "not": {
+%                     "lt": [
+%                         "tab1.col11",
+%                         "tab1.col12"
+%                     ]
+%                 }
+%             },
+%             {
+%                 "not": {
+%                     "gt": [
+%                         "tab1.col11",
+%                         "tab1.col12"
+%                     ]
+%                 }
+%             }
 %         ]
 %     }
 % }
 fof(select_1,definition,(
-    ! [TAB1_COL11,TAB1_COL12] :
+    ! [TAB1_COL12,TAB1_COL11] :
       ( select_1(TAB1_COL11,TAB1_COL12)
-    <=> ? [TAB1_COL13,TAB1_COL14,TAB1_COL15,TAB2_COL21,TAB2_COL22,TAB2_COL23,TAB2_COL24,TAB2_COL25] :
-          ( from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15,TAB2_COL21,TAB2_COL22,TAB2_COL23,TAB2_COL24,TAB2_COL25)
+    <=> ? [TAB1_COL13,TAB1_COL14,TAB1_COL15] :
+          ( from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15)
           & where_3(TAB1_COL12,TAB1_COL11) ) ) )).
 
 % {
@@ -55,14 +79,25 @@ fof(select_1,definition,(
 %             "value": "tab1.col12"
 %         }
 %     ],
-%     "from": [
-%         "tab1",
-%         "tab2"
-%     ],
+%     "from": "tab1",
 %     "where": {
-%         "eq": [
-%             "tab1.col11",
-%             "tab1.col12"
+%         "and": [
+%             {
+%                 "not": {
+%                     "lt": [
+%                         "tab1.col11",
+%                         "tab1.col12"
+%                     ]
+%                 }
+%             },
+%             {
+%                 "not": {
+%                     "gt": [
+%                         "tab1.col11",
+%                         "tab1.col12"
+%                     ]
+%                 }
+%             }
 %         ]
 %     }
 % }
@@ -108,5 +143,5 @@ fof(where_6,definition,(
 %         ]
 %     }
 % }
-ERROR: Line 84 Char 277 Token "," continuing with " TAB1_COL11)))))).
+ERROR: Line 119 Char 277 Token "," continuing with " TAB1_COL11)))))).
 "

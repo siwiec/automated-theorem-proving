@@ -90,6 +90,8 @@ def build_axioms():
 
     for predicate in get_predicates():
         variables = get_variables(predicate)
+        if len(variables) < 2:
+            continue
         for variable in variables:
             save("fof(substitution_" + predicate + "_" + variable
                 + ", axiom, ( ! [X, "
@@ -99,9 +101,15 @@ def build_axioms():
                 + ", ".join(["X" if x == variable else x for x in variables])
                 + ")))).")
 
-    variables = ", ".join(get_variables("main_query_1"))
-    save("", comment="Conjecture:")
-    save("fof(equivalence_check, conjecture, ( ! [ " + variables + " ] : ( main_query_1(" + variables + ") <=> main_query_2(" + variables + ") ) )).")
+    if len(get_variables("main_query_1")) == len(get_variables("main_query_2")):
+        variables = ", ".join(get_variables("main_query_1"))
+        save("", comment="Conjecture:")
+        save("fof(equivalence_check, conjecture, ( ! [ " + variables + " ] : ( main_query_1(" + variables + ") <=> main_query_2(" + variables + ") ) )).")
+        return 0
+    else:
+        save("", comment="These queries cannot be equivalent; different numbers of columns are selected")
+        save("fof(equivalence_check, conjecture, ( $false )).")
+        return 1
 
 
 
@@ -290,11 +298,12 @@ def parse_select(statement):
         where_external = []
 
     external = list(set(from_external + where_external))
+    external = [x for x in external if x not in columns]
     exists = [x for x in from_variables if x not in values]
 
     
     save("fof(" + select_predicate + ", definition, ( ! ["
-                + ", ".join(values)
+                + ", ".join(list(set(values)))
             + "] : ("
                 + select_predicate
                 + "("
@@ -381,7 +390,8 @@ if __name__ == '__main__':
     log("Translating " + sys.argv[3] + "...")
     tptp(sql2, 'main_query_2')
 
-    build_axioms()
+    conjecture = build_axioms()
+        
     print_predicates()
     for line in output:
         print(line)
@@ -390,3 +400,6 @@ if __name__ == '__main__':
     log(json.dumps(columns, indent=4))
     log("External:")
     log(json.dumps(external, indent=4))
+    
+    log("Exiting with code: " + str(conjecture))
+    sys.exit(conjecture)
