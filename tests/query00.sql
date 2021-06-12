@@ -1,2 +1,2 @@
-SELECT col11
+SELECT tab1.col11
 FROM tab1

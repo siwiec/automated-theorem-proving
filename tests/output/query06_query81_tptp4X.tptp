@@ -1,0 +1,144 @@
+% [
+%     {
+%         "value": "tab1",
+%         "name": "tabalias1"
+%     }
+% ]
+fof(from_4,definition,(
+    ! [TABALIAS1_COL11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15] :
+      ( from_4(TABALIAS1_COL11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15)
+    <=> tab1(TABALIAS1_COL11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15) ) )).
+
+% {
+%     "select": {
+%         "value": "tabalias1.col11"
+%     },
+%     "from": {
+%         "value": "tab1",
+%         "name": "tabalias1"
+%     }
+% }
+fof(select_3,definition,(
+    ! [TABALIAS1_COL11] :
+      ( select_3(TABALIAS1_COL11)
+    <=> ? [TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15] :
+          ( from_4(TABALIAS1_COL11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15)
+          & $true ) ) )).
+
+% {
+%     "select": {
+%         "value": "tabalias1.col11"
+%     },
+%     "from": {
+%         "value": "tab1",
+%         "name": "tabalias1"
+%     }
+% }
+fof(query_2,definition,(
+    ! [COL11] :
+      ( query_2(COL11)
+    <=> select_3(COL11) ) )).
+
+% [
+%     {
+%         "value": {
+%             "select": {
+%                 "value": "tabalias1.col11"
+%             },
+%             "from": {
+%                 "value": "tab1",
+%                 "name": "tabalias1"
+%             }
+%         },
+%         "name": "subquery"
+%     }
+% ]
+fof(from_5,definition,(
+    ! [SUBQUERY_COL11] :
+      ( from_5(SUBQUERY_COL11)
+    <=> query_2(SUBQUERY_COL11) ) )).
+
+% {
+%     "select": {
+%         "value": "subquery.col11"
+%     },
+%     "from": {
+%         "value": {
+%             "select": {
+%                 "value": "tabalias1.col11"
+%             },
+%             "from": {
+%                 "value": "tab1",
+%                 "name": "tabalias1"
+%             }
+%         },
+%         "name": "subquery"
+%     }
+% }
+fof(select_1,definition,(
+    ! [SUBQUERY_COL11] :
+      ( select_1(SUBQUERY_COL11)
+    <=> ( from_5(SUBQUERY_COL11)
+        & $true ) ) )).
+
+% {
+%     "select": {
+%         "value": "subquery.col11"
+%     },
+%     "from": {
+%         "value": {
+%             "select": {
+%                 "value": "tabalias1.col11"
+%             },
+%             "from": {
+%                 "value": "tab1",
+%                 "name": "tabalias1"
+%             }
+%         },
+%         "name": "subquery"
+%     }
+% }
+fof(main_query_1,definition,(
+    ! [COL11] :
+      ( main_query_1(COL11)
+    <=> select_1(COL11) ) )).
+
+% [
+%     {
+%         "value": "tab1",
+%         "name": "tabalias1"
+%     }
+% ]
+fof(from_7,definition,(
+    ! [TABALIAS1_COL11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15] :
+      ( from_7(TABALIAS1_COL11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15)
+    <=> tab1(TABALIAS1_COL11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15) ) )).
+
+% {
+%     "eq": [
+%         "tab1.col11",
+%         "tab1.col12"
+%     ]
+% }
+fof(where_8,definition,(
+    ! [TAB1_COL11,TAB1_COL12] :
+      ( where_8(TAB1_COL11,TAB1_COL12)
+    <=> eq(TAB1_COL11,TAB1_COL12) ) )).
+
+% {
+%     "select": {
+%         "value": "tab1.col11"
+%     },
+%     "from": {
+%         "value": "tab1",
+%         "name": "tabalias1"
+%     },
+%     "where": {
+%         "eq": [
+%             "tab1.col11",
+%             "tab1.col12"
+%         ]
+%     }
+% }
+ERROR: Line 108 Char 289 Token ")" continuing with "))))).
+"

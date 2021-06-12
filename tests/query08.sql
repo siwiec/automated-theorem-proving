@@ -1,3 +1,4 @@
-SELECT col11 as alias1
+SELECT tab1.col11
 FROM tab1
-WHERE alias1 = col12
+WHERE ((tab1.col11 <= tab1.col11) and (tab1.col11 >= tab1.col11))
+

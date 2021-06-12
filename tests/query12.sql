@@ -1,3 +1,6 @@
-SELECT col11
+
+SELECT tab1.col11,
+    tab1.col12
 FROM tab1
-WHERE col11 IN tab1
+WHERE (tab1.col11 <= tab1.col12) and (tab1.col12 <= tab1.col11)
+

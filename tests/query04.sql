@@ -1,2 +1,3 @@
-SELECT tab1.col11 as alias1
-FROM tab1 as tabalias1
+SELECT tab1.col11 as alias11
+FROM tab1
+WHERE alias11 = alias11

@@ -1,4 +1,4 @@
-SELECT col11,
-col21
+SELECT tab1.col11,
+    tab1.col12
 FROM tab1, tab2
-WHERE col22 = col12
+WHERE tab1.col11 = tab1.col12

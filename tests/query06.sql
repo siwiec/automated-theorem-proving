@@ -1,3 +1,5 @@
-SELECT col11
-FROM tab1
-WHERE col11 = col12
+SELECT subquery.col11
+FROM
+(SELECT tabalias1.col11
+FROM tab1 as tabalias1) as subquery
+
