@@ -61,9 +61,9 @@ fof(select_3,definition,(
 %     }
 % }
 fof(query_2,definition,(
-    ! [COLALIAS,COL12] :
-      ( query_2(COLALIAS,COL12)
-    <=> select_3(COLALIAS,COL12) ) )).
+    ! [COLALIAS,COL12,COL11] :
+      ( query_2(COLALIAS,COL12,COL11)
+    <=> select_3(COLALIAS,COL12,COL11) ) )).
 
 % [
 %     {
@@ -89,9 +89,9 @@ fof(query_2,definition,(
 %     }
 % ]
 fof(from_6,definition,(
-    ! [ALIAS_COLALIAS,ALIAS_COL12] :
-      ( from_6(ALIAS_COLALIAS,ALIAS_COL12)
-    <=> query_2(ALIAS_COLALIAS,ALIAS_COL12) ) )).
+    ! [ALIAS_COLALIAS,ALIAS_COL12,ALIAS_COL11] :
+      ( from_6(ALIAS_COLALIAS,ALIAS_COL12,ALIAS_COL11)
+    <=> query_2(ALIAS_COLALIAS,ALIAS_COL12,ALIAS_COL11) ) )).
 
 % {
 %     "select": {
@@ -122,8 +122,8 @@ fof(from_6,definition,(
 fof(select_1,definition,(
     ! [ALIAS_COLALIAS] :
       ( select_1(ALIAS_COLALIAS)
-    <=> ? [ALIAS_COL12] :
-          ( from_6(ALIAS_COLALIAS,ALIAS_COL12)
+    <=> ? [ALIAS_COL12,ALIAS_COL11] :
+          ( from_6(ALIAS_COLALIAS,ALIAS_COL12,ALIAS_COL11)
           & $true ) ) )).
 
 % {

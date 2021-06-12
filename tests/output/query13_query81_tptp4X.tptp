@@ -27,8 +27,8 @@ fof(from_2,definition,(
 %     ]
 % }
 fof(where_3,definition,(
-    ! [TAB1_COL12,TAB1_COL11] :
-      ( where_3(TAB1_COL12,TAB1_COL11)
+    ! [TAB1_COL11,TAB1_COL12] :
+      ( where_3(TAB1_COL11,TAB1_COL12)
     <=> ( ~ lt(TAB1_COL11,TAB1_COL12)
         & ~ gt(TAB1_COL11,TAB1_COL12) ) ) )).
 
@@ -68,7 +68,7 @@ fof(select_1,definition,(
       ( select_1(TAB1_COL11,TAB1_COL12)
     <=> ? [TAB1_COL13,TAB1_COL14,TAB1_COL15] :
           ( from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15)
-          & where_3(TAB1_COL12,TAB1_COL11) ) ) )).
+          & where_3(TAB1_COL11,TAB1_COL12) ) ) )).
 
 % {
 %     "select": [
