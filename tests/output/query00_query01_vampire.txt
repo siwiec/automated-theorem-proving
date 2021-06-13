@@ -3,30 +3,30 @@
 % SZS output start Proof for query00_query01_tptp4X
 1. ! [X0,X1,X2,X3,X4] : (from_2(X0,X1,X2,X3,X4) <=> tab1(X0,X1,X2,X3,X4)) [input]
 2. ! [X0] : (select_1(X0) <=> ? [X1,X2,X3,X4] : ($true & from_2(X0,X1,X2,X3,X4))) [input]
-3. ! [X5] : (main_query_1(X5) <=> select_1(X5)) [input]
-4. ! [X0,X1,X2,X3,X4] : (from_4(X0,X1,X2,X3,X4) <=> tab1(X0,X1,X2,X3,X4)) [input]
-5. ! [X0] : (select_3(X0) <=> ? [X1,X2,X3,X4] : ($true & from_4(X0,X1,X2,X3,X4))) [input]
-6. ! [X6] : (main_query_2(X6) <=> select_3(X6)) [input]
-40. ! [X5] : (main_query_1(X5) <=> main_query_2(X5)) [input]
-41. ~! [X5] : (main_query_1(X5) <=> main_query_2(X5)) [negated conjecture 40]
+3. ! [X0] : (main_query_1(X0) <=> select_1(X0)) [input]
+4. ! [X5,X1,X2,X3,X4] : (from_4(X5,X1,X2,X3,X4) <=> tab1(X5,X1,X2,X3,X4)) [input]
+5. ! [X5] : (select_3(X5) <=> ? [X1,X2,X3,X4] : ($true & from_4(X5,X1,X2,X3,X4))) [input]
+6. ! [X5] : (main_query_2(X5) <=> select_3(X5)) [input]
+40. ! [X0] : (main_query_1(X0) <=> main_query_2(X0)) [input]
+41. ~! [X0] : (main_query_1(X0) <=> main_query_2(X0)) [negated conjecture 40]
 42. ! [X0] : (select_1(X0) <=> ? [X1,X2,X3,X4] : from_2(X0,X1,X2,X3,X4)) [true and false elimination 2]
-43. ! [X0] : (main_query_1(X0) <=> select_1(X0)) [rectify 3]
-44. ! [X0] : (select_3(X0) <=> ? [X1,X2,X3,X4] : from_4(X0,X1,X2,X3,X4)) [true and false elimination 5]
-45. ! [X0] : (main_query_2(X0) <=> select_3(X0)) [rectify 6]
-79. ~! [X0] : (main_query_1(X0) <=> main_query_2(X0)) [rectify 41]
-131. ? [X0] : (main_query_1(X0) <~> main_query_2(X0)) [ennf transformation 79]
+43. ! [X0,X1,X2,X3,X4] : (from_4(X0,X1,X2,X3,X4) <=> tab1(X0,X1,X2,X3,X4)) [rectify 4]
+44. ! [X0] : (select_3(X0) <=> ? [X1,X2,X3,X4] : ($true & from_4(X0,X1,X2,X3,X4))) [rectify 5]
+45. ! [X0] : (select_3(X0) <=> ? [X1,X2,X3,X4] : from_4(X0,X1,X2,X3,X4)) [true and false elimination 44]
+46. ! [X0] : (main_query_2(X0) <=> select_3(X0)) [rectify 6]
+131. ? [X0] : (main_query_1(X0) <~> main_query_2(X0)) [ennf transformation 41]
 132. ! [X0,X1,X2,X3,X4] : ((from_2(X0,X1,X2,X3,X4) | ~tab1(X0,X1,X2,X3,X4)) & (tab1(X0,X1,X2,X3,X4) | ~from_2(X0,X1,X2,X3,X4))) [nnf transformation 1]
 133. ! [X0] : ((select_1(X0) | ! [X1,X2,X3,X4] : ~from_2(X0,X1,X2,X3,X4)) & (? [X1,X2,X3,X4] : from_2(X0,X1,X2,X3,X4) | ~select_1(X0))) [nnf transformation 42]
 134. ! [X0] : ((select_1(X0) | ! [X1,X2,X3,X4] : ~from_2(X0,X1,X2,X3,X4)) & (? [X5,X6,X7,X8] : from_2(X0,X5,X6,X7,X8) | ~select_1(X0))) [rectify 133]
 135. ! [X0] : (? [X5,X6,X7,X8] : from_2(X0,X5,X6,X7,X8) => from_2(X0,sK0(X0),sK1(X0),sK2(X0),sK3(X0))) [choice axiom]
 136. ! [X0] : ((select_1(X0) | ! [X1,X2,X3,X4] : ~from_2(X0,X1,X2,X3,X4)) & (from_2(X0,sK0(X0),sK1(X0),sK2(X0),sK3(X0)) | ~select_1(X0))) [skolemisation 134,135]
-137. ! [X0] : ((main_query_1(X0) | ~select_1(X0)) & (select_1(X0) | ~main_query_1(X0))) [nnf transformation 43]
-138. ! [X0,X1,X2,X3,X4] : ((from_4(X0,X1,X2,X3,X4) | ~tab1(X0,X1,X2,X3,X4)) & (tab1(X0,X1,X2,X3,X4) | ~from_4(X0,X1,X2,X3,X4))) [nnf transformation 4]
-139. ! [X0] : ((select_3(X0) | ! [X1,X2,X3,X4] : ~from_4(X0,X1,X2,X3,X4)) & (? [X1,X2,X3,X4] : from_4(X0,X1,X2,X3,X4) | ~select_3(X0))) [nnf transformation 44]
+137. ! [X0] : ((main_query_1(X0) | ~select_1(X0)) & (select_1(X0) | ~main_query_1(X0))) [nnf transformation 3]
+138. ! [X0,X1,X2,X3,X4] : ((from_4(X0,X1,X2,X3,X4) | ~tab1(X0,X1,X2,X3,X4)) & (tab1(X0,X1,X2,X3,X4) | ~from_4(X0,X1,X2,X3,X4))) [nnf transformation 43]
+139. ! [X0] : ((select_3(X0) | ! [X1,X2,X3,X4] : ~from_4(X0,X1,X2,X3,X4)) & (? [X1,X2,X3,X4] : from_4(X0,X1,X2,X3,X4) | ~select_3(X0))) [nnf transformation 45]
 140. ! [X0] : ((select_3(X0) | ! [X1,X2,X3,X4] : ~from_4(X0,X1,X2,X3,X4)) & (? [X5,X6,X7,X8] : from_4(X0,X5,X6,X7,X8) | ~select_3(X0))) [rectify 139]
 141. ! [X0] : (? [X5,X6,X7,X8] : from_4(X0,X5,X6,X7,X8) => from_4(X0,sK4(X0),sK5(X0),sK6(X0),sK7(X0))) [choice axiom]
 142. ! [X0] : ((select_3(X0) | ! [X1,X2,X3,X4] : ~from_4(X0,X1,X2,X3,X4)) & (from_4(X0,sK4(X0),sK5(X0),sK6(X0),sK7(X0)) | ~select_3(X0))) [skolemisation 140,141]
-143. ! [X0] : ((main_query_2(X0) | ~select_3(X0)) & (select_3(X0) | ~main_query_2(X0))) [nnf transformation 45]
+143. ! [X0] : ((main_query_2(X0) | ~select_3(X0)) & (select_3(X0) | ~main_query_2(X0))) [nnf transformation 46]
 146. ? [X0] : ((~main_query_2(X0) | ~main_query_1(X0)) & (main_query_2(X0) | main_query_1(X0))) [nnf transformation 131]
 147. ? [X0] : ((~main_query_2(X0) | ~main_query_1(X0)) & (main_query_2(X0) | main_query_1(X0))) => ((~main_query_2(sK8) | ~main_query_1(sK8)) & (main_query_2(sK8) | main_query_1(sK8))) [choice axiom]
 148. (~main_query_2(sK8) | ~main_query_1(sK8)) & (main_query_2(sK8) | main_query_1(sK8)) [skolemisation 146,147]
@@ -77,6 +77,6 @@
 % Termination reason: Refutation
 
 % Memory used [KB]: 4861
-% Time elapsed: 0.009 s
+% Time elapsed: 0.004 s
 % ------------------------------
 % ------------------------------

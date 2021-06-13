@@ -31,21 +31,21 @@
 #
 #cnf(i_0_4, plain, (~gt(X1,X1)|~where_3(X1))).
 #
-#cnf(i_0_16, plain, (select_6(X1)|~query_5(X1))).
+#cnf(i_0_16, plain, (select_7(X1)|~subquery_from_6(X1))).
 #
-#cnf(i_0_18, plain, (query_5(X1)|~from_8(X1))).
+#cnf(i_0_18, plain, (subquery_from_6(X1)|~from_5(X1))).
 #
-#cnf(i_0_20, plain, (from_8(X1)|~select_4(X1))).
+#cnf(i_0_20, plain, (from_5(X1)|~select_4(X1))).
 #
 #cnf(i_0_26, plain, (lte(X1,X1))).
 #
 #cnf(i_0_22, plain, (select_4(X1)|~main_query_2(X1))).
 #
-#cnf(i_0_15, plain, (query_5(X1)|~select_6(X1))).
+#cnf(i_0_15, plain, (subquery_from_6(X1)|~select_7(X1))).
 #
-#cnf(i_0_17, plain, (from_8(X1)|~query_5(X1))).
+#cnf(i_0_17, plain, (from_5(X1)|~subquery_from_6(X1))).
 #
-#cnf(i_0_19, plain, (select_4(X1)|~from_8(X1))).
+#cnf(i_0_19, plain, (select_4(X1)|~from_5(X1))).
 #
 #cnf(i_0_36, plain, (neq(X1,X2)|eq(X1,X2))).
 #
@@ -73,7 +73,7 @@
 #
 #cnf(i_0_24, plain, (eq(X2,X1)|~eq(X1,X2))).
 #
-#cnf(i_0_13, plain, (select_6(X1)|~from_7(X1,X2,X3,X4,X5))).
+#cnf(i_0_13, plain, (select_7(X1)|~from_8(X1,X2,X3,X4,X5))).
 #
 #cnf(i_0_29, plain, (eq(X1,X2)|~lte(X2,X1)|~lte(X1,X2))).
 #
@@ -87,27 +87,27 @@
 #
 #cnf(i_0_1, plain, (from_2(X1,X2,X3,X4,X5)|~tab1(X1,X2,X3,X4,X5))).
 #
-#cnf(i_0_11, plain, (from_7(X1,X2,X3,X4,X5)|~tab1(X1,X2,X3,X4,X5))).
+#cnf(i_0_11, plain, (from_8(X1,X2,X3,X4,X5)|~tab1(X1,X2,X3,X4,X5))).
 #
 #cnf(i_0_2, plain, (tab1(X1,X2,X3,X4,X5)|~from_2(X1,X2,X3,X4,X5))).
 #
 #cnf(i_0_8, plain, (from_2(X1,esk1_1(X1),esk2_1(X1),esk3_1(X1),esk4_1(X1))|~select_1(X1))).
 #
-#cnf(i_0_12, plain, (tab1(X1,X2,X3,X4,X5)|~from_7(X1,X2,X3,X4,X5))).
+#cnf(i_0_12, plain, (tab1(X1,X2,X3,X4,X5)|~from_8(X1,X2,X3,X4,X5))).
 #
-#cnf(i_0_14, plain, (from_7(X1,esk5_1(X1),esk6_1(X1),esk7_1(X1),esk8_1(X1))|~select_6(X1))).
+#cnf(i_0_14, plain, (from_8(X1,esk5_1(X1),esk6_1(X1),esk7_1(X1),esk8_1(X1))|~select_7(X1))).
 ##
-#cnf(i_0_71, plain, (main_query_2(X1)|~from_8(X1))).
+#cnf(i_0_71, plain, (main_query_2(X1)|~from_5(X1))).
 #
-#cnf(i_0_96, plain, (main_query_2(X1)|~query_5(X1))).
+#cnf(i_0_96, plain, (main_query_2(X1)|~subquery_from_6(X1))).
 #
-#cnf(i_0_68, plain, (from_8(X1)|~main_query_2(X1))).
+#cnf(i_0_68, plain, (from_5(X1)|~main_query_2(X1))).
 #
-#cnf(i_0_97, plain, (main_query_2(X1)|~select_6(X1))).
+#cnf(i_0_97, plain, (main_query_2(X1)|~select_7(X1))).
 #
-#cnf(i_0_98, plain, (query_5(X1)|~main_query_2(X1))).
+#cnf(i_0_98, plain, (subquery_from_6(X1)|~main_query_2(X1))).
 #
-#cnf(i_0_100, plain, (select_6(X1)|~main_query_2(X1))).
+#cnf(i_0_100, plain, (select_7(X1)|~main_query_2(X1))).
 #
 #cnf(i_0_78, plain, (lt(X1,X1)|where_3(X1))).
 ##
@@ -123,15 +123,15 @@
 #
 #cnf(i_0_89, plain, (lte(X1,X2)|~lte(X1,X3)|~eq(X3,X2))).
 #
-#cnf(i_0_91, plain, (from_7(X1,X2,X3,X4,X5)|~from_2(X1,X2,X3,X4,X5))).
+#cnf(i_0_91, plain, (from_8(X1,X2,X3,X4,X5)|~from_2(X1,X2,X3,X4,X5))).
 #
-#cnf(i_0_93, plain, (from_2(X1,X2,X3,X4,X5)|~from_7(X1,X2,X3,X4,X5))).
+#cnf(i_0_93, plain, (from_2(X1,X2,X3,X4,X5)|~from_8(X1,X2,X3,X4,X5))).
 #
-#cnf(i_0_112, plain, (select_1(X1)|~from_7(X1,X2,X3,X4,X5))).
+#cnf(i_0_112, plain, (select_1(X1)|~from_8(X1,X2,X3,X4,X5))).
 #
-#cnf(i_0_111, plain, (from_7(X1,esk1_1(X1),esk2_1(X1),esk3_1(X1),esk4_1(X1))|~select_1(X1))).
+#cnf(i_0_111, plain, (from_8(X1,esk1_1(X1),esk2_1(X1),esk3_1(X1),esk4_1(X1))|~select_1(X1))).
 #
-#cnf(i_0_114, plain, (select_1(X1)|~select_6(X1))).
+#cnf(i_0_114, plain, (select_1(X1)|~select_7(X1))).
 #
 #cnf(i_0_117, plain, (select_1(X1)|~main_query_2(X1))).
 #
@@ -139,7 +139,7 @@
 #
 #cnf(i_0_119, negated_conjecture, (select_1(esk9_0))).
 #
-#cnf(i_0_115, plain, (select_6(X1)|~select_1(X1))).
+#cnf(i_0_115, plain, (select_7(X1)|~select_1(X1))).
 #
 #cnf(i_0_120, plain, (main_query_2(X1)|~select_1(X1))).
 #
