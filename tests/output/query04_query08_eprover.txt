@@ -15,9 +15,9 @@
 #
 # Initializing proof state
 #
-#cnf(i_0_60, negated_conjecture, (main_query_2(esk9_0)|main_query_1(esk9_0))).
+#cnf(i_0_61, negated_conjecture, (main_query_2(esk9_0)|main_query_1(esk9_0))).
 #
-#cnf(i_0_61, negated_conjecture, (~main_query_2(esk9_0)|~main_query_1(esk9_0))).
+#cnf(i_0_62, negated_conjecture, (~main_query_2(esk9_0)|~main_query_1(esk9_0))).
 #
 #cnf(i_0_8, plain, (main_query_1(X1)|~select_1(X1))).
 #
@@ -33,21 +33,21 @@
 #
 #cnf(i_0_19, plain, (select_4(X1)|~main_query_2(X1))).
 #
-#cnf(i_0_29, plain, (~lt(X1,X2)|~eq(X1,X2))).
+#cnf(i_0_30, plain, (~lt(X1,X2)|~eq(X1,X2))).
 #
-#cnf(i_0_34, plain, (~neq(X1,X2)|~eq(X1,X2))).
+#cnf(i_0_35, plain, (~neq(X1,X2)|~eq(X1,X2))).
 #
 #cnf(i_0_23, plain, (lte(X1,X1))).
 #
 #cnf(i_0_13, plain, (gte(X1,X1)|~where_6(X1))).
 #
-#cnf(i_0_36, plain, (lte(X2,X1)|~gte(X1,X2))).
+#cnf(i_0_37, plain, (lte(X2,X1)|~gte(X1,X2))).
 #
-#cnf(i_0_30, plain, (lte(X1,X2)|~lt(X1,X2))).
+#cnf(i_0_31, plain, (lte(X1,X2)|~lt(X1,X2))).
 #
-#cnf(i_0_32, plain, (lt(X2,X1)|~gt(X1,X2))).
+#cnf(i_0_33, plain, (lt(X2,X1)|~gt(X1,X2))).
 ##
-#cnf(i_0_33, plain, (neq(X1,X2)|eq(X1,X2))).
+#cnf(i_0_34, plain, (neq(X1,X2)|eq(X1,X2))).
 #
 #cnf(i_0_3, plain, (where_3(X1))).
 #
@@ -57,19 +57,21 @@
 #
 #cnf(i_0_25, plain, (lte(X1,X2)|~eq(X1,X2))).
 #
-#cnf(i_0_35, plain, (gte(X2,X1)|~lte(X1,X2))).
+#cnf(i_0_36, plain, (gte(X2,X1)|~lte(X1,X2))).
 #
-#cnf(i_0_31, plain, (gt(X2,X1)|~lt(X1,X2))).
+#cnf(i_0_32, plain, (gt(X2,X1)|~lt(X1,X2))).
 #
 #cnf(i_0_21, plain, (eq(X2,X1)|~eq(X1,X2))).
 #
+#cnf(i_0_28, plain, (lte(X2,X1)|lte(X1,X2))).
+#
+#cnf(i_0_29, plain, (lt(X1,X2)|eq(X1,X2)|~lte(X1,X2))).
+#
 #cnf(i_0_26, plain, (eq(X1,X2)|~lte(X2,X1)|~lte(X1,X2))).
 #
-#cnf(i_0_28, plain, (lt(X1,X2)|eq(X1,X2)|~lte(X1,X2))).
+#cnf(i_0_15, plain, (select_4(X1)|~where_6(X1)|~from_5(X1,X2,X3,X4,X5))).
 #
 #cnf(i_0_5, plain, (select_1(X1)|~from_2(X1,X2,X3,X4,X5))).
-#
-#cnf(i_0_15, plain, (select_4(X1)|~where_6(X1)|~from_5(X1,X2,X3,X4,X5))).
 #
 #cnf(i_0_22, plain, (eq(X1,X3)|~eq(X2,X3)|~eq(X1,X2))).
 #
@@ -77,74 +79,164 @@
 #
 #cnf(i_0_1, plain, (from_2(X1,X2,X3,X4,X5)|~tab1(X1,X2,X3,X4,X5))).
 #
-#cnf(i_0_2, plain, (tab1(X1,X2,X3,X4,X5)|~from_2(X1,X2,X3,X4,X5))).
-#
 #cnf(i_0_11, plain, (tab1(X1,X2,X3,X4,X5)|~from_5(X1,X2,X3,X4,X5))).
+#
+#cnf(i_0_2, plain, (tab1(X1,X2,X3,X4,X5)|~from_2(X1,X2,X3,X4,X5))).
 #
 #cnf(i_0_10, plain, (from_5(X1,X2,X3,X4,X5)|~tab1(X1,X2,X3,X4,X5))).
 #
+#cnf(i_0_45, plain, (tab(X3,X4,X2)|~tab(X3,X4,X1)|~eq(X1,X2))).
+#
+#cnf(i_0_44, plain, (tab(X3,X2,X4)|~tab(X3,X1,X4)|~eq(X1,X2))).
+#
 #cnf(i_0_7, plain, (from_2(X1,esk1_1(X1),esk2_1(X1),esk3_1(X1),esk4_1(X1))|~select_1(X1))).
+#
+#cnf(i_0_43, plain, (tab(X2,X3,X4)|~tab(X1,X3,X4)|~eq(X1,X2))).
+#
+#cnf(i_0_55, plain, (from_2(X3,X4,X5,X6,X2)|~eq(X1,X2)|~from_2(X3,X4,X5,X6,X1))).
+#
+#cnf(i_0_54, plain, (from_2(X3,X4,X5,X2,X6)|~eq(X1,X2)|~from_2(X3,X4,X5,X1,X6))).
+#
+#cnf(i_0_53, plain, (from_2(X3,X4,X2,X5,X6)|~eq(X1,X2)|~from_2(X3,X4,X1,X5,X6))).
 #
 #cnf(i_0_17, plain, (from_5(X1,esk5_1(X1),esk6_1(X1),esk7_1(X1),esk8_1(X1))|~select_4(X1))).
 #
-#cnf(i_0_63, negated_conjecture, (~select_4(esk9_0)|~main_query_1(esk9_0))).
+#cnf(i_0_52, plain, (from_2(X3,X2,X4,X5,X6)|~eq(X1,X2)|~from_2(X3,X1,X4,X5,X6))).
 #
-#cnf(i_0_70, plain, (where_6(X1))).
+#cnf(i_0_51, plain, (from_2(X2,X3,X4,X5,X6)|~eq(X1,X2)|~from_2(X1,X3,X4,X5,X6))).
 #
-#cnf(i_0_89, negated_conjecture, (~select_4(esk9_0)|~select_1(esk9_0))).
+#cnf(i_0_42, plain, (tab1(X3,X4,X5,X6,X2)|~eq(X1,X2)|~tab1(X3,X4,X5,X6,X1))).
+#
+#cnf(i_0_41, plain, (tab1(X3,X4,X5,X2,X6)|~eq(X1,X2)|~tab1(X3,X4,X5,X1,X6))).
+#
+#cnf(i_0_40, plain, (tab1(X3,X4,X2,X5,X6)|~eq(X1,X2)|~tab1(X3,X4,X1,X5,X6))).
+#
+#cnf(i_0_39, plain, (tab1(X3,X2,X4,X5,X6)|~eq(X1,X2)|~tab1(X3,X1,X4,X5,X6))).
+#
+#cnf(i_0_38, plain, (tab1(X2,X3,X4,X5,X6)|~eq(X1,X2)|~tab1(X1,X3,X4,X5,X6))).
+#
+#cnf(i_0_60, plain, (from_5(X3,X4,X5,X6,X2)|~from_5(X3,X4,X5,X6,X1)|~eq(X1,X2))).
+#
+#cnf(i_0_59, plain, (from_5(X3,X4,X5,X2,X6)|~from_5(X3,X4,X5,X1,X6)|~eq(X1,X2))).
+#
+#cnf(i_0_58, plain, (from_5(X3,X4,X2,X5,X6)|~from_5(X3,X4,X1,X5,X6)|~eq(X1,X2))).
+#
+#cnf(i_0_57, plain, (from_5(X3,X2,X4,X5,X6)|~from_5(X3,X1,X4,X5,X6)|~eq(X1,X2))).
+#
+#cnf(i_0_56, plain, (from_5(X2,X3,X4,X5,X6)|~from_5(X1,X3,X4,X5,X6)|~eq(X1,X2))).
+#
+#cnf(i_0_50, plain, (tab2(X3,X4,X5,X6,X2)|~tab2(X3,X4,X5,X6,X1)|~eq(X1,X2))).
+#
+#cnf(i_0_49, plain, (tab2(X3,X4,X5,X2,X6)|~tab2(X3,X4,X5,X1,X6)|~eq(X1,X2))).
+#
+#cnf(i_0_48, plain, (tab2(X3,X4,X2,X5,X6)|~tab2(X3,X4,X1,X5,X6)|~eq(X1,X2))).
+#
+#cnf(i_0_47, plain, (tab2(X3,X2,X4,X5,X6)|~tab2(X3,X1,X4,X5,X6)|~eq(X1,X2))).
+#
+#cnf(i_0_46, plain, (tab2(X2,X3,X4,X5,X6)|~tab2(X1,X3,X4,X5,X6)|~eq(X1,X2))).
+#
+#cnf(i_0_64, negated_conjecture, (~select_4(esk9_0)|~main_query_1(esk9_0))).
+#
+#cnf(i_0_116, negated_conjecture, (~select_4(esk9_0)|~select_1(esk9_0))).
+#
+#cnf(i_0_71, plain, (where_6(X1))).
 #
 #cnf(i_0_13, plain, (gte(X1,X1))).
 #
-#cnf(i_0_65, negated_conjecture, (select_4(esk9_0)|main_query_1(esk9_0))).
+#cnf(i_0_66, negated_conjecture, (select_4(esk9_0)|main_query_1(esk9_0))).
 #
-#cnf(i_0_91, negated_conjecture, (select_4(esk9_0)|select_1(esk9_0))).
-##
+#cnf(i_0_118, negated_conjecture, (select_4(esk9_0)|select_1(esk9_0))).
+#
 #cnf(i_0_15, plain, (select_4(X1)|~from_5(X1,X2,X3,X4,X5))).
 #
-#cnf(i_0_95, plain, (select_4(X1)|~tab1(X1,X2,X3,X4,X5))).
+#cnf(i_0_122, plain, (select_4(X1)|~tab1(X1,X2,X3,X4,X5))).
 #
-#cnf(i_0_96, plain, (select_4(X1)|~from_2(X1,X2,X3,X4,X5))).
-#
-#cnf(i_0_97, plain, (select_4(X1)|~select_1(X1))).
-#
-#cnf(i_0_81, plain, (lte(X1,X2)|~lte(X1,X3)|~eq(X3,X2))).
-#
-#cnf(i_0_82, plain, (lte(X1,X2)|~lte(X1,X3)|~eq(X2,X3))).
-#
-#cnf(i_0_98, negated_conjecture, (~select_1(esk9_0))).
-#
-#cnf(i_0_91, negated_conjecture, (select_4(esk9_0))).
+#cnf(i_0_123, plain, (select_4(X1)|~from_2(X1,X2,X3,X4,X5))).
 ##
-#cnf(i_0_63, negated_conjecture, (~main_query_1(esk9_0))).
+#cnf(i_0_124, plain, (select_4(X1)|~select_1(X1))).
 #
-#cnf(i_0_60, negated_conjecture, (main_query_2(esk9_0))).
+#cnf(i_0_125, negated_conjecture, (~select_1(esk9_0))).
+#
+#cnf(i_0_118, negated_conjecture, (select_4(esk9_0))).
+##
+#cnf(i_0_64, negated_conjecture, (~main_query_1(esk9_0))).
+#
+#cnf(i_0_61, negated_conjecture, (main_query_2(esk9_0))).
 ###
-#cnf(i_0_88, plain, (tab1(X1,esk5_1(X1),esk6_1(X1),esk7_1(X1),esk8_1(X1))|~select_4(X1))).
+#cnf(i_0_87, plain, (lte(X1,X2)|~lte(X1,X3)|~eq(X2,X3))).
 #
-#cnf(i_0_103, plain, (from_2(X1,esk5_1(X1),esk6_1(X1),esk7_1(X1),esk8_1(X1))|~select_4(X1))).
+#cnf(i_0_88, plain, (lte(X1,X2)|~lte(X1,X3)|~eq(X3,X2))).
 #
-#cnf(i_0_105, plain, (select_1(X1)|~select_4(X1))).
+#cnf(i_0_86, plain, (lte(X1,X2)|lte(X2,X3)|~lte(X1,X3))).
+###
+#cnf(i_0_132, plain, (lte(X1,X2)|lte(X2,X3)|~eq(X3,X1))).
+#
+#cnf(i_0_133, plain, (lte(X1,X2)|lte(X2,X3)|~eq(X1,X3))).
+###
+#cnf(i_0_131, plain, (lte(X1,X2)|lte(X2,X3)|lte(X3,X1))).
+##
+#cnf(i_0_145, plain, (lte(X1,X2)|lte(X2,X4)|lte(X4,X3)|~lte(X1,X3))).
+##
+#cnf(i_0_94, plain, (from_2(X1,esk1_1(X1),esk2_1(X1),esk3_1(X1),X2)|~select_1(X1)|~eq(esk4_1(X1),X2))).
+#####
+#cnf(i_0_155, plain, (lte(X1,X2)|lte(X2,X3)|lte(X3,X4)|~eq(X4,X1))).
+##
+#cnf(i_0_156, plain, (lte(X1,X2)|lte(X2,X3)|lte(X3,X4)|~eq(X1,X4))).
+####
+#cnf(i_0_95, plain, (from_2(X1,esk1_1(X1),esk2_1(X1),X2,esk4_1(X1))|~select_1(X1)|~eq(esk3_1(X1),X2))).
+##
+#cnf(i_0_101, plain, (tab1(X1,X2,X3,X4,X5)|~eq(X6,X5)|~from_2(X1,X2,X3,X4,X6))).
+#
+#cnf(i_0_102, plain, (tab1(X1,X2,X3,X4,X5)|~eq(X6,X4)|~from_2(X1,X2,X3,X6,X5))).
+#
+#cnf(i_0_103, plain, (tab1(X1,X2,X3,X4,X5)|~eq(X6,X3)|~from_2(X1,X2,X6,X4,X5))).
+#
+#cnf(i_0_104, plain, (tab1(X1,X2,X3,X4,X5)|~eq(X6,X2)|~from_2(X1,X6,X3,X4,X5))).
+#
+#cnf(i_0_98, plain, (tab1(X1,esk5_1(X1),esk6_1(X1),esk7_1(X1),esk8_1(X1))|~select_4(X1))).
+#
+#cnf(i_0_105, plain, (tab1(X1,X2,X3,X4,X5)|~eq(X6,X1)|~from_2(X6,X2,X3,X4,X5))).
+#
+#cnf(i_0_107, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X5)|~tab1(X1,X2,X3,X4,X6))).
+#
+#cnf(i_0_109, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X4)|~tab1(X1,X2,X3,X6,X5))).
+#
+#cnf(i_0_111, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X3)|~tab1(X1,X2,X6,X4,X5))).
+#
+#cnf(i_0_96, plain, (from_2(X1,esk1_1(X1),X2,esk3_1(X1),esk4_1(X1))|~select_1(X1)|~eq(esk2_1(X1),X2))).
+##
+#cnf(i_0_113, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X2)|~tab1(X1,X6,X3,X4,X5))).
+#
+#cnf(i_0_115, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X1)|~tab1(X6,X2,X3,X4,X5))).
+#
+#cnf(i_0_199, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X5)|~from_2(X1,X2,X3,X4,X6))).
+#
+#cnf(i_0_201, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X4)|~from_2(X1,X2,X3,X6,X5))).
+#
+#cnf(i_0_188, plain, (from_2(X1,esk5_1(X1),esk6_1(X1),esk7_1(X1),esk8_1(X1))|~select_4(X1))).
+#
+#cnf(i_0_228, plain, (select_1(X1)|~select_4(X1))).
 
 # Proof found!
 # SZS status Theorem
-# Parsed axioms                        : 42
+# Parsed axioms                        : 43
 # Removed by relevancy pruning/SinE    : 0
-# Initial clauses                      : 61
-# Removed in clause preprocessing      : 23
-# Initial clauses in saturation        : 38
-# Processed clauses                    : 61
+# Initial clauses                      : 62
+# Removed in clause preprocessing      : 0
+# Initial clauses in saturation        : 62
+# Processed clauses                    : 123
 # ...of these trivial                  : 2
-# ...subsumed                          : 4
-# ...remaining for further processing  : 55
+# ...subsumed                          : 20
+# ...remaining for further processing  : 101
 # Other redundant clauses eliminated   : 0
 # Clauses deleted for lack of memory   : 0
 # Backward-subsumed                    : 1
 # Backward-rewritten                   : 8
-# Generated clauses                    : 49
-# ...of the previous two non-trivial   : 24
+# Generated clauses                    : 183
+# ...of the previous two non-trivial   : 145
 # Contextual simplify-reflections      : 0
-# Paramodulations                      : 47
-# Factorizations                       : 0
+# Paramodulations                      : 173
+# Factorizations                       : 8
 # Equation resolutions                 : 0
 # Propositional unsat checks           : 0
 #    Propositional check models        : 0
@@ -158,22 +250,22 @@
 #    Success case prop preproc time    : 0.000
 #    Success case prop encoding time   : 0.000
 #    Success case prop solver time     : 0.000
-# Current number of processed clauses  : 44
+# Current number of processed clauses  : 90
 #    Positive orientable unit clauses  : 7
 #    Positive unorientable unit clauses: 0
 #    Negative unit clauses             : 2
-#    Non-unit-clauses                  : 35
-# Current number of unprocessed clauses: 0
-# ...number of literals in the above   : 0
+#    Non-unit-clauses                  : 81
+# Current number of unprocessed clauses: 83
+# ...number of literals in the above   : 296
 # Current number of archived formulas  : 0
 # Current number of archived clauses   : 11
-# Clause-clause subsumption calls (NU) : 257
-# Rec. Clause-clause subsumption calls : 207
-# Non-unit clause-clause subsumptions  : 1
-# Unit Clause-clause subsumption calls : 52
+# Clause-clause subsumption calls (NU) : 1154
+# Rec. Clause-clause subsumption calls : 1050
+# Non-unit clause-clause subsumptions  : 17
+# Unit Clause-clause subsumption calls : 126
 # Rewrite failures with RHS unbound    : 0
 # BW rewrite match attempts            : 6
 # BW rewrite match successes           : 4
 # Condensation attempts                : 0
 # Condensation successes               : 0
-# Termbank termtop insertions          : 3907
+# Termbank termtop insertions          : 5961

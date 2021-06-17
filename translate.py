@@ -46,7 +46,7 @@ def add_columns(predicate, variables):
     if not isinstance(variables, list):
         variables = [variables]
     columns = get_columns(predicate)
-    variables = make_variables(variables)
+    variables = list(set(make_variables(variables)))
     variables = [x for x in variables if x not in columns]
     set_columns(predicate, columns + variables)
 
@@ -70,7 +70,7 @@ def add_external(predicate, variables):
     if not isinstance(variables, list):
         variables = [variables]
     external = get_external(predicate)
-    variables = make_variables(variables)
+    variables = list(set(make_variables(variables)))
     variables = [x for x in variables if x not in external]
     set_external(predicate, external + variables)
 
@@ -112,6 +112,7 @@ def build_axioms():
     save("fof(reflexivity_of_less_than_or_equal, axiom, ( ! [X] : lte(X,X) )).")
     save("fof(antisymmetry_of_less_than_or_equal, axiom, ( ! [X,Y] : ( ( lte(X,Y) & lte(Y,X) ) <=> eq(X, Y) ) )).")
     save("fof(transitivity_of_less_than_or_equal, axiom, ( ! [X,Y,Z] : ( ( lte(X,Y) & lte(Y,Z) ) => lte(X,Z) ) )).")
+    save("fof(strong_connectedness_of_less_than_or_eqal, axiom, ( ! [X,Y] : ( lte(X,Y) | lte(Y,X) ) )).")
 
     save("fof(less_than_definition, definition, ( ! [X,Y] : ( ( lt(X,Y) ) <=> ( lte(X,Y) & (~ eq(X,Y))) ) )).")
     save("fof(greater_than_definition, definition, ( ! [X,Y] : ( ( gt(X,Y) ) <=>  ( lt(Y,X)) ) )).")
@@ -123,10 +124,11 @@ def build_axioms():
         if len(variables) < 2:
             continue
         for variable in variables:
-            save("fof(substitution_" + predicate + "_" + variable
+            save("fof(substitution_" + predicate + "_" + variable.lower()
                 + ", axiom, ( ! [X, "
                 + ", ".join(variables)
-                + "] : (( " + variable + " = X & " + predicate + " ( "
+                #+ "] : (( " + variable + " = X & " + predicate + " ( "
+                + "] : (( eq(" + variable + ", X) & " + predicate + " ( "
                 + ", ".join(variables) + ")) => " + predicate + " ( "
                 + ", ".join(["X" if x == variable else x for x in variables])
                 + ")))).")
@@ -143,7 +145,7 @@ def build_axioms():
 
 
 
-def parse_from(statement, values, columns):
+def translate_from(statement, values, columns):
     """
     Parse list of statements within a FROM clause.
 
@@ -179,7 +181,7 @@ def parse_from(statement, values, columns):
 
             value = subquery['value']
             if isinstance(value, dict):
-                subquery_name = parse_query(value, get_id("subquery_from"))
+                subquery_name = translate_query(value, get_id("subquery_from"))
             else: # aliased simple table
                 subquery_name = value
 
@@ -236,20 +238,20 @@ def parse_from(statement, values, columns):
 
 
 
-def parse_where(statement, from_name, values, columns):
+def translate_where(statement, from_name, values, columns):
     """
 
     """
 
-    def parse_where_item(item, where_name, values, columns, known_variables):
+    def translate_where_item(item, where_name, values, columns, known_variables):
         aliases = dict(zip(values, columns))
 
         for x in ['eq', 'neq', 'lt', 'lte', 'gt', 'gte']:
             if x in item:
                 fst = make_variables(item[x][0])
                 snd = make_variables(item[x][1])
-                fst = aliases.get(fst, fst)
-                snd = aliases.get(snd, snd)
+                #fst = aliases.get(fst, fst)
+                #snd = aliases.get(snd, snd)
 
                 if fst not in known_variables: # not defined in FROM!
                     add_external(where_name, fst)
@@ -262,35 +264,38 @@ def parse_where(statement, from_name, values, columns):
                 fof_formula = x + " ( " + fst + ", " + snd + " ) "
                 return fof_formula
 
-        for x in ['in']:
+        for x in ['in', 'nin']:
             if x in item:
                 fst = make_variables(item[x][0])
-                fst = aliases.get(fst, fst)
+                #fst = aliases.get(fst, fst)
                 if fst not in known_variables: # not defined in FROM!
                     add_external(where_name, fst)
                 else:
                     add_columns(where_name, fst)
 
-                subquery_name = parse_query(item[x][1], name=get_id(where_name + "_subquery"))
+                subquery_name = translate_query(item[x][1], name=get_id(where_name + "_subquery"))
                 subquery_external = get_external(subquery_name)
                 for variable in subquery_external:
                     if variable in known_variables:
                         add_columns(where_name, variable)
                     else:
                         add_external(where_name, variable)
-                return " ( " + subquery_name + " ( " + ", ".join([fst] + subquery_external) + "))"
+                if x == 'in':
+                    return " ( " + subquery_name + " ( " + ", ".join([fst] + subquery_external) + "))"
+                else:
+                    return " ( ~ ( " + subquery_name + " ( " + ", ".join([fst] + subquery_external) + ")) )"
 
         for x in ['and', 'or']:
             if x in item:
-                fst_fof = parse_where_item(item[x][0], where_name, values, columns, known_variables)
-                snd_fof = parse_where_item(item[x][1], where_name, values, columns, known_variables)
+                fst_fof = translate_where_item(item[x][0], where_name, values, columns, known_variables)
+                snd_fof = translate_where_item(item[x][1], where_name, values, columns, known_variables)
                 if x == 'and': symbol = '&'
                 if x == 'or':  symbol = '|'
                 fof_formula = " ( " + fst_fof + " " + symbol + " " + snd_fof + " ) "
                 return fof_formula
 
         if 'not' in item:
-            fof_formula = parse_where_item(item['not'], where_name, values, columns, known_variables)
+            fof_formula = translate_where_item(item['not'], where_name, values, columns, known_variables)
             return "( ~ " + fof_formula + " ) "
 
 
@@ -300,7 +305,7 @@ def parse_where(statement, from_name, values, columns):
     aliases = dict(zip(values, columns))
     known_variables = [aliases.get(x, x) for x in from_columns] # replace values with their aliases
 
-    fof_formula = parse_where_item(statement, where_name, values, columns, known_variables)
+    fof_formula = translate_where_item(statement, where_name, values, columns, known_variables)
     
     save("fof("
             + where_name
@@ -320,7 +325,7 @@ def parse_where(statement, from_name, values, columns):
 
 
 
-def parse_select(statement):
+def translate_select(statement):
     """
     Parse a single SELECT statement.
     
@@ -340,30 +345,31 @@ def parse_select(statement):
     
     # local variables (resolved aliases)
     values = [ make_variables(x['value']) for x in selected ] # list of values TABLENAME_COLUMNNAME
+    aliased_values = [ make_variables(x['name']) if 'name' in x else make_variables(x['value']) for x in selected]
 
     # exposed columns
     columns = [ make_variables(x['name']) if 'name' in x else make_variables(x['value'].split('.')[-1]) for x in selected ]
 
 
     # Parsing of the FROM clause
-    from_name = parse_from(statement['from'], values, columns)
+    from_name = translate_from(statement['from'], values, aliased_values)
     from_fof = from_name + " ( " + ", ".join(get_variables(from_name)) + " ) "
 
 
     # Parsing of the WHERE clause
     if 'where' in statement:
-        where_name = parse_where(statement['where'], from_name, values, columns)
+        where_name = translate_where(statement['where'], from_name, values, aliased_values)
         where_fof = where_name + " ( " + ", ".join(get_variables(where_name)) + " ) "
-        external = [x for x in set(get_external(from_name) + get_external(where_name)) if x not in columns]
+        external = [x for x in set(get_external(from_name) + get_external(where_name)) if x not in aliased_values]
     else:
         where_fof = "$true"
-        external = [x for x in set(get_external(from_name)) if x not in columns] # no externals from WHERE
+        external = [x for x in set(get_external(from_name)) if x not in aliased_values] # no externals from WHERE
 
     set_columns(select_name, columns)
     set_external(select_name, external)
 
     # Generating a TPTP formula
-    forall = get_variables(select_name)
+    forall = aliased_values + external
     exists = [ x for x in get_variables(from_name) if x not in forall ]
 
     save("fof(" + select_name + ", definition, ( ! ["
@@ -387,7 +393,7 @@ def parse_select(statement):
 
 
 
-def parse_query(statement, name=None):
+def translate_query(statement, name=None):
     """
     Adds an external query definition by adding a new predicate with an appropriate name
     """
@@ -395,25 +401,29 @@ def parse_query(statement, name=None):
         query_name = get_id('query')
     else:
         query_name = name
+    if isinstance(statement, dict): # query or subquery
 
-    select_name = parse_select(statement)
-    set_columns(query_name, get_columns(select_name))
-    set_external(query_name, get_external(select_name))
+        select_name = translate_select(statement)
+        set_columns(query_name, get_columns(select_name))
+        set_external(query_name, get_external(select_name))
 
-    save("fof("
-            + query_name
-            + ", definition, ( ! ["
-            + ", ".join(get_variables(query_name))
-            + "] : ("
-            + query_name
-            + " ( " + ", ".join(get_variables(query_name))
-            + ") <=> ("
-            + select_name
-            + " ( " + ", ".join(get_variables(select_name))
-            + "))))).", comment=json.dumps(statement, indent=4))
+        save("fof("
+                + query_name
+                + ", definition, ( ! ["
+                + ", ".join(get_variables(query_name))
+                + "] : ("
+                + query_name
+                + " ( " + ", ".join(get_variables(query_name))
+                + ") <=> ("
+                + select_name
+                + " ( " + ", ".join(get_variables(select_name))
+                + "))))).", comment=json.dumps(statement, indent=4))
 
-    return query_name
-
+        return query_name
+    
+    if isinstance(statement, str): # simple table reference
+        log("parsing query: \"{}\"".format(statement))
+        return statement
 
 
 
@@ -421,11 +431,13 @@ def parse_query(statement, name=None):
 """
 def tptp(sql, name=None):
     try:
+        log(sql)
         statement = moz_sql_parser.parse(sql)
+        log(statement)
     except Exception as e:
         log(e)
         sys.exit(-1)
-    parse_query(statement, name)
+    translate_query(statement, name)
 
 
 if __name__ == '__main__':
@@ -440,17 +452,13 @@ if __name__ == '__main__':
             items = line.strip().split()
             if items:
                 set_columns(items[0], items[1:])
-    log(columns)
-    log(external)
-
+    
     # read two query files
     try:
         with open(sys.argv[2]) as f:
             sql1 = f.read().lower()
-            log(sql1)
         with open(sys.argv[3]) as f:
             sql2 = f.read().lower()
-            log(sql2)
     except Exception as e:
         log(e)
         sys.exit(-1)

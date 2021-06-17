@@ -15,25 +15,25 @@
 #
 # Initializing proof state
 #
-#cnf(i_0_71, negated_conjecture, (main_query_2(esk7_0,esk8_0)|main_query_1(esk7_0,esk8_0))).
+#cnf(i_0_72, negated_conjecture, (main_query_2(esk7_0,esk8_0)|main_query_1(esk7_0,esk8_0))).
 #
-#cnf(i_0_72, negated_conjecture, (~main_query_2(esk7_0,esk8_0)|~main_query_1(esk7_0,esk8_0))).
+#cnf(i_0_73, negated_conjecture, (~main_query_2(esk7_0,esk8_0)|~main_query_1(esk7_0,esk8_0))).
 #
 #cnf(i_0_19, plain, (eq(X1,X1))).
 #
 #cnf(i_0_22, plain, (lte(X1,X1))).
 #
-#cnf(i_0_28, plain, (~lt(X1,X2)|~eq(X1,X2))).
+#cnf(i_0_29, plain, (~lt(X1,X2)|~eq(X1,X2))).
 #
-#cnf(i_0_32, plain, (neq(X1,X2)|eq(X1,X2))).
+#cnf(i_0_33, plain, (neq(X1,X2)|eq(X1,X2))).
 #
 #cnf(i_0_9, plain, (select_1(X1,X2)|~main_query_1(X1,X2))).
 #
-#cnf(i_0_33, plain, (~neq(X1,X2)|~eq(X1,X2))).
+#cnf(i_0_34, plain, (~neq(X1,X2)|~eq(X1,X2))).
 #
 #cnf(i_0_4, plain, (eq(X1,X2)|~where_3(X1,X2))).
 #
-#cnf(i_0_35, plain, (lte(X2,X1)|~gte(X1,X2))).
+#cnf(i_0_36, plain, (lte(X2,X1)|~gte(X1,X2))).
 #
 #cnf(i_0_13, plain, (lte(X1,X2)|~where_6(X1,X2))).
 #
@@ -43,9 +43,11 @@
 #
 #cnf(i_0_17, plain, (main_query_2(X1,X2)|~select_4(X1,X2))).
 #
-#cnf(i_0_29, plain, (lte(X1,X2)|~lt(X1,X2))).
+#cnf(i_0_30, plain, (lte(X1,X2)|~lt(X1,X2))).
 #
-#cnf(i_0_31, plain, (lt(X2,X1)|~gt(X1,X2))).
+#cnf(i_0_32, plain, (lt(X2,X1)|~gt(X1,X2))).
+#
+#cnf(i_0_27, plain, (lte(X1,X2)|lte(X2,X1))).
 #
 #cnf(i_0_3, plain, (where_3(X1,X2)|~eq(X1,X2))).
 #
@@ -59,19 +61,43 @@
 #
 #cnf(i_0_24, plain, (lte(X1,X2)|~eq(X1,X2))).
 #
-#cnf(i_0_30, plain, (gt(X2,X1)|~lt(X1,X2))).
+#cnf(i_0_31, plain, (gt(X2,X1)|~lt(X1,X2))).
 #
-#cnf(i_0_34, plain, (gte(X2,X1)|~lte(X1,X2))).
+#cnf(i_0_35, plain, (gte(X2,X1)|~lte(X1,X2))).
 #
 #cnf(i_0_20, plain, (eq(X2,X1)|~eq(X1,X2))).
 #
+#cnf(i_0_45, plain, (main_query_1(X3,X2)|~main_query_1(X3,X1)|~eq(X1,X2))).
+#
+#cnf(i_0_28, plain, (lt(X1,X2)|eq(X1,X2)|~lte(X1,X2))).
+#
 #cnf(i_0_25, plain, (eq(X1,X2)|~lte(X2,X1)|~lte(X1,X2))).
 #
-#cnf(i_0_27, plain, (lt(X1,X2)|eq(X1,X2)|~lte(X1,X2))).
+#cnf(i_0_54, plain, (where_3(X3,X2)|~eq(X1,X2)|~where_3(X3,X1))).
+#
+#cnf(i_0_53, plain, (where_3(X2,X3)|~eq(X1,X2)|~where_3(X1,X3))).
 #
 #cnf(i_0_21, plain, (eq(X1,X3)|~eq(X2,X3)|~eq(X1,X2))).
 #
+#cnf(i_0_56, plain, (select_1(X3,X2)|~select_1(X3,X1)|~eq(X1,X2))).
+#
+#cnf(i_0_44, plain, (main_query_1(X2,X3)|~main_query_1(X1,X3)|~eq(X1,X2))).
+#
+#cnf(i_0_52, plain, (main_query_2(X3,X2)|~main_query_2(X3,X1)|~eq(X1,X2))).
+#
+#cnf(i_0_51, plain, (main_query_2(X2,X3)|~main_query_2(X1,X3)|~eq(X1,X2))).
+#
+#cnf(i_0_55, plain, (select_1(X2,X3)|~select_1(X1,X3)|~eq(X1,X2))).
+#
+#cnf(i_0_43, plain, (where_6(X3,X2)|~where_6(X3,X1)|~eq(X1,X2))).
+#
+#cnf(i_0_42, plain, (where_6(X2,X3)|~where_6(X1,X3)|~eq(X1,X2))).
+#
 #cnf(i_0_26, plain, (lte(X1,X3)|~lte(X2,X3)|~lte(X1,X2))).
+#
+#cnf(i_0_58, plain, (select_4(X3,X2)|~select_4(X3,X1)|~eq(X1,X2))).
+#
+#cnf(i_0_57, plain, (select_4(X2,X3)|~select_4(X1,X3)|~eq(X1,X2))).
 #
 #cnf(i_0_5, plain, (select_1(X1,X2)|~where_3(X1,X2)|~from_2(X1,X2,X3,X4,X5))).
 #
@@ -85,56 +111,102 @@
 #
 #cnf(i_0_10, plain, (from_5(X1,X2,X3,X4,X5)|~tab1(X1,X2,X3,X4,X5))).
 #
+#cnf(i_0_61, plain, (tab(X3,X4,X2)|~tab(X3,X4,X1)|~eq(X1,X2))).
+#
+#cnf(i_0_60, plain, (tab(X3,X2,X4)|~tab(X3,X1,X4)|~eq(X1,X2))).
+#
+#cnf(i_0_59, plain, (tab(X2,X3,X4)|~tab(X1,X3,X4)|~eq(X1,X2))).
+#
+#cnf(i_0_66, plain, (from_2(X3,X4,X5,X6,X2)|~eq(X1,X2)|~from_2(X3,X4,X5,X6,X1))).
+#
+#cnf(i_0_65, plain, (from_2(X3,X4,X5,X2,X6)|~eq(X1,X2)|~from_2(X3,X4,X5,X1,X6))).
+#
+#cnf(i_0_64, plain, (from_2(X3,X4,X2,X5,X6)|~eq(X1,X2)|~from_2(X3,X4,X1,X5,X6))).
+#
+#cnf(i_0_63, plain, (from_2(X3,X2,X4,X5,X6)|~eq(X1,X2)|~from_2(X3,X1,X4,X5,X6))).
+#
 #cnf(i_0_7, plain, (from_2(X1,X2,esk1_2(X1,X2),esk2_2(X1,X2),esk3_2(X1,X2))|~select_1(X1,X2))).
 #
+#cnf(i_0_62, plain, (from_2(X2,X3,X4,X5,X6)|~eq(X1,X2)|~from_2(X1,X3,X4,X5,X6))).
+#
+#cnf(i_0_50, plain, (tab1(X3,X4,X5,X6,X2)|~eq(X1,X2)|~tab1(X3,X4,X5,X6,X1))).
+#
+#cnf(i_0_49, plain, (tab1(X3,X4,X5,X2,X6)|~eq(X1,X2)|~tab1(X3,X4,X5,X1,X6))).
+#
+#cnf(i_0_48, plain, (tab1(X3,X4,X2,X5,X6)|~eq(X1,X2)|~tab1(X3,X4,X1,X5,X6))).
+#
 #cnf(i_0_16, plain, (from_5(X1,X2,esk4_2(X1,X2),esk5_2(X1,X2),esk6_2(X1,X2))|~select_4(X1,X2))).
+#
+#cnf(i_0_47, plain, (tab1(X3,X2,X4,X5,X6)|~eq(X1,X2)|~tab1(X3,X1,X4,X5,X6))).
+#
+#cnf(i_0_46, plain, (tab1(X2,X3,X4,X5,X6)|~eq(X1,X2)|~tab1(X1,X3,X4,X5,X6))).
+#
+#cnf(i_0_71, plain, (from_5(X3,X4,X5,X6,X2)|~from_5(X3,X4,X5,X6,X1)|~eq(X1,X2))).
+#
+#cnf(i_0_70, plain, (from_5(X3,X4,X5,X2,X6)|~from_5(X3,X4,X5,X1,X6)|~eq(X1,X2))).
+#
+#cnf(i_0_69, plain, (from_5(X3,X4,X2,X5,X6)|~from_5(X3,X4,X1,X5,X6)|~eq(X1,X2))).
+#
+#cnf(i_0_68, plain, (from_5(X3,X2,X4,X5,X6)|~from_5(X3,X1,X4,X5,X6)|~eq(X1,X2))).
+#
+#cnf(i_0_67, plain, (from_5(X2,X3,X4,X5,X6)|~from_5(X1,X3,X4,X5,X6)|~eq(X1,X2))).
+#
+#cnf(i_0_41, plain, (tab2(X3,X4,X5,X6,X2)|~tab2(X3,X4,X5,X6,X1)|~eq(X1,X2))).
+#
+#cnf(i_0_40, plain, (tab2(X3,X4,X5,X2,X6)|~tab2(X3,X4,X5,X1,X6)|~eq(X1,X2))).
+#
+#cnf(i_0_39, plain, (tab2(X3,X4,X2,X5,X6)|~tab2(X3,X4,X1,X5,X6)|~eq(X1,X2))).
+#
+#cnf(i_0_38, plain, (tab2(X3,X2,X4,X5,X6)|~tab2(X3,X1,X4,X5,X6)|~eq(X1,X2))).
+#
+#cnf(i_0_37, plain, (tab2(X2,X3,X4,X5,X6)|~tab2(X1,X3,X4,X5,X6)|~eq(X1,X2))).
 # Presaturation interreduction done
 #
-#cnf(i_0_72, negated_conjecture, (~main_query_2(esk7_0,esk8_0)|~main_query_1(esk7_0,esk8_0))).
+#cnf(i_0_29, plain, (~lt(X1,X2)|~eq(X1,X2))).
+#
+#cnf(i_0_34, plain, (~neq(X1,X2)|~eq(X1,X2))).
 #
 #cnf(i_0_19, plain, (eq(X1,X1))).
 #
-#cnf(i_0_71, negated_conjecture, (main_query_2(esk7_0,esk8_0)|main_query_1(esk7_0,esk8_0))).
-#
-#cnf(i_0_28, plain, (~lt(X1,X2)|~eq(X1,X2))).
-#
-#cnf(i_0_33, plain, (~neq(X1,X2)|~eq(X1,X2))).
-#
 #cnf(i_0_22, plain, (lte(X1,X1))).
 #
-#cnf(i_0_9, plain, (select_1(X1,X2)|~main_query_1(X1,X2))).
+#cnf(i_0_72, negated_conjecture, (main_query_2(esk7_0,esk8_0)|main_query_1(esk7_0,esk8_0))).
 #
-#cnf(i_0_8, plain, (main_query_1(X1,X2)|~select_1(X1,X2))).
+#cnf(i_0_73, negated_conjecture, (~main_query_2(esk7_0,esk8_0)|~main_query_1(esk7_0,esk8_0))).
+#
+#cnf(i_0_9, plain, (select_1(X1,X2)|~main_query_1(X1,X2))).
 #
 #cnf(i_0_18, plain, (select_4(X1,X2)|~main_query_2(X1,X2))).
 #
 #cnf(i_0_75, negated_conjecture, (select_4(esk7_0,esk8_0)|main_query_1(esk7_0,esk8_0))).
 #
+#cnf(i_0_33, plain, (neq(X1,X2)|eq(X1,X2))).
+#
 #cnf(i_0_76, negated_conjecture, (select_4(esk7_0,esk8_0)|select_1(esk7_0,esk8_0))).
-#
-#cnf(i_0_17, plain, (main_query_2(X1,X2)|~select_4(X1,X2))).
-#
-#cnf(i_0_32, plain, (neq(X1,X2)|eq(X1,X2))).
 #
 #cnf(i_0_4, plain, (eq(X1,X2)|~where_3(X1,X2))).
 #
-#cnf(i_0_77, negated_conjecture, (~select_4(esk7_0,esk8_0)|~main_query_1(esk7_0,esk8_0))).
-#
-#cnf(i_0_80, negated_conjecture, (~select_4(esk7_0,esk8_0)|~select_1(esk7_0,esk8_0))).
-#
-#cnf(i_0_35, plain, (lte(X1,X2)|~gte(X2,X1))).
+#cnf(i_0_36, plain, (lte(X1,X2)|~gte(X2,X1))).
 #
 #cnf(i_0_13, plain, (lte(X1,X2)|~where_6(X1,X2))).
 #
-#cnf(i_0_29, plain, (lte(X1,X2)|~lt(X1,X2))).
+#cnf(i_0_30, plain, (lte(X1,X2)|~lt(X1,X2))).
 #
-#cnf(i_0_31, plain, (lt(X1,X2)|~gt(X2,X1))).
+#cnf(i_0_8, plain, (main_query_1(X1,X2)|~select_1(X1,X2))).
+#
+#cnf(i_0_17, plain, (main_query_2(X1,X2)|~select_4(X1,X2))).
+#
+#cnf(i_0_79, negated_conjecture, (~select_4(esk7_0,esk8_0)|~main_query_1(esk7_0,esk8_0))).
+#
+#cnf(i_0_81, negated_conjecture, (~select_4(esk7_0,esk8_0)|~select_1(esk7_0,esk8_0))).
+#
+#cnf(i_0_32, plain, (lt(X1,X2)|~gt(X2,X1))).
+#
+#cnf(i_0_27, plain, (lte(X2,X1)|lte(X1,X2))).
 #
 #cnf(i_0_3, plain, (where_3(X1,X2)|~eq(X1,X2))).
 #
 #cnf(i_0_6, plain, (where_3(X1,X2)|~select_1(X1,X2))).
-#
-#cnf(i_0_84, plain, (eq(X1,X2)|~select_1(X1,X2))).
 #
 #cnf(i_0_12, plain, (where_6(X1,X2)|~lte(X1,X2))).
 #
@@ -144,149 +216,2224 @@
 #
 #cnf(i_0_24, plain, (lte(X1,X2)|~eq(X1,X2))).
 #
-#cnf(i_0_30, plain, (gt(X1,X2)|~lt(X2,X1))).
+#cnf(i_0_87, plain, (eq(X1,X2)|~select_1(X1,X2))).
 #
-#cnf(i_0_34, plain, (gte(X1,X2)|~lte(X2,X1))).
-#
-#cnf(i_0_20, plain, (eq(X1,X2)|~eq(X2,X1))).
-#
-#cnf(i_0_86, plain, (lte(X1,X2)|~select_4(X1,X2))).
+#cnf(i_0_89, plain, (lte(X1,X2)|~select_4(X1,X2))).
 #
 #cnf(i_0_90, negated_conjecture, (lte(esk7_0,esk8_0)|select_1(esk7_0,esk8_0))).
 #
 #cnf(i_0_91, negated_conjecture, (lte(esk7_0,esk8_0))).
 #
+#cnf(i_0_31, plain, (gt(X1,X2)|~lt(X2,X1))).
+#
+#cnf(i_0_35, plain, (gte(X1,X2)|~lte(X2,X1))).
+#
+#cnf(i_0_20, plain, (eq(X1,X2)|~eq(X2,X1))).
+#
 #cnf(i_0_25, plain, (eq(X1,X2)|~lte(X2,X1)|~lte(X1,X2))).
 #
-#cnf(i_0_27, plain, (lt(X1,X2)|eq(X1,X2)|~lte(X1,X2))).
+#cnf(i_0_45, plain, (main_query_1(X1,X2)|~main_query_1(X1,X3)|~eq(X3,X2))).
 #
-#cnf(i_0_92, negated_conjecture, (eq(esk8_0,esk7_0)|~lte(esk8_0,esk7_0))).
+#cnf(i_0_28, plain, (lt(X1,X2)|eq(X1,X2)|~lte(X1,X2))).
+#
+#cnf(i_0_44, plain, (main_query_1(X1,X2)|~main_query_1(X3,X2)|~eq(X3,X1))).
+#
+#cnf(i_0_95, negated_conjecture, (eq(esk8_0,esk7_0)|~lte(esk8_0,esk7_0))).
+###
+#cnf(i_0_52, plain, (main_query_2(X1,X2)|~main_query_2(X1,X3)|~eq(X3,X2))).
+#
+#cnf(i_0_54, plain, (where_3(X1,X2)|~eq(X3,X2)|~where_3(X1,X3))).
+#
+#cnf(i_0_51, plain, (main_query_2(X1,X2)|~main_query_2(X3,X2)|~eq(X3,X1))).
+#
+#cnf(i_0_53, plain, (where_3(X1,X2)|~eq(X3,X1)|~where_3(X3,X2))).
+#
+#cnf(i_0_21, plain, (eq(X1,X2)|~eq(X3,X2)|~eq(X1,X3))).
+#
+#cnf(i_0_56, plain, (select_1(X1,X2)|~select_1(X1,X3)|~eq(X3,X2))).
+#
+#cnf(i_0_55, plain, (select_1(X1,X2)|~select_1(X3,X2)|~eq(X3,X1))).
+#
+#cnf(i_0_43, plain, (where_6(X1,X2)|~where_6(X1,X3)|~eq(X3,X2))).
+#
+#cnf(i_0_42, plain, (where_6(X1,X2)|~where_6(X3,X2)|~eq(X3,X1))).
+#
+#cnf(i_0_26, plain, (lte(X1,X2)|~lte(X3,X2)|~lte(X1,X3))).
+#
+#cnf(i_0_118, negated_conjecture, (lte(X1,esk8_0)|~lte(X1,esk7_0))).
+#
+#cnf(i_0_124, negated_conjecture, (eq(esk8_0,X1)|~lte(esk8_0,X1)|~lte(X1,esk7_0))).
+#
+#cnf(i_0_58, plain, (select_4(X1,X2)|~select_4(X1,X3)|~eq(X3,X2))).
+##
+#cnf(i_0_57, plain, (select_4(X1,X2)|~select_4(X3,X2)|~eq(X3,X1))).
 #
 #cnf(i_0_5, plain, (select_1(X1,X2)|~where_3(X1,X2)|~from_2(X1,X2,X3,X4,X5))).
 #
 #cnf(i_0_14, plain, (select_4(X1,X2)|~where_6(X1,X2)|~from_5(X1,X2,X3,X4,X5))).
 #
-#cnf(i_0_21, plain, (eq(X1,X2)|~eq(X3,X2)|~eq(X1,X3))).
-#
-#cnf(i_0_26, plain, (lte(X1,X2)|~lte(X3,X2)|~lte(X1,X3))).
-#
 #cnf(i_0_1, plain, (from_2(X1,X2,X3,X4,X5)|~tab1(X1,X2,X3,X4,X5))).
-##
-#cnf(i_0_101, negated_conjecture, (lte(X1,esk8_0)|~lte(X1,esk7_0))).
 #
-#cnf(i_0_105, negated_conjecture, (eq(esk8_0,X1)|~lte(esk8_0,X1)|~lte(X1,esk7_0))).
-##
 #cnf(i_0_11, plain, (tab1(X1,X2,X3,X4,X5)|~from_5(X1,X2,X3,X4,X5))).
-#
-#cnf(i_0_106, negated_conjecture, (lte(X1,esk8_0)|~lte(X2,esk7_0)|~lte(X1,X2))).
+##
+#cnf(i_0_125, negated_conjecture, (lte(X1,esk8_0)|~lte(X2,esk7_0)|~lte(X1,X2))).
+##
+#cnf(i_0_135, negated_conjecture, (lte(X1,esk8_0)|~lte(X1,X2)|~eq(esk7_0,X2))).
 #
 #cnf(i_0_2, plain, (tab1(X1,X2,X3,X4,X5)|~from_2(X1,X2,X3,X4,X5))).
+#
+#cnf(i_0_144, negated_conjecture, (lte(X1,esk8_0)|~eq(esk7_0,X1))).
+#
+#cnf(i_0_61, plain, (tab(X1,X2,X3)|~tab(X1,X2,X4)|~eq(X4,X3))).
+#
+#cnf(i_0_60, plain, (tab(X1,X2,X3)|~tab(X1,X4,X3)|~eq(X4,X2))).
+#
+#cnf(i_0_59, plain, (tab(X1,X2,X3)|~tab(X4,X2,X3)|~eq(X4,X1))).
 #
 #cnf(i_0_10, plain, (from_5(X1,X2,X3,X4,X5)|~tab1(X1,X2,X3,X4,X5))).
 #
 #cnf(i_0_7, plain, (from_2(X1,X2,esk1_2(X1,X2),esk2_2(X1,X2),esk3_2(X1,X2))|~select_1(X1,X2))).
+###
+#cnf(i_0_149, negated_conjecture, (eq(esk8_0,X1)|~lte(esk8_0,X1)|~eq(esk7_0,X1))).
+##
+#cnf(i_0_66, plain, (from_2(X1,X2,X3,X4,X5)|~eq(X6,X5)|~from_2(X1,X2,X3,X4,X6))).
+##
+#cnf(i_0_65, plain, (from_2(X1,X2,X3,X4,X5)|~eq(X6,X4)|~from_2(X1,X2,X3,X6,X5))).
+#
+#cnf(i_0_64, plain, (from_2(X1,X2,X3,X4,X5)|~eq(X6,X3)|~from_2(X1,X2,X6,X4,X5))).
+#
+#cnf(i_0_63, plain, (from_2(X1,X2,X3,X4,X5)|~eq(X6,X2)|~from_2(X1,X6,X3,X4,X5))).
+#
+#cnf(i_0_62, plain, (from_2(X1,X2,X3,X4,X5)|~eq(X6,X1)|~from_2(X6,X2,X3,X4,X5))).
 #
 #cnf(i_0_16, plain, (from_5(X1,X2,esk4_2(X1,X2),esk5_2(X1,X2),esk6_2(X1,X2))|~select_4(X1,X2))).
-##
-#cnf(i_0_111, negated_conjecture, (lte(X1,esk8_0)|~lte(X1,X2)|~eq(esk7_0,X2))).
 #
-#cnf(i_0_124, negated_conjecture, (lte(X1,esk8_0)|~eq(esk7_0,X1))).
+#cnf(i_0_142, negated_conjecture, (lte(X1,esk8_0)|~eq(esk7_0,X2)|~eq(X2,X1))).
+##
+#cnf(i_0_143, negated_conjecture, (lte(X1,esk8_0)|~eq(esk7_0,X2)|~eq(X1,X2))).
+#
+#cnf(i_0_169, negated_conjecture, (lte(X1,esk8_0)|~eq(X1,esk7_0))).
+#
+#cnf(i_0_50, plain, (tab1(X1,X2,X3,X4,X5)|~eq(X6,X5)|~tab1(X1,X2,X3,X4,X6))).
+##
+#cnf(i_0_49, plain, (tab1(X1,X2,X3,X4,X5)|~eq(X6,X4)|~tab1(X1,X2,X3,X6,X5))).
+#
+#cnf(i_0_48, plain, (tab1(X1,X2,X3,X4,X5)|~eq(X6,X3)|~tab1(X1,X2,X6,X4,X5))).
+#
+#cnf(i_0_47, plain, (tab1(X1,X2,X3,X4,X5)|~eq(X6,X2)|~tab1(X1,X6,X3,X4,X5))).
+#
+#cnf(i_0_46, plain, (tab1(X1,X2,X3,X4,X5)|~eq(X6,X1)|~tab1(X6,X2,X3,X4,X5))).
+#
+#cnf(i_0_71, plain, (from_5(X1,X2,X3,X4,X5)|~from_5(X1,X2,X3,X4,X6)|~eq(X6,X5))).
+#
+#cnf(i_0_173, negated_conjecture, (eq(esk8_0,X1)|~lte(esk8_0,X1)|~eq(X1,esk7_0))).
+##
+#cnf(i_0_136, negated_conjecture, (lte(X1,esk8_0)|~lte(X1,X2)|~eq(X2,esk7_0))).
+##
+#cnf(i_0_70, plain, (from_5(X1,X2,X3,X4,X5)|~from_5(X1,X2,X3,X6,X5)|~eq(X6,X4))).
+##
+#cnf(i_0_69, plain, (from_5(X1,X2,X3,X4,X5)|~from_5(X1,X2,X6,X4,X5)|~eq(X6,X3))).
+#
+#cnf(i_0_68, plain, (from_5(X1,X2,X3,X4,X5)|~from_5(X1,X6,X3,X4,X5)|~eq(X6,X2))).
+#
+#cnf(i_0_67, plain, (from_5(X1,X2,X3,X4,X5)|~from_5(X6,X2,X3,X4,X5)|~eq(X6,X1))).
+#
+#cnf(i_0_41, plain, (tab2(X1,X2,X3,X4,X5)|~tab2(X1,X2,X3,X4,X6)|~eq(X6,X5))).
+#
+#cnf(i_0_40, plain, (tab2(X1,X2,X3,X4,X5)|~tab2(X1,X2,X3,X6,X5)|~eq(X6,X4))).
+###
+#cnf(i_0_195, negated_conjecture, (lte(X1,esk8_0)|~eq(X2,esk7_0)|~eq(X2,X1))).
+##
+#cnf(i_0_39, plain, (tab2(X1,X2,X3,X4,X5)|~tab2(X1,X2,X6,X4,X5)|~eq(X6,X3))).
+##
+#cnf(i_0_38, plain, (tab2(X1,X2,X3,X4,X5)|~tab2(X1,X6,X3,X4,X5)|~eq(X6,X2))).
+#
+#cnf(i_0_37, plain, (tab2(X1,X2,X3,X4,X5)|~tab2(X6,X2,X3,X4,X5)|~eq(X6,X1))).
+#
+#cnf(i_0_120, plain, (lte(X1,X2)|~lte(X1,X3)|~eq(X2,X3))).
+#
+#cnf(i_0_121, plain, (lte(X1,X2)|~lte(X1,X3)|~eq(X3,X2))).
+##
+#cnf(i_0_196, negated_conjecture, (lte(X1,esk8_0)|~eq(X2,esk7_0)|~eq(X1,X2))).
 ####
-#cnf(i_0_127, negated_conjecture, (eq(esk8_0,X1)|~lte(esk8_0,X1)|~eq(esk7_0,X1))).
+#cnf(i_0_119, plain, (lte(X2,X3)|lte(X1,X2)|~lte(X1,X3))).
 #
-#cnf(i_0_102, plain, (lte(X1,X2)|~lte(X1,X3)|~eq(X2,X3))).
+#cnf(i_0_211, negated_conjecture, (lte(esk7_0,X1)|lte(X1,esk8_0))).
+##
+#cnf(i_0_216, plain, (lte(X3,X1)|lte(X1,X2)|~eq(X2,X3))).
 #
-#cnf(i_0_103, plain, (lte(X1,X2)|~lte(X1,X3)|~eq(X3,X2))).
+#cnf(i_0_217, plain, (lte(X3,X1)|lte(X1,X2)|~eq(X3,X2))).
 #
-#cnf(i_0_112, negated_conjecture, (lte(X1,esk8_0)|~lte(X1,X2)|~eq(X2,esk7_0))).
-#
-#cnf(i_0_141, negated_conjecture, (lte(X1,esk8_0)|~eq(X1,esk7_0))).
-######
-#cnf(i_0_115, plain, (select_4(X1,X2)|~where_6(X1,X2)|~tab1(X1,X2,X3,X4,X5))).
-#
-#cnf(i_0_146, negated_conjecture, (eq(esk8_0,X1)|~lte(esk8_0,X1)|~eq(X1,esk7_0))).
+#cnf(i_0_151, plain, (select_4(X1,X2)|~where_6(X1,X2)|~tab1(X1,X2,X3,X4,X5))).
 ###
-#cnf(i_0_122, negated_conjecture, (lte(X1,esk8_0)|~eq(esk7_0,X2)|~eq(X2,X1))).
+#cnf(i_0_225, negated_conjecture, (lte(esk7_0,X1)|eq(esk8_0,X1)|~lte(esk8_0,X1))).
 ###
-#cnf(i_0_123, negated_conjecture, (lte(X1,esk8_0)|~eq(esk7_0,X2)|~eq(X1,X2))).
+#cnf(i_0_134, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|~lte(X1,X2))).
 ##
-#cnf(i_0_139, negated_conjecture, (lte(X1,esk8_0)|~eq(X2,esk7_0)|~eq(X2,X1))).
-##
-#cnf(i_0_119, plain, (tab1(X1,X2,esk4_2(X1,X2),esk5_2(X1,X2),esk6_2(X1,X2))|~select_4(X1,X2))).
+#cnf(i_0_235, plain, (select_4(X1,X2)|~where_6(X1,X2)|~from_2(X1,X2,X3,X4,X5))).
 #
-#cnf(i_0_140, negated_conjecture, (lte(X1,esk8_0)|~eq(X2,esk7_0)|~eq(X1,X2))).
-##
-#cnf(i_0_148, plain, (select_4(X1,X2)|~where_6(X1,X2)|~from_2(X1,X2,X3,X4,X5))).
+#cnf(i_0_256, plain, (select_4(X1,X2)|~where_6(X1,X2)|~select_1(X1,X2))).
 #
-#cnf(i_0_161, plain, (select_4(X1,X2)|~where_6(X1,X2)|~select_1(X1,X2))).
+#cnf(i_0_257, plain, (select_4(X1,X2)|~lte(X1,X2)|~select_1(X1,X2))).
 #
-#cnf(i_0_162, plain, (select_4(X1,X2)|~lte(X1,X2)|~select_1(X1,X2))).
-#
-#cnf(i_0_164, negated_conjecture, (~select_1(esk7_0,esk8_0))).
+#cnf(i_0_259, negated_conjecture, (~select_1(esk7_0,esk8_0))).
 #
 #cnf(i_0_76, negated_conjecture, (select_4(esk7_0,esk8_0))).
 #
-#cnf(i_0_77, negated_conjecture, (~main_query_1(esk7_0,esk8_0))).
+#cnf(i_0_79, negated_conjecture, (~main_query_1(esk7_0,esk8_0))).
 #
-#cnf(i_0_71, negated_conjecture, (main_query_2(esk7_0,esk8_0))).
-###
-#cnf(i_0_158, plain, (from_2(X1,X2,esk4_2(X1,X2),esk5_2(X1,X2),esk6_2(X1,X2))|~select_4(X1,X2))).
+#cnf(i_0_72, negated_conjecture, (main_query_2(esk7_0,esk8_0))).
+######
+#cnf(i_0_141, negated_conjecture, (lte(X1,esk8_0)|lte(X2,X1)|~eq(esk7_0,X2))).
 ##
-#cnf(i_0_169, plain, (select_1(X1,X2)|~select_4(X1,X2)|~where_3(X1,X2))).
+#cnf(i_0_194, negated_conjecture, (lte(X1,esk8_0)|lte(X2,X1)|~eq(X2,esk7_0))).
+#####
+#cnf(i_0_212, negated_conjecture, (lte(X1,esk8_0)|lte(X2,X1)|~lte(X2,esk7_0))).
 #
-#cnf(i_0_171, plain, (select_1(X1,X2)|~select_4(X1,X2)|~eq(X1,X2))).
+#cnf(i_0_161, plain, (from_2(X1,X2,esk1_2(X1,X2),esk2_2(X1,X2),X3)|~select_1(X1,X2)|~eq(esk3_2(X1,X2),X3))).
+########
+#cnf(i_0_252, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|~eq(X1,X2))).
+##
+#cnf(i_0_253, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|~eq(X2,X1))).
 #
-#cnf(i_0_173, negated_conjecture, (~eq(esk7_0,esk8_0))).
-
-# No proof found!
-# SZS status CounterSatisfiable
-# Parsed axioms                        : 54
-# Removed by relevancy pruning/SinE    : 0
-# Initial clauses                      : 72
-# Removed in clause preprocessing      : 35
-# Initial clauses in saturation        : 37
-# Processed clauses                    : 132
-# ...of these trivial                  : 0
-# ...subsumed                          : 21
-# ...remaining for further processing  : 111
-# Other redundant clauses eliminated   : 0
-# Clauses deleted for lack of memory   : 0
-# Backward-subsumed                    : 0
-# Backward-rewritten                   : 5
-# Generated clauses                    : 104
-# ...of the previous two non-trivial   : 58
-# Contextual simplify-reflections      : 1
-# Paramodulations                      : 102
-# Factorizations                       : 0
-# Equation resolutions                 : 0
-# Propositional unsat checks           : 0
-#    Propositional check models        : 0
-#    Propositional check unsatisfiable : 0
-#    Propositional clauses             : 0
-#    Propositional clauses after purity: 0
-#    Propositional unsat core size     : 0
-#    Propositional preprocessing time  : 0.000
-#    Propositional encoding time       : 0.000
-#    Propositional solver time         : 0.000
-#    Success case prop preproc time    : 0.000
-#    Success case prop encoding time   : 0.000
-#    Success case prop solver time     : 0.000
-# Current number of processed clauses  : 67
-#    Positive orientable unit clauses  : 5
-#    Positive unorientable unit clauses: 0
-#    Negative unit clauses             : 3
-#    Non-unit-clauses                  : 59
-# Current number of unprocessed clauses: 0
-# ...number of literals in the above   : 0
-# Current number of archived formulas  : 0
-# Current number of archived clauses   : 44
-# Clause-clause subsumption calls (NU) : 1531
-# Rec. Clause-clause subsumption calls : 1494
-# Non-unit clause-clause subsumptions  : 19
-# Unit Clause-clause subsumption calls : 13
-# Rewrite failures with RHS unbound    : 0
-# BW rewrite match attempts            : 3
-# BW rewrite match successes           : 3
-# Condensation attempts                : 0
-# Condensation successes               : 0
-# Termbank termtop insertions          : 5502
+#cnf(i_0_162, plain, (from_2(X1,X2,esk1_2(X1,X2),X3,esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk2_2(X1,X2),X3))).
+########
+#cnf(i_0_227, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X2,X1))).
+###
+#cnf(i_0_163, plain, (from_2(X1,X2,X3,esk2_2(X1,X2),esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X3))).
+####
+#cnf(i_0_175, plain, (tab1(X1,X2,X3,X4,X5)|~eq(X6,X5)|~from_2(X1,X2,X3,X4,X6))).
+#
+#cnf(i_0_176, plain, (tab1(X1,X2,X3,X4,X5)|~eq(X6,X4)|~from_2(X1,X2,X3,X6,X5))).
+###
+#cnf(i_0_308, negated_conjecture, (lte(esk7_0,X2)|lte(X2,X1)|eq(esk8_0,X1)|~lte(esk8_0,X1))).
+###
+#cnf(i_0_164, plain, (from_2(X1,X2,esk1_2(X1,X3),esk2_2(X1,X3),esk3_2(X1,X3))|~select_1(X1,X3)|~eq(X3,X2))).
+###
+#cnf(i_0_347, plain, (select_4(X1,X2)|~where_6(X1,X2)|~select_1(X1,X3)|~eq(X3,X2))).
+#
+#cnf(i_0_355, plain, (select_4(X1,X2)|~lte(X1,X2)|~select_1(X1,X3)|~eq(X3,X2))).
+#
+#cnf(i_0_177, plain, (tab1(X1,X2,X3,X4,X5)|~eq(X6,X3)|~from_2(X1,X2,X6,X4,X5))).
+###
+#cnf(i_0_300, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X3)|lte(X1,X2)|~lte(X1,X3))).
+#
+#cnf(i_0_310, negated_conjecture, (lte(esk7_0,X3)|lte(X1,esk8_0)|lte(X3,X2)|~lte(X1,X2))).
+##
+#cnf(i_0_165, plain, (from_2(X1,X2,esk1_2(X3,X2),esk2_2(X3,X2),esk3_2(X3,X2))|~select_1(X3,X2)|~eq(X3,X1))).
+###
+#cnf(i_0_391, plain, (select_4(X1,X2)|~where_6(X1,X2)|~select_1(X3,X2)|~eq(X3,X1))).
+#
+#cnf(i_0_400, plain, (select_4(X1,X2)|~lte(X1,X2)|~select_1(X3,X2)|~eq(X3,X1))).
+#
+#cnf(i_0_178, plain, (tab1(X1,X2,X3,X4,X5)|~eq(X6,X2)|~from_2(X1,X6,X3,X4,X5))).
+##
+#cnf(i_0_318, negated_conjecture, (lte(X3,esk8_0)|lte(X2,X3)|lte(X1,X2)|~lte(X1,esk7_0))).
+#
+#cnf(i_0_371, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X3,X1)|~eq(X2,X3))).
+#
+#cnf(i_0_372, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X3,X1)|~eq(X3,X2))).
+#
+#cnf(i_0_385, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X1,X3)|~eq(X3,X2))).
+#
+#cnf(i_0_167, plain, (tab1(X1,X2,esk4_2(X1,X2),esk5_2(X1,X2),esk6_2(X1,X2))|~select_4(X1,X2))).
+##
+#cnf(i_0_179, plain, (tab1(X1,X2,X3,X4,X5)|~eq(X6,X1)|~from_2(X6,X2,X3,X4,X5))).
+#
+#cnf(i_0_180, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X5)|~tab1(X1,X2,X3,X4,X6))).
+#
+#cnf(i_0_199, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X4)|~tab1(X1,X2,X3,X6,X5))).
+#
+#cnf(i_0_201, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X3)|~tab1(X1,X2,X6,X4,X5))).
+##
+#cnf(i_0_386, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X1,X3)|~eq(X2,X3))).
+#
+#cnf(i_0_410, negated_conjecture, (lte(X1,esk8_0)|lte(X3,X2)|lte(X2,X1)|~eq(esk7_0,X3))).
+#
+#cnf(i_0_411, negated_conjecture, (lte(X1,esk8_0)|lte(X3,X2)|lte(X2,X1)|~eq(X3,esk7_0))).
+##
+#cnf(i_0_181, plain, (from_5(X1,X2,esk4_2(X1,X2),esk5_2(X1,X2),X3)|~select_4(X1,X2)|~eq(esk6_2(X1,X2),X3))).
+##
+#cnf(i_0_203, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X2)|~tab1(X1,X6,X3,X4,X5))).
+#
+#cnf(i_0_205, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X1)|~tab1(X6,X2,X3,X4,X5))).
+#
+#cnf(i_0_431, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X5)|~from_2(X1,X2,X3,X4,X6))).
+#
+#cnf(i_0_433, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X4)|~from_2(X1,X2,X3,X6,X5))).
+######
+#cnf(i_0_200, plain, (from_5(X1,X2,esk4_2(X1,X2),X3,esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk5_2(X1,X2),X3))).
+##
+#cnf(i_0_435, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X3)|~from_2(X1,X2,X6,X4,X5))).
+#
+#cnf(i_0_447, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X2)|~from_2(X1,X6,X3,X4,X5))).
+#
+#cnf(i_0_449, plain, (from_5(X1,X2,X3,X4,X5)|~eq(X6,X1)|~from_2(X6,X2,X3,X4,X5))).
+#
+#cnf(i_0_215, plain, (lte(X2,X3)|lte(X3,X1)|lte(X1,X2))).
+######
+#cnf(i_0_202, plain, (from_5(X1,X2,X3,esk5_2(X1,X2),esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3))).
+###
+#cnf(i_0_508, plain, (lte(X4,X3)|lte(X2,X4)|lte(X1,X2)|~lte(X1,X3))).
+########
+#cnf(i_0_204, plain, (from_5(X1,X2,esk4_2(X1,X3),esk5_2(X1,X3),esk6_2(X1,X3))|~select_4(X1,X3)|~eq(X3,X2))).
+#####
+#cnf(i_0_561, plain, (lte(X4,X3)|lte(X3,X1)|lte(X1,X2)|~eq(X2,X4))).
+######
+#cnf(i_0_206, plain, (from_5(X1,X2,esk4_2(X3,X2),esk5_2(X3,X2),esk6_2(X3,X2))|~select_4(X3,X2)|~eq(X3,X1))).
+###
+#cnf(i_0_562, plain, (lte(X4,X3)|lte(X3,X1)|lte(X1,X2)|~eq(X4,X2))).
+###################
+#cnf(i_0_273, plain, (from_2(X1,X2,esk1_2(X1,X2),esk2_2(X1,X2),X3)|~select_1(X1,X2)|~eq(esk3_2(X1,X2),X4)|~eq(X4,X3))).
+##
+#cnf(i_0_283, plain, (from_2(X1,X2,esk1_2(X1,X2),X3,esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk2_2(X1,X2),X4)|~eq(X4,X3))).
+#
+#cnf(i_0_324, plain, (from_2(X1,X2,X3,esk2_2(X1,X2),esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X4)|~eq(X4,X3))).
+#
+#cnf(i_0_328, plain, (tab1(X1,X2,esk1_2(X1,X2),esk2_2(X1,X2),X3)|~select_1(X1,X2)|~eq(esk3_2(X1,X2),X4)|~eq(X4,X3))).
+#
+#cnf(i_0_333, plain, (tab1(X1,X2,esk1_2(X1,X2),X3,esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk2_2(X1,X2),X4)|~eq(X4,X3))).
+####
+#cnf(i_0_301, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X3)|lte(X3,X1)|lte(X1,X2))).
+##
+#cnf(i_0_274, plain, (from_2(X1,X2,esk1_2(X1,X2),X3,X4)|~select_1(X1,X2)|~eq(esk2_2(X1,X2),X3)|~eq(esk3_2(X1,X2),X4))).
+#####
+#cnf(i_0_644, negated_conjecture, (lte(X3,esk8_0)|lte(X4,X3)|lte(X2,X4)|lte(X1,X2)|~lte(X1,esk7_0))).
+######
+#cnf(i_0_275, plain, (from_2(X1,X2,X3,esk2_2(X1,X2),X4)|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X3)|~eq(esk3_2(X1,X2),X4))).
+###
+#cnf(i_0_682, negated_conjecture, (lte(X1,esk8_0)|lte(X4,X3)|lte(X3,X2)|lte(X2,X1)|~eq(esk7_0,X4))).
+#
+#cnf(i_0_683, negated_conjecture, (lte(X1,esk8_0)|lte(X4,X3)|lte(X3,X2)|lte(X2,X1)|~eq(X4,esk7_0))).
+#######
+#cnf(i_0_276, plain, (from_2(X1,X2,esk1_2(X1,X3),esk2_2(X1,X3),X4)|~select_1(X1,X3)|~eq(esk3_2(X1,X3),X4)|~eq(X3,X2))).
+####
+#cnf(i_0_614, negated_conjecture, (lte(esk7_0,X4)|lte(X2,esk8_0)|lte(X4,X3)|lte(X1,X2)|~lte(X1,X3))).
+#####
+#cnf(i_0_655, negated_conjecture, (lte(esk7_0,X2)|lte(X3,X1)|lte(X2,X3)|eq(esk8_0,X1)|~lte(esk8_0,X1))).
+##
+#cnf(i_0_277, plain, (from_2(X1,X2,esk1_2(X3,X2),esk2_2(X3,X2),X4)|~select_1(X3,X2)|~eq(esk3_2(X3,X2),X4)|~eq(X3,X1))).
+####
+#cnf(i_0_632, negated_conjecture, (lte(esk7_0,X3)|lte(X4,esk8_0)|lte(X2,X4)|lte(X1,X2)|~lte(X1,X3))).
+#
+#cnf(i_0_658, negated_conjecture, (lte(esk7_0,X3)|lte(X1,esk8_0)|lte(X4,X2)|lte(X3,X4)|~lte(X1,X2))).
+####
+#cnf(i_0_739, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X4,X2)|lte(X1,X3)|~eq(X3,X4))).
+#
+#cnf(i_0_740, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X4,X2)|lte(X1,X3)|~eq(X4,X3))).
+##
+#cnf(i_0_794, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X4,X3)|lte(X3,X2)|~eq(X1,X4))).
+#
+#cnf(i_0_795, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X4,X3)|lte(X3,X2)|~eq(X4,X1))).
+#
+#cnf(i_0_815, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X1,X3)|lte(X3,X4)|~eq(X4,X2))).
+#
+#cnf(i_0_816, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X1,X3)|lte(X3,X4)|~eq(X2,X4))).
+#
+#cnf(i_0_670, plain, (from_2(X1,X2,X3,X4,X5)|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X3)|~eq(esk2_2(X1,X2),X4)|~eq(esk3_2(X1,X2),X5))).
+######
+#cnf(i_0_284, plain, (from_2(X1,X2,X3,X4,esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X3)|~eq(esk2_2(X1,X2),X4))).
+###
+#cnf(i_0_671, plain, (tab1(X1,X2,X3,X4,X5)|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X3)|~eq(esk2_2(X1,X2),X4)|~eq(esk3_2(X1,X2),X5))).
+#
+#cnf(i_0_672, plain, (from_5(X1,X2,X3,X4,X5)|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X3)|~eq(esk2_2(X1,X2),X4)|~eq(esk3_2(X1,X2),X5))).
+#######
+#cnf(i_0_285, plain, (from_2(X1,X2,esk1_2(X1,X3),X4,esk3_2(X1,X3))|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X4)|~eq(X3,X2))).
+###########
+#cnf(i_0_286, plain, (from_2(X1,X2,esk1_2(X3,X2),X4,esk3_2(X3,X2))|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X4)|~eq(X3,X1))).
+##############
+#cnf(i_0_360, plain, (tab1(X1,X2,X3,esk2_2(X1,X2),esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X4)|~eq(X4,X3))).
+#
+#cnf(i_0_442, plain, (from_5(X1,X2,esk4_2(X1,X2),esk5_2(X1,X2),X3)|~select_4(X1,X2)|~eq(esk6_2(X1,X2),X4)|~eq(X4,X3))).
+#
+#cnf(i_0_452, plain, (from_5(X1,X2,esk1_2(X1,X2),esk2_2(X1,X2),X3)|~select_1(X1,X2)|~eq(esk3_2(X1,X2),X4)|~eq(X4,X3))).
+#######
+#cnf(i_0_509, plain, (lte(X4,X3)|lte(X2,X4)|lte(X3,X1)|lte(X1,X2))).
+##########
+#cnf(i_0_325, plain, (from_2(X1,X2,X3,esk2_2(X1,X4),esk3_2(X1,X4))|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X3)|~eq(X4,X2))).
+#####
+#cnf(i_0_916, plain, (lte(X5,X3)|lte(X2,X4)|lte(X4,X5)|lte(X1,X2)|~lte(X1,X3))).
+######
+#cnf(i_0_326, plain, (from_2(X1,X2,X3,esk2_2(X4,X2),esk3_2(X4,X2))|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X3)|~eq(X4,X1))).
+###########
+#cnf(i_0_327, plain, (tab1(X1,X2,esk1_2(X1,X2),esk2_2(X1,X2),X3)|~select_1(X1,X2)|~eq(esk3_2(X1,X2),X3))).
+###########
+#cnf(i_0_329, plain, (tab1(X1,X2,esk1_2(X1,X2),X3,X4)|~select_1(X1,X2)|~eq(esk3_2(X1,X2),X4)|~eq(esk2_2(X1,X2),X3))).
+####
+#cnf(i_0_1020, plain, (lte(X5,X3)|lte(X4,X1)|lte(X3,X4)|lte(X1,X2)|~eq(X2,X5))).
+#
+#cnf(i_0_1021, plain, (lte(X5,X3)|lte(X4,X1)|lte(X3,X4)|lte(X1,X2)|~eq(X5,X2))).
+######
+#cnf(i_0_330, plain, (tab1(X1,X2,X3,esk2_2(X1,X2),X4)|~select_1(X1,X2)|~eq(esk3_2(X1,X2),X4)|~eq(esk1_2(X1,X2),X3))).
+###########
+#cnf(i_0_331, plain, (tab1(X1,X2,esk1_2(X1,X2),X3,esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk2_2(X1,X2),X3))).
+####
+#cnf(i_0_459, plain, (from_5(X1,X2,esk1_2(X1,X2),X3,esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk2_2(X1,X2),X4)|~eq(X4,X3))).
+#
+#cnf(i_0_466, plain, (from_5(X1,X2,esk4_2(X1,X2),X3,esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk5_2(X1,X2),X4)|~eq(X4,X3))).
+########
+#cnf(i_0_473, plain, (from_5(X1,X2,X3,esk2_2(X1,X2),esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X4)|~eq(X4,X3))).
+#
+#cnf(i_0_549, plain, (from_5(X1,X2,X3,esk5_2(X1,X2),esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X4)|~eq(X4,X3))).
+########
+#cnf(i_0_334, plain, (tab1(X1,X2,X3,X4,esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk2_2(X1,X2),X4)|~eq(esk1_2(X1,X2),X3))).
+##############
+#cnf(i_0_664, plain, (from_2(X1,X2,esk1_2(X1,X2),X3,X4)|~select_1(X1,X2)|~eq(esk2_2(X1,X2),X3)|~eq(esk3_2(X1,X2),X5)|~eq(X5,X4))).
+#
+#cnf(i_0_665, plain, (tab1(X1,X2,esk1_2(X1,X2),X3,X4)|~select_1(X1,X2)|~eq(esk2_2(X1,X2),X3)|~eq(esk3_2(X1,X2),X5)|~eq(X5,X4))).
+#
+#cnf(i_0_666, plain, (from_5(X1,X2,esk1_2(X1,X2),X3,X4)|~select_1(X1,X2)|~eq(esk2_2(X1,X2),X3)|~eq(esk3_2(X1,X2),X5)|~eq(X5,X4))).
+######
+#cnf(i_0_349, plain, (tab1(X1,X2,esk1_2(X1,X3),esk2_2(X1,X3),X4)|~select_1(X1,X3)|~eq(esk3_2(X1,X3),X4)|~eq(X3,X2))).
+###
+#cnf(i_0_667, plain, (from_2(X1,X2,esk1_2(X1,X2),X3,X4)|~select_1(X1,X2)|~eq(esk2_2(X1,X2),X5)|~eq(esk3_2(X1,X2),X4)|~eq(X5,X3))).
+#
+#cnf(i_0_668, plain, (tab1(X1,X2,esk1_2(X1,X2),X3,X4)|~select_1(X1,X2)|~eq(esk2_2(X1,X2),X5)|~eq(esk3_2(X1,X2),X4)|~eq(X5,X3))).
+#
+#cnf(i_0_669, plain, (from_5(X1,X2,esk1_2(X1,X2),X3,X4)|~select_1(X1,X2)|~eq(esk2_2(X1,X2),X5)|~eq(esk3_2(X1,X2),X4)|~eq(X5,X3))).
+##
+#cnf(i_0_353, plain, (from_2(X1,X2,esk1_2(X1,X3),esk2_2(X1,X3),esk3_2(X1,X3))|~select_1(X1,X3)|~eq(X4,X2)|~eq(X3,X4))).
+#
+#cnf(i_0_399, plain, (from_2(X1,X2,esk1_2(X3,X2),esk2_2(X3,X2),esk3_2(X3,X2))|~select_1(X3,X2)|~eq(X4,X1)|~eq(X3,X4))).
+#
+#cnf(i_0_406, plain, (tab1(X1,X2,esk1_2(X1,X3),esk2_2(X1,X3),esk3_2(X1,X3))|~select_1(X1,X3)|~eq(X4,X2)|~eq(X3,X4))).
+#
+#cnf(i_0_430, plain, (tab1(X1,X2,esk1_2(X3,X2),esk2_2(X3,X2),esk3_2(X3,X2))|~select_1(X3,X2)|~eq(X4,X1)|~eq(X3,X4))).
+##
+#cnf(i_0_418, plain, (from_2(X1,X2,esk4_2(X1,X2),esk5_2(X1,X2),esk6_2(X1,X2))|~select_4(X1,X2))).
+#
+#cnf(i_0_1139, plain, (select_1(X1,X2)|~select_4(X1,X2)|~where_3(X1,X2))).
+#
+#cnf(i_0_1156, plain, (select_1(X1,X2)|~select_4(X1,X2)|~eq(X1,X2))).
+#
+#cnf(i_0_1158, negated_conjecture, (~eq(esk7_0,esk8_0))).
+#
+#cnf(i_0_694, plain, (from_2(X1,X2,X3,esk2_2(X1,X2),X4)|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X3)|~eq(esk3_2(X1,X2),X5)|~eq(X5,X4))).
+#
+#cnf(i_0_502, negated_conjecture, (lte(esk7_0,X4)|lte(X1,esk8_0)|lte(X4,X3)|lte(X3,X2)|lte(X2,X1))).
+#####
+#cnf(i_0_351, plain, (tab1(X1,X2,esk1_2(X1,X3),X4,esk3_2(X1,X3))|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X4)|~eq(X3,X2))).
+###
+#cnf(i_0_695, plain, (tab1(X1,X2,X3,esk2_2(X1,X2),X4)|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X3)|~eq(esk3_2(X1,X2),X5)|~eq(X5,X4))).
+#
+#cnf(i_0_696, plain, (from_5(X1,X2,X3,esk2_2(X1,X2),X4)|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X3)|~eq(esk3_2(X1,X2),X5)|~eq(X5,X4))).
+#
+#cnf(i_0_700, plain, (from_2(X1,X2,X3,esk2_2(X1,X2),X4)|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X5)|~eq(esk3_2(X1,X2),X4)|~eq(X5,X3))).
+########
+#cnf(i_0_701, plain, (tab1(X1,X2,X3,esk2_2(X1,X2),X4)|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X5)|~eq(esk3_2(X1,X2),X4)|~eq(X5,X3))).
+#
+#cnf(i_0_702, plain, (from_5(X1,X2,X3,esk2_2(X1,X2),X4)|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X5)|~eq(esk3_2(X1,X2),X4)|~eq(X5,X3))).
+#
+#cnf(i_0_837, plain, (from_2(X1,X2,X3,X4,esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X3)|~eq(esk2_2(X1,X2),X5)|~eq(X5,X4))).
+#
+#cnf(i_0_838, plain, (tab1(X1,X2,X3,X4,esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X3)|~eq(esk2_2(X1,X2),X5)|~eq(X5,X4))).
+######
+#cnf(i_0_354, plain, (from_2(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),esk3_2(X3,X4))|~select_1(X3,X4)|~eq(X3,X1)|~eq(X4,X2))).
+#
+#cnf(i_0_1306, plain, (select_1(X1,X2)|~select_1(X3,X4)|~eq(X3,X1)|~eq(X4,X2)|~where_3(X1,X2))).
+##
+#cnf(i_0_1307, plain, (select_4(X1,X2)|~where_6(X1,X2)|~select_1(X3,X4)|~eq(X3,X1)|~eq(X4,X2))).
+#
+#cnf(i_0_1324, plain, (select_4(X1,X2)|~lte(X1,X2)|~select_1(X3,X4)|~eq(X3,X1)|~eq(X4,X2))).
+#
+#cnf(i_0_839, plain, (from_5(X1,X2,X3,X4,esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X3)|~eq(esk2_2(X1,X2),X5)|~eq(X5,X4))).
+######
+#cnf(i_0_357, plain, (tab1(X1,X2,X3,esk2_2(X1,X2),esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X3))).
+####
+#cnf(i_0_840, plain, (from_2(X1,X2,X3,X4,esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X5)|~eq(esk2_2(X1,X2),X4)|~eq(X5,X3))).
+#
+#cnf(i_0_841, plain, (tab1(X1,X2,X3,X4,esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X5)|~eq(esk2_2(X1,X2),X4)|~eq(X5,X3))).
+########
+#cnf(i_0_842, plain, (from_5(X1,X2,X3,X4,esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X5)|~eq(esk2_2(X1,X2),X4)|~eq(X5,X3))).
+#####
+#cnf(i_0_1259, negated_conjecture, (lte(esk7_0,X2)|lte(X4,X1)|lte(X3,X4)|lte(X2,X3)|eq(esk8_0,X1)|~lte(esk8_0,X1))).
+#####
+#cnf(i_0_1279, negated_conjecture, (lte(X3,esk8_0)|lte(X5,X3)|lte(X4,X5)|lte(X2,X4)|lte(X1,X2)|~lte(X1,esk7_0))).
+#####
+#cnf(i_0_1371, negated_conjecture, (lte(X1,esk8_0)|lte(X5,X4)|lte(X4,X3)|lte(X3,X2)|lte(X2,X1)|~eq(esk7_0,X5))).
+#
+#cnf(i_0_1195, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X4)|lte(X5,X3)|lte(X4,X5)|lte(X1,X2)|~lte(X1,X3))).
+####
+#cnf(i_0_361, plain, (tab1(X1,X2,X3,esk2_2(X1,X4),esk3_2(X1,X4))|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X3)|~eq(X4,X2))).
+#
+#cnf(i_0_1372, negated_conjecture, (lte(X1,esk8_0)|lte(X5,X4)|lte(X4,X3)|lte(X3,X2)|lte(X2,X1)|~eq(X5,esk7_0))).
+######
+#cnf(i_0_1219, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X2,X5)|lte(X4,X3)|lte(X1,X2)|~lte(X1,X3))).
+########
+#cnf(i_0_480, plain, (from_5(X1,X2,esk1_2(X1,X3),esk2_2(X1,X3),esk3_2(X1,X3))|~select_1(X1,X3)|~eq(X4,X2)|~eq(X3,X4))).
+#
+#cnf(i_0_487, plain, (from_5(X1,X2,esk1_2(X3,X2),esk2_2(X3,X2),esk3_2(X3,X2))|~select_1(X3,X2)|~eq(X4,X1)|~eq(X3,X4))).
+#
+#cnf(i_0_1243, negated_conjecture, (lte(X4,esk8_0)|lte(esk7_0,X3)|lte(X5,X4)|lte(X2,X5)|lte(X1,X2)|~lte(X1,X3))).
+#
+#cnf(i_0_1262, negated_conjecture, (lte(esk7_0,X3)|lte(X1,esk8_0)|lte(X5,X2)|lte(X4,X5)|lte(X3,X4)|~lte(X1,X2))).
+####
+#cnf(i_0_393, plain, (tab1(X1,X2,esk1_2(X3,X2),esk2_2(X3,X2),X4)|~select_1(X3,X2)|~eq(esk3_2(X3,X2),X4)|~eq(X3,X1))).
+#
+#cnf(i_0_1402, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X5,X1)|lte(X2,X3)|lte(X3,X4)|~eq(X4,X5))).
+##
+#cnf(i_0_574, plain, (from_5(X1,X2,esk4_2(X1,X3),esk5_2(X1,X3),esk6_2(X1,X3))|~select_4(X1,X3)|~eq(X4,X2)|~eq(X3,X4))).
+#
+#cnf(i_0_583, plain, (from_5(X1,X2,esk4_2(X3,X2),esk5_2(X3,X2),esk6_2(X3,X2))|~select_4(X3,X2)|~eq(X4,X1)|~eq(X3,X4))).
+#
+#cnf(i_0_722, plain, (from_2(X1,X2,esk1_2(X1,X3),esk2_2(X1,X3),X4)|~select_1(X1,X3)|~eq(esk3_2(X1,X3),X4)|~eq(X5,X2)|~eq(X3,X5))).
+#
+#cnf(i_0_1403, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X5,X1)|lte(X2,X3)|lte(X3,X4)|~eq(X5,X4))).
+#
+#cnf(i_0_1445, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X5,X3)|lte(X2,X4)|lte(X3,X1)|~eq(X4,X5))).
+#
+#cnf(i_0_1446, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X5,X3)|lte(X2,X4)|lte(X3,X1)|~eq(X5,X4))).
+#
+#cnf(i_0_1477, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X2,X5))).
+#
+#cnf(i_0_1478, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X5,X2))).
+##
+#cnf(i_0_1507, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X1,X5)|lte(X5,X3)|lte(X3,X4)|~eq(X4,X2))).
+#
+#cnf(i_0_723, plain, (tab1(X1,X2,esk1_2(X1,X3),esk2_2(X1,X3),X4)|~select_1(X1,X3)|~eq(esk3_2(X1,X3),X4)|~eq(X5,X2)|~eq(X3,X5))).
+#
+#cnf(i_0_724, plain, (from_5(X1,X2,esk1_2(X1,X3),esk2_2(X1,X3),X4)|~select_1(X1,X3)|~eq(esk3_2(X1,X3),X4)|~eq(X5,X2)|~eq(X3,X5))).
+#
+#cnf(i_0_780, plain, (from_2(X1,X2,esk1_2(X3,X2),esk2_2(X3,X2),X4)|~select_1(X3,X2)|~eq(esk3_2(X3,X2),X4)|~eq(X5,X1)|~eq(X3,X5))).
+#
+#cnf(i_0_781, plain, (tab1(X1,X2,esk1_2(X3,X2),esk2_2(X3,X2),X4)|~select_1(X3,X2)|~eq(esk3_2(X3,X2),X4)|~eq(X5,X1)|~eq(X3,X5))).
+#
+#cnf(i_0_1508, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X1,X5)|lte(X5,X3)|lte(X3,X4)|~eq(X2,X4))).
+#####
+#cnf(i_0_395, plain, (tab1(X1,X2,esk1_2(X3,X2),X4,esk3_2(X3,X2))|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X4)|~eq(X3,X1))).
+##
+#cnf(i_0_782, plain, (from_5(X1,X2,esk1_2(X3,X2),esk2_2(X3,X2),X4)|~select_1(X3,X2)|~eq(esk3_2(X3,X2),X4)|~eq(X5,X1)|~eq(X3,X5))).
+#
+#cnf(i_0_862, plain, (from_2(X1,X2,esk1_2(X1,X3),X4,esk3_2(X1,X3))|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X4)|~eq(X5,X2)|~eq(X3,X5))).
+#
+#cnf(i_0_863, plain, (tab1(X1,X2,esk1_2(X1,X3),X4,esk3_2(X1,X3))|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X4)|~eq(X5,X2)|~eq(X3,X5))).
+#
+#cnf(i_0_864, plain, (from_5(X1,X2,esk1_2(X1,X3),X4,esk3_2(X1,X3))|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X4)|~eq(X5,X2)|~eq(X3,X5))).
+########
+#cnf(i_0_882, plain, (from_2(X1,X2,esk1_2(X3,X2),X4,esk3_2(X3,X2))|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X4)|~eq(X5,X1)|~eq(X3,X5))).
+#
+#cnf(i_0_883, plain, (tab1(X1,X2,esk1_2(X3,X2),X4,esk3_2(X3,X2))|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X4)|~eq(X5,X1)|~eq(X3,X5))).
+#
+#cnf(i_0_884, plain, (from_5(X1,X2,esk1_2(X3,X2),X4,esk3_2(X3,X2))|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X4)|~eq(X5,X1)|~eq(X3,X5))).
+#
+#cnf(i_0_1003, plain, (from_2(X1,X2,X3,esk2_2(X1,X4),esk3_2(X1,X4))|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X3)|~eq(X5,X2)|~eq(X4,X5))).
+######
+#cnf(i_0_397, plain, (tab1(X1,X2,X3,esk2_2(X4,X2),esk3_2(X4,X2))|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X3)|~eq(X4,X1))).
+##
+#cnf(i_0_1004, plain, (tab1(X1,X2,X3,esk2_2(X1,X4),esk3_2(X1,X4))|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X3)|~eq(X5,X2)|~eq(X4,X5))).
+#
+#cnf(i_0_1005, plain, (from_5(X1,X2,X3,esk2_2(X1,X4),esk3_2(X1,X4))|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X3)|~eq(X5,X2)|~eq(X4,X5))).
+#
+#cnf(i_0_1048, plain, (from_2(X1,X2,X3,esk2_2(X4,X2),esk3_2(X4,X2))|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X3)|~eq(X5,X1)|~eq(X4,X5))).
+#
+#cnf(i_0_1049, plain, (tab1(X1,X2,X3,esk2_2(X4,X2),esk3_2(X4,X2))|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X3)|~eq(X5,X1)|~eq(X4,X5))).
+########
+#cnf(i_0_1050, plain, (from_5(X1,X2,X3,esk2_2(X4,X2),esk3_2(X4,X2))|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X3)|~eq(X5,X1)|~eq(X4,X5))).
+#########
+#cnf(i_0_402, plain, (tab1(X1,X2,esk1_2(X1,X3),esk2_2(X1,X3),esk3_2(X1,X3))|~select_1(X1,X3)|~eq(X3,X2))).
+###########################
+#cnf(i_0_443, plain, (from_5(X1,X2,esk4_2(X1,X2),X3,X4)|~select_4(X1,X2)|~eq(esk5_2(X1,X2),X3)|~eq(esk6_2(X1,X2),X4))).
+##
+#cnf(i_0_1604, plain, (from_5(X1,X2,X3,X4,X5)|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3)|~eq(esk5_2(X1,X2),X4)|~eq(esk6_2(X1,X2),X5))).
+######
+#cnf(i_0_1602, plain, (from_5(X1,X2,esk4_2(X1,X2),X3,X4)|~select_4(X1,X2)|~eq(esk5_2(X1,X2),X3)|~eq(esk6_2(X1,X2),X5)|~eq(X5,X4))).
+#
+#cnf(i_0_1603, plain, (from_5(X1,X2,esk4_2(X1,X2),X3,X4)|~select_4(X1,X2)|~eq(esk5_2(X1,X2),X5)|~eq(esk6_2(X1,X2),X4)|~eq(X5,X3))).
+#
+#cnf(i_0_444, plain, (from_5(X1,X2,X3,esk5_2(X1,X2),X4)|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3)|~eq(esk6_2(X1,X2),X4))).
+#######
+#cnf(i_0_407, plain, (tab1(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),esk3_2(X3,X4))|~select_1(X3,X4)|~eq(X4,X2)|~eq(X3,X1))).
+##
+#cnf(i_0_1612, plain, (from_5(X1,X2,X3,esk5_2(X1,X2),X4)|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3)|~eq(esk6_2(X1,X2),X5)|~eq(X5,X4))).
+#
+#cnf(i_0_1614, plain, (from_5(X1,X2,X3,esk5_2(X1,X2),X4)|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X5)|~eq(esk6_2(X1,X2),X4)|~eq(X5,X3))).
+#
+#cnf(i_0_453, plain, (from_5(X1,X2,esk1_2(X1,X2),X3,X4)|~select_1(X1,X2)|~eq(esk3_2(X1,X2),X4)|~eq(esk2_2(X1,X2),X3))).
+#######
+#cnf(i_0_420, plain, (tab1(X1,X2,esk4_2(X1,X2),esk5_2(X1,X2),X3)|~select_4(X1,X2)|~eq(esk6_2(X1,X2),X3))).
+##
+#cnf(i_0_1640, plain, (tab1(X1,X2,esk4_2(X1,X2),esk5_2(X1,X2),X3)|~select_4(X1,X2)|~eq(esk6_2(X1,X2),X4)|~eq(X4,X3))).
+####
+#cnf(i_0_421, plain, (tab1(X1,X2,esk4_2(X1,X2),X3,esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk5_2(X1,X2),X3))).
+#
+#cnf(i_0_1655, plain, (tab1(X1,X2,esk4_2(X1,X2),X3,esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk5_2(X1,X2),X4)|~eq(X4,X3))).
+##
+#cnf(i_0_422, plain, (tab1(X1,X2,X3,esk5_2(X1,X2),esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3))).
+#
+#cnf(i_0_1670, plain, (tab1(X1,X2,X3,esk5_2(X1,X2),esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X4)|~eq(X4,X3))).
+#
+#cnf(i_0_423, plain, (tab1(X1,X2,esk4_2(X1,X3),esk5_2(X1,X3),esk6_2(X1,X3))|~select_4(X1,X3)|~eq(X3,X2))).
+###
+#cnf(i_0_1685, plain, (tab1(X1,X2,esk4_2(X1,X3),esk5_2(X1,X3),esk6_2(X1,X3))|~select_4(X1,X3)|~eq(X4,X2)|~eq(X3,X4))).
+##
+#cnf(i_0_454, plain, (from_5(X1,X2,X3,esk2_2(X1,X2),X4)|~select_1(X1,X2)|~eq(esk3_2(X1,X2),X4)|~eq(esk1_2(X1,X2),X3))).
+######
+#cnf(i_0_424, plain, (tab1(X1,X2,esk4_2(X3,X2),esk5_2(X3,X2),esk6_2(X3,X2))|~select_4(X3,X2)|~eq(X3,X1))).
+####
+#cnf(i_0_1707, plain, (tab1(X1,X2,esk4_2(X3,X2),esk5_2(X3,X2),esk6_2(X3,X2))|~select_4(X3,X2)|~eq(X4,X1)|~eq(X3,X4))).
+###
+#cnf(i_0_451, plain, (from_5(X1,X2,esk1_2(X1,X2),esk2_2(X1,X2),X3)|~select_1(X1,X2)|~eq(esk3_2(X1,X2),X3))).
+###
+#cnf(i_0_457, plain, (from_5(X1,X2,esk1_2(X1,X2),X3,esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk2_2(X1,X2),X3))).
+#
+#cnf(i_0_425, plain, (tab1(X1,X2,esk1_2(X3,X2),esk2_2(X3,X2),esk3_2(X3,X2))|~select_1(X3,X2)|~eq(X3,X1))).
+#######
+#cnf(i_0_470, plain, (from_5(X1,X2,X3,esk2_2(X1,X2),esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk1_2(X1,X2),X3))).
+#######
+#cnf(i_0_460, plain, (from_5(X1,X2,X3,X4,esk3_2(X1,X2))|~select_1(X1,X2)|~eq(esk2_2(X1,X2),X4)|~eq(esk1_2(X1,X2),X3))).
+#############
+#cnf(i_0_467, plain, (from_5(X1,X2,X3,X4,esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3)|~eq(esk5_2(X1,X2),X4))).
+########
+#cnf(i_0_1753, plain, (from_5(X1,X2,X3,X4,esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3)|~eq(esk5_2(X1,X2),X5)|~eq(X5,X4))).
+#
+#cnf(i_0_1754, plain, (from_5(X1,X2,X3,X4,esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X5)|~eq(esk5_2(X1,X2),X4)|~eq(X5,X3))).
+#####
+#cnf(i_0_1141, plain, (from_2(X1,X2,esk4_2(X1,X2),esk5_2(X1,X2),X3)|~select_4(X1,X2)|~eq(esk6_2(X1,X2),X3))).
+##
+#cnf(i_0_1761, plain, (from_2(X1,X2,esk4_2(X1,X2),esk5_2(X1,X2),X3)|~select_4(X1,X2)|~eq(esk6_2(X1,X2),X4)|~eq(X4,X3))).
+########
+#cnf(i_0_1144, plain, (from_2(X1,X2,esk4_2(X1,X2),X3,esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk5_2(X1,X2),X3))).
+##
+#cnf(i_0_1782, plain, (from_2(X1,X2,esk4_2(X1,X2),X3,esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk5_2(X1,X2),X4)|~eq(X4,X3))).
+##
+#cnf(i_0_445, plain, (from_5(X1,X2,esk4_2(X1,X3),esk5_2(X1,X3),X4)|~select_4(X1,X3)|~eq(esk6_2(X1,X3),X4)|~eq(X3,X2))).
+###
+#cnf(i_0_1800, plain, (from_5(X1,X2,esk4_2(X1,X3),esk5_2(X1,X3),X4)|~select_4(X1,X3)|~eq(esk6_2(X1,X3),X4)|~eq(X5,X2)|~eq(X3,X5))).
+#
+#cnf(i_0_713, plain, (from_2(X1,X2,esk1_2(X1,X3),esk2_2(X1,X3),X4)|~select_1(X1,X3)|~eq(esk3_2(X1,X3),X5)|~eq(X5,X4)|~eq(X3,X2))).
+#
+#cnf(i_0_714, plain, (tab1(X1,X2,esk1_2(X1,X3),esk2_2(X1,X3),X4)|~select_1(X1,X3)|~eq(esk3_2(X1,X3),X5)|~eq(X5,X4)|~eq(X3,X2))).
+###
+#cnf(i_0_1147, plain, (from_2(X1,X2,X3,esk5_2(X1,X2),esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3))).
+##
+#cnf(i_0_1813, plain, (from_2(X1,X2,X3,esk5_2(X1,X2),esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X4)|~eq(X4,X3))).
+#
+#cnf(i_0_446, plain, (from_5(X1,X2,esk4_2(X3,X2),esk5_2(X3,X2),X4)|~select_4(X3,X2)|~eq(esk6_2(X3,X2),X4)|~eq(X3,X1))).
+####
+#cnf(i_0_1829, plain, (from_5(X1,X2,esk4_2(X3,X2),esk5_2(X3,X2),X4)|~select_4(X3,X2)|~eq(esk6_2(X3,X2),X4)|~eq(X5,X1)|~eq(X3,X5))).
+#
+#cnf(i_0_715, plain, (from_5(X1,X2,esk1_2(X1,X3),esk2_2(X1,X3),X4)|~select_1(X1,X3)|~eq(esk3_2(X1,X3),X5)|~eq(X5,X4)|~eq(X3,X2))).
+########
+#cnf(i_0_768, plain, (from_2(X1,X2,esk1_2(X3,X2),esk2_2(X3,X2),X4)|~select_1(X3,X2)|~eq(esk3_2(X3,X2),X5)|~eq(X5,X4)|~eq(X3,X1))).
+#
+#cnf(i_0_769, plain, (tab1(X1,X2,esk1_2(X3,X2),esk2_2(X3,X2),X4)|~select_1(X3,X2)|~eq(esk3_2(X3,X2),X5)|~eq(X5,X4)|~eq(X3,X1))).
+#
+#cnf(i_0_770, plain, (from_5(X1,X2,esk1_2(X3,X2),esk2_2(X3,X2),X4)|~select_1(X3,X2)|~eq(esk3_2(X3,X2),X5)|~eq(X5,X4)|~eq(X3,X1))).
+###########
+#cnf(i_0_856, plain, (from_2(X1,X2,esk1_2(X1,X3),X4,esk3_2(X1,X3))|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X5)|~eq(X5,X4)|~eq(X3,X2))).
+#
+#cnf(i_0_857, plain, (tab1(X1,X2,esk1_2(X1,X3),X4,esk3_2(X1,X3))|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X5)|~eq(X5,X4)|~eq(X3,X2))).
+######
+#cnf(i_0_455, plain, (from_5(X1,X2,esk1_2(X1,X3),esk2_2(X1,X3),X4)|~select_1(X1,X3)|~eq(esk3_2(X1,X3),X4)|~eq(X3,X2))).
+###
+#cnf(i_0_858, plain, (from_5(X1,X2,esk1_2(X1,X3),X4,esk3_2(X1,X3))|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X5)|~eq(X5,X4)|~eq(X3,X2))).
+#
+#cnf(i_0_873, plain, (from_2(X1,X2,esk1_2(X3,X2),X4,esk3_2(X3,X2))|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X5)|~eq(X5,X4)|~eq(X3,X1))).
+#
+#cnf(i_0_874, plain, (tab1(X1,X2,esk1_2(X3,X2),X4,esk3_2(X3,X2))|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X5)|~eq(X5,X4)|~eq(X3,X1))).
+#
+#cnf(i_0_563, plain, (lte(X5,X4)|lte(X2,X5)|lte(X4,X3)|lte(X3,X1)|lte(X1,X2))).
+#####
+#cnf(i_0_456, plain, (from_5(X1,X2,esk1_2(X3,X2),esk2_2(X3,X2),X4)|~select_1(X3,X2)|~eq(esk3_2(X3,X2),X4)|~eq(X3,X1))).
+####
+#cnf(i_0_1885, plain, (lte(X6,X3)|lte(X5,X6)|lte(X2,X4)|lte(X4,X5)|lte(X1,X2)|~lte(X1,X3))).
+#######
+#cnf(i_0_461, plain, (from_5(X1,X2,esk1_2(X1,X3),X4,esk3_2(X1,X3))|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X4)|~eq(X3,X2))).
+###########
+#cnf(i_0_462, plain, (from_5(X1,X2,esk1_2(X3,X2),X4,esk3_2(X3,X2))|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X4)|~eq(X3,X1))).
+###########
+#cnf(i_0_468, plain, (from_5(X1,X2,esk4_2(X1,X3),X4,esk6_2(X1,X3))|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X4)|~eq(X3,X2))).
+####
+#cnf(i_0_2037, plain, (lte(X6,X4)|lte(X5,X3)|lte(X4,X5)|lte(X3,X1)|lte(X1,X2)|~eq(X2,X6))).
+#
+#cnf(i_0_2038, plain, (lte(X6,X4)|lte(X5,X3)|lte(X4,X5)|lte(X3,X1)|lte(X1,X2)|~eq(X6,X2))).
+######
+#cnf(i_0_469, plain, (from_5(X1,X2,esk4_2(X3,X2),X4,esk6_2(X3,X2))|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X4)|~eq(X3,X1))).
+###########
+#cnf(i_0_474, plain, (from_5(X1,X2,X3,esk2_2(X1,X4),esk3_2(X1,X4))|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X3)|~eq(X4,X2))).
+###
+#cnf(i_0_2078, plain, (from_5(X1,X2,esk4_2(X1,X3),X4,esk6_2(X1,X3))|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X4)|~eq(X5,X2)|~eq(X3,X5))).
+#
+#cnf(i_0_2088, plain, (from_5(X1,X2,esk4_2(X3,X2),X4,esk6_2(X3,X2))|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X4)|~eq(X5,X1)|~eq(X3,X5))).
+#######
+#cnf(i_0_475, plain, (from_5(X1,X2,X3,esk2_2(X4,X2),esk3_2(X4,X2))|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X3)|~eq(X4,X1))).
+###########
+#cnf(i_0_476, plain, (from_5(X1,X2,esk1_2(X1,X3),esk2_2(X1,X3),esk3_2(X1,X3))|~select_1(X1,X3)|~eq(X3,X2))).
+###
+#cnf(i_0_875, plain, (from_5(X1,X2,esk1_2(X3,X2),X4,esk3_2(X3,X2))|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X5)|~eq(X5,X4)|~eq(X3,X1))).
+#
+#cnf(i_0_1000, plain, (from_2(X1,X2,X3,esk2_2(X1,X4),esk3_2(X1,X4))|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X5)|~eq(X5,X3)|~eq(X4,X2))).
+#
+#cnf(i_0_1001, plain, (tab1(X1,X2,X3,esk2_2(X1,X4),esk3_2(X1,X4))|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X5)|~eq(X5,X3)|~eq(X4,X2))).
+########
+#cnf(i_0_1002, plain, (from_5(X1,X2,X3,esk2_2(X1,X4),esk3_2(X1,X4))|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X5)|~eq(X5,X3)|~eq(X4,X2))).
+#
+#cnf(i_0_1042, plain, (from_2(X1,X2,X3,esk2_2(X4,X2),esk3_2(X4,X2))|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X5)|~eq(X5,X3)|~eq(X4,X1))).
+#
+#cnf(i_0_1043, plain, (tab1(X1,X2,X3,esk2_2(X4,X2),esk3_2(X4,X2))|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X5)|~eq(X5,X3)|~eq(X4,X1))).
+#
+#cnf(i_0_1044, plain, (from_5(X1,X2,X3,esk2_2(X4,X2),esk3_2(X4,X2))|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X5)|~eq(X5,X3)|~eq(X4,X1))).
+############################
+#cnf(i_0_481, plain, (from_5(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),esk3_2(X3,X4))|~select_1(X3,X4)|~eq(X4,X2)|~eq(X3,X1))).
+###########
+#cnf(i_0_482, plain, (from_5(X1,X2,esk1_2(X3,X2),esk2_2(X3,X2),esk3_2(X3,X2))|~select_1(X3,X2)|~eq(X3,X1))).
+#######
+#cnf(i_0_1601, plain, (tab1(X1,X2,esk4_2(X1,X2),X3,X4)|~select_4(X1,X2)|~eq(esk5_2(X1,X2),X3)|~eq(esk6_2(X1,X2),X4))).
+#
+#cnf(i_0_2139, plain, (tab1(X1,X2,X3,X4,X5)|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3)|~eq(esk5_2(X1,X2),X4)|~eq(esk6_2(X1,X2),X5))).
+##
+#cnf(i_0_2135, plain, (tab1(X1,X2,esk4_2(X1,X2),X3,X4)|~select_4(X1,X2)|~eq(esk5_2(X1,X2),X3)|~eq(esk6_2(X1,X2),X5)|~eq(X5,X4))).
+####
+#cnf(i_0_2137, plain, (tab1(X1,X2,esk4_2(X1,X2),X3,X4)|~select_4(X1,X2)|~eq(esk5_2(X1,X2),X5)|~eq(esk6_2(X1,X2),X4)|~eq(X5,X3))).
+#######
+#cnf(i_0_1611, plain, (tab1(X1,X2,X3,esk5_2(X1,X2),X4)|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3)|~eq(esk6_2(X1,X2),X4))).
+#####
+#cnf(i_0_2150, plain, (tab1(X1,X2,X3,esk5_2(X1,X2),X4)|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3)|~eq(esk6_2(X1,X2),X5)|~eq(X5,X4))).
+###
+#cnf(i_0_2154, plain, (tab1(X1,X2,X3,esk5_2(X1,X2),X4)|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X5)|~eq(esk6_2(X1,X2),X4)|~eq(X5,X3))).
+########################
+#cnf(i_0_1657, plain, (tab1(X1,X2,X3,X4,esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3)|~eq(esk5_2(X1,X2),X4))).
+##
+#cnf(i_0_550, plain, (from_5(X1,X2,X3,esk5_2(X1,X4),esk6_2(X1,X4))|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X3)|~eq(X4,X2))).
+###
+#cnf(i_0_2166, plain, (tab1(X1,X2,X3,X4,esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3)|~eq(esk5_2(X1,X2),X5)|~eq(X5,X4))).
+##
+#cnf(i_0_2168, plain, (tab1(X1,X2,X3,X4,esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X5)|~eq(esk5_2(X1,X2),X4)|~eq(X5,X3))).
+###
+#cnf(i_0_2179, plain, (from_5(X1,X2,X3,esk5_2(X1,X4),esk6_2(X1,X4))|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X3)|~eq(X5,X2)|~eq(X4,X5))).
+###
+#cnf(i_0_551, plain, (from_5(X1,X2,X3,esk5_2(X4,X2),esk6_2(X4,X2))|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X3)|~eq(X4,X1))).
+##
+#cnf(i_0_2190, plain, (from_5(X1,X2,X3,esk5_2(X4,X2),esk6_2(X4,X2))|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X3)|~eq(X5,X1)|~eq(X4,X5))).
+####
+#cnf(i_0_1150, plain, (from_2(X1,X2,esk4_2(X1,X3),esk5_2(X1,X3),esk6_2(X1,X3))|~select_4(X1,X3)|~eq(X3,X2))).
+#
+#cnf(i_0_2192, plain, (select_1(X1,X2)|~select_4(X1,X3)|~eq(X3,X2)|~where_3(X1,X2))).
+#
+#cnf(i_0_2209, negated_conjecture, (select_1(esk7_0,X1)|~eq(esk8_0,X1)|~where_3(esk7_0,X1))).
+#
+#cnf(i_0_2211, negated_conjecture, (select_1(esk7_0,X1)|~eq(esk8_0,X1)|~eq(esk7_0,X1))).
+####
+#cnf(i_0_2214, negated_conjecture, (select_4(esk7_0,X1)|~lte(esk7_0,X1)|~eq(esk8_0,X2)|~eq(esk7_0,X2)|~eq(X2,X1))).
+##
+#cnf(i_0_2215, negated_conjecture, (select_4(X1,X2)|~lte(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X2)|~eq(esk7_0,X2))).
+#
+#cnf(i_0_2216, negated_conjecture, (select_4(X1,X2)|~lte(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(esk7_0,X3)|~eq(X3,X2))).
+###
+#cnf(i_0_2220, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X2)|~eq(X1,X2))).
+##
+#cnf(i_0_2225, negated_conjecture, (select_4(X1,X2)|~lte(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(X3,X2)|~eq(X1,X3))).
+##
+#cnf(i_0_2228, negated_conjecture, (select_4(X1,X2)|~lte(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X2)|~eq(X1,esk8_0))).
+#
+#cnf(i_0_2226, negated_conjecture, (select_4(X1,X2)|~lte(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(X3,X1)|~eq(X3,X2))).
+###
+#cnf(i_0_2227, negated_conjecture, (select_4(X1,X2)|~lte(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(X3,X1)|~eq(X4,X2)|~eq(X3,X4))).
+##
+#cnf(i_0_2221, negated_conjecture, (select_1(X1,X2)|~lte(X1,X3)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(esk7_0,X3)|~eq(X3,X2)|~where_3(X1,X2))).
+###
+#cnf(i_0_2253, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X1)|~eq(X1,X2))).
+####
+#cnf(i_0_2271, negated_conjecture, (select_4(X1,X2)|~lte(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X1)|~eq(X3,X2)|~eq(X1,X3))).
+#
+#cnf(i_0_2274, negated_conjecture, (select_4(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X1)|~eq(X1,X2))).
+######
+#cnf(i_0_2272, negated_conjecture, (select_4(X1,X2)|~lte(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X3)|~eq(X3,X1)|~eq(X3,X2))).
+#
+#cnf(i_0_575, plain, (from_5(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),esk6_2(X3,X4))|~select_4(X3,X4)|~eq(X3,X1)|~eq(X4,X2))).
+##
+#cnf(i_0_2277, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X1)|~eq(X3,X2)|~eq(X1,X3)|~where_3(X1,X2))).
+##
+#cnf(i_0_2273, negated_conjecture, (select_4(X1,X2)|~lte(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X3)|~eq(X3,X1)|~eq(X4,X2)|~eq(X3,X4))).
+###
+#cnf(i_0_2279, plain, (select_4(X1,X2)|~select_4(X3,X4)|~where_6(X1,X2)|~eq(X3,X1)|~eq(X4,X2))).
+#
+#cnf(i_0_2288, plain, (select_4(X1,X2)|~select_4(X3,X4)|~lte(X1,X2)|~eq(X3,X1)|~eq(X4,X2))).
+##
+#cnf(i_0_2247, negated_conjecture, (select_1(X1,X2)|~eq(esk8_0,X3)|~eq(esk7_0,X3)|~eq(X3,X2)|~eq(X3,X1)|~where_3(X1,X2))).
+###
+#cnf(i_0_2231, negated_conjecture, (select_1(X1,X2)|~lte(X1,X3)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(X1,esk8_0)|~eq(X3,X2)|~where_3(X1,X2))).
+##
+#cnf(i_0_2298, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X1)|~eq(X1,esk8_0)|~eq(esk8_0,X2)|~where_3(X1,X2))).
+#########
+#cnf(i_0_2248, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(X3,X2)|~eq(X1,X3)|~where_3(X1,X2))).
+##
+#cnf(i_0_2305, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(X1,esk8_0)|~eq(X3,X2)|~eq(X3,X1)|~where_3(X1,X2))).
+####
+#cnf(i_0_2246, negated_conjecture, (lte(X3,X1)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(esk7_0,X3)|~eq(X3,X2)|~where_3(X1,X2))).
+#
+#cnf(i_0_2331, negated_conjecture, (lte(X1,X2)|select_1(X2,X1)|~eq(esk7_0,X2)|~eq(esk8_0,X1)|~eq(esk7_0,X1)|~where_3(X2,X1))).
+#####
+#cnf(i_0_2304, negated_conjecture, (lte(X3,X1)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(X1,esk8_0)|~eq(X3,X2)|~where_3(X1,X2))).
+#########
+#cnf(i_0_2203, plain, (from_2(X1,X2,esk4_2(X1,X3),esk5_2(X1,X3),esk6_2(X1,X3))|~select_4(X1,X3)|~eq(X4,X2)|~eq(X3,X4))).
+#
+#cnf(i_0_2249, negated_conjecture, (lte(X4,X1)|lte(X3,X4)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(esk7_0,X3)|~eq(X3,X2)|~where_3(X1,X2))).
+#
+#cnf(i_0_2336, negated_conjecture, (lte(X3,X1)|lte(X1,X2)|select_1(X2,X3)|~eq(esk7_0,X2)|~eq(esk8_0,X3)|~eq(esk7_0,X3)|~where_3(X2,X3))).
+#####
+#cnf(i_0_2307, negated_conjecture, (lte(X4,X1)|lte(X3,X4)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(X1,esk8_0)|~eq(X3,X2)|~where_3(X1,X2))).
+######
+#cnf(i_0_2251, negated_conjecture, (lte(X5,X4)|lte(X3,X5)|lte(X4,X1)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(esk7_0,X3)|~eq(X3,X2)|~where_3(X1,X2))).
+#
+#cnf(i_0_2340, negated_conjecture, (lte(X2,X4)|lte(X3,X1)|lte(X1,X2)|select_1(X4,X3)|~eq(esk7_0,X4)|~eq(esk8_0,X3)|~eq(esk7_0,X3)|~where_3(X4,X3))).
+############
+#cnf(i_0_2309, negated_conjecture, (lte(X5,X4)|lte(X3,X5)|lte(X4,X1)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(X1,esk8_0)|~eq(X3,X2)|~where_3(X1,X2))).
+######
+#cnf(i_0_617, negated_conjecture, (lte(esk7_0,X5)|lte(X2,esk8_0)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|lte(X1,X2))).
+#############
+#cnf(i_0_2252, negated_conjecture, (lte(X6,X4)|lte(X5,X6)|lte(X3,X5)|lte(X4,X1)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(esk7_0,X3)|~eq(X3,X2)|~where_3(X1,X2))).
+#
+#cnf(i_0_2556, negated_conjecture, (lte(X2,X5)|lte(X4,X3)|lte(X3,X1)|lte(X1,X2)|select_1(X5,X4)|~eq(esk7_0,X5)|~eq(esk8_0,X4)|~eq(esk7_0,X4)|~where_3(X5,X4))).
+#############
+#cnf(i_0_2310, negated_conjecture, (lte(X6,X4)|lte(X5,X6)|lte(X3,X5)|lte(X4,X1)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(X1,esk8_0)|~eq(X3,X2)|~where_3(X1,X2))).
+###########################
+#cnf(i_0_2513, negated_conjecture, (lte(esk7_0,X2)|lte(X5,X1)|lte(X4,X5)|lte(X3,X4)|lte(X2,X3)|eq(esk8_0,X1)|~lte(esk8_0,X1))).
+#########################################
+#cnf(i_0_2392, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X4)|lte(X6,X3)|lte(X5,X6)|lte(X4,X5)|lte(X1,X2)|~lte(X1,X3))).
+########
+#cnf(i_0_1764, plain, (from_2(X1,X2,esk4_2(X1,X2),X3,X4)|~select_4(X1,X2)|~eq(esk5_2(X1,X2),X3)|~eq(esk6_2(X1,X2),X4))).
+####
+#cnf(i_0_2425, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X2,X5)|lte(X6,X3)|lte(X4,X6)|lte(X1,X2)|~lte(X1,X3))).
+###
+#cnf(i_0_673, plain, (from_2(X1,X2,esk1_2(X1,X3),X4,X5)|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X4)|~eq(esk3_2(X1,X3),X5)|~eq(X3,X2))).
+####
+#cnf(i_0_2644, plain, (from_2(X1,X2,X3,X4,X5)|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3)|~eq(esk5_2(X1,X2),X4)|~eq(esk6_2(X1,X2),X5))).
+####
+#cnf(i_0_2458, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X6,X5)|lte(X2,X6)|lte(X4,X3)|lte(X1,X2)|~lte(X1,X3))).
+###
+#cnf(i_0_674, plain, (tab1(X1,X2,esk1_2(X1,X3),X4,X5)|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X4)|~eq(esk3_2(X1,X3),X5)|~eq(X3,X2))).
+####
+#cnf(i_0_2638, plain, (from_2(X1,X2,esk4_2(X1,X2),X3,X4)|~select_4(X1,X2)|~eq(esk5_2(X1,X2),X3)|~eq(esk6_2(X1,X2),X5)|~eq(X5,X4))).
+####
+#cnf(i_0_2491, negated_conjecture, (lte(X4,esk8_0)|lte(esk7_0,X3)|lte(X6,X4)|lte(X5,X6)|lte(X2,X5)|lte(X1,X2)|~lte(X1,X3))).
+#
+#cnf(i_0_2518, negated_conjecture, (lte(esk7_0,X3)|lte(X1,esk8_0)|lte(X6,X2)|lte(X5,X6)|lte(X4,X5)|lte(X3,X4)|~lte(X1,X2))).
+##
+#cnf(i_0_675, plain, (from_5(X1,X2,esk1_2(X1,X3),X4,X5)|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X4)|~eq(esk3_2(X1,X3),X5)|~eq(X3,X2))).
+####
+#cnf(i_0_2641, plain, (from_2(X1,X2,esk4_2(X1,X2),X3,X4)|~select_4(X1,X2)|~eq(esk5_2(X1,X2),X5)|~eq(esk6_2(X1,X2),X4)|~eq(X5,X3))).
+###
+#cnf(i_0_2543, negated_conjecture, (lte(X3,esk8_0)|lte(X6,X3)|lte(X5,X6)|lte(X4,X5)|lte(X2,X4)|lte(X1,X2)|~lte(X1,esk7_0))).
+#
+#cnf(i_0_2610, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X6,X1)|lte(X2,X5)|lte(X5,X3)|lte(X3,X4)|~eq(X4,X6))).
+#
+#cnf(i_0_2611, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X6,X1)|lte(X2,X5)|lte(X5,X3)|lte(X3,X4)|~eq(X6,X4))).
+#
+#cnf(i_0_2668, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X6,X3)|lte(X2,X4)|lte(X4,X5)|lte(X3,X1)|~eq(X5,X6))).
+#
+#cnf(i_0_676, plain, (from_2(X1,X2,esk1_2(X3,X2),X4,X5)|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X4)|~eq(esk3_2(X3,X2),X5)|~eq(X3,X1))).
+#
+#cnf(i_0_2861, negated_conjecture, (lte(X1,esk8_0)|lte(X6,X5)|lte(X5,X4)|lte(X4,X3)|lte(X3,X2)|lte(X2,X1)|~eq(esk7_0,X6))).
+####
+#cnf(i_0_2702, plain, (from_2(X1,X2,X3,X4,X5)|~select_1(X1,X6)|~eq(esk1_2(X1,X6),X3)|~eq(esk2_2(X1,X6),X4)|~eq(esk3_2(X1,X6),X5)|~eq(X6,X2))).
+#
+#cnf(i_0_2862, negated_conjecture, (lte(X1,esk8_0)|lte(X6,X5)|lte(X5,X4)|lte(X4,X3)|lte(X3,X2)|lte(X2,X1)|~eq(X6,esk7_0))).
+#
+#cnf(i_0_2669, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X6,X3)|lte(X2,X4)|lte(X4,X5)|lte(X3,X1)|~eq(X6,X5))).
+#
+#cnf(i_0_2727, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X6,X4)|lte(X2,X5)|lte(X4,X3)|lte(X3,X1)|~eq(X5,X6))).
+#
+#cnf(i_0_2728, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X6,X4)|lte(X2,X5)|lte(X4,X3)|lte(X3,X1)|~eq(X6,X5))).
+#
+#cnf(i_0_2781, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X6,X5)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X2,X6))).
+#
+#cnf(i_0_677, plain, (tab1(X1,X2,esk1_2(X3,X2),X4,X5)|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X4)|~eq(esk3_2(X3,X2),X5)|~eq(X3,X1))).
+#
+#cnf(i_0_2782, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X6,X5)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X6,X2))).
+##
+#cnf(i_0_2703, plain, (tab1(X1,X2,X3,X4,X5)|~select_1(X1,X6)|~eq(esk1_2(X1,X6),X3)|~eq(esk2_2(X1,X6),X4)|~eq(esk3_2(X1,X6),X5)|~eq(X6,X2))).
+#
+#cnf(i_0_2704, plain, (from_5(X1,X2,X3,X4,X5)|~select_1(X1,X6)|~eq(esk1_2(X1,X6),X3)|~eq(esk2_2(X1,X6),X4)|~eq(esk3_2(X1,X6),X5)|~eq(X6,X2))).
+##
+#cnf(i_0_2822, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X1,X6)|lte(X6,X5)|lte(X5,X3)|lte(X3,X4)|~eq(X4,X2))).
+#
+#cnf(i_0_2823, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X1,X6)|lte(X6,X5)|lte(X5,X3)|lte(X3,X4)|~eq(X2,X4))).
+###
+#cnf(i_0_1767, plain, (from_2(X1,X2,X3,esk5_2(X1,X2),X4)|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3)|~eq(esk6_2(X1,X2),X4))).
+#
+#cnf(i_0_678, plain, (from_5(X1,X2,esk1_2(X3,X2),X4,X5)|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X4)|~eq(esk3_2(X3,X2),X5)|~eq(X3,X1))).
+#######
+#cnf(i_0_2933, plain, (from_2(X1,X2,X3,esk5_2(X1,X2),X4)|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3)|~eq(esk6_2(X1,X2),X5)|~eq(X5,X4))).
+###
+#cnf(i_0_2939, plain, (from_2(X1,X2,X3,esk5_2(X1,X2),X4)|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X5)|~eq(esk6_2(X1,X2),X4)|~eq(X5,X3))).
+##
+#cnf(i_0_1153, plain, (from_2(X1,X2,esk4_2(X3,X2),esk5_2(X3,X2),esk6_2(X3,X2))|~select_4(X3,X2)|~eq(X3,X1))).
+#
+#cnf(i_0_2957, plain, (select_1(X1,X2)|~select_4(X3,X2)|~eq(X3,X1)|~where_3(X1,X2))).
+#
+#cnf(i_0_2974, negated_conjecture, (select_1(X1,esk8_0)|~eq(esk7_0,X1)|~where_3(X1,esk8_0))).
+#
+#cnf(i_0_2979, negated_conjecture, (select_1(X1,esk8_0)|~eq(esk7_0,X1)|~eq(X1,esk8_0))).
+##
+#cnf(i_0_2984, negated_conjecture, (select_4(X1,esk8_0)|~eq(esk7_0,X2)|~eq(X2,esk8_0)|~eq(X2,X1))).
+####
+#cnf(i_0_2985, negated_conjecture, (select_4(X1,X2)|~lte(X1,X2)|~eq(esk8_0,X2)|~eq(esk7_0,X3)|~eq(X3,esk8_0)|~eq(X3,X1))).
+####
+#cnf(i_0_2976, negated_conjecture, (select_1(X1,X2)|~lte(X3,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(X3,esk8_0)|~eq(X3,X1)|~where_3(X1,X2))).
+##
+#cnf(i_0_2995, negated_conjecture, (select_1(X1,esk8_0)|~eq(esk7_0,X2)|~eq(X2,esk8_0)|~eq(X2,X1)|~where_3(X1,esk8_0))).
+########
+#cnf(i_0_3009, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X2)|~eq(esk8_0,X2)|~eq(X2,X1)|~where_3(X1,X2))).
+#
+#cnf(i_0_3030, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X2)|~eq(esk8_0,X2)|~eq(X2,X1))).
+####
+#cnf(i_0_3035, negated_conjecture, (select_4(X1,X2)|~lte(X1,X2)|~eq(esk7_0,X2)|~eq(esk8_0,X2)|~eq(X3,X1)|~eq(X2,X3))).
+#
+#cnf(i_0_3037, negated_conjecture, (select_4(X1,X2)|~eq(esk7_0,X2)|~eq(esk8_0,X2)|~eq(X2,X1))).
+#####
+#cnf(i_0_3041, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X2)|~eq(esk8_0,X2)|~eq(X3,X1)|~eq(X2,X3)|~where_3(X1,X2))).
+##
+#cnf(i_0_3036, negated_conjecture, (select_4(X1,X2)|~lte(X1,X2)|~eq(esk7_0,X4)|~eq(esk8_0,X4)|~eq(X3,X1)|~eq(X4,X2)|~eq(X4,X3))).
+###
+#cnf(i_0_3003, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(X3,esk8_0)|~eq(X3,X1)|~eq(X2,X3)|~where_3(X1,X2))).
+##
+#cnf(i_0_3004, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(X3,esk8_0)|~eq(X3,X1)|~where_3(X1,X2))).
+###
+#cnf(i_0_2977, negated_conjecture, (select_1(X1,X2)|~lte(X3,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(esk7_0,X2)|~eq(X3,X1)|~where_3(X1,X2))).
+############
+#cnf(i_0_3062, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(X3,X1)|~eq(X3,X2)|~where_3(X1,X2))).
+#
+#cnf(i_0_3087, negated_conjecture, (select_1(X1,X2)|~eq(esk8_0,X2)|~eq(esk7_0,X1)|~eq(esk7_0,X2)|~where_3(X1,X2))).
+##
+#cnf(i_0_3060, negated_conjecture, (lte(X2,X3)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(esk7_0,X2)|~eq(X3,X1)|~where_3(X1,X2))).
+#####
+#cnf(i_0_3063, negated_conjecture, (lte(X4,X3)|lte(X2,X4)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(esk7_0,X2)|~eq(X3,X1)|~where_3(X1,X2))).
+#
+#cnf(i_0_703, plain, (from_2(X1,X2,X3,esk2_2(X1,X4),X5)|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X3)|~eq(esk3_2(X1,X4),X5)|~eq(X4,X2))).
+#####
+#cnf(i_0_3065, negated_conjecture, (lte(X5,X4)|lte(X2,X5)|lte(X4,X3)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(esk7_0,X2)|~eq(X3,X1)|~where_3(X1,X2))).
+####
+#cnf(i_0_2971, plain, (from_2(X1,X2,esk4_2(X3,X2),esk5_2(X3,X2),esk6_2(X3,X2))|~select_4(X3,X2)|~eq(X4,X1)|~eq(X3,X4))).
+##
+#cnf(i_0_704, plain, (tab1(X1,X2,X3,esk2_2(X1,X4),X5)|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X3)|~eq(esk3_2(X1,X4),X5)|~eq(X4,X2))).
+###########
+#cnf(i_0_705, plain, (from_5(X1,X2,X3,esk2_2(X1,X4),X5)|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X3)|~eq(esk3_2(X1,X4),X5)|~eq(X4,X2))).
+###
+#cnf(i_0_3066, negated_conjecture, (lte(X6,X4)|lte(X5,X6)|lte(X2,X5)|lte(X4,X3)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(esk7_0,X2)|~eq(X3,X1)|~where_3(X1,X2))).
+########
+#cnf(i_0_706, plain, (from_2(X1,X2,X3,esk2_2(X4,X2),X5)|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X3)|~eq(esk3_2(X4,X2),X5)|~eq(X4,X1))).
+###########
+#cnf(i_0_707, plain, (tab1(X1,X2,X3,esk2_2(X4,X2),X5)|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X3)|~eq(esk3_2(X4,X2),X5)|~eq(X4,X1))).
+########
+#cnf(i_0_1785, plain, (from_2(X1,X2,X3,X4,esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3)|~eq(esk5_2(X1,X2),X4))).
+###
+#cnf(i_0_708, plain, (from_5(X1,X2,X3,esk2_2(X4,X2),X5)|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X3)|~eq(esk3_2(X4,X2),X5)|~eq(X4,X1))).
+#######
+#cnf(i_0_3165, plain, (from_2(X1,X2,X3,X4,esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X3)|~eq(esk5_2(X1,X2),X5)|~eq(X5,X4))).
+###
+#cnf(i_0_3168, plain, (from_2(X1,X2,X3,X4,esk6_2(X1,X2))|~select_4(X1,X2)|~eq(esk4_2(X1,X2),X5)|~eq(esk5_2(X1,X2),X4)|~eq(X5,X3))).
+##############
+#cnf(i_0_2898, plain, (from_2(X1,X2,X3,X4,X5)|~select_1(X6,X2)|~eq(esk1_2(X6,X2),X3)|~eq(esk2_2(X6,X2),X4)|~eq(esk3_2(X6,X2),X5)|~eq(X6,X1))).
+#
+#cnf(i_0_2899, plain, (tab1(X1,X2,X3,X4,X5)|~select_1(X6,X2)|~eq(esk1_2(X6,X2),X3)|~eq(esk2_2(X6,X2),X4)|~eq(esk3_2(X6,X2),X5)|~eq(X6,X1))).
+#
+#cnf(i_0_2900, plain, (from_5(X1,X2,X3,X4,X5)|~select_1(X6,X2)|~eq(esk1_2(X6,X2),X3)|~eq(esk2_2(X6,X2),X4)|~eq(esk3_2(X6,X2),X5)|~eq(X6,X1))).
+############################################
+#cnf(i_0_2705, plain, (from_2(X1,X2,esk1_2(X1,X3),X4,X5)|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X4)|~eq(esk3_2(X1,X3),X5)|~eq(X6,X2)|~eq(X3,X6))).
+#
+#cnf(i_0_2706, plain, (tab1(X1,X2,esk1_2(X1,X3),X4,X5)|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X4)|~eq(esk3_2(X1,X3),X5)|~eq(X6,X2)|~eq(X3,X6))).
+######
+#cnf(i_0_725, plain, (from_2(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),X5)|~select_1(X3,X4)|~eq(esk3_2(X3,X4),X5)|~eq(X3,X1)|~eq(X4,X2))).
+###
+#cnf(i_0_2707, plain, (from_5(X1,X2,esk1_2(X1,X3),X4,X5)|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X4)|~eq(esk3_2(X1,X3),X5)|~eq(X6,X2)|~eq(X3,X6))).
+#####
+#cnf(i_0_1317, plain, (from_2(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),esk3_2(X3,X4))|~select_1(X3,X4)|~eq(X5,X2)|~eq(X3,X1)|~eq(X4,X5))).
+#
+#cnf(i_0_1318, plain, (tab1(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),esk3_2(X3,X4))|~select_1(X3,X4)|~eq(X5,X2)|~eq(X3,X1)|~eq(X4,X5))).
+#
+#cnf(i_0_1319, plain, (from_5(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),esk3_2(X3,X4))|~select_1(X3,X4)|~eq(X5,X2)|~eq(X3,X1)|~eq(X4,X5))).
+#
+#cnf(i_0_726, plain, (tab1(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),X5)|~select_1(X3,X4)|~eq(esk3_2(X3,X4),X5)|~eq(X3,X1)|~eq(X4,X2))).
+###
+#cnf(i_0_2904, plain, (from_2(X1,X2,esk1_2(X3,X2),X4,X5)|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X4)|~eq(esk3_2(X3,X2),X5)|~eq(X6,X1)|~eq(X3,X6))).
+#
+#cnf(i_0_2905, plain, (tab1(X1,X2,esk1_2(X3,X2),X4,X5)|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X4)|~eq(esk3_2(X3,X2),X5)|~eq(X6,X1)|~eq(X3,X6))).
+#
+#cnf(i_0_2906, plain, (from_5(X1,X2,esk1_2(X3,X2),X4,X5)|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X4)|~eq(esk3_2(X3,X2),X5)|~eq(X6,X1)|~eq(X3,X6))).
+##
+#cnf(i_0_1320, plain, (from_2(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),esk3_2(X3,X4))|~select_1(X3,X4)|~eq(X5,X1)|~eq(X3,X5)|~eq(X4,X2))).
+#
+#cnf(i_0_1321, plain, (tab1(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),esk3_2(X3,X4))|~select_1(X3,X4)|~eq(X5,X1)|~eq(X3,X5)|~eq(X4,X2))).
+#
+#cnf(i_0_1322, plain, (from_5(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),esk3_2(X3,X4))|~select_1(X3,X4)|~eq(X5,X1)|~eq(X3,X5)|~eq(X4,X2))).
+##
+#cnf(i_0_727, plain, (from_5(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),X5)|~select_1(X3,X4)|~eq(esk3_2(X3,X4),X5)|~eq(X3,X1)|~eq(X4,X2))).
+#####
+#cnf(i_0_3103, plain, (from_2(X1,X2,X3,esk2_2(X1,X4),X5)|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X3)|~eq(esk3_2(X1,X4),X5)|~eq(X6,X2)|~eq(X4,X6))).
+#####
+#cnf(i_0_1797, plain, (from_5(X1,X2,esk4_2(X1,X3),esk5_2(X1,X3),X4)|~select_4(X1,X3)|~eq(esk6_2(X1,X3),X5)|~eq(X5,X4)|~eq(X3,X2))).
+###
+#cnf(i_0_3104, plain, (tab1(X1,X2,X3,esk2_2(X1,X4),X5)|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X3)|~eq(esk3_2(X1,X4),X5)|~eq(X6,X2)|~eq(X4,X6))).
+#
+#cnf(i_0_3105, plain, (from_5(X1,X2,X3,esk2_2(X1,X4),X5)|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X3)|~eq(esk3_2(X1,X4),X5)|~eq(X6,X2)|~eq(X4,X6))).
+####
+#cnf(i_0_1825, plain, (from_5(X1,X2,esk4_2(X3,X2),esk5_2(X3,X2),X4)|~select_4(X3,X2)|~eq(esk6_2(X3,X2),X5)|~eq(X5,X4)|~eq(X3,X1))).
+#######
+#cnf(i_0_3145, plain, (from_2(X1,X2,X3,esk2_2(X4,X2),X5)|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X3)|~eq(esk3_2(X4,X2),X5)|~eq(X6,X1)|~eq(X4,X6))).
+#
+#cnf(i_0_3146, plain, (tab1(X1,X2,X3,esk2_2(X4,X2),X5)|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X3)|~eq(esk3_2(X4,X2),X5)|~eq(X6,X1)|~eq(X4,X6))).
+#
+#cnf(i_0_3147, plain, (from_5(X1,X2,X3,esk2_2(X4,X2),X5)|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X3)|~eq(esk3_2(X4,X2),X5)|~eq(X6,X1)|~eq(X4,X6))).
+###
+#cnf(i_0_2076, plain, (from_5(X1,X2,esk4_2(X1,X3),X4,esk6_2(X1,X3))|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X5)|~eq(X5,X4)|~eq(X3,X2))).
+#
+#cnf(i_0_2085, plain, (from_5(X1,X2,esk4_2(X3,X2),X4,esk6_2(X3,X2))|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X5)|~eq(X5,X4)|~eq(X3,X1))).
+###########
+#cnf(i_0_2178, plain, (from_5(X1,X2,X3,esk5_2(X1,X4),esk6_2(X1,X4))|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X5)|~eq(X5,X3)|~eq(X4,X2))).
+#
+#cnf(i_0_2188, plain, (from_5(X1,X2,X3,esk5_2(X4,X2),esk6_2(X4,X2))|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X5)|~eq(X5,X3)|~eq(X4,X1))).
+###
+#cnf(i_0_2696, plain, (from_2(X1,X2,esk1_2(X1,X3),X4,X5)|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X4)|~eq(esk3_2(X1,X3),X6)|~eq(X6,X5)|~eq(X3,X2))).
+#
+#cnf(i_0_2697, plain, (tab1(X1,X2,esk1_2(X1,X3),X4,X5)|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X4)|~eq(esk3_2(X1,X3),X6)|~eq(X6,X5)|~eq(X3,X2))).
+#
+#cnf(i_0_2698, plain, (from_5(X1,X2,esk1_2(X1,X3),X4,X5)|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X4)|~eq(esk3_2(X1,X3),X6)|~eq(X6,X5)|~eq(X3,X2))).
+#
+#cnf(i_0_2699, plain, (from_2(X1,X2,esk1_2(X1,X3),X4,X5)|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X6)|~eq(esk3_2(X1,X3),X5)|~eq(X6,X4)|~eq(X3,X2))).
+##
+#cnf(i_0_2284, plain, (from_5(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),esk6_2(X3,X4))|~select_4(X3,X4)|~eq(X5,X2)|~eq(X3,X1)|~eq(X4,X5))).
+#
+#cnf(i_0_2285, plain, (from_5(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),esk6_2(X3,X4))|~select_4(X3,X4)|~eq(X5,X1)|~eq(X3,X5)|~eq(X4,X2))).
+#####
+#cnf(i_0_2700, plain, (tab1(X1,X2,esk1_2(X1,X3),X4,X5)|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X6)|~eq(esk3_2(X1,X3),X5)|~eq(X6,X4)|~eq(X3,X2))).
+#
+#cnf(i_0_2701, plain, (from_5(X1,X2,esk1_2(X1,X3),X4,X5)|~select_1(X1,X3)|~eq(esk2_2(X1,X3),X6)|~eq(esk3_2(X1,X3),X5)|~eq(X6,X4)|~eq(X3,X2))).
+#####################
+#cnf(i_0_2892, plain, (from_2(X1,X2,esk1_2(X3,X2),X4,X5)|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X4)|~eq(esk3_2(X3,X2),X6)|~eq(X6,X5)|~eq(X3,X1))).
+#
+#cnf(i_0_2893, plain, (tab1(X1,X2,esk1_2(X3,X2),X4,X5)|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X4)|~eq(esk3_2(X3,X2),X6)|~eq(X6,X5)|~eq(X3,X1))).
+#
+#cnf(i_0_2894, plain, (from_5(X1,X2,esk1_2(X3,X2),X4,X5)|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X4)|~eq(esk3_2(X3,X2),X6)|~eq(X6,X5)|~eq(X3,X1))).
+#
+#cnf(i_0_2895, plain, (from_2(X1,X2,esk1_2(X3,X2),X4,X5)|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X6)|~eq(esk3_2(X3,X2),X5)|~eq(X6,X4)|~eq(X3,X1))).
+########
+#cnf(i_0_2896, plain, (tab1(X1,X2,esk1_2(X3,X2),X4,X5)|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X6)|~eq(esk3_2(X3,X2),X5)|~eq(X6,X4)|~eq(X3,X1))).
+#
+#cnf(i_0_2897, plain, (from_5(X1,X2,esk1_2(X3,X2),X4,X5)|~select_1(X3,X2)|~eq(esk2_2(X3,X2),X6)|~eq(esk3_2(X3,X2),X5)|~eq(X6,X4)|~eq(X3,X1))).
+#####################
+#cnf(i_0_3094, plain, (from_2(X1,X2,X3,esk2_2(X1,X4),X5)|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X3)|~eq(esk3_2(X1,X4),X6)|~eq(X6,X5)|~eq(X4,X2))).
+#
+#cnf(i_0_3095, plain, (tab1(X1,X2,X3,esk2_2(X1,X4),X5)|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X3)|~eq(esk3_2(X1,X4),X6)|~eq(X6,X5)|~eq(X4,X2))).
+#
+#cnf(i_0_3096, plain, (from_5(X1,X2,X3,esk2_2(X1,X4),X5)|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X3)|~eq(esk3_2(X1,X4),X6)|~eq(X6,X5)|~eq(X4,X2))).
+#
+#cnf(i_0_3100, plain, (from_2(X1,X2,X3,esk2_2(X1,X4),X5)|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X6)|~eq(esk3_2(X1,X4),X5)|~eq(X6,X3)|~eq(X4,X2))).
+########
+#cnf(i_0_3101, plain, (tab1(X1,X2,X3,esk2_2(X1,X4),X5)|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X6)|~eq(esk3_2(X1,X4),X5)|~eq(X6,X3)|~eq(X4,X2))).
+#
+#cnf(i_0_3102, plain, (from_5(X1,X2,X3,esk2_2(X1,X4),X5)|~select_1(X1,X4)|~eq(esk1_2(X1,X4),X6)|~eq(esk3_2(X1,X4),X5)|~eq(X6,X3)|~eq(X4,X2))).
+#####################
+#cnf(i_0_3133, plain, (from_2(X1,X2,X3,esk2_2(X4,X2),X5)|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X3)|~eq(esk3_2(X4,X2),X6)|~eq(X6,X5)|~eq(X4,X1))).
+#
+#cnf(i_0_3134, plain, (tab1(X1,X2,X3,esk2_2(X4,X2),X5)|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X3)|~eq(esk3_2(X4,X2),X6)|~eq(X6,X5)|~eq(X4,X1))).
+#
+#cnf(i_0_3135, plain, (from_5(X1,X2,X3,esk2_2(X4,X2),X5)|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X3)|~eq(esk3_2(X4,X2),X6)|~eq(X6,X5)|~eq(X4,X1))).
+#
+#cnf(i_0_3139, plain, (from_2(X1,X2,X3,esk2_2(X4,X2),X5)|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X6)|~eq(esk3_2(X4,X2),X5)|~eq(X6,X3)|~eq(X4,X1))).
+########
+#cnf(i_0_3140, plain, (tab1(X1,X2,X3,esk2_2(X4,X2),X5)|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X6)|~eq(esk3_2(X4,X2),X5)|~eq(X6,X3)|~eq(X4,X1))).
+#
+#cnf(i_0_3141, plain, (from_5(X1,X2,X3,esk2_2(X4,X2),X5)|~select_1(X4,X2)|~eq(esk1_2(X4,X2),X6)|~eq(esk3_2(X4,X2),X5)|~eq(X6,X3)|~eq(X4,X1))).
+###############
+#cnf(i_0_1646, plain, (tab1(X1,X2,esk4_2(X1,X3),esk5_2(X1,X3),X4)|~select_4(X1,X3)|~eq(esk6_2(X1,X3),X4)|~eq(X3,X2))).
+##
+#cnf(i_0_3283, plain, (tab1(X1,X2,esk4_2(X1,X3),esk5_2(X1,X3),X4)|~select_4(X1,X3)|~eq(esk6_2(X1,X3),X4)|~eq(X5,X2)|~eq(X3,X5))).
+####
+#cnf(i_0_3277, plain, (tab1(X1,X2,esk4_2(X1,X3),esk5_2(X1,X3),X4)|~select_4(X1,X3)|~eq(esk6_2(X1,X3),X5)|~eq(X5,X4)|~eq(X3,X2))).
+##
+#cnf(i_0_3202, plain, (from_2(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),X5)|~select_1(X3,X4)|~eq(esk3_2(X3,X4),X5)|~eq(X6,X2)|~eq(X3,X1)|~eq(X4,X6))).
+#
+#cnf(i_0_3203, plain, (tab1(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),X5)|~select_1(X3,X4)|~eq(esk3_2(X3,X4),X5)|~eq(X6,X2)|~eq(X3,X1)|~eq(X4,X6))).
+#
+#cnf(i_0_1648, plain, (tab1(X1,X2,esk4_2(X3,X2),esk5_2(X3,X2),X4)|~select_4(X3,X2)|~eq(esk6_2(X3,X2),X4)|~eq(X3,X1))).
+##
+#cnf(i_0_3301, plain, (tab1(X1,X2,esk4_2(X3,X2),esk5_2(X3,X2),X4)|~select_4(X3,X2)|~eq(esk6_2(X3,X2),X4)|~eq(X5,X1)|~eq(X3,X5))).
+##
+#cnf(i_0_3293, plain, (tab1(X1,X2,esk4_2(X3,X2),esk5_2(X3,X2),X4)|~select_4(X3,X2)|~eq(esk6_2(X3,X2),X5)|~eq(X5,X4)|~eq(X3,X1))).
+####
+#cnf(i_0_3204, plain, (from_5(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),X5)|~select_1(X3,X4)|~eq(esk3_2(X3,X4),X5)|~eq(X6,X2)|~eq(X3,X1)|~eq(X4,X6))).
+#
+#cnf(i_0_3205, plain, (from_2(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),X5)|~select_1(X3,X4)|~eq(esk3_2(X3,X4),X5)|~eq(X6,X1)|~eq(X3,X6)|~eq(X4,X2))).
+#
+#cnf(i_0_3206, plain, (tab1(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),X5)|~select_1(X3,X4)|~eq(esk3_2(X3,X4),X5)|~eq(X6,X1)|~eq(X3,X6)|~eq(X4,X2))).
+#
+#cnf(i_0_1659, plain, (tab1(X1,X2,esk4_2(X1,X3),X4,esk6_2(X1,X3))|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X4)|~eq(X3,X2))).
+##
+#cnf(i_0_3316, plain, (tab1(X1,X2,esk4_2(X1,X3),X4,esk6_2(X1,X3))|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X4)|~eq(X5,X2)|~eq(X3,X5))).
+##
+#cnf(i_0_3312, plain, (tab1(X1,X2,esk4_2(X1,X3),X4,esk6_2(X1,X3))|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X5)|~eq(X5,X4)|~eq(X3,X2))).
+####
+#cnf(i_0_3207, plain, (from_5(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),X5)|~select_1(X3,X4)|~eq(esk3_2(X3,X4),X5)|~eq(X6,X1)|~eq(X3,X6)|~eq(X4,X2))).
+###
+#cnf(i_0_1661, plain, (tab1(X1,X2,esk4_2(X3,X2),X4,esk6_2(X3,X2))|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X4)|~eq(X3,X1))).
+##
+#cnf(i_0_3333, plain, (tab1(X1,X2,esk4_2(X3,X2),X4,esk6_2(X3,X2))|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X4)|~eq(X5,X1)|~eq(X3,X5))).
+##
+#cnf(i_0_3327, plain, (tab1(X1,X2,esk4_2(X3,X2),X4,esk6_2(X3,X2))|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X5)|~eq(X5,X4)|~eq(X3,X1))).
+#######
+#cnf(i_0_1672, plain, (tab1(X1,X2,X3,esk5_2(X1,X4),esk6_2(X1,X4))|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X3)|~eq(X4,X2))).
+##
+#cnf(i_0_3345, plain, (tab1(X1,X2,X3,esk5_2(X1,X4),esk6_2(X1,X4))|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X3)|~eq(X5,X2)|~eq(X4,X5))).
+##
+#cnf(i_0_3343, plain, (tab1(X1,X2,X3,esk5_2(X1,X4),esk6_2(X1,X4))|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X5)|~eq(X5,X3)|~eq(X4,X2))).
+#####
+#cnf(i_0_843, plain, (from_2(X1,X2,X3,X4,esk3_2(X1,X5))|~select_1(X1,X5)|~eq(esk1_2(X1,X5),X3)|~eq(esk2_2(X1,X5),X4)|~eq(X5,X2))).
+######
+#cnf(i_0_3362, plain, (from_2(X1,X2,X3,X4,esk3_2(X1,X5))|~select_1(X1,X5)|~eq(esk1_2(X1,X5),X3)|~eq(esk2_2(X1,X5),X4)|~eq(X6,X2)|~eq(X5,X6))).
+##
+#cnf(i_0_1674, plain, (tab1(X1,X2,X3,esk5_2(X4,X2),esk6_2(X4,X2))|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X3)|~eq(X4,X1))).
+##
+#cnf(i_0_3379, plain, (tab1(X1,X2,X3,esk5_2(X4,X2),esk6_2(X4,X2))|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X3)|~eq(X5,X1)|~eq(X4,X5))).
+##
+#cnf(i_0_3363, plain, (tab1(X1,X2,X3,X4,esk3_2(X1,X5))|~select_1(X1,X5)|~eq(esk1_2(X1,X5),X3)|~eq(esk2_2(X1,X5),X4)|~eq(X6,X2)|~eq(X5,X6))).
+##
+#cnf(i_0_3375, plain, (tab1(X1,X2,X3,esk5_2(X4,X2),esk6_2(X4,X2))|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X5)|~eq(X5,X3)|~eq(X4,X1))).
+##
+#cnf(i_0_3364, plain, (from_5(X1,X2,X3,X4,esk3_2(X1,X5))|~select_1(X1,X5)|~eq(esk1_2(X1,X5),X3)|~eq(esk2_2(X1,X5),X4)|~eq(X6,X2)|~eq(X5,X6))).
+####
+#cnf(i_0_3356, plain, (from_2(X1,X2,X3,X4,esk3_2(X1,X5))|~select_1(X1,X5)|~eq(esk1_2(X1,X5),X3)|~eq(esk2_2(X1,X5),X6)|~eq(X6,X4)|~eq(X5,X2))).
+#
+#cnf(i_0_3357, plain, (tab1(X1,X2,X3,X4,esk3_2(X1,X5))|~select_1(X1,X5)|~eq(esk1_2(X1,X5),X3)|~eq(esk2_2(X1,X5),X6)|~eq(X6,X4)|~eq(X5,X2))).
+#
+#cnf(i_0_3358, plain, (from_5(X1,X2,X3,X4,esk3_2(X1,X5))|~select_1(X1,X5)|~eq(esk1_2(X1,X5),X3)|~eq(esk2_2(X1,X5),X6)|~eq(X6,X4)|~eq(X5,X2))).
+#
+#cnf(i_0_3359, plain, (from_2(X1,X2,X3,X4,esk3_2(X1,X5))|~select_1(X1,X5)|~eq(esk1_2(X1,X5),X6)|~eq(esk2_2(X1,X5),X4)|~eq(X6,X3)|~eq(X5,X2))).
+########
+#cnf(i_0_3360, plain, (tab1(X1,X2,X3,X4,esk3_2(X1,X5))|~select_1(X1,X5)|~eq(esk1_2(X1,X5),X6)|~eq(esk2_2(X1,X5),X4)|~eq(X6,X3)|~eq(X5,X2))).
+#
+#cnf(i_0_3361, plain, (from_5(X1,X2,X3,X4,esk3_2(X1,X5))|~select_1(X1,X5)|~eq(esk1_2(X1,X5),X6)|~eq(esk2_2(X1,X5),X4)|~eq(X6,X3)|~eq(X5,X2))).
+#
+#cnf(i_0_844, plain, (tab1(X1,X2,X3,X4,esk3_2(X1,X5))|~select_1(X1,X5)|~eq(esk1_2(X1,X5),X3)|~eq(esk2_2(X1,X5),X4)|~eq(X5,X2))).
+####################
+#cnf(i_0_845, plain, (from_5(X1,X2,X3,X4,esk3_2(X1,X5))|~select_1(X1,X5)|~eq(esk1_2(X1,X5),X3)|~eq(esk2_2(X1,X5),X4)|~eq(X5,X2))).
+#############
+#cnf(i_0_846, plain, (from_2(X1,X2,X3,X4,esk3_2(X5,X2))|~select_1(X5,X2)|~eq(esk1_2(X5,X2),X3)|~eq(esk2_2(X5,X2),X4)|~eq(X5,X1))).
+######
+#cnf(i_0_3424, plain, (from_2(X1,X2,X3,X4,esk3_2(X5,X2))|~select_1(X5,X2)|~eq(esk1_2(X5,X2),X3)|~eq(esk2_2(X5,X2),X4)|~eq(X6,X1)|~eq(X5,X6))).
+###
+#cnf(i_0_3425, plain, (tab1(X1,X2,X3,X4,esk3_2(X5,X2))|~select_1(X5,X2)|~eq(esk1_2(X5,X2),X3)|~eq(esk2_2(X5,X2),X4)|~eq(X6,X1)|~eq(X5,X6))).
+#
+#cnf(i_0_3426, plain, (from_5(X1,X2,X3,X4,esk3_2(X5,X2))|~select_1(X5,X2)|~eq(esk1_2(X5,X2),X3)|~eq(esk2_2(X5,X2),X4)|~eq(X6,X1)|~eq(X5,X6))).
+#
+#cnf(i_0_3415, plain, (from_2(X1,X2,X3,X4,esk3_2(X5,X2))|~select_1(X5,X2)|~eq(esk1_2(X5,X2),X3)|~eq(esk2_2(X5,X2),X6)|~eq(X6,X4)|~eq(X5,X1))).
+#
+#cnf(i_0_3416, plain, (tab1(X1,X2,X3,X4,esk3_2(X5,X2))|~select_1(X5,X2)|~eq(esk1_2(X5,X2),X3)|~eq(esk2_2(X5,X2),X6)|~eq(X6,X4)|~eq(X5,X1))).
+##
+#cnf(i_0_1770, plain, (from_2(X1,X2,esk4_2(X1,X3),esk5_2(X1,X3),X4)|~select_4(X1,X3)|~eq(esk6_2(X1,X3),X4)|~eq(X3,X2))).
+###
+#cnf(i_0_3443, plain, (from_2(X1,X2,esk4_2(X1,X3),esk5_2(X1,X3),X4)|~select_4(X1,X3)|~eq(esk6_2(X1,X3),X4)|~eq(X5,X2)|~eq(X3,X5))).
+####
+#cnf(i_0_3434, plain, (from_2(X1,X2,esk4_2(X1,X3),esk5_2(X1,X3),X4)|~select_4(X1,X3)|~eq(esk6_2(X1,X3),X5)|~eq(X5,X4)|~eq(X3,X2))).
+#####
+#cnf(i_0_1773, plain, (from_2(X1,X2,esk4_2(X3,X2),esk5_2(X3,X2),X4)|~select_4(X3,X2)|~eq(esk6_2(X3,X2),X4)|~eq(X3,X1))).
+####
+#cnf(i_0_3465, plain, (from_2(X1,X2,esk4_2(X3,X2),esk5_2(X3,X2),X4)|~select_4(X3,X2)|~eq(esk6_2(X3,X2),X4)|~eq(X5,X1)|~eq(X3,X5))).
+###
+#cnf(i_0_3453, plain, (from_2(X1,X2,esk4_2(X3,X2),esk5_2(X3,X2),X4)|~select_4(X3,X2)|~eq(esk6_2(X3,X2),X5)|~eq(X5,X4)|~eq(X3,X1))).
+#####
+#cnf(i_0_1788, plain, (from_2(X1,X2,esk4_2(X1,X3),X4,esk6_2(X1,X3))|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X4)|~eq(X3,X2))).
+####
+#cnf(i_0_3481, plain, (from_2(X1,X2,esk4_2(X1,X3),X4,esk6_2(X1,X3))|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X4)|~eq(X5,X2)|~eq(X3,X5))).
+###
+#cnf(i_0_3475, plain, (from_2(X1,X2,esk4_2(X1,X3),X4,esk6_2(X1,X3))|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X5)|~eq(X5,X4)|~eq(X3,X2))).
+#####
+#cnf(i_0_1791, plain, (from_2(X1,X2,esk4_2(X3,X2),X4,esk6_2(X3,X2))|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X4)|~eq(X3,X1))).
+####
+#cnf(i_0_3503, plain, (from_2(X1,X2,esk4_2(X3,X2),X4,esk6_2(X3,X2))|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X4)|~eq(X5,X1)|~eq(X3,X5))).
+####
+#cnf(i_0_3494, plain, (from_2(X1,X2,esk4_2(X3,X2),X4,esk6_2(X3,X2))|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X5)|~eq(X5,X4)|~eq(X3,X1))).
+####
+#cnf(i_0_847, plain, (tab1(X1,X2,X3,X4,esk3_2(X5,X2))|~select_1(X5,X2)|~eq(esk1_2(X5,X2),X3)|~eq(esk2_2(X5,X2),X4)|~eq(X5,X1))).
+##########
+#cnf(i_0_1816, plain, (from_2(X1,X2,X3,esk5_2(X1,X4),esk6_2(X1,X4))|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X3)|~eq(X4,X2))).
+#
+#cnf(i_0_848, plain, (from_5(X1,X2,X3,X4,esk3_2(X5,X2))|~select_1(X5,X2)|~eq(esk1_2(X5,X2),X3)|~eq(esk2_2(X5,X2),X4)|~eq(X5,X1))).
+#####
+#cnf(i_0_3531, plain, (from_2(X1,X2,X3,esk5_2(X1,X4),esk6_2(X1,X4))|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X3)|~eq(X5,X2)|~eq(X4,X5))).
+###
+#cnf(i_0_3528, plain, (from_2(X1,X2,X3,esk5_2(X1,X4),esk6_2(X1,X4))|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X5)|~eq(X5,X3)|~eq(X4,X2))).
+######
+#cnf(i_0_3417, plain, (from_5(X1,X2,X3,X4,esk3_2(X5,X2))|~select_1(X5,X2)|~eq(esk1_2(X5,X2),X3)|~eq(esk2_2(X5,X2),X6)|~eq(X6,X4)|~eq(X5,X1))).
+#
+#cnf(i_0_3418, plain, (from_2(X1,X2,X3,X4,esk3_2(X5,X2))|~select_1(X5,X2)|~eq(esk1_2(X5,X2),X6)|~eq(esk2_2(X5,X2),X4)|~eq(X6,X3)|~eq(X5,X1))).
+#
+#cnf(i_0_3419, plain, (tab1(X1,X2,X3,X4,esk3_2(X5,X2))|~select_1(X5,X2)|~eq(esk1_2(X5,X2),X6)|~eq(esk2_2(X5,X2),X4)|~eq(X6,X3)|~eq(X5,X1))).
+##
+#cnf(i_0_1819, plain, (from_2(X1,X2,X3,esk5_2(X4,X2),esk6_2(X4,X2))|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X3)|~eq(X4,X1))).
+###
+#cnf(i_0_3563, plain, (from_2(X1,X2,X3,esk5_2(X4,X2),esk6_2(X4,X2))|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X3)|~eq(X5,X1)|~eq(X4,X5))).
+####
+#cnf(i_0_3557, plain, (from_2(X1,X2,X3,esk5_2(X4,X2),esk6_2(X4,X2))|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X5)|~eq(X5,X3)|~eq(X4,X1))).
+##########
+#cnf(i_0_3420, plain, (from_5(X1,X2,X3,X4,esk3_2(X5,X2))|~select_1(X5,X2)|~eq(esk1_2(X5,X2),X6)|~eq(esk2_2(X5,X2),X4)|~eq(X6,X3)|~eq(X5,X1))).
+###############################
+#cnf(i_0_865, plain, (from_2(X1,X2,esk1_2(X3,X4),X5,esk3_2(X3,X4))|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(X3,X1)|~eq(X4,X2))).
+###
+#cnf(i_0_3580, plain, (from_2(X1,X2,esk1_2(X3,X4),X5,esk3_2(X3,X4))|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(X6,X2)|~eq(X3,X1)|~eq(X4,X6))).
+#
+#cnf(i_0_3581, plain, (tab1(X1,X2,esk1_2(X3,X4),X5,esk3_2(X3,X4))|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(X6,X2)|~eq(X3,X1)|~eq(X4,X6))).
+#
+#cnf(i_0_3582, plain, (from_5(X1,X2,esk1_2(X3,X4),X5,esk3_2(X3,X4))|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(X6,X2)|~eq(X3,X1)|~eq(X4,X6))).
+######
+#cnf(i_0_866, plain, (tab1(X1,X2,esk1_2(X3,X4),X5,esk3_2(X3,X4))|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(X3,X1)|~eq(X4,X2))).
+##
+#cnf(i_0_3583, plain, (from_2(X1,X2,esk1_2(X3,X4),X5,esk3_2(X3,X4))|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(X6,X1)|~eq(X3,X6)|~eq(X4,X2))).
+#
+#cnf(i_0_3584, plain, (tab1(X1,X2,esk1_2(X3,X4),X5,esk3_2(X3,X4))|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(X6,X1)|~eq(X3,X6)|~eq(X4,X2))).
+#
+#cnf(i_0_3585, plain, (from_5(X1,X2,esk1_2(X3,X4),X5,esk3_2(X3,X4))|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(X6,X1)|~eq(X3,X6)|~eq(X4,X2))).
+#######
+#cnf(i_0_867, plain, (from_5(X1,X2,esk1_2(X3,X4),X5,esk3_2(X3,X4))|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(X3,X1)|~eq(X4,X2))).
+#############################################################################
+#cnf(i_0_910, negated_conjecture, (lte(esk7_0,X5)|lte(X1,esk8_0)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|lte(X2,X1))).
+############################################
+#cnf(i_0_920, plain, (lte(X6,X4)|lte(X2,X5)|lte(X5,X6)|lte(X4,X3)|lte(X3,X1)|lte(X1,X2))).
+##
+#cnf(i_0_3972, negated_conjecture, (lte(X7,X1)|lte(X5,X7)|lte(X6,X4)|lte(X3,X6)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(esk7_0,X3)|~eq(X3,X2)|~where_3(X1,X2))).
+##
+#cnf(i_0_3973, negated_conjecture, (lte(X7,X1)|lte(X5,X7)|lte(X6,X4)|lte(X3,X6)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(X1,esk8_0)|~eq(X3,X2)|~where_3(X1,X2))).
+##
+#cnf(i_0_3977, negated_conjecture, (lte(X7,X3)|lte(X5,X7)|lte(X6,X4)|lte(X2,X6)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(esk7_0,X2)|~eq(X3,X1)|~where_3(X1,X2))).
+####################################################################################################
+#cnf(i_0_3974, plain, (lte(X7,X3)|lte(X5,X7)|lte(X6,X4)|lte(X2,X6)|lte(X4,X5)|lte(X1,X2)|~lte(X1,X3))).
+#################
+#cnf(i_0_1605, plain, (from_5(X1,X2,esk4_2(X1,X3),X4,X5)|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X4)|~eq(esk6_2(X1,X3),X5)|~eq(X3,X2))).
+##
+#cnf(i_0_4259, plain, (from_5(X1,X2,X3,X4,X5)|~select_4(X1,X6)|~eq(esk4_2(X1,X6),X3)|~eq(esk5_2(X1,X6),X4)|~eq(esk6_2(X1,X6),X5)|~eq(X6,X2))).
+#
+#cnf(i_0_4260, plain, (from_5(X1,X2,esk4_2(X1,X3),X4,X5)|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X4)|~eq(esk6_2(X1,X3),X5)|~eq(X6,X2)|~eq(X3,X6))).
+########
+#cnf(i_0_4257, plain, (from_5(X1,X2,esk4_2(X1,X3),X4,X5)|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X4)|~eq(esk6_2(X1,X3),X6)|~eq(X6,X5)|~eq(X3,X2))).
+#
+#cnf(i_0_4258, plain, (from_5(X1,X2,esk4_2(X1,X3),X4,X5)|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X6)|~eq(esk6_2(X1,X3),X5)|~eq(X6,X4)|~eq(X3,X2))).
+#
+#cnf(i_0_1606, plain, (from_5(X1,X2,esk4_2(X3,X2),X4,X5)|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X4)|~eq(esk6_2(X3,X2),X5)|~eq(X3,X1))).
+#####
+#cnf(i_0_4218, plain, (lte(X7,X6)|lte(X5,X3)|lte(X6,X4)|lte(X4,X5)|lte(X3,X1)|lte(X1,X2)|~eq(X2,X7))).
+#
+#cnf(i_0_4219, plain, (lte(X7,X6)|lte(X5,X3)|lte(X6,X4)|lte(X4,X5)|lte(X3,X1)|lte(X1,X2)|~eq(X7,X2))).
+###
+#cnf(i_0_4270, plain, (from_5(X1,X2,X3,X4,X5)|~select_4(X6,X2)|~eq(esk4_2(X6,X2),X3)|~eq(esk5_2(X6,X2),X4)|~eq(esk6_2(X6,X2),X5)|~eq(X6,X1))).
+#
+#cnf(i_0_4272, plain, (from_5(X1,X2,esk4_2(X3,X2),X4,X5)|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X4)|~eq(esk6_2(X3,X2),X5)|~eq(X6,X1)|~eq(X3,X6))).
+#
+#cnf(i_0_4268, plain, (from_5(X1,X2,esk4_2(X3,X2),X4,X5)|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X4)|~eq(esk6_2(X3,X2),X6)|~eq(X6,X5)|~eq(X3,X1))).
+#
+#cnf(i_0_4269, plain, (from_5(X1,X2,esk4_2(X3,X2),X4,X5)|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X6)|~eq(esk6_2(X3,X2),X5)|~eq(X6,X4)|~eq(X3,X1))).
+########
+#cnf(i_0_1615, plain, (from_5(X1,X2,X3,esk5_2(X1,X4),X5)|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X3)|~eq(esk6_2(X1,X4),X5)|~eq(X4,X2))).
+###
+#cnf(i_0_4284, plain, (from_5(X1,X2,X3,esk5_2(X1,X4),X5)|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X3)|~eq(esk6_2(X1,X4),X5)|~eq(X6,X2)|~eq(X4,X6))).
+####
+#cnf(i_0_3866, negated_conjecture, (lte(esk7_0,X2)|lte(X6,X1)|lte(X5,X6)|lte(X4,X5)|lte(X2,X3)|lte(X3,X4)|eq(esk8_0,X1)|~lte(esk8_0,X1))).
+####
+#cnf(i_0_4281, plain, (from_5(X1,X2,X3,esk5_2(X1,X4),X5)|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X3)|~eq(esk6_2(X1,X4),X6)|~eq(X6,X5)|~eq(X4,X2))).
+#
+#cnf(i_0_4283, plain, (from_5(X1,X2,X3,esk5_2(X1,X4),X5)|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X6)|~eq(esk6_2(X1,X4),X5)|~eq(X6,X3)|~eq(X4,X2))).
+#
+#cnf(i_0_1616, plain, (from_5(X1,X2,X3,esk5_2(X4,X2),X5)|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X3)|~eq(esk6_2(X4,X2),X5)|~eq(X4,X1))).
+#####
+#cnf(i_0_4342, plain, (from_5(X1,X2,X3,esk5_2(X4,X2),X5)|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X3)|~eq(esk6_2(X4,X2),X5)|~eq(X6,X1)|~eq(X4,X6))).
+###
+#cnf(i_0_3903, negated_conjecture, (lte(X3,esk8_0)|lte(X7,X3)|lte(X6,X7)|lte(X5,X6)|lte(X2,X4)|lte(X4,X5)|lte(X1,X2)|~lte(X1,esk7_0))).
+#
+#cnf(i_0_4338, plain, (from_5(X1,X2,X3,esk5_2(X4,X2),X5)|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X3)|~eq(esk6_2(X4,X2),X6)|~eq(X6,X5)|~eq(X4,X1))).
+#
+#cnf(i_0_4340, plain, (from_5(X1,X2,X3,esk5_2(X4,X2),X5)|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X6)|~eq(esk6_2(X4,X2),X5)|~eq(X6,X3)|~eq(X4,X1))).
+###
+#cnf(i_0_4350, negated_conjecture, (lte(X1,esk8_0)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|lte(X2,X1)|~eq(esk7_0,X7))).
+######
+#cnf(i_0_4351, negated_conjecture, (lte(X1,esk8_0)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|lte(X2,X1)|~eq(X7,esk7_0))).
+###########
+#cnf(i_0_3673, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X4)|lte(X7,X3)|lte(X6,X7)|lte(X4,X5)|lte(X5,X6)|lte(X1,X2)|~lte(X1,X3))).
+#
+#cnf(i_0_1755, plain, (from_5(X1,X2,X3,X4,esk6_2(X1,X5))|~select_4(X1,X5)|~eq(esk4_2(X1,X5),X3)|~eq(esk5_2(X1,X5),X4)|~eq(X5,X2))).
+###
+#cnf(i_0_4450, plain, (from_5(X1,X2,X3,X4,esk6_2(X1,X5))|~select_4(X1,X5)|~eq(esk4_2(X1,X5),X3)|~eq(esk5_2(X1,X5),X4)|~eq(X6,X2)|~eq(X5,X6))).
+########
+#cnf(i_0_4448, plain, (from_5(X1,X2,X3,X4,esk6_2(X1,X5))|~select_4(X1,X5)|~eq(esk4_2(X1,X5),X3)|~eq(esk5_2(X1,X5),X6)|~eq(X6,X4)|~eq(X5,X2))).
+#
+#cnf(i_0_4449, plain, (from_5(X1,X2,X3,X4,esk6_2(X1,X5))|~select_4(X1,X5)|~eq(esk4_2(X1,X5),X6)|~eq(esk5_2(X1,X5),X4)|~eq(X6,X3)|~eq(X5,X2))).
+#
+#cnf(i_0_1756, plain, (from_5(X1,X2,X3,X4,esk6_2(X5,X2))|~select_4(X5,X2)|~eq(esk4_2(X5,X2),X3)|~eq(esk5_2(X5,X2),X4)|~eq(X5,X1))).
+##
+#cnf(i_0_3714, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X2,X5)|lte(X7,X3)|lte(X4,X6)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+#######
+#cnf(i_0_4461, plain, (from_5(X1,X2,X3,X4,esk6_2(X5,X2))|~select_4(X5,X2)|~eq(esk4_2(X5,X2),X3)|~eq(esk5_2(X5,X2),X4)|~eq(X6,X1)|~eq(X5,X6))).
+#
+#cnf(i_0_4458, plain, (from_5(X1,X2,X3,X4,esk6_2(X5,X2))|~select_4(X5,X2)|~eq(esk4_2(X5,X2),X3)|~eq(esk5_2(X5,X2),X6)|~eq(X6,X4)|~eq(X5,X1))).
+#
+#cnf(i_0_4459, plain, (from_5(X1,X2,X3,X4,esk6_2(X5,X2))|~select_4(X5,X2)|~eq(esk4_2(X5,X2),X6)|~eq(esk5_2(X5,X2),X4)|~eq(X6,X3)|~eq(X5,X1))).
+##
+#cnf(i_0_3755, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X7,X5)|lte(X2,X7)|lte(X4,X6)|lte(X6,X3)|lte(X1,X2)|~lte(X1,X3))).
+###########
+#cnf(i_0_3796, negated_conjecture, (lte(X4,esk8_0)|lte(esk7_0,X3)|lte(X7,X4)|lte(X6,X7)|lte(X5,X6)|lte(X2,X5)|lte(X1,X2)|~lte(X1,X3))).
+###########
+#cnf(i_0_3837, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X7,X5)|lte(X6,X7)|lte(X2,X6)|lte(X4,X3)|lte(X1,X2)|~lte(X1,X3))).
+######
+#cnf(i_0_3871, negated_conjecture, (lte(esk7_0,X3)|lte(X1,esk8_0)|lte(X7,X2)|lte(X6,X7)|lte(X5,X6)|lte(X3,X4)|lte(X4,X5)|~lte(X1,X2))).
+###########
+#cnf(i_0_4408, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X7,X1)|lte(X6,X5)|lte(X2,X6)|lte(X5,X3)|lte(X3,X4)|~eq(X4,X7))).
+#####
+#cnf(i_0_4409, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X7,X1)|lte(X6,X5)|lte(X2,X6)|lte(X5,X3)|lte(X3,X4)|~eq(X7,X4))).
+##
+#cnf(i_0_4479, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X7,X3)|lte(X6,X4)|lte(X2,X6)|lte(X4,X5)|lte(X3,X1)|~eq(X5,X7))).
+#
+#cnf(i_0_4480, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X7,X3)|lte(X6,X4)|lte(X2,X6)|lte(X4,X5)|lte(X3,X1)|~eq(X7,X5))).
+#
+#cnf(i_0_4536, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X7,X4)|lte(X5,X6)|lte(X2,X5)|lte(X4,X3)|lte(X3,X1)|~eq(X6,X7))).
+##
+#cnf(i_0_4537, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X7,X4)|lte(X5,X6)|lte(X2,X5)|lte(X4,X3)|lte(X3,X1)|~eq(X7,X6))).
+####
+#cnf(i_0_2141, plain, (tab1(X1,X2,esk4_2(X1,X3),X4,X5)|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X4)|~eq(esk6_2(X1,X3),X5)|~eq(X3,X2))).
+##
+#cnf(i_0_4747, plain, (tab1(X1,X2,X3,X4,X5)|~select_4(X1,X6)|~eq(esk4_2(X1,X6),X3)|~eq(esk5_2(X1,X6),X4)|~eq(esk6_2(X1,X6),X5)|~eq(X6,X2))).
+##
+#cnf(i_0_4749, plain, (tab1(X1,X2,esk4_2(X1,X3),X4,X5)|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X4)|~eq(esk6_2(X1,X3),X5)|~eq(X6,X2)|~eq(X3,X6))).
+###
+#cnf(i_0_4590, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X7,X6)|lte(X6,X5)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X2,X7))).
+#
+#cnf(i_0_4743, plain, (tab1(X1,X2,esk4_2(X1,X3),X4,X5)|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X4)|~eq(esk6_2(X1,X3),X6)|~eq(X6,X5)|~eq(X3,X2))).
+##
+#cnf(i_0_4745, plain, (tab1(X1,X2,esk4_2(X1,X3),X4,X5)|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X6)|~eq(esk6_2(X1,X3),X5)|~eq(X6,X4)|~eq(X3,X2))).
+##
+#cnf(i_0_4591, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X7,X6)|lte(X6,X5)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X7,X2))).
+#
+#cnf(i_0_4644, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X7,X5)|lte(X2,X6)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X6,X7))).
+#
+#cnf(i_0_4645, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X7,X5)|lte(X2,X6)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X7,X6))).
+#
+#cnf(i_0_4698, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X7,X6)|lte(X1,X7)|lte(X6,X5)|lte(X5,X3)|lte(X3,X4)|~eq(X4,X2))).
+#
+#cnf(i_0_4699, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X7,X6)|lte(X1,X7)|lte(X6,X5)|lte(X5,X3)|lte(X3,X4)|~eq(X2,X4))).
+####
+#cnf(i_0_2143, plain, (tab1(X1,X2,esk4_2(X3,X2),X4,X5)|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X4)|~eq(esk6_2(X3,X2),X5)|~eq(X3,X1))).
+##
+#cnf(i_0_4769, plain, (tab1(X1,X2,X3,X4,X5)|~select_4(X6,X2)|~eq(esk4_2(X6,X2),X3)|~eq(esk5_2(X6,X2),X4)|~eq(esk6_2(X6,X2),X5)|~eq(X6,X1))).
+###
+#cnf(i_0_4773, plain, (tab1(X1,X2,esk4_2(X3,X2),X4,X5)|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X4)|~eq(esk6_2(X3,X2),X5)|~eq(X6,X1)|~eq(X3,X6))).
+##
+#cnf(i_0_4765, plain, (tab1(X1,X2,esk4_2(X3,X2),X4,X5)|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X4)|~eq(esk6_2(X3,X2),X6)|~eq(X6,X5)|~eq(X3,X1))).
+####
+#cnf(i_0_4767, plain, (tab1(X1,X2,esk4_2(X3,X2),X4,X5)|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X6)|~eq(esk6_2(X3,X2),X5)|~eq(X6,X4)|~eq(X3,X1))).
+####
+#cnf(i_0_2156, plain, (tab1(X1,X2,X3,esk5_2(X1,X4),X5)|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X3)|~eq(esk6_2(X1,X4),X5)|~eq(X4,X2))).
+######
+#cnf(i_0_4787, plain, (tab1(X1,X2,X3,esk5_2(X1,X4),X5)|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X3)|~eq(esk6_2(X1,X4),X5)|~eq(X6,X2)|~eq(X4,X6))).
+##
+#cnf(i_0_4781, plain, (tab1(X1,X2,X3,esk5_2(X1,X4),X5)|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X3)|~eq(esk6_2(X1,X4),X6)|~eq(X6,X5)|~eq(X4,X2))).
+###
+#cnf(i_0_4785, plain, (tab1(X1,X2,X3,esk5_2(X1,X4),X5)|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X6)|~eq(esk6_2(X1,X4),X5)|~eq(X6,X3)|~eq(X4,X2))).
+###
+#cnf(i_0_2158, plain, (tab1(X1,X2,X3,esk5_2(X4,X2),X5)|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X3)|~eq(esk6_2(X4,X2),X5)|~eq(X4,X1))).
+#
+#cnf(i_0_1006, plain, (from_2(X1,X2,X3,esk2_2(X4,X5),esk3_2(X4,X5))|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(X4,X1)|~eq(X5,X2))).
+#######
+#cnf(i_0_4804, plain, (tab1(X1,X2,X3,esk5_2(X4,X2),X5)|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X3)|~eq(esk6_2(X4,X2),X5)|~eq(X6,X1)|~eq(X4,X6))).
+##
+#cnf(i_0_4796, plain, (tab1(X1,X2,X3,esk5_2(X4,X2),X5)|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X3)|~eq(esk6_2(X4,X2),X6)|~eq(X6,X5)|~eq(X4,X1))).
+##
+#cnf(i_0_1007, plain, (tab1(X1,X2,X3,esk2_2(X4,X5),esk3_2(X4,X5))|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(X4,X1)|~eq(X5,X2))).
+##
+#cnf(i_0_4800, plain, (tab1(X1,X2,X3,esk5_2(X4,X2),X5)|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X6)|~eq(esk6_2(X4,X2),X5)|~eq(X6,X3)|~eq(X4,X1))).
+##
+#cnf(i_0_4817, plain, (from_2(X1,X2,X3,esk2_2(X4,X5),esk3_2(X4,X5))|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(X6,X2)|~eq(X4,X1)|~eq(X5,X6))).
+#
+#cnf(i_0_4818, plain, (tab1(X1,X2,X3,esk2_2(X4,X5),esk3_2(X4,X5))|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(X6,X2)|~eq(X4,X1)|~eq(X5,X6))).
+##
+#cnf(i_0_4819, plain, (from_5(X1,X2,X3,esk2_2(X4,X5),esk3_2(X4,X5))|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(X6,X2)|~eq(X4,X1)|~eq(X5,X6))).
+#
+#cnf(i_0_4820, plain, (from_2(X1,X2,X3,esk2_2(X4,X5),esk3_2(X4,X5))|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(X6,X1)|~eq(X4,X6)|~eq(X5,X2))).
+#
+#cnf(i_0_4821, plain, (tab1(X1,X2,X3,esk2_2(X4,X5),esk3_2(X4,X5))|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(X6,X1)|~eq(X4,X6)|~eq(X5,X2))).
+#
+#cnf(i_0_4822, plain, (from_5(X1,X2,X3,esk2_2(X4,X5),esk3_2(X4,X5))|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(X6,X1)|~eq(X4,X6)|~eq(X5,X2))).
+#
+#cnf(i_0_1008, plain, (from_5(X1,X2,X3,esk2_2(X4,X5),esk3_2(X4,X5))|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(X4,X1)|~eq(X5,X2))).
+##########
+#cnf(i_0_2170, plain, (tab1(X1,X2,X3,X4,esk6_2(X1,X5))|~select_4(X1,X5)|~eq(esk4_2(X1,X5),X3)|~eq(esk5_2(X1,X5),X4)|~eq(X5,X2))).
+#####
+#cnf(i_0_4859, plain, (tab1(X1,X2,X3,X4,esk6_2(X1,X5))|~select_4(X1,X5)|~eq(esk4_2(X1,X5),X3)|~eq(esk5_2(X1,X5),X4)|~eq(X6,X2)|~eq(X5,X6))).
+###
+#cnf(i_0_4855, plain, (tab1(X1,X2,X3,X4,esk6_2(X1,X5))|~select_4(X1,X5)|~eq(esk4_2(X1,X5),X3)|~eq(esk5_2(X1,X5),X6)|~eq(X6,X4)|~eq(X5,X2))).
+##
+#cnf(i_0_4857, plain, (tab1(X1,X2,X3,X4,esk6_2(X1,X5))|~select_4(X1,X5)|~eq(esk4_2(X1,X5),X6)|~eq(esk5_2(X1,X5),X4)|~eq(X6,X3)|~eq(X5,X2))).
+#####
+#cnf(i_0_2172, plain, (tab1(X1,X2,X3,X4,esk6_2(X5,X2))|~select_4(X5,X2)|~eq(esk4_2(X5,X2),X3)|~eq(esk5_2(X5,X2),X4)|~eq(X5,X1))).
+#####
+#cnf(i_0_4876, plain, (tab1(X1,X2,X3,X4,esk6_2(X5,X2))|~select_4(X5,X2)|~eq(esk4_2(X5,X2),X3)|~eq(esk5_2(X5,X2),X4)|~eq(X6,X1)|~eq(X5,X6))).
+##
+#cnf(i_0_4870, plain, (tab1(X1,X2,X3,X4,esk6_2(X5,X2))|~select_4(X5,X2)|~eq(esk4_2(X5,X2),X3)|~eq(esk5_2(X5,X2),X6)|~eq(X6,X4)|~eq(X5,X1))).
+####
+#cnf(i_0_4872, plain, (tab1(X1,X2,X3,X4,esk6_2(X5,X2))|~select_4(X5,X2)|~eq(esk4_2(X5,X2),X6)|~eq(esk5_2(X5,X2),X4)|~eq(X6,X3)|~eq(X5,X1))).
+##########
+#cnf(i_0_2647, plain, (from_2(X1,X2,esk4_2(X1,X3),X4,X5)|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X4)|~eq(esk6_2(X1,X3),X5)|~eq(X3,X2))).
+###
+#cnf(i_0_4889, plain, (from_2(X1,X2,X3,X4,X5)|~select_4(X1,X6)|~eq(esk4_2(X1,X6),X3)|~eq(esk5_2(X1,X6),X4)|~eq(esk6_2(X1,X6),X5)|~eq(X6,X2))).
+####
+#cnf(i_0_4892, plain, (from_2(X1,X2,esk4_2(X1,X3),X4,X5)|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X4)|~eq(esk6_2(X1,X3),X5)|~eq(X6,X2)|~eq(X3,X6))).
+#####
+#cnf(i_0_4883, plain, (from_2(X1,X2,esk4_2(X1,X3),X4,X5)|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X4)|~eq(esk6_2(X1,X3),X6)|~eq(X6,X5)|~eq(X3,X2))).
+####
+#cnf(i_0_4886, plain, (from_2(X1,X2,esk4_2(X1,X3),X4,X5)|~select_4(X1,X3)|~eq(esk5_2(X1,X3),X6)|~eq(esk6_2(X1,X3),X5)|~eq(X6,X4)|~eq(X3,X2))).
+####
+#cnf(i_0_1024, plain, (lte(X7,X6)|lte(X2,X7)|lte(X6,X5)|lte(X5,X3)|lte(X4,X1)|lte(X3,X4)|lte(X1,X2))).
+##
+#cnf(i_0_4966, negated_conjecture, (lte(X7,X8)|lte(X8,X1)|lte(X6,X7)|lte(X5,X6)|lte(X3,X4)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(esk7_0,X3)|~eq(X3,X2)|~where_3(X1,X2))).
+##
+#cnf(i_0_4967, negated_conjecture, (lte(X7,X8)|lte(X8,X1)|lte(X6,X7)|lte(X5,X6)|lte(X3,X4)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(X1,esk8_0)|~eq(X3,X2)|~where_3(X1,X2))).
+##
+#cnf(i_0_4971, negated_conjecture, (lte(X7,X8)|lte(X8,X3)|lte(X6,X7)|lte(X5,X6)|lte(X2,X4)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(esk7_0,X2)|~eq(X3,X1)|~where_3(X1,X2))).
+####################################################
+#cnf(i_0_2650, plain, (from_2(X1,X2,esk4_2(X3,X2),X4,X5)|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X4)|~eq(esk6_2(X3,X2),X5)|~eq(X3,X1))).
+####
+#cnf(i_0_5305, plain, (from_2(X1,X2,X3,X4,X5)|~select_4(X6,X2)|~eq(esk4_2(X6,X2),X3)|~eq(esk5_2(X6,X2),X4)|~eq(esk6_2(X6,X2),X5)|~eq(X6,X1))).
+###
+#cnf(i_0_5311, plain, (from_2(X1,X2,esk4_2(X3,X2),X4,X5)|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X4)|~eq(esk6_2(X3,X2),X5)|~eq(X6,X1)|~eq(X3,X6))).
+#####
+#cnf(i_0_5299, plain, (from_2(X1,X2,esk4_2(X3,X2),X4,X5)|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X4)|~eq(esk6_2(X3,X2),X6)|~eq(X6,X5)|~eq(X3,X1))).
+####
+#cnf(i_0_5302, plain, (from_2(X1,X2,esk4_2(X3,X2),X4,X5)|~select_4(X3,X2)|~eq(esk5_2(X3,X2),X6)|~eq(esk6_2(X3,X2),X5)|~eq(X6,X4)|~eq(X3,X1))).
+###########################
+#cnf(i_0_2942, plain, (from_2(X1,X2,X3,esk5_2(X1,X4),X5)|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X3)|~eq(esk6_2(X1,X4),X5)|~eq(X4,X2))).
+####
+#cnf(i_0_4968, plain, (lte(X7,X8)|lte(X8,X3)|lte(X6,X7)|lte(X5,X6)|lte(X2,X4)|lte(X4,X5)|lte(X1,X2)|~lte(X1,X3))).
+###
+#cnf(i_0_5329, plain, (from_2(X1,X2,X3,esk5_2(X1,X4),X5)|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X3)|~eq(esk6_2(X1,X4),X5)|~eq(X6,X2)|~eq(X4,X6))).
+#####
+#cnf(i_0_5320, plain, (from_2(X1,X2,X3,esk5_2(X1,X4),X5)|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X3)|~eq(esk6_2(X1,X4),X6)|~eq(X6,X5)|~eq(X4,X2))).
+####
+#cnf(i_0_5326, plain, (from_2(X1,X2,X3,esk5_2(X1,X4),X5)|~select_4(X1,X4)|~eq(esk4_2(X1,X4),X6)|~eq(esk6_2(X1,X4),X5)|~eq(X6,X3)|~eq(X4,X2))).
+########
+#cnf(i_0_2945, plain, (from_2(X1,X2,X3,esk5_2(X4,X2),X5)|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X3)|~eq(esk6_2(X4,X2),X5)|~eq(X4,X1))).
+######
+#cnf(i_0_5413, plain, (from_2(X1,X2,X3,esk5_2(X4,X2),X5)|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X3)|~eq(esk6_2(X4,X2),X5)|~eq(X6,X1)|~eq(X4,X6))).
+#####
+#cnf(i_0_5401, plain, (from_2(X1,X2,X3,esk5_2(X4,X2),X5)|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X3)|~eq(esk6_2(X4,X2),X6)|~eq(X6,X5)|~eq(X4,X1))).
+####
+#cnf(i_0_5407, plain, (from_2(X1,X2,X3,esk5_2(X4,X2),X5)|~select_4(X4,X2)|~eq(esk4_2(X4,X2),X6)|~eq(esk6_2(X4,X2),X5)|~eq(X6,X3)|~eq(X4,X1))).
+############
+#cnf(i_0_3171, plain, (from_2(X1,X2,X3,X4,esk6_2(X1,X5))|~select_4(X1,X5)|~eq(esk4_2(X1,X5),X3)|~eq(esk5_2(X1,X5),X4)|~eq(X5,X2))).
+#######
+#cnf(i_0_5430, plain, (from_2(X1,X2,X3,X4,esk6_2(X1,X5))|~select_4(X1,X5)|~eq(esk4_2(X1,X5),X3)|~eq(esk5_2(X1,X5),X4)|~eq(X6,X2)|~eq(X5,X6))).
+####
+#cnf(i_0_5424, plain, (from_2(X1,X2,X3,X4,esk6_2(X1,X5))|~select_4(X1,X5)|~eq(esk4_2(X1,X5),X3)|~eq(esk5_2(X1,X5),X6)|~eq(X6,X4)|~eq(X5,X2))).
+#####
+#cnf(i_0_5427, plain, (from_2(X1,X2,X3,X4,esk6_2(X1,X5))|~select_4(X1,X5)|~eq(esk4_2(X1,X5),X6)|~eq(esk5_2(X1,X5),X4)|~eq(X6,X3)|~eq(X5,X2))).
+######
+#cnf(i_0_3174, plain, (from_2(X1,X2,X3,X4,esk6_2(X5,X2))|~select_4(X5,X2)|~eq(esk4_2(X5,X2),X3)|~eq(esk5_2(X5,X2),X4)|~eq(X5,X1))).
+#######
+#cnf(i_0_5453, plain, (from_2(X1,X2,X3,X4,esk6_2(X5,X2))|~select_4(X5,X2)|~eq(esk4_2(X5,X2),X3)|~eq(esk5_2(X5,X2),X4)|~eq(X6,X1)|~eq(X5,X6))).
+####
+#cnf(i_0_5444, plain, (from_2(X1,X2,X3,X4,esk6_2(X5,X2))|~select_4(X5,X2)|~eq(esk4_2(X5,X2),X3)|~eq(esk5_2(X5,X2),X6)|~eq(X6,X4)|~eq(X5,X1))).
+#####
+#cnf(i_0_5447, plain, (from_2(X1,X2,X3,X4,esk6_2(X5,X2))|~select_4(X5,X2)|~eq(esk4_2(X5,X2),X6)|~eq(esk5_2(X5,X2),X4)|~eq(X6,X3)|~eq(X5,X1))).
+##############
+#cnf(i_0_5352, plain, (lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X4)|lte(X4,X1)|lte(X2,X3)|lte(X1,X2)|~eq(X3,X8))).
+######
+#cnf(i_0_5353, plain, (lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X4)|lte(X4,X1)|lte(X2,X3)|lte(X1,X2)|~eq(X8,X3))).
+#
+#cnf(i_0_3193, plain, (from_2(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),X5)|~select_1(X3,X4)|~eq(esk3_2(X3,X4),X6)|~eq(X6,X5)|~eq(X3,X1)|~eq(X4,X2))).
+#
+#cnf(i_0_3194, plain, (tab1(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),X5)|~select_1(X3,X4)|~eq(esk3_2(X3,X4),X6)|~eq(X6,X5)|~eq(X3,X1)|~eq(X4,X2))).
+#
+#cnf(i_0_3195, plain, (from_5(X1,X2,esk1_2(X3,X4),esk2_2(X3,X4),X5)|~select_1(X3,X4)|~eq(esk3_2(X3,X4),X6)|~eq(X6,X5)|~eq(X3,X1)|~eq(X4,X2))).
+##################
+#cnf(i_0_1202, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X3)|lte(X4,X1)|lte(X3,X4)|lte(X1,X2))).
+####################################################################################################
+#cnf(i_0_1687, plain, (tab1(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),esk6_2(X3,X4))|~select_4(X3,X4)|~eq(X3,X1)|~eq(X4,X2))).
+##
+#cnf(i_0_5916, plain, (tab1(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),esk6_2(X3,X4))|~select_4(X3,X4)|~eq(X5,X2)|~eq(X3,X1)|~eq(X4,X5))).
+##
+#cnf(i_0_5918, plain, (tab1(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),esk6_2(X3,X4))|~select_4(X3,X4)|~eq(X5,X1)|~eq(X3,X5)|~eq(X4,X2))).
+##########################################################################
+#cnf(i_0_3574, plain, (from_2(X1,X2,esk1_2(X3,X4),X5,esk3_2(X3,X4))|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X6)|~eq(X6,X5)|~eq(X3,X1)|~eq(X4,X2))).
+#
+#cnf(i_0_3575, plain, (tab1(X1,X2,esk1_2(X3,X4),X5,esk3_2(X3,X4))|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X6)|~eq(X6,X5)|~eq(X3,X1)|~eq(X4,X2))).
+#
+#cnf(i_0_3576, plain, (from_5(X1,X2,esk1_2(X3,X4),X5,esk3_2(X3,X4))|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X6)|~eq(X6,X5)|~eq(X3,X1)|~eq(X4,X2))).
+#########################################
+#cnf(i_0_2206, plain, (from_2(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),esk6_2(X3,X4))|~select_4(X3,X4)|~eq(X3,X1)|~eq(X4,X2))).
+#
+#cnf(i_0_5925, plain, (select_1(X1,X2)|~select_4(X3,X4)|~eq(X3,X1)|~eq(X4,X2)|~where_3(X1,X2))).
+#
+#cnf(i_0_5942, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X2)|~where_3(X1,X2))).
+##
+#cnf(i_0_5946, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X3)|~eq(X3,X1)|~eq(X4,X2)|~eq(X3,X4)|~where_3(X1,X2))).
+####
+#cnf(i_0_5947, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X4)|~eq(esk8_0,X4)|~eq(X3,X1)|~eq(X4,X2)|~eq(X4,X3)|~where_3(X1,X2))).
+###
+#cnf(i_0_5944, negated_conjecture, (select_1(X1,X2)|~lte(X3,X4)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(X3,esk8_0)|~eq(X3,X1)|~eq(X4,X2)|~where_3(X1,X2))).
+########
+#cnf(i_0_5971, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(X3,esk8_0)|~eq(X3,X1)|~eq(X4,X2)|~eq(X4,X3)|~where_3(X1,X2))).
+####
+#cnf(i_0_5945, negated_conjecture, (select_1(X1,X2)|~lte(X3,X4)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(esk7_0,X4)|~eq(X3,X1)|~eq(X4,X2)|~where_3(X1,X2))).
+########
+#cnf(i_0_5972, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(X3,esk8_0)|~eq(X3,X1)|~eq(X4,X2)|~where_3(X1,X2))).
+####
+#cnf(i_0_6042, negated_conjecture, (select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(X3,X1)|~eq(X4,X2)|~eq(X3,X4)|~where_3(X1,X2))).
+#
+#cnf(i_0_6092, negated_conjecture, (select_1(X1,X2)|~eq(esk8_0,X3)|~eq(esk7_0,X1)|~eq(esk7_0,X3)|~eq(X3,X2)|~where_3(X1,X2))).
+###
+#cnf(i_0_6040, negated_conjecture, (lte(X4,X3)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(esk7_0,X4)|~eq(X3,X1)|~eq(X4,X2)|~where_3(X1,X2))).
+#####
+#cnf(i_0_5936, plain, (from_2(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),esk6_2(X3,X4))|~select_4(X3,X4)|~eq(X5,X2)|~eq(X3,X1)|~eq(X4,X5))).
+#
+#cnf(i_0_6043, negated_conjecture, (lte(X5,X3)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(esk7_0,X4)|~eq(X3,X1)|~eq(X4,X2)|~where_3(X1,X2))).
+##########
+#cnf(i_0_5939, plain, (from_2(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),esk6_2(X3,X4))|~select_4(X3,X4)|~eq(X5,X1)|~eq(X3,X5)|~eq(X4,X2))).
+#
+#cnf(i_0_6045, negated_conjecture, (lte(X6,X5)|lte(X4,X6)|lte(X5,X3)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(esk7_0,X4)|~eq(X3,X1)|~eq(X4,X2)|~where_3(X1,X2))).
+#############
+#cnf(i_0_6046, negated_conjecture, (lte(X7,X5)|lte(X6,X7)|lte(X4,X6)|lte(X5,X3)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(esk7_0,X4)|~eq(X3,X1)|~eq(X4,X2)|~where_3(X1,X2))).
+#######################
+#cnf(i_0_6047, negated_conjecture, (lte(X8,X5)|lte(X7,X8)|lte(X4,X7)|lte(X6,X3)|lte(X5,X6)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(esk7_0,X4)|~eq(X3,X1)|~eq(X4,X2)|~where_3(X1,X2))).
+###############################
+#cnf(i_0_6048, negated_conjecture, (lte(X9,X5)|lte(X7,X8)|lte(X8,X9)|lte(X6,X7)|lte(X4,X6)|lte(X5,X3)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(esk7_0,X4)|~eq(X3,X1)|~eq(X4,X2)|~where_3(X1,X2))).
+#############################################
+#cnf(i_0_4814, plain, (from_2(X1,X2,X3,esk2_2(X4,X5),esk3_2(X4,X5))|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X6)|~eq(X6,X3)|~eq(X4,X1)|~eq(X5,X2))).
+#
+#cnf(i_0_4815, plain, (tab1(X1,X2,X3,esk2_2(X4,X5),esk3_2(X4,X5))|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X6)|~eq(X6,X3)|~eq(X4,X1)|~eq(X5,X2))).
+########
+#cnf(i_0_4816, plain, (from_5(X1,X2,X3,esk2_2(X4,X5),esk3_2(X4,X5))|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X6)|~eq(X6,X3)|~eq(X4,X1)|~eq(X5,X2))).
+###########
+#cnf(i_0_2708, plain, (from_2(X1,X2,esk1_2(X3,X4),X5,X6)|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(esk3_2(X3,X4),X6)|~eq(X3,X1)|~eq(X4,X2))).
+###
+#cnf(i_0_6113, plain, (from_2(X1,X2,X3,X4,X5)|~select_1(X6,X7)|~eq(esk1_2(X6,X7),X3)|~eq(esk2_2(X6,X7),X4)|~eq(esk3_2(X6,X7),X5)|~eq(X6,X1)|~eq(X7,X2))).
+########
+#cnf(i_0_6114, plain, (tab1(X1,X2,X3,X4,X5)|~select_1(X6,X7)|~eq(esk1_2(X6,X7),X3)|~eq(esk2_2(X6,X7),X4)|~eq(esk3_2(X6,X7),X5)|~eq(X6,X1)|~eq(X7,X2))).
+#
+#cnf(i_0_6115, plain, (from_5(X1,X2,X3,X4,X5)|~select_1(X6,X7)|~eq(esk1_2(X6,X7),X3)|~eq(esk2_2(X6,X7),X4)|~eq(esk3_2(X6,X7),X5)|~eq(X6,X1)|~eq(X7,X2))).
+#
+#cnf(i_0_6116, plain, (from_2(X1,X2,esk1_2(X3,X4),X5,X6)|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(esk3_2(X3,X4),X6)|~eq(X7,X2)|~eq(X3,X1)|~eq(X4,X7))).
+#
+#cnf(i_0_6117, plain, (tab1(X1,X2,esk1_2(X3,X4),X5,X6)|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(esk3_2(X3,X4),X6)|~eq(X7,X2)|~eq(X3,X1)|~eq(X4,X7))).
+########
+#cnf(i_0_6118, plain, (from_5(X1,X2,esk1_2(X3,X4),X5,X6)|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(esk3_2(X3,X4),X6)|~eq(X7,X2)|~eq(X3,X1)|~eq(X4,X7))).
+#
+#cnf(i_0_6119, plain, (from_2(X1,X2,esk1_2(X3,X4),X5,X6)|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(esk3_2(X3,X4),X6)|~eq(X7,X1)|~eq(X3,X7)|~eq(X4,X2))).
+#
+#cnf(i_0_6120, plain, (tab1(X1,X2,esk1_2(X3,X4),X5,X6)|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(esk3_2(X3,X4),X6)|~eq(X7,X1)|~eq(X3,X7)|~eq(X4,X2))).
+#
+#cnf(i_0_6121, plain, (from_5(X1,X2,esk1_2(X3,X4),X5,X6)|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(esk3_2(X3,X4),X6)|~eq(X7,X1)|~eq(X3,X7)|~eq(X4,X2))).
+########
+#cnf(i_0_6107, plain, (from_2(X1,X2,esk1_2(X3,X4),X5,X6)|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(esk3_2(X3,X4),X7)|~eq(X7,X6)|~eq(X3,X1)|~eq(X4,X2))).
+#
+#cnf(i_0_6108, plain, (tab1(X1,X2,esk1_2(X3,X4),X5,X6)|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(esk3_2(X3,X4),X7)|~eq(X7,X6)|~eq(X3,X1)|~eq(X4,X2))).
+#
+#cnf(i_0_6109, plain, (from_5(X1,X2,esk1_2(X3,X4),X5,X6)|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(esk3_2(X3,X4),X7)|~eq(X7,X6)|~eq(X3,X1)|~eq(X4,X2))).
+#
+#cnf(i_0_6110, plain, (from_2(X1,X2,esk1_2(X3,X4),X5,X6)|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X7)|~eq(esk3_2(X3,X4),X6)|~eq(X7,X5)|~eq(X3,X1)|~eq(X4,X2))).
+########
+#cnf(i_0_6111, plain, (tab1(X1,X2,esk1_2(X3,X4),X5,X6)|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X7)|~eq(esk3_2(X3,X4),X6)|~eq(X7,X5)|~eq(X3,X1)|~eq(X4,X2))).
+#
+#cnf(i_0_6112, plain, (from_5(X1,X2,esk1_2(X3,X4),X5,X6)|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X7)|~eq(esk3_2(X3,X4),X6)|~eq(X7,X5)|~eq(X3,X1)|~eq(X4,X2))).
+#
+#cnf(i_0_2709, plain, (tab1(X1,X2,esk1_2(X3,X4),X5,X6)|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(esk3_2(X3,X4),X6)|~eq(X3,X1)|~eq(X4,X2))).
+#################################
+#cnf(i_0_2710, plain, (from_5(X1,X2,esk1_2(X3,X4),X5,X6)|~select_1(X3,X4)|~eq(esk2_2(X3,X4),X5)|~eq(esk3_2(X3,X4),X6)|~eq(X3,X1)|~eq(X4,X2))).
+############################################
+#cnf(i_0_3106, plain, (from_2(X1,X2,X3,esk2_2(X4,X5),X6)|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(esk3_2(X4,X5),X6)|~eq(X4,X1)|~eq(X5,X2))).
+#########
+#cnf(i_0_6167, plain, (from_2(X1,X2,X3,esk2_2(X4,X5),X6)|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(esk3_2(X4,X5),X6)|~eq(X7,X2)|~eq(X4,X1)|~eq(X5,X7))).
+#
+#cnf(i_0_6168, plain, (tab1(X1,X2,X3,esk2_2(X4,X5),X6)|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(esk3_2(X4,X5),X6)|~eq(X7,X2)|~eq(X4,X1)|~eq(X5,X7))).
+#
+#cnf(i_0_6169, plain, (from_5(X1,X2,X3,esk2_2(X4,X5),X6)|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(esk3_2(X4,X5),X6)|~eq(X7,X2)|~eq(X4,X1)|~eq(X5,X7))).
+#
+#cnf(i_0_6170, plain, (from_2(X1,X2,X3,esk2_2(X4,X5),X6)|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(esk3_2(X4,X5),X6)|~eq(X7,X1)|~eq(X4,X7)|~eq(X5,X2))).
+##
+#cnf(i_0_6171, plain, (tab1(X1,X2,X3,esk2_2(X4,X5),X6)|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(esk3_2(X4,X5),X6)|~eq(X7,X1)|~eq(X4,X7)|~eq(X5,X2))).
+#
+#cnf(i_0_6172, plain, (from_5(X1,X2,X3,esk2_2(X4,X5),X6)|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(esk3_2(X4,X5),X6)|~eq(X7,X1)|~eq(X4,X7)|~eq(X5,X2))).
+#####
+#cnf(i_0_6158, plain, (from_2(X1,X2,X3,esk2_2(X4,X5),X6)|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(esk3_2(X4,X5),X7)|~eq(X7,X6)|~eq(X4,X1)|~eq(X5,X2))).
+#
+#cnf(i_0_6159, plain, (tab1(X1,X2,X3,esk2_2(X4,X5),X6)|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(esk3_2(X4,X5),X7)|~eq(X7,X6)|~eq(X4,X1)|~eq(X5,X2))).
+#
+#cnf(i_0_6160, plain, (from_5(X1,X2,X3,esk2_2(X4,X5),X6)|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(esk3_2(X4,X5),X7)|~eq(X7,X6)|~eq(X4,X1)|~eq(X5,X2))).
+#
+#cnf(i_0_6164, plain, (from_2(X1,X2,X3,esk2_2(X4,X5),X6)|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X7)|~eq(esk3_2(X4,X5),X6)|~eq(X7,X3)|~eq(X4,X1)|~eq(X5,X2))).
+########
+#cnf(i_0_6165, plain, (tab1(X1,X2,X3,esk2_2(X4,X5),X6)|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X7)|~eq(esk3_2(X4,X5),X6)|~eq(X7,X3)|~eq(X4,X1)|~eq(X5,X2))).
+#
+#cnf(i_0_6166, plain, (from_5(X1,X2,X3,esk2_2(X4,X5),X6)|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X7)|~eq(esk3_2(X4,X5),X6)|~eq(X7,X3)|~eq(X4,X1)|~eq(X5,X2))).
+#
+#cnf(i_0_3107, plain, (tab1(X1,X2,X3,esk2_2(X4,X5),X6)|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(esk3_2(X4,X5),X6)|~eq(X4,X1)|~eq(X5,X2))).
+######################
+#cnf(i_0_3108, plain, (from_5(X1,X2,X3,esk2_2(X4,X5),X6)|~select_1(X4,X5)|~eq(esk1_2(X4,X5),X3)|~eq(esk3_2(X4,X5),X6)|~eq(X4,X1)|~eq(X5,X2))).
+##
+#cnf(i_0_5876, negated_conjecture, (lte(esk7_0,X2)|lte(X7,X1)|lte(X5,X6)|lte(X6,X7)|lte(X4,X5)|lte(X2,X3)|lte(X3,X4)|eq(esk8_0,X1)|~lte(esk8_0,X1))).
+########################
+#cnf(i_0_1801, plain, (from_5(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),X5)|~select_4(X3,X4)|~eq(esk6_2(X3,X4),X5)|~eq(X3,X1)|~eq(X4,X2))).
+##
+#cnf(i_0_6270, plain, (from_5(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),X5)|~select_4(X3,X4)|~eq(esk6_2(X3,X4),X5)|~eq(X6,X2)|~eq(X3,X1)|~eq(X4,X6))).
+###
+#cnf(i_0_6271, plain, (from_5(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),X5)|~select_4(X3,X4)|~eq(esk6_2(X3,X4),X5)|~eq(X6,X1)|~eq(X3,X6)|~eq(X4,X2))).
+#
+#cnf(i_0_6267, plain, (from_5(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),X5)|~select_4(X3,X4)|~eq(esk6_2(X3,X4),X6)|~eq(X6,X5)|~eq(X3,X1)|~eq(X4,X2))).
+################
+#cnf(i_0_2079, plain, (from_5(X1,X2,esk4_2(X3,X4),X5,esk6_2(X3,X4))|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(X3,X1)|~eq(X4,X2))).
+##
+#cnf(i_0_6280, plain, (from_5(X1,X2,esk4_2(X3,X4),X5,esk6_2(X3,X4))|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(X6,X2)|~eq(X3,X1)|~eq(X4,X6))).
+###
+#cnf(i_0_6281, plain, (from_5(X1,X2,esk4_2(X3,X4),X5,esk6_2(X3,X4))|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(X6,X1)|~eq(X3,X6)|~eq(X4,X2))).
+#
+#cnf(i_0_6278, plain, (from_5(X1,X2,esk4_2(X3,X4),X5,esk6_2(X3,X4))|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X6)|~eq(X6,X5)|~eq(X3,X1)|~eq(X4,X2))).
+#################
+#cnf(i_0_2180, plain, (from_5(X1,X2,X3,esk5_2(X4,X5),esk6_2(X4,X5))|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(X4,X1)|~eq(X5,X2))).
+####
+#cnf(i_0_6290, plain, (from_5(X1,X2,X3,esk5_2(X4,X5),esk6_2(X4,X5))|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(X6,X2)|~eq(X4,X1)|~eq(X5,X6))).
+#
+#cnf(i_0_6291, plain, (from_5(X1,X2,X3,esk5_2(X4,X5),esk6_2(X4,X5))|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(X6,X1)|~eq(X4,X6)|~eq(X5,X2))).
+#
+#cnf(i_0_6289, plain, (from_5(X1,X2,X3,esk5_2(X4,X5),esk6_2(X4,X5))|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X6)|~eq(X6,X3)|~eq(X4,X1)|~eq(X5,X2))).
+###########
+#cnf(i_0_3365, plain, (from_2(X1,X2,X3,X4,esk3_2(X5,X6))|~select_1(X5,X6)|~eq(esk1_2(X5,X6),X3)|~eq(esk2_2(X5,X6),X4)|~eq(X5,X1)|~eq(X6,X2))).
+#########
+#cnf(i_0_6306, plain, (from_2(X1,X2,X3,X4,esk3_2(X5,X6))|~select_1(X5,X6)|~eq(esk1_2(X5,X6),X3)|~eq(esk2_2(X5,X6),X4)|~eq(X7,X2)|~eq(X5,X1)|~eq(X6,X7))).
+#
+#cnf(i_0_6307, plain, (tab1(X1,X2,X3,X4,esk3_2(X5,X6))|~select_1(X5,X6)|~eq(esk1_2(X5,X6),X3)|~eq(esk2_2(X5,X6),X4)|~eq(X7,X2)|~eq(X5,X1)|~eq(X6,X7))).
+#
+#cnf(i_0_6308, plain, (from_5(X1,X2,X3,X4,esk3_2(X5,X6))|~select_1(X5,X6)|~eq(esk1_2(X5,X6),X3)|~eq(esk2_2(X5,X6),X4)|~eq(X7,X2)|~eq(X5,X1)|~eq(X6,X7))).
+#
+#cnf(i_0_6309, plain, (from_2(X1,X2,X3,X4,esk3_2(X5,X6))|~select_1(X5,X6)|~eq(esk1_2(X5,X6),X3)|~eq(esk2_2(X5,X6),X4)|~eq(X7,X1)|~eq(X5,X7)|~eq(X6,X2))).
+##
+#cnf(i_0_6310, plain, (tab1(X1,X2,X3,X4,esk3_2(X5,X6))|~select_1(X5,X6)|~eq(esk1_2(X5,X6),X3)|~eq(esk2_2(X5,X6),X4)|~eq(X7,X1)|~eq(X5,X7)|~eq(X6,X2))).
+#
+#cnf(i_0_6311, plain, (from_5(X1,X2,X3,X4,esk3_2(X5,X6))|~select_1(X5,X6)|~eq(esk1_2(X5,X6),X3)|~eq(esk2_2(X5,X6),X4)|~eq(X7,X1)|~eq(X5,X7)|~eq(X6,X2))).
+#####
+#cnf(i_0_6300, plain, (from_2(X1,X2,X3,X4,esk3_2(X5,X6))|~select_1(X5,X6)|~eq(esk1_2(X5,X6),X3)|~eq(esk2_2(X5,X6),X7)|~eq(X7,X4)|~eq(X5,X1)|~eq(X6,X2))).
+#
+#cnf(i_0_6301, plain, (tab1(X1,X2,X3,X4,esk3_2(X5,X6))|~select_1(X5,X6)|~eq(esk1_2(X5,X6),X3)|~eq(esk2_2(X5,X6),X7)|~eq(X7,X4)|~eq(X5,X1)|~eq(X6,X2))).
+#
+#cnf(i_0_6302, plain, (from_5(X1,X2,X3,X4,esk3_2(X5,X6))|~select_1(X5,X6)|~eq(esk1_2(X5,X6),X3)|~eq(esk2_2(X5,X6),X7)|~eq(X7,X4)|~eq(X5,X1)|~eq(X6,X2))).
+#
+#cnf(i_0_6303, plain, (from_2(X1,X2,X3,X4,esk3_2(X5,X6))|~select_1(X5,X6)|~eq(esk1_2(X5,X6),X7)|~eq(esk2_2(X5,X6),X4)|~eq(X7,X3)|~eq(X5,X1)|~eq(X6,X2))).
+##
+#cnf(i_0_3285, plain, (tab1(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),X5)|~select_4(X3,X4)|~eq(esk6_2(X3,X4),X5)|~eq(X3,X1)|~eq(X4,X2))).
+##
+#cnf(i_0_6330, plain, (tab1(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),X5)|~select_4(X3,X4)|~eq(esk6_2(X3,X4),X5)|~eq(X6,X2)|~eq(X3,X1)|~eq(X4,X6))).
+####
+#cnf(i_0_6332, plain, (tab1(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),X5)|~select_4(X3,X4)|~eq(esk6_2(X3,X4),X5)|~eq(X6,X1)|~eq(X3,X6)|~eq(X4,X2))).
+##
+#cnf(i_0_6324, plain, (tab1(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),X5)|~select_4(X3,X4)|~eq(esk6_2(X3,X4),X6)|~eq(X6,X5)|~eq(X3,X1)|~eq(X4,X2))).
+#########
+#cnf(i_0_6304, plain, (tab1(X1,X2,X3,X4,esk3_2(X5,X6))|~select_1(X5,X6)|~eq(esk1_2(X5,X6),X7)|~eq(esk2_2(X5,X6),X4)|~eq(X7,X3)|~eq(X5,X1)|~eq(X6,X2))).
+#
+#cnf(i_0_6305, plain, (from_5(X1,X2,X3,X4,esk3_2(X5,X6))|~select_1(X5,X6)|~eq(esk1_2(X5,X6),X7)|~eq(esk2_2(X5,X6),X4)|~eq(X7,X3)|~eq(X5,X1)|~eq(X6,X2))).
+#
+#cnf(i_0_3366, plain, (tab1(X1,X2,X3,X4,esk3_2(X5,X6))|~select_1(X5,X6)|~eq(esk1_2(X5,X6),X3)|~eq(esk2_2(X5,X6),X4)|~eq(X5,X1)|~eq(X6,X2))).
+######################
+#cnf(i_0_3367, plain, (from_5(X1,X2,X3,X4,esk3_2(X5,X6))|~select_1(X5,X6)|~eq(esk1_2(X5,X6),X3)|~eq(esk2_2(X5,X6),X4)|~eq(X5,X1)|~eq(X6,X2))).
+######
+#cnf(i_0_3318, plain, (tab1(X1,X2,esk4_2(X3,X4),X5,esk6_2(X3,X4))|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(X3,X1)|~eq(X4,X2))).
+###
+#cnf(i_0_6366, plain, (tab1(X1,X2,esk4_2(X3,X4),X5,esk6_2(X3,X4))|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(X6,X2)|~eq(X3,X1)|~eq(X4,X6))).
+##
+#cnf(i_0_6368, plain, (tab1(X1,X2,esk4_2(X3,X4),X5,esk6_2(X3,X4))|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(X6,X1)|~eq(X3,X6)|~eq(X4,X2))).
+###
+#cnf(i_0_6362, plain, (tab1(X1,X2,esk4_2(X3,X4),X5,esk6_2(X3,X4))|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X6)|~eq(X6,X5)|~eq(X3,X1)|~eq(X4,X2))).
+#############
+#cnf(i_0_3347, plain, (tab1(X1,X2,X3,esk5_2(X4,X5),esk6_2(X4,X5))|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(X4,X1)|~eq(X5,X2))).
+####
+#cnf(i_0_6381, plain, (tab1(X1,X2,X3,esk5_2(X4,X5),esk6_2(X4,X5))|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(X6,X2)|~eq(X4,X1)|~eq(X5,X6))).
+##
+#cnf(i_0_6383, plain, (tab1(X1,X2,X3,esk5_2(X4,X5),esk6_2(X4,X5))|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(X6,X1)|~eq(X4,X6)|~eq(X5,X2))).
+###
+#cnf(i_0_6379, plain, (tab1(X1,X2,X3,esk5_2(X4,X5),esk6_2(X4,X5))|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X6)|~eq(X6,X3)|~eq(X4,X1)|~eq(X5,X2))).
+############
+#cnf(i_0_3446, plain, (from_2(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),X5)|~select_4(X3,X4)|~eq(esk6_2(X3,X4),X5)|~eq(X3,X1)|~eq(X4,X2))).
+#####
+#cnf(i_0_6399, plain, (from_2(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),X5)|~select_4(X3,X4)|~eq(esk6_2(X3,X4),X5)|~eq(X6,X2)|~eq(X3,X1)|~eq(X4,X6))).
+###
+#cnf(i_0_6402, plain, (from_2(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),X5)|~select_4(X3,X4)|~eq(esk6_2(X3,X4),X5)|~eq(X6,X1)|~eq(X3,X6)|~eq(X4,X2))).
+####
+#cnf(i_0_6390, plain, (from_2(X1,X2,esk4_2(X3,X4),esk5_2(X3,X4),X5)|~select_4(X3,X4)|~eq(esk6_2(X3,X4),X6)|~eq(X6,X5)|~eq(X3,X1)|~eq(X4,X2))).
+##############
+#cnf(i_0_5838, negated_conjecture, (lte(X3,esk8_0)|lte(X8,X3)|lte(X6,X7)|lte(X7,X8)|lte(X5,X6)|lte(X2,X4)|lte(X4,X5)|lte(X1,X2)|~lte(X1,esk7_0))).
+#####
+#cnf(i_0_6415, negated_conjecture, (lte(X1,esk8_0)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X3)|lte(X4,X2)|lte(X3,X4)|lte(X2,X1)|~eq(esk7_0,X8))).
+##
+#cnf(i_0_3484, plain, (from_2(X1,X2,esk4_2(X3,X4),X5,esk6_2(X3,X4))|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(X3,X1)|~eq(X4,X2))).
+####
+#cnf(i_0_6416, negated_conjecture, (lte(X1,esk8_0)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X3)|lte(X4,X2)|lte(X3,X4)|lte(X2,X1)|~eq(X8,esk7_0))).
+#
+#cnf(i_0_6477, plain, (from_2(X1,X2,esk4_2(X3,X4),X5,esk6_2(X3,X4))|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(X6,X2)|~eq(X3,X1)|~eq(X4,X6))).
+###
+#cnf(i_0_6480, plain, (from_2(X1,X2,esk4_2(X3,X4),X5,esk6_2(X3,X4))|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(X6,X1)|~eq(X3,X6)|~eq(X4,X2))).
+####
+#cnf(i_0_6471, plain, (from_2(X1,X2,esk4_2(X3,X4),X5,esk6_2(X3,X4))|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X6)|~eq(X6,X5)|~eq(X3,X1)|~eq(X4,X2))).
+###
+#cnf(i_0_5542, negated_conjecture, (lte(esk7_0,X4)|lte(X2,esk8_0)|lte(X7,X8)|lte(X8,X3)|lte(X6,X7)|lte(X4,X5)|lte(X5,X6)|lte(X1,X2)|~lte(X1,X3))).
+################
+#cnf(i_0_5593, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X8,X4)|lte(X2,X8)|lte(X7,X3)|lte(X5,X6)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+########
+#cnf(i_0_4261, plain, (from_5(X1,X2,esk4_2(X3,X4),X5,X6)|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(esk6_2(X3,X4),X6)|~eq(X3,X1)|~eq(X4,X2))).
+##
+#cnf(i_0_6629, plain, (from_5(X1,X2,X3,X4,X5)|~select_4(X6,X7)|~eq(esk4_2(X6,X7),X3)|~eq(esk5_2(X6,X7),X4)|~eq(esk6_2(X6,X7),X5)|~eq(X6,X1)|~eq(X7,X2))).
+#
+#cnf(i_0_5644, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X2,X4)|lte(X8,X3)|lte(X7,X8)|lte(X5,X6)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+####
+#cnf(i_0_6630, plain, (from_5(X1,X2,esk4_2(X3,X4),X5,X6)|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(esk6_2(X3,X4),X6)|~eq(X7,X2)|~eq(X3,X1)|~eq(X4,X7))).
+###
+#cnf(i_0_6631, plain, (from_5(X1,X2,esk4_2(X3,X4),X5,X6)|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(esk6_2(X3,X4),X6)|~eq(X7,X1)|~eq(X3,X7)|~eq(X4,X2))).
+#
+#cnf(i_0_6627, plain, (from_5(X1,X2,esk4_2(X3,X4),X5,X6)|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(esk6_2(X3,X4),X7)|~eq(X7,X6)|~eq(X3,X1)|~eq(X4,X2))).
+#
+#cnf(i_0_6628, plain, (from_5(X1,X2,esk4_2(X3,X4),X5,X6)|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X7)|~eq(esk6_2(X3,X4),X6)|~eq(X7,X5)|~eq(X3,X1)|~eq(X4,X2))).
+##
+#cnf(i_0_5695, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X8,X4)|lte(X2,X7)|lte(X7,X8)|lte(X5,X6)|lte(X6,X3)|lte(X1,X2)|~lte(X1,X3))).
+#######
+#cnf(i_0_4285, plain, (from_5(X1,X2,X3,esk5_2(X4,X5),X6)|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(esk6_2(X4,X5),X6)|~eq(X4,X1)|~eq(X5,X2))).
+###
+#cnf(i_0_6780, plain, (from_5(X1,X2,X3,esk5_2(X4,X5),X6)|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(esk6_2(X4,X5),X6)|~eq(X7,X2)|~eq(X4,X1)|~eq(X5,X7))).
+#
+#cnf(i_0_5746, negated_conjecture, (lte(esk7_0,X3)|lte(X4,esk8_0)|lte(X8,X4)|lte(X6,X7)|lte(X7,X8)|lte(X5,X6)|lte(X2,X5)|lte(X1,X2)|~lte(X1,X3))).
+#
+#cnf(i_0_6781, plain, (from_5(X1,X2,X3,esk5_2(X4,X5),X6)|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(esk6_2(X4,X5),X6)|~eq(X7,X1)|~eq(X4,X7)|~eq(X5,X2))).
+##
+#cnf(i_0_3534, plain, (from_2(X1,X2,X3,esk5_2(X4,X5),esk6_2(X4,X5))|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(X4,X1)|~eq(X5,X2))).
+####
+#cnf(i_0_6864, plain, (from_2(X1,X2,X3,esk5_2(X4,X5),esk6_2(X4,X5))|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(X6,X2)|~eq(X4,X1)|~eq(X5,X6))).
+###
+#cnf(i_0_6867, plain, (from_2(X1,X2,X3,esk5_2(X4,X5),esk6_2(X4,X5))|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(X6,X1)|~eq(X4,X6)|~eq(X5,X2))).
+####
+#cnf(i_0_6861, plain, (from_2(X1,X2,X3,esk5_2(X4,X5),esk6_2(X4,X5))|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X6)|~eq(X6,X3)|~eq(X4,X1)|~eq(X5,X2))).
+###
+#cnf(i_0_5797, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X8,X4)|lte(X6,X7)|lte(X7,X8)|lte(X2,X6)|lte(X5,X3)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_6777, plain, (from_5(X1,X2,X3,esk5_2(X4,X5),X6)|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(esk6_2(X4,X5),X7)|~eq(X7,X6)|~eq(X4,X1)|~eq(X5,X2))).
+#
+#cnf(i_0_6779, plain, (from_5(X1,X2,X3,esk5_2(X4,X5),X6)|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X7)|~eq(esk6_2(X4,X5),X6)|~eq(X7,X3)|~eq(X4,X1)|~eq(X5,X2))).
+########
+#cnf(i_0_5881, negated_conjecture, (lte(esk7_0,X3)|lte(X1,esk8_0)|lte(X8,X2)|lte(X6,X7)|lte(X7,X8)|lte(X5,X6)|lte(X3,X4)|lte(X4,X5)|~lte(X1,X2))).
+#
+#cnf(i_0_4451, plain, (from_5(X1,X2,X3,X4,esk6_2(X5,X6))|~select_4(X5,X6)|~eq(esk4_2(X5,X6),X3)|~eq(esk5_2(X5,X6),X4)|~eq(X5,X1)|~eq(X6,X2))).
+###
+#cnf(i_0_7018, plain, (from_5(X1,X2,X3,X4,esk6_2(X5,X6))|~select_4(X5,X6)|~eq(esk4_2(X5,X6),X3)|~eq(esk5_2(X5,X6),X4)|~eq(X7,X2)|~eq(X5,X1)|~eq(X6,X7))).
+####
+#cnf(i_0_7019, plain, (from_5(X1,X2,X3,X4,esk6_2(X5,X6))|~select_4(X5,X6)|~eq(esk4_2(X5,X6),X3)|~eq(esk5_2(X5,X6),X4)|~eq(X7,X1)|~eq(X5,X7)|~eq(X6,X2))).
+###
+#cnf(i_0_6506, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X8,X2)|lte(X7,X6)|lte(X1,X7)|lte(X6,X3)|lte(X4,X5)|lte(X3,X4)|~eq(X5,X8))).
+#
+#cnf(i_0_7016, plain, (from_5(X1,X2,X3,X4,esk6_2(X5,X6))|~select_4(X5,X6)|~eq(esk4_2(X5,X6),X3)|~eq(esk5_2(X5,X6),X7)|~eq(X7,X4)|~eq(X5,X1)|~eq(X6,X2))).
+#
+#cnf(i_0_7017, plain, (from_5(X1,X2,X3,X4,esk6_2(X5,X6))|~select_4(X5,X6)|~eq(esk4_2(X5,X6),X7)|~eq(esk5_2(X5,X6),X4)|~eq(X7,X3)|~eq(X5,X1)|~eq(X6,X2))).
+##
+#cnf(i_0_4751, plain, (tab1(X1,X2,esk4_2(X3,X4),X5,X6)|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(esk6_2(X3,X4),X6)|~eq(X3,X1)|~eq(X4,X2))).
+##
+#cnf(i_0_7031, plain, (tab1(X1,X2,X3,X4,X5)|~select_4(X6,X7)|~eq(esk4_2(X6,X7),X3)|~eq(esk5_2(X6,X7),X4)|~eq(esk6_2(X6,X7),X5)|~eq(X6,X1)|~eq(X7,X2))).
+##
+#cnf(i_0_7033, plain, (tab1(X1,X2,esk4_2(X3,X4),X5,X6)|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(esk6_2(X3,X4),X6)|~eq(X7,X2)|~eq(X3,X1)|~eq(X4,X7))).
+###
+#cnf(i_0_6507, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X8,X2)|lte(X7,X6)|lte(X1,X7)|lte(X6,X3)|lte(X4,X5)|lte(X3,X4)|~eq(X8,X5))).
+#
+#cnf(i_0_7035, plain, (tab1(X1,X2,esk4_2(X3,X4),X5,X6)|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(esk6_2(X3,X4),X6)|~eq(X7,X1)|~eq(X3,X7)|~eq(X4,X2))).
+##
+#cnf(i_0_7027, plain, (tab1(X1,X2,esk4_2(X3,X4),X5,X6)|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(esk6_2(X3,X4),X7)|~eq(X7,X6)|~eq(X3,X1)|~eq(X4,X2))).
+##
+#cnf(i_0_6575, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X8,X4)|lte(X7,X5)|lte(X1,X7)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X6,X8))).
+######
+#cnf(i_0_6576, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X8,X4)|lte(X7,X5)|lte(X1,X7)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X8,X6))).
+#
+#cnf(i_0_7029, plain, (tab1(X1,X2,esk4_2(X3,X4),X5,X6)|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X7)|~eq(esk6_2(X3,X4),X6)|~eq(X7,X5)|~eq(X3,X1)|~eq(X4,X2))).
+####
+#cnf(i_0_6652, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X8,X3)|lte(X7,X6)|lte(X1,X7)|lte(X6,X4)|lte(X4,X5)|lte(X3,X2)|~eq(X5,X8))).
+######
+#cnf(i_0_6653, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X8,X3)|lte(X7,X6)|lte(X1,X7)|lte(X6,X4)|lte(X4,X5)|lte(X3,X2)|~eq(X8,X5))).
+##
+#cnf(i_0_4789, plain, (tab1(X1,X2,X3,esk5_2(X4,X5),X6)|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(esk6_2(X4,X5),X6)|~eq(X4,X1)|~eq(X5,X2))).
+###
+#cnf(i_0_6725, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X8,X4)|lte(X6,X7)|lte(X1,X6)|lte(X5,X3)|lte(X4,X5)|lte(X3,X2)|~eq(X7,X8))).
+##
+#cnf(i_0_7055, plain, (tab1(X1,X2,X3,esk5_2(X4,X5),X6)|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(esk6_2(X4,X5),X6)|~eq(X7,X2)|~eq(X4,X1)|~eq(X5,X7))).
+##
+#cnf(i_0_7057, plain, (tab1(X1,X2,X3,esk5_2(X4,X5),X6)|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(esk6_2(X4,X5),X6)|~eq(X7,X1)|~eq(X4,X7)|~eq(X5,X2))).
+##
+#cnf(i_0_6726, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X8,X4)|lte(X6,X7)|lte(X1,X6)|lte(X5,X3)|lte(X4,X5)|lte(X3,X2)|~eq(X8,X7))).
+##
+#cnf(i_0_7049, plain, (tab1(X1,X2,X3,esk5_2(X4,X5),X6)|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(esk6_2(X4,X5),X7)|~eq(X7,X6)|~eq(X4,X1)|~eq(X5,X2))).
+##
+#cnf(i_0_7053, plain, (tab1(X1,X2,X3,esk5_2(X4,X5),X6)|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X7)|~eq(esk6_2(X4,X5),X6)|~eq(X7,X3)|~eq(X4,X1)|~eq(X5,X2))).
+#
+#cnf(i_0_6802, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X8,X7)|lte(X7,X6)|lte(X6,X4)|lte(X5,X3)|lte(X4,X5)|lte(X3,X2)|~eq(X1,X8))).
+######
+#cnf(i_0_6803, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X8,X7)|lte(X7,X6)|lte(X6,X4)|lte(X5,X3)|lte(X4,X5)|lte(X3,X2)|~eq(X8,X1))).
+#####
+#cnf(i_0_6892, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X8,X6)|lte(X1,X7)|lte(X6,X4)|lte(X5,X3)|lte(X4,X5)|lte(X3,X2)|~eq(X7,X8))).
+######
+#cnf(i_0_6893, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X8,X6)|lte(X1,X7)|lte(X6,X4)|lte(X5,X3)|lte(X4,X5)|lte(X3,X2)|~eq(X8,X7))).
+#####
+#cnf(i_0_6963, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X8,X7)|lte(X1,X8)|lte(X7,X5)|lte(X6,X3)|lte(X5,X6)|lte(X3,X4)|~eq(X4,X2))).
+######
+#cnf(i_0_6964, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X8,X7)|lte(X1,X8)|lte(X7,X5)|lte(X6,X3)|lte(X5,X6)|lte(X3,X4)|~eq(X2,X4))).
+#######################
+#cnf(i_0_4861, plain, (tab1(X1,X2,X3,X4,esk6_2(X5,X6))|~select_4(X5,X6)|~eq(esk4_2(X5,X6),X3)|~eq(esk5_2(X5,X6),X4)|~eq(X5,X1)|~eq(X6,X2))).
+#####
+#cnf(i_0_7079, plain, (tab1(X1,X2,X3,X4,esk6_2(X5,X6))|~select_4(X5,X6)|~eq(esk4_2(X5,X6),X3)|~eq(esk5_2(X5,X6),X4)|~eq(X7,X2)|~eq(X5,X1)|~eq(X6,X7))).
+##
+#cnf(i_0_7081, plain, (tab1(X1,X2,X3,X4,esk6_2(X5,X6))|~select_4(X5,X6)|~eq(esk4_2(X5,X6),X3)|~eq(esk5_2(X5,X6),X4)|~eq(X7,X1)|~eq(X5,X7)|~eq(X6,X2))).
+####
+#cnf(i_0_7075, plain, (tab1(X1,X2,X3,X4,esk6_2(X5,X6))|~select_4(X5,X6)|~eq(esk4_2(X5,X6),X3)|~eq(esk5_2(X5,X6),X7)|~eq(X7,X4)|~eq(X5,X1)|~eq(X6,X2))).
+##
+#cnf(i_0_7077, plain, (tab1(X1,X2,X3,X4,esk6_2(X5,X6))|~select_4(X5,X6)|~eq(esk4_2(X5,X6),X7)|~eq(esk5_2(X5,X6),X4)|~eq(X7,X3)|~eq(X5,X1)|~eq(X6,X2))).
+############
+#cnf(i_0_4895, plain, (from_2(X1,X2,esk4_2(X3,X4),X5,X6)|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(esk6_2(X3,X4),X6)|~eq(X3,X1)|~eq(X4,X2))).
+###
+#cnf(i_0_7095, plain, (from_2(X1,X2,X3,X4,X5)|~select_4(X6,X7)|~eq(esk4_2(X6,X7),X3)|~eq(esk5_2(X6,X7),X4)|~eq(esk6_2(X6,X7),X5)|~eq(X6,X1)|~eq(X7,X2))).
+#####
+#cnf(i_0_7098, plain, (from_2(X1,X2,esk4_2(X3,X4),X5,X6)|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(esk6_2(X3,X4),X6)|~eq(X7,X2)|~eq(X3,X1)|~eq(X4,X7))).
+###
+#cnf(i_0_7101, plain, (from_2(X1,X2,esk4_2(X3,X4),X5,X6)|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(esk6_2(X3,X4),X6)|~eq(X7,X1)|~eq(X3,X7)|~eq(X4,X2))).
+########
+#cnf(i_0_7089, plain, (from_2(X1,X2,esk4_2(X3,X4),X5,X6)|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X5)|~eq(esk6_2(X3,X4),X7)|~eq(X7,X6)|~eq(X3,X1)|~eq(X4,X2))).
+###
+#cnf(i_0_7092, plain, (from_2(X1,X2,esk4_2(X3,X4),X5,X6)|~select_4(X3,X4)|~eq(esk5_2(X3,X4),X7)|~eq(esk6_2(X3,X4),X6)|~eq(X7,X5)|~eq(X3,X1)|~eq(X4,X2))).
+######################
+#cnf(i_0_5332, plain, (from_2(X1,X2,X3,esk5_2(X4,X5),X6)|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(esk6_2(X4,X5),X6)|~eq(X4,X1)|~eq(X5,X2))).
+########
+#cnf(i_0_7120, plain, (from_2(X1,X2,X3,esk5_2(X4,X5),X6)|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(esk6_2(X4,X5),X6)|~eq(X7,X2)|~eq(X4,X1)|~eq(X5,X7))).
+###
+#cnf(i_0_7123, plain, (from_2(X1,X2,X3,esk5_2(X4,X5),X6)|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(esk6_2(X4,X5),X6)|~eq(X7,X1)|~eq(X4,X7)|~eq(X5,X2))).
+########
+#cnf(i_0_7111, plain, (from_2(X1,X2,X3,esk5_2(X4,X5),X6)|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X3)|~eq(esk6_2(X4,X5),X7)|~eq(X7,X6)|~eq(X4,X1)|~eq(X5,X2))).
+###
+#cnf(i_0_7117, plain, (from_2(X1,X2,X3,esk5_2(X4,X5),X6)|~select_4(X4,X5)|~eq(esk4_2(X4,X5),X7)|~eq(esk6_2(X4,X5),X6)|~eq(X7,X3)|~eq(X4,X1)|~eq(X5,X2))).
+######################
+#cnf(i_0_5433, plain, (from_2(X1,X2,X3,X4,esk6_2(X5,X6))|~select_4(X5,X6)|~eq(esk4_2(X5,X6),X3)|~eq(esk5_2(X5,X6),X4)|~eq(X5,X1)|~eq(X6,X2))).
+########
+#cnf(i_0_7141, plain, (from_2(X1,X2,X3,X4,esk6_2(X5,X6))|~select_4(X5,X6)|~eq(esk4_2(X5,X6),X3)|~eq(esk5_2(X5,X6),X4)|~eq(X7,X2)|~eq(X5,X1)|~eq(X6,X7))).
+###
+#cnf(i_0_7144, plain, (from_2(X1,X2,X3,X4,esk6_2(X5,X6))|~select_4(X5,X6)|~eq(esk4_2(X5,X6),X3)|~eq(esk5_2(X5,X6),X4)|~eq(X7,X1)|~eq(X5,X7)|~eq(X6,X2))).
+########
+#cnf(i_0_7135, plain, (from_2(X1,X2,X3,X4,esk6_2(X5,X6))|~select_4(X5,X6)|~eq(esk4_2(X5,X6),X3)|~eq(esk5_2(X5,X6),X7)|~eq(X7,X4)|~eq(X5,X1)|~eq(X6,X2))).
+###
+#cnf(i_0_7138, plain, (from_2(X1,X2,X3,X4,esk6_2(X5,X6))|~select_4(X5,X6)|~eq(esk4_2(X5,X6),X7)|~eq(esk5_2(X5,X6),X4)|~eq(X7,X3)|~eq(X5,X1)|~eq(X6,X2))).
+###########################################################################################################################################################################################################################################################################################################################################################
+#cnf(i_0_1879, negated_conjecture, (lte(esk7_0,X6)|lte(X1,esk8_0)|lte(X8,X5)|lte(X7,X8)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X2)|lte(X2,X1))).
+###########################################################
+#cnf(i_0_7706, negated_conjecture, (lte(X3,esk8_0)|lte(X9,X3)|lte(X8,X9)|lte(X7,X8)|lte(X5,X7)|lte(X2,X6)|lte(X6,X4)|lte(X4,X5)|lte(X1,X2)|~lte(X1,esk7_0))).
+#
+#cnf(i_0_7749, negated_conjecture, (lte(X1,esk8_0)|lte(X9,X6)|lte(X8,X5)|lte(X7,X8)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X2)|lte(X2,X1)|~eq(esk7_0,X9))).
+########
+#cnf(i_0_7750, negated_conjecture, (lte(X1,esk8_0)|lte(X9,X6)|lte(X8,X5)|lte(X7,X8)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X2)|lte(X2,X1)|~eq(X9,esk7_0))).
+##
+#cnf(i_0_7246, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X4)|lte(X9,X3)|lte(X8,X9)|lte(X6,X8)|lte(X4,X7)|lte(X7,X5)|lte(X5,X6)|lte(X1,X2)|~lte(X1,X3))).
+#######
+#cnf(i_0_1895, plain, (lte(X8,X5)|lte(X7,X8)|lte(X2,X6)|lte(X6,X7)|lte(X5,X3)|lte(X4,X1)|lte(X3,X4)|lte(X1,X2))).
+##
+#cnf(i_0_7967, negated_conjecture, (lte(X8,X9)|lte(X9,X1)|lte(X5,X8)|lte(X7,X6)|lte(X3,X7)|lte(X6,X4)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(X1,esk8_0)|~eq(X3,X2)|~where_3(X1,X2))).
+##
+#cnf(i_0_7971, negated_conjecture, (lte(X8,X9)|lte(X9,X3)|lte(X5,X8)|lte(X7,X6)|lte(X2,X7)|lte(X6,X4)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(esk7_0,X2)|~eq(X3,X1)|~where_3(X1,X2))).
+##################################
+#cnf(i_0_7975, negated_conjecture, (lte(X9,X10)|lte(X10,X3)|lte(X6,X9)|lte(X8,X7)|lte(X4,X8)|lte(X7,X5)|lte(X5,X6)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(esk7_0,X4)|~eq(X3,X1)|~eq(X4,X2)|~where_3(X1,X2))).
+######################
+#cnf(i_0_7968, plain, (lte(X8,X9)|lte(X9,X3)|lte(X5,X8)|lte(X7,X6)|lte(X2,X7)|lte(X6,X4)|lte(X4,X5)|lte(X1,X2)|~lte(X1,X3))).
+###########################################
+#cnf(i_0_8462, plain, (lte(X9,X7)|lte(X8,X4)|lte(X6,X8)|lte(X7,X5)|lte(X5,X6)|lte(X4,X1)|lte(X2,X3)|lte(X1,X2)|~eq(X3,X9))).
+#
+#cnf(i_0_8463, plain, (lte(X9,X7)|lte(X8,X4)|lte(X6,X8)|lte(X7,X5)|lte(X5,X6)|lte(X4,X1)|lte(X2,X3)|lte(X1,X2)|~eq(X9,X3))).
+########
+#cnf(i_0_7306, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X2,X5)|lte(X9,X3)|lte(X7,X9)|lte(X4,X8)|lte(X8,X6)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_7366, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X9,X5)|lte(X2,X9)|lte(X7,X3)|lte(X4,X8)|lte(X8,X6)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_7426, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X9,X5)|lte(X8,X9)|lte(X2,X8)|lte(X4,X7)|lte(X7,X6)|lte(X6,X3)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_7486, negated_conjecture, (lte(X4,esk8_0)|lte(esk7_0,X3)|lte(X9,X4)|lte(X8,X9)|lte(X7,X8)|lte(X6,X7)|lte(X2,X5)|lte(X5,X6)|lte(X1,X2)|~lte(X1,X3))).
+########
+#cnf(i_0_7653, negated_conjecture, (lte(esk7_0,X2)|lte(X8,X1)|lte(X7,X8)|lte(X6,X7)|lte(X4,X6)|lte(X2,X5)|lte(X5,X3)|lte(X3,X4)|eq(esk8_0,X1)|~lte(esk8_0,X1))).
+#
+#cnf(i_0_7546, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X9,X5)|lte(X8,X9)|lte(X7,X8)|lte(X6,X7)|lte(X4,X3)|lte(X2,X6)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_7606, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X9,X5)|lte(X8,X9)|lte(X7,X8)|lte(X2,X7)|lte(X4,X6)|lte(X6,X3)|lte(X1,X2)|~lte(X1,X3))).
+#
+#cnf(i_0_7657, negated_conjecture, (lte(esk7_0,X3)|lte(X1,esk8_0)|lte(X9,X2)|lte(X8,X9)|lte(X7,X8)|lte(X5,X7)|lte(X3,X6)|lte(X6,X4)|lte(X4,X5)|~lte(X1,X2))).
+########
+#cnf(i_0_7829, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X9,X1)|lte(X8,X6)|lte(X7,X8)|lte(X2,X7)|lte(X6,X5)|lte(X5,X3)|lte(X3,X4)|~eq(X4,X9))).
+#
+#cnf(i_0_7830, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X9,X1)|lte(X8,X6)|lte(X7,X8)|lte(X2,X7)|lte(X6,X5)|lte(X5,X3)|lte(X3,X4)|~eq(X9,X4))).
+#
+#cnf(i_0_8550, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X9,X3)|lte(X8,X6)|lte(X7,X8)|lte(X2,X7)|lte(X6,X4)|lte(X4,X5)|lte(X3,X1)|~eq(X5,X9))).
+#
+#cnf(i_0_8551, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X9,X3)|lte(X8,X6)|lte(X7,X8)|lte(X2,X7)|lte(X6,X4)|lte(X4,X5)|lte(X3,X1)|~eq(X9,X5))).
+#######
+#cnf(i_0_8636, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X9,X4)|lte(X8,X5)|lte(X7,X8)|lte(X2,X7)|lte(X5,X6)|lte(X4,X3)|lte(X3,X1)|~eq(X6,X9))).
+#
+#cnf(i_0_8637, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X9,X4)|lte(X8,X5)|lte(X7,X8)|lte(X2,X7)|lte(X5,X6)|lte(X4,X3)|lte(X3,X1)|~eq(X9,X6))).
+#
+#cnf(i_0_8722, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X9,X5)|lte(X7,X8)|lte(X6,X7)|lte(X2,X6)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X8,X9))).
+#
+#cnf(i_0_8723, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X9,X5)|lte(X7,X8)|lte(X6,X7)|lte(X2,X6)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X9,X8))).
+#
+#cnf(i_0_8808, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X9,X7)|lte(X8,X6)|lte(X7,X8)|lte(X6,X5)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X2,X9))).
+#
+#cnf(i_0_8809, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X9,X7)|lte(X8,X6)|lte(X7,X8)|lte(X6,X5)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X9,X2))).
+#
+#cnf(i_0_8971, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X9,X8)|lte(X8,X6)|lte(X2,X7)|lte(X6,X5)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X7,X9))).
+#
+#cnf(i_0_8972, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X9,X8)|lte(X8,X6)|lte(X2,X7)|lte(X6,X5)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X9,X7))).
+#
+#cnf(i_0_9057, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X9,X6)|lte(X7,X8)|lte(X2,X7)|lte(X6,X5)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X8,X9))).
+#
+#cnf(i_0_9058, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X9,X6)|lte(X7,X8)|lte(X2,X7)|lte(X6,X5)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X9,X8))).
+##
+#cnf(i_0_9143, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X9,X7)|lte(X8,X9)|lte(X1,X8)|lte(X7,X6)|lte(X6,X5)|lte(X5,X3)|lte(X3,X4)|~eq(X4,X2))).
+#
+#cnf(i_0_9144, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X9,X7)|lte(X8,X9)|lte(X1,X8)|lte(X7,X6)|lte(X6,X5)|lte(X5,X3)|lte(X3,X4)|~eq(X2,X4))).
+#######################################################################################################################################################################################################################################################################################################
+#cnf(i_0_2042, plain, (lte(X9,X7)|lte(X8,X9)|lte(X2,X8)|lte(X7,X6)|lte(X6,X4)|lte(X5,X3)|lte(X4,X5)|lte(X3,X1)|lte(X1,X2))).
+##
+#cnf(i_0_9324, negated_conjecture, (lte(X10,X1)|lte(X8,X9)|lte(X9,X10)|lte(X7,X8)|lte(X5,X7)|lte(X3,X6)|lte(X6,X4)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(X1,esk8_0)|~eq(X3,X2)|~where_3(X1,X2))).
+##
+#cnf(i_0_9328, negated_conjecture, (lte(X10,X3)|lte(X8,X9)|lte(X9,X10)|lte(X7,X8)|lte(X5,X7)|lte(X2,X6)|lte(X6,X4)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(esk7_0,X2)|~eq(X3,X1)|~where_3(X1,X2))).
+##########################################
+#cnf(i_0_9332, negated_conjecture, (lte(X11,X3)|lte(X9,X10)|lte(X10,X11)|lte(X8,X9)|lte(X6,X8)|lte(X4,X7)|lte(X7,X5)|lte(X5,X6)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(esk7_0,X4)|~eq(X3,X1)|~eq(X4,X2)|~where_3(X1,X2))).
+#######################
+#cnf(i_0_9325, plain, (lte(X10,X3)|lte(X8,X9)|lte(X9,X10)|lte(X7,X8)|lte(X5,X7)|lte(X2,X6)|lte(X6,X4)|lte(X4,X5)|lte(X1,X2)|~lte(X1,X3))).
+#############################################
+#cnf(i_0_9959, plain, (lte(X10,X7)|lte(X9,X6)|lte(X8,X9)|lte(X7,X8)|lte(X6,X5)|lte(X5,X3)|lte(X4,X1)|lte(X3,X4)|lte(X1,X2)|~eq(X2,X10))).
+#
+#cnf(i_0_9960, plain, (lte(X10,X7)|lte(X9,X6)|lte(X8,X9)|lte(X7,X8)|lte(X6,X5)|lte(X5,X3)|lte(X4,X1)|lte(X3,X4)|lte(X1,X2)|~eq(X10,X2))).
+########################################################################
+#cnf(i_0_2404, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X7)|lte(X9,X6)|lte(X8,X9)|lte(X7,X8)|lte(X6,X4)|lte(X5,X3)|lte(X4,X5)|lte(X3,X1)|lte(X1,X2))).
+####################################################################
+#cnf(i_0_10716, negated_conjecture, (lte(X3,esk8_0)|lte(X10,X3)|lte(X9,X10)|lte(X7,X8)|lte(X8,X9)|lte(X5,X7)|lte(X2,X6)|lte(X6,X4)|lte(X4,X5)|lte(X1,X2)|~lte(X1,esk7_0))).
+#
+#cnf(i_0_10830, negated_conjecture, (lte(X1,esk8_0)|lte(X10,X7)|lte(X9,X6)|lte(X8,X9)|lte(X7,X8)|lte(X6,X4)|lte(X5,X3)|lte(X4,X5)|lte(X3,X2)|lte(X2,X1)|~eq(esk7_0,X10))).
+#
+#cnf(i_0_10831, negated_conjecture, (lte(X1,esk8_0)|lte(X10,X7)|lte(X9,X6)|lte(X8,X9)|lte(X7,X8)|lte(X6,X4)|lte(X5,X3)|lte(X4,X5)|lte(X3,X2)|lte(X2,X1)|~eq(X10,esk7_0))).
+#########
+#cnf(i_0_10152, negated_conjecture, (lte(esk7_0,X4)|lte(X2,esk8_0)|lte(X10,X3)|lte(X8,X9)|lte(X9,X10)|lte(X6,X8)|lte(X4,X7)|lte(X7,X5)|lte(X5,X6)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_10224, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X2,X4)|lte(X9,X10)|lte(X10,X3)|lte(X7,X9)|lte(X5,X8)|lte(X8,X6)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_10296, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X10,X4)|lte(X9,X10)|lte(X2,X9)|lte(X7,X3)|lte(X5,X8)|lte(X8,X6)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_10368, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X10,X4)|lte(X2,X10)|lte(X9,X3)|lte(X7,X9)|lte(X5,X8)|lte(X8,X6)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_10440, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X10,X4)|lte(X9,X10)|lte(X2,X8)|lte(X8,X9)|lte(X5,X7)|lte(X7,X6)|lte(X6,X3)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_10512, negated_conjecture, (lte(esk7_0,X3)|lte(X4,esk8_0)|lte(X10,X4)|lte(X9,X10)|lte(X7,X8)|lte(X8,X9)|lte(X6,X7)|lte(X2,X5)|lte(X5,X6)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_10584, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X10,X4)|lte(X9,X10)|lte(X7,X8)|lte(X8,X9)|lte(X6,X7)|lte(X5,X3)|lte(X2,X6)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_10656, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X10,X4)|lte(X9,X10)|lte(X7,X8)|lte(X8,X9)|lte(X2,X7)|lte(X5,X6)|lte(X6,X3)|lte(X1,X2)|~lte(X1,X3))).
+#
+#cnf(i_0_10778, negated_conjecture, (lte(esk7_0,X3)|lte(X1,esk8_0)|lte(X10,X2)|lte(X9,X10)|lte(X7,X8)|lte(X8,X9)|lte(X5,X7)|lte(X3,X6)|lte(X6,X4)|lte(X4,X5)|~lte(X1,X2))).
+########
+#cnf(i_0_10937, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X2)|lte(X9,X7)|lte(X8,X9)|lte(X1,X8)|lte(X7,X5)|lte(X6,X3)|lte(X5,X6)|lte(X3,X4)|~eq(X4,X10))).
+#
+#cnf(i_0_10938, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X2)|lte(X9,X7)|lte(X8,X9)|lte(X1,X8)|lte(X7,X5)|lte(X6,X3)|lte(X5,X6)|lte(X3,X4)|~eq(X10,X4))).
+#
+#cnf(i_0_11042, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X3)|lte(X9,X7)|lte(X8,X9)|lte(X1,X8)|lte(X7,X4)|lte(X5,X6)|lte(X4,X5)|lte(X3,X2)|~eq(X6,X10))).
+#
+#cnf(i_0_11043, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X3)|lte(X9,X7)|lte(X8,X9)|lte(X1,X8)|lte(X7,X4)|lte(X5,X6)|lte(X4,X5)|lte(X3,X2)|~eq(X10,X6))).
+########
+#cnf(i_0_11147, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X5)|lte(X9,X6)|lte(X8,X9)|lte(X1,X8)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X2)|~eq(X7,X10))).
+#
+#cnf(i_0_11148, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X5)|lte(X9,X6)|lte(X8,X9)|lte(X1,X8)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X2)|~eq(X10,X7))).
+#
+#cnf(i_0_11252, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X4)|lte(X9,X7)|lte(X8,X9)|lte(X1,X8)|lte(X7,X5)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X6,X10))).
+#
+#cnf(i_0_11253, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X4)|lte(X9,X7)|lte(X8,X9)|lte(X1,X8)|lte(X7,X5)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X10,X6))).
+#######
+#cnf(i_0_10774, negated_conjecture, (lte(esk7_0,X2)|lte(X9,X1)|lte(X8,X9)|lte(X6,X7)|lte(X7,X8)|lte(X4,X6)|lte(X2,X5)|lte(X5,X3)|lte(X3,X4)|eq(esk8_0,X1)|~lte(esk8_0,X1))).
+#
+#cnf(i_0_11357, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X5)|lte(X8,X9)|lte(X7,X8)|lte(X1,X7)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X9,X10))).
+#
+#cnf(i_0_11358, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X5)|lte(X8,X9)|lte(X7,X8)|lte(X1,X7)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X10,X9))).
+#
+#cnf(i_0_11462, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X8)|lte(X9,X7)|lte(X8,X9)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X1,X10))).
+#
+#cnf(i_0_11463, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X8)|lte(X9,X7)|lte(X8,X9)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X10,X1))).
+##
+#cnf(i_0_11567, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X9)|lte(X9,X7)|lte(X1,X8)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X8,X10))).
+#
+#cnf(i_0_11568, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X9)|lte(X9,X7)|lte(X1,X8)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X10,X8))).
+#
+#cnf(i_0_11672, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X7)|lte(X8,X9)|lte(X1,X8)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X9,X10))).
+#
+#cnf(i_0_11673, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X7)|lte(X8,X9)|lte(X1,X8)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X10,X9))).
+##
+#cnf(i_0_11777, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X8)|lte(X9,X10)|lte(X1,X9)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X4,X2))).
+#
+#cnf(i_0_11778, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X10,X8)|lte(X9,X10)|lte(X1,X9)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X2,X4))).
+##############################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+#cnf(i_0_3991, plain, (lte(X10,X6)|lte(X8,X10)|lte(X9,X7)|lte(X2,X9)|lte(X7,X8)|lte(X6,X4)|lte(X5,X3)|lte(X4,X5)|lte(X3,X1)|lte(X1,X2))).
+#
+#cnf(i_0_12092, negated_conjecture, (lte(X11,X1)|lte(X9,X10)|lte(X10,X11)|lte(X5,X9)|lte(X8,X6)|lte(X3,X7)|lte(X7,X8)|lte(X6,X4)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(X1,esk8_0)|~eq(X3,X2)|~where_3(X1,X2))).
+########
+#cnf(i_0_12097, negated_conjecture, (lte(X11,X3)|lte(X9,X10)|lte(X10,X11)|lte(X5,X9)|lte(X8,X6)|lte(X2,X7)|lte(X7,X8)|lte(X6,X4)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(esk7_0,X2)|~eq(X3,X1)|~where_3(X1,X2))).
+############################################
+#cnf(i_0_12101, negated_conjecture, (lte(X12,X3)|lte(X10,X11)|lte(X11,X12)|lte(X6,X10)|lte(X9,X7)|lte(X4,X8)|lte(X8,X9)|lte(X7,X5)|lte(X5,X6)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(esk7_0,X4)|~eq(X3,X1)|~eq(X4,X2)|~where_3(X1,X2))).
+########################
+#cnf(i_0_12094, plain, (lte(X11,X3)|lte(X9,X10)|lte(X10,X11)|lte(X5,X9)|lte(X8,X6)|lte(X2,X7)|lte(X7,X8)|lte(X6,X4)|lte(X4,X5)|lte(X1,X2)|~lte(X1,X3))).
+####################################################
+#cnf(i_0_12918, plain, (lte(X11,X8)|lte(X10,X5)|lte(X7,X10)|lte(X9,X6)|lte(X8,X9)|lte(X6,X7)|lte(X5,X3)|lte(X4,X1)|lte(X3,X4)|lte(X1,X2)|~eq(X2,X11))).
+#
+#cnf(i_0_12919, plain, (lte(X11,X8)|lte(X10,X5)|lte(X7,X10)|lte(X9,X6)|lte(X8,X9)|lte(X6,X7)|lte(X5,X3)|lte(X4,X1)|lte(X3,X4)|lte(X1,X2)|~eq(X11,X2))).
+#######################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+#cnf(i_0_3690, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X7)|lte(X10,X6)|lte(X9,X10)|lte(X7,X8)|lte(X8,X9)|lte(X6,X4)|lte(X5,X3)|lte(X4,X5)|lte(X3,X1)|lte(X1,X2))).
+#######################################################################
+#cnf(i_0_13895, negated_conjecture, (lte(X3,esk8_0)|lte(X11,X3)|lte(X10,X11)|lte(X8,X9)|lte(X9,X10)|lte(X5,X8)|lte(X7,X6)|lte(X2,X7)|lte(X6,X4)|lte(X4,X5)|lte(X1,X2)|~lte(X1,esk7_0))).
+########
+#cnf(i_0_14030, negated_conjecture, (lte(X1,esk8_0)|lte(X11,X9)|lte(X10,X6)|lte(X8,X10)|lte(X9,X7)|lte(X7,X8)|lte(X6,X4)|lte(X5,X3)|lte(X4,X5)|lte(X3,X2)|lte(X2,X1)|~eq(esk7_0,X11))).
+#
+#cnf(i_0_14031, negated_conjecture, (lte(X1,esk8_0)|lte(X11,X9)|lte(X10,X6)|lte(X8,X10)|lte(X9,X7)|lte(X7,X8)|lte(X6,X4)|lte(X5,X3)|lte(X4,X5)|lte(X3,X2)|lte(X2,X1)|~eq(X11,esk7_0))).
+##
+#cnf(i_0_13152, negated_conjecture, (lte(esk7_0,X4)|lte(X2,esk8_0)|lte(X11,X3)|lte(X9,X10)|lte(X10,X11)|lte(X6,X9)|lte(X8,X7)|lte(X4,X8)|lte(X7,X5)|lte(X5,X6)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_13236, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X2,X4)|lte(X10,X11)|lte(X11,X3)|lte(X7,X10)|lte(X9,X8)|lte(X5,X9)|lte(X8,X6)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_13320, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X11,X4)|lte(X10,X11)|lte(X2,X10)|lte(X7,X3)|lte(X9,X8)|lte(X5,X9)|lte(X8,X6)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_13404, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X11,X4)|lte(X2,X11)|lte(X10,X3)|lte(X7,X10)|lte(X9,X8)|lte(X5,X9)|lte(X8,X6)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_13488, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X11,X4)|lte(X10,X11)|lte(X2,X9)|lte(X9,X10)|lte(X8,X7)|lte(X5,X8)|lte(X7,X6)|lte(X6,X3)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_13572, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X11,X4)|lte(X10,X11)|lte(X8,X9)|lte(X9,X10)|lte(X7,X8)|lte(X5,X3)|lte(X2,X6)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_13656, negated_conjecture, (lte(esk7_0,X3)|lte(X4,esk8_0)|lte(X11,X4)|lte(X10,X11)|lte(X8,X9)|lte(X9,X10)|lte(X6,X8)|lte(X2,X7)|lte(X7,X5)|lte(X5,X6)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_13740, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X11,X4)|lte(X10,X11)|lte(X8,X9)|lte(X9,X10)|lte(X6,X8)|lte(X7,X3)|lte(X5,X7)|lte(X2,X6)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_13824, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X11,X4)|lte(X10,X11)|lte(X8,X9)|lte(X9,X10)|lte(X2,X8)|lte(X7,X6)|lte(X5,X7)|lte(X6,X3)|lte(X1,X2)|~lte(X1,X3))).
+########
+#cnf(i_0_13968, negated_conjecture, (lte(esk7_0,X3)|lte(X1,esk8_0)|lte(X11,X2)|lte(X10,X11)|lte(X8,X9)|lte(X9,X10)|lte(X5,X8)|lte(X7,X6)|lte(X3,X7)|lte(X6,X4)|lte(X4,X5)|~lte(X1,X2))).
+#
+#cnf(i_0_14158, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X2)|lte(X10,X7)|lte(X9,X10)|lte(X1,X8)|lte(X8,X9)|lte(X7,X5)|lte(X6,X3)|lte(X5,X6)|lte(X3,X4)|~eq(X4,X11))).
+#
+#cnf(i_0_14159, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X2)|lte(X10,X7)|lte(X9,X10)|lte(X1,X8)|lte(X8,X9)|lte(X7,X5)|lte(X6,X3)|lte(X5,X6)|lte(X3,X4)|~eq(X11,X4))).
+#
+#cnf(i_0_14284, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X3)|lte(X10,X7)|lte(X9,X10)|lte(X1,X8)|lte(X8,X9)|lte(X7,X4)|lte(X5,X6)|lte(X4,X5)|lte(X3,X2)|~eq(X6,X11))).
+########
+#cnf(i_0_14285, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X3)|lte(X10,X7)|lte(X9,X10)|lte(X1,X8)|lte(X8,X9)|lte(X7,X4)|lte(X5,X6)|lte(X4,X5)|lte(X3,X2)|~eq(X11,X6))).
+#
+#cnf(i_0_14410, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X5)|lte(X10,X6)|lte(X9,X10)|lte(X1,X8)|lte(X8,X9)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X2)|~eq(X7,X11))).
+#
+#cnf(i_0_14411, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X5)|lte(X10,X6)|lte(X9,X10)|lte(X1,X8)|lte(X8,X9)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X2)|~eq(X11,X7))).
+#
+#cnf(i_0_14536, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X4)|lte(X10,X7)|lte(X9,X10)|lte(X1,X8)|lte(X8,X9)|lte(X7,X5)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X6,X11))).
+########
+#cnf(i_0_14537, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X4)|lte(X10,X7)|lte(X9,X10)|lte(X1,X8)|lte(X8,X9)|lte(X7,X5)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X11,X6))).
+#
+#cnf(i_0_14662, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X5)|lte(X9,X10)|lte(X8,X9)|lte(X1,X7)|lte(X7,X8)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X10,X11))).
+#
+#cnf(i_0_14663, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X5)|lte(X9,X10)|lte(X8,X9)|lte(X1,X7)|lte(X7,X8)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X11,X10))).
+#
+#cnf(i_0_14788, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X9)|lte(X10,X7)|lte(X9,X10)|lte(X1,X8)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X8,X11))).
+###
+#cnf(i_0_13963, negated_conjecture, (lte(esk7_0,X2)|lte(X10,X1)|lte(X9,X10)|lte(X7,X8)|lte(X8,X9)|lte(X4,X7)|lte(X6,X5)|lte(X2,X6)|lte(X5,X3)|lte(X3,X4)|eq(esk8_0,X1)|~lte(esk8_0,X1))).
+##
+#cnf(i_0_14789, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X9)|lte(X10,X7)|lte(X9,X10)|lte(X1,X8)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X11,X8))).
+##
+#cnf(i_0_14914, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X8)|lte(X10,X7)|lte(X9,X10)|lte(X8,X9)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X1,X11))).
+#
+#cnf(i_0_14915, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X8)|lte(X10,X7)|lte(X9,X10)|lte(X8,X9)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X11,X1))).
+#
+#cnf(i_0_15040, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X10)|lte(X10,X7)|lte(X1,X8)|lte(X8,X9)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X9,X11))).
+#
+#cnf(i_0_15041, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X10)|lte(X10,X7)|lte(X1,X8)|lte(X8,X9)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X11,X9))).
+#
+#cnf(i_0_15166, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X7)|lte(X9,X10)|lte(X1,X8)|lte(X8,X9)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X10,X11))).
+#
+#cnf(i_0_15167, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X7)|lte(X9,X10)|lte(X1,X8)|lte(X8,X9)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|~eq(X11,X10))).
+#
+#cnf(i_0_15292, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X8)|lte(X10,X11)|lte(X1,X9)|lte(X9,X10)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X4,X2))).
+#
+#cnf(i_0_15293, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X8)|lte(X10,X11)|lte(X1,X9)|lte(X9,X10)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X2,X4))).
+#######################################################################################################################################################################################################################################################
+#cnf(i_0_4224, plain, (lte(X11,X8)|lte(X10,X11)|lte(X2,X10)|lte(X9,X7)|lte(X8,X9)|lte(X7,X6)|lte(X5,X3)|lte(X6,X4)|lte(X4,X5)|lte(X3,X1)|lte(X1,X2))).
+#
+#cnf(i_0_15670, negated_conjecture, (lte(X11,X1)|lte(X12,X10)|lte(X9,X12)|lte(X10,X11)|lte(X8,X9)|lte(X5,X7)|lte(X7,X8)|lte(X3,X6)|lte(X6,X4)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(X1,esk8_0)|~eq(X3,X2)|~where_3(X1,X2))).
+##
+#cnf(i_0_15675, negated_conjecture, (lte(X11,X3)|lte(X12,X10)|lte(X9,X12)|lte(X10,X11)|lte(X8,X9)|lte(X5,X7)|lte(X7,X8)|lte(X2,X6)|lte(X6,X4)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(esk7_0,X2)|~eq(X3,X1)|~where_3(X1,X2))).
+####################################################
+#cnf(i_0_15679, negated_conjecture, (lte(X12,X3)|lte(X13,X11)|lte(X10,X13)|lte(X11,X12)|lte(X9,X10)|lte(X6,X8)|lte(X8,X9)|lte(X4,X7)|lte(X7,X5)|lte(X5,X6)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(esk7_0,X4)|~eq(X3,X1)|~eq(X4,X2)|~where_3(X1,X2))).
+#########################
+#cnf(i_0_15672, plain, (lte(X11,X3)|lte(X12,X10)|lte(X9,X12)|lte(X10,X11)|lte(X8,X9)|lte(X5,X7)|lte(X7,X8)|lte(X2,X6)|lte(X6,X4)|lte(X4,X5)|lte(X1,X2)|~lte(X1,X3))).
+############################################################
+#cnf(i_0_16722, plain, (lte(X12,X9)|lte(X11,X7)|lte(X10,X11)|lte(X9,X10)|lte(X8,X6)|lte(X7,X8)|lte(X6,X5)|lte(X4,X1)|lte(X5,X3)|lte(X3,X4)|lte(X1,X2)|~eq(X2,X12))).
+##
+#cnf(i_0_16723, plain, (lte(X12,X9)|lte(X11,X7)|lte(X10,X11)|lte(X9,X10)|lte(X8,X6)|lte(X7,X8)|lte(X6,X5)|lte(X4,X1)|lte(X5,X3)|lte(X3,X4)|lte(X1,X2)|~eq(X12,X2))).
+######################################################################################################################################################################################################################################################################################################################################################################################################################
+#cnf(i_0_4207, negated_conjecture, (lte(X7,esk8_0)|lte(esk7_0,X6)|lte(X11,X7)|lte(X10,X11)|lte(X9,X10)|lte(X2,X8)|lte(X8,X9)|lte(X5,X3)|lte(X6,X4)|lte(X4,X5)|lte(X3,X1)|lte(X1,X2))).
+################################################################################
+#cnf(i_0_17956, negated_conjecture, (lte(X3,esk8_0)|lte(X12,X7)|lte(X10,X12)|lte(X11,X9)|lte(X2,X11)|lte(X9,X10)|lte(X8,X6)|lte(X7,X8)|lte(X6,X5)|lte(X5,X4)|lte(X4,X3)|lte(X1,X2)|~lte(X1,esk7_0))).
+#
+#cnf(i_0_18115, negated_conjecture, (lte(X1,esk8_0)|lte(X12,X7)|lte(X11,X1)|lte(X10,X11)|lte(X9,X10)|lte(X3,X8)|lte(X8,X9)|lte(X6,X4)|lte(X7,X5)|lte(X5,X6)|lte(X4,X2)|lte(X2,X3)|~eq(esk7_0,X12))).
+#
+#cnf(i_0_18116, negated_conjecture, (lte(X1,esk8_0)|lte(X12,X7)|lte(X11,X1)|lte(X10,X11)|lte(X9,X10)|lte(X3,X8)|lte(X8,X9)|lte(X6,X4)|lte(X7,X5)|lte(X5,X6)|lte(X4,X2)|lte(X2,X3)|~eq(X12,esk7_0))).
+#########
+#cnf(i_0_17000, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X11,X3)|lte(X12,X10)|lte(X5,X12)|lte(X10,X11)|lte(X9,X8)|lte(X2,X9)|lte(X8,X7)|lte(X7,X6)|lte(X6,X4)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_17097, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X2,X9)|lte(X12,X11)|lte(X5,X12)|lte(X11,X3)|lte(X10,X8)|lte(X9,X10)|lte(X8,X7)|lte(X7,X6)|lte(X6,X4)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_17194, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X12,X9)|lte(X11,X12)|lte(X5,X3)|lte(X2,X11)|lte(X10,X8)|lte(X9,X10)|lte(X8,X7)|lte(X7,X6)|lte(X6,X4)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_17291, negated_conjecture, (lte(esk7_0,X3)|lte(X4,esk8_0)|lte(X12,X8)|lte(X11,X12)|lte(X2,X10)|lte(X10,X11)|lte(X9,X7)|lte(X8,X9)|lte(X7,X6)|lte(X6,X5)|lte(X5,X4)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_17388, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X12,X9)|lte(X2,X12)|lte(X11,X3)|lte(X5,X11)|lte(X10,X8)|lte(X9,X10)|lte(X8,X7)|lte(X7,X6)|lte(X6,X4)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_17485, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X12,X8)|lte(X10,X12)|lte(X11,X9)|lte(X5,X11)|lte(X9,X10)|lte(X8,X3)|lte(X2,X7)|lte(X7,X6)|lte(X6,X4)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_17582, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X12,X3)|lte(X10,X12)|lte(X11,X9)|lte(X5,X11)|lte(X9,X10)|lte(X2,X8)|lte(X8,X7)|lte(X7,X6)|lte(X6,X4)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_17679, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X12,X7)|lte(X10,X12)|lte(X11,X9)|lte(X5,X11)|lte(X9,X10)|lte(X8,X3)|lte(X7,X8)|lte(X2,X6)|lte(X6,X4)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_17776, negated_conjecture, (lte(esk7_0,X5)|lte(X4,esk8_0)|lte(X12,X7)|lte(X10,X12)|lte(X11,X9)|lte(X5,X11)|lte(X9,X10)|lte(X8,X6)|lte(X7,X8)|lte(X6,X3)|lte(X2,X4)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_17873, negated_conjecture, (lte(esk7_0,X4)|lte(X2,esk8_0)|lte(X12,X7)|lte(X10,X12)|lte(X11,X9)|lte(X4,X11)|lte(X9,X10)|lte(X8,X6)|lte(X7,X8)|lte(X6,X5)|lte(X5,X3)|lte(X1,X2)|~lte(X1,X3))).
+########
+#cnf(i_0_18041, negated_conjecture, (lte(esk7_0,X3)|lte(X1,esk8_0)|lte(X12,X7)|lte(X10,X12)|lte(X11,X9)|lte(X3,X11)|lte(X9,X10)|lte(X8,X6)|lte(X7,X8)|lte(X6,X5)|lte(X5,X4)|lte(X4,X2)|~lte(X1,X2))).
+#
+#cnf(i_0_18266, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X9)|lte(X11,X2)|lte(X10,X11)|lte(X8,X10)|lte(X9,X7)|lte(X7,X8)|lte(X6,X3)|lte(X1,X5)|lte(X5,X6)|lte(X3,X4)|~eq(X4,X12))).
+#
+#cnf(i_0_18267, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X9)|lte(X11,X2)|lte(X10,X11)|lte(X8,X10)|lte(X9,X7)|lte(X7,X8)|lte(X6,X3)|lte(X1,X5)|lte(X5,X6)|lte(X3,X4)|~eq(X12,X4))).
+#
+#cnf(i_0_18415, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X3)|lte(X11,X2)|lte(X10,X11)|lte(X9,X10)|lte(X4,X8)|lte(X8,X9)|lte(X6,X7)|lte(X1,X5)|lte(X5,X6)|lte(X3,X4)|~eq(X7,X12))).
+########
+#cnf(i_0_18416, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X3)|lte(X11,X2)|lte(X10,X11)|lte(X9,X10)|lte(X4,X8)|lte(X8,X9)|lte(X6,X7)|lte(X1,X5)|lte(X5,X6)|lte(X3,X4)|~eq(X12,X7))).
+#
+#cnf(i_0_18564, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X7)|lte(X11,X2)|lte(X10,X11)|lte(X9,X10)|lte(X4,X8)|lte(X8,X9)|lte(X7,X5)|lte(X1,X6)|lte(X5,X3)|lte(X3,X4)|~eq(X6,X12))).
+#
+#cnf(i_0_18565, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X7)|lte(X11,X2)|lte(X10,X11)|lte(X9,X10)|lte(X4,X8)|lte(X8,X9)|lte(X7,X5)|lte(X1,X6)|lte(X5,X3)|lte(X3,X4)|~eq(X12,X6))).
+#
+#cnf(i_0_18713, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X6)|lte(X11,X2)|lte(X10,X11)|lte(X9,X10)|lte(X4,X8)|lte(X8,X9)|lte(X7,X5)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X1,X12))).
+########
+#cnf(i_0_18714, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X6)|lte(X11,X2)|lte(X10,X11)|lte(X9,X10)|lte(X4,X8)|lte(X8,X9)|lte(X7,X5)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X12,X1))).
+#
+#cnf(i_0_18862, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X5)|lte(X11,X2)|lte(X10,X11)|lte(X9,X10)|lte(X4,X8)|lte(X8,X9)|lte(X1,X6)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X7,X12))).
+#
+#cnf(i_0_18863, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X5)|lte(X11,X2)|lte(X10,X11)|lte(X9,X10)|lte(X4,X8)|lte(X8,X9)|lte(X1,X6)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X12,X7))).
+#
+#cnf(i_0_19011, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X9)|lte(X11,X2)|lte(X10,X11)|lte(X9,X10)|lte(X4,X8)|lte(X7,X5)|lte(X1,X6)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X8,X12))).
+########
+#cnf(i_0_19012, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X9)|lte(X11,X2)|lte(X10,X11)|lte(X9,X10)|lte(X4,X8)|lte(X7,X5)|lte(X1,X6)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X12,X8))).
+#
+#cnf(i_0_19160, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X8)|lte(X11,X2)|lte(X10,X11)|lte(X9,X10)|lte(X8,X9)|lte(X7,X5)|lte(X1,X6)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X4,X12))).
+#
+#cnf(i_0_19161, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X8)|lte(X11,X2)|lte(X10,X11)|lte(X9,X10)|lte(X8,X9)|lte(X7,X5)|lte(X1,X6)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X12,X4))).
+#
+#cnf(i_0_19309, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X10)|lte(X11,X2)|lte(X10,X11)|lte(X4,X8)|lte(X8,X9)|lte(X7,X5)|lte(X1,X6)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X9,X12))).
+#
+#cnf(i_0_18036, negated_conjecture, (lte(esk7_0,X2)|lte(X11,X6)|lte(X9,X11)|lte(X10,X8)|lte(X2,X10)|lte(X8,X9)|lte(X7,X5)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|eq(esk8_0,X1)|~lte(esk8_0,X1))).
+##
+#cnf(i_0_19310, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X10)|lte(X11,X2)|lte(X10,X11)|lte(X4,X8)|lte(X8,X9)|lte(X7,X5)|lte(X1,X6)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X12,X9))).
+#
+#cnf(i_0_19458, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X11)|lte(X11,X2)|lte(X9,X10)|lte(X4,X8)|lte(X8,X9)|lte(X7,X5)|lte(X1,X6)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X10,X12))).
+#
+#cnf(i_0_19459, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X11)|lte(X11,X2)|lte(X9,X10)|lte(X4,X8)|lte(X8,X9)|lte(X7,X5)|lte(X1,X6)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X12,X10))).
+##
+#cnf(i_0_19607, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X2)|lte(X10,X11)|lte(X9,X10)|lte(X4,X8)|lte(X8,X9)|lte(X7,X5)|lte(X1,X6)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X11,X12))).
+#
+#cnf(i_0_19608, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X2)|lte(X10,X11)|lte(X9,X10)|lte(X4,X8)|lte(X8,X9)|lte(X7,X5)|lte(X1,X6)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X12,X11))).
+#
+#cnf(i_0_19756, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X12)|lte(X10,X11)|lte(X9,X10)|lte(X4,X8)|lte(X8,X9)|lte(X7,X5)|lte(X1,X6)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X12,X2))).
+#
+#cnf(i_0_19757, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X11,X12)|lte(X10,X11)|lte(X9,X10)|lte(X4,X8)|lte(X8,X9)|lte(X7,X5)|lte(X1,X6)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X2,X12))).
+################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+#cnf(i_0_4973, plain, (lte(X11,X12)|lte(X12,X7)|lte(X10,X11)|lte(X9,X10)|lte(X2,X8)|lte(X8,X9)|lte(X7,X6)|lte(X5,X3)|lte(X6,X4)|lte(X4,X5)|lte(X3,X1)|lte(X1,X2))).
+#
+#cnf(i_0_20203, negated_conjecture, (lte(X12,X1)|lte(X13,X11)|lte(X10,X13)|lte(X11,X12)|lte(X6,X10)|lte(X9,X8)|lte(X3,X9)|lte(X8,X7)|lte(X7,X4)|lte(X5,X6)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X1)|~eq(esk8_0,X3)|~eq(X1,esk8_0)|~eq(X3,X2)|~where_3(X1,X2))).
+########
+#cnf(i_0_20208, negated_conjecture, (lte(X12,X3)|lte(X13,X11)|lte(X10,X13)|lte(X11,X12)|lte(X6,X10)|lte(X9,X8)|lte(X2,X9)|lte(X8,X7)|lte(X7,X4)|lte(X5,X6)|lte(X4,X5)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X2)|~eq(esk7_0,X2)|~eq(X3,X1)|~where_3(X1,X2))).
+################################################
+#cnf(i_0_20212, negated_conjecture, (lte(X13,X3)|lte(X14,X12)|lte(X11,X14)|lte(X12,X13)|lte(X7,X11)|lte(X10,X9)|lte(X4,X10)|lte(X9,X8)|lte(X8,X5)|lte(X6,X7)|lte(X5,X6)|select_1(X1,X2)|~eq(esk7_0,X3)|~eq(esk8_0,X4)|~eq(esk7_0,X4)|~eq(X3,X1)|~eq(X4,X2)|~where_3(X1,X2))).
+################################
+#cnf(i_0_20205, plain, (lte(X12,X3)|lte(X13,X11)|lte(X10,X13)|lte(X11,X12)|lte(X6,X10)|lte(X9,X8)|lte(X2,X9)|lte(X8,X7)|lte(X7,X4)|lte(X5,X6)|lte(X4,X5)|lte(X1,X2)|~lte(X1,X3))).
+################################################################
+#cnf(i_0_21519, plain, (lte(X13,X9)|lte(X11,X12)|lte(X12,X6)|lte(X10,X11)|lte(X8,X10)|lte(X9,X7)|lte(X7,X8)|lte(X6,X5)|lte(X4,X1)|lte(X5,X3)|lte(X3,X4)|lte(X1,X2)|~eq(X2,X13))).
+#
+#cnf(i_0_21520, plain, (lte(X13,X9)|lte(X11,X12)|lte(X12,X6)|lte(X10,X11)|lte(X8,X10)|lte(X9,X7)|lte(X7,X8)|lte(X6,X5)|lte(X4,X1)|lte(X5,X3)|lte(X3,X4)|lte(X1,X2)|~eq(X13,X2))).
+###########################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+#cnf(i_0_4957, negated_conjecture, (lte(esk7_0,X8)|lte(X1,esk8_0)|lte(X11,X12)|lte(X12,X7)|lte(X10,X11)|lte(X9,X10)|lte(X8,X9)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|lte(X2,X1))).
+##########################################################################################
+#cnf(i_0_23149, negated_conjecture, (lte(X3,esk8_0)|lte(X13,X3)|lte(X12,X13)|lte(X11,X12)|lte(X9,X10)|lte(X10,X11)|lte(X6,X9)|lte(X2,X8)|lte(X8,X7)|lte(X7,X4)|lte(X5,X6)|lte(X4,X5)|lte(X1,X2)|~lte(X1,esk7_0))).
+#
+#cnf(i_0_23236, negated_conjecture, (lte(X1,esk8_0)|lte(X13,X8)|lte(X11,X12)|lte(X12,X7)|lte(X10,X11)|lte(X9,X10)|lte(X8,X9)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|lte(X2,X1)|~eq(esk7_0,X13))).
+#
+#cnf(i_0_23237, negated_conjecture, (lte(X1,esk8_0)|lte(X13,X8)|lte(X11,X12)|lte(X12,X7)|lte(X10,X11)|lte(X9,X10)|lte(X8,X9)|lte(X7,X5)|lte(X6,X4)|lte(X5,X6)|lte(X4,X3)|lte(X3,X2)|lte(X2,X1)|~eq(X13,esk7_0))).
+#########
+#cnf(i_0_21845, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X4)|lte(X13,X3)|lte(X12,X13)|lte(X10,X11)|lte(X11,X12)|lte(X7,X10)|lte(X4,X9)|lte(X9,X8)|lte(X8,X5)|lte(X6,X7)|lte(X5,X6)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_21956, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X2,X5)|lte(X13,X3)|lte(X11,X12)|lte(X12,X13)|lte(X8,X11)|lte(X4,X10)|lte(X10,X9)|lte(X9,X6)|lte(X7,X8)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_22067, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X13,X5)|lte(X2,X13)|lte(X11,X12)|lte(X12,X3)|lte(X8,X11)|lte(X4,X10)|lte(X10,X9)|lte(X9,X6)|lte(X7,X8)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_22178, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X13,X5)|lte(X12,X13)|lte(X11,X12)|lte(X2,X11)|lte(X8,X3)|lte(X4,X10)|lte(X10,X9)|lte(X9,X6)|lte(X7,X8)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_22289, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X13,X5)|lte(X12,X13)|lte(X2,X12)|lte(X11,X3)|lte(X8,X11)|lte(X4,X10)|lte(X10,X9)|lte(X9,X6)|lte(X7,X8)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_22400, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X13,X5)|lte(X12,X13)|lte(X11,X12)|lte(X2,X10)|lte(X10,X11)|lte(X4,X9)|lte(X9,X8)|lte(X8,X6)|lte(X7,X3)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_22511, negated_conjecture, (lte(X4,esk8_0)|lte(esk7_0,X3)|lte(X13,X4)|lte(X12,X13)|lte(X11,X12)|lte(X9,X10)|lte(X10,X11)|lte(X7,X9)|lte(X2,X8)|lte(X8,X5)|lte(X6,X7)|lte(X5,X6)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_22622, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X13,X5)|lte(X12,X13)|lte(X11,X12)|lte(X9,X10)|lte(X10,X11)|lte(X8,X9)|lte(X4,X3)|lte(X2,X6)|lte(X7,X8)|lte(X6,X7)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_22733, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X13,X5)|lte(X12,X13)|lte(X11,X12)|lte(X9,X10)|lte(X10,X11)|lte(X7,X9)|lte(X4,X8)|lte(X8,X3)|lte(X6,X7)|lte(X2,X6)|lte(X1,X2)|~lte(X1,X3))).
+##
+#cnf(i_0_22844, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X13,X5)|lte(X12,X13)|lte(X11,X12)|lte(X9,X10)|lte(X10,X11)|lte(X2,X9)|lte(X4,X8)|lte(X8,X7)|lte(X7,X6)|lte(X6,X3)|lte(X1,X2)|~lte(X1,X3))).
+#########
+#cnf(i_0_22955, negated_conjecture, (lte(X5,esk8_0)|lte(esk7_0,X4)|lte(X13,X5)|lte(X12,X13)|lte(X11,X12)|lte(X9,X10)|lte(X10,X11)|lte(X6,X9)|lte(X4,X8)|lte(X8,X7)|lte(X7,X3)|lte(X2,X6)|lte(X1,X2)|~lte(X1,X3))).
+#
+#cnf(i_0_23053, negated_conjecture, (lte(esk7_0,X3)|lte(X1,esk8_0)|lte(X13,X2)|lte(X12,X13)|lte(X11,X12)|lte(X9,X10)|lte(X10,X11)|lte(X6,X9)|lte(X3,X8)|lte(X8,X7)|lte(X7,X4)|lte(X5,X6)|lte(X4,X5)|~lte(X1,X2))).
+#
+#cnf(i_0_23412, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X1)|lte(X11,X12)|lte(X12,X8)|lte(X10,X11)|lte(X9,X10)|lte(X2,X9)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X4,X13))).
+#
+#cnf(i_0_23413, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X1)|lte(X11,X12)|lte(X12,X8)|lte(X10,X11)|lte(X9,X10)|lte(X2,X9)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X3)|lte(X3,X4)|~eq(X13,X4))).
+########
+#cnf(i_0_23586, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X3)|lte(X11,X12)|lte(X12,X8)|lte(X10,X11)|lte(X9,X10)|lte(X2,X9)|lte(X8,X6)|lte(X7,X4)|lte(X6,X7)|lte(X4,X5)|lte(X3,X1)|~eq(X5,X13))).
+#
+#cnf(i_0_23587, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X3)|lte(X11,X12)|lte(X12,X8)|lte(X10,X11)|lte(X9,X10)|lte(X2,X9)|lte(X8,X6)|lte(X7,X4)|lte(X6,X7)|lte(X4,X5)|lte(X3,X1)|~eq(X13,X5))).
+#
+#cnf(i_0_23760, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X4)|lte(X11,X12)|lte(X12,X8)|lte(X10,X11)|lte(X9,X10)|lte(X2,X9)|lte(X8,X5)|lte(X6,X7)|lte(X5,X6)|lte(X4,X3)|lte(X3,X1)|~eq(X7,X13))).
+#
+#cnf(i_0_23761, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X4)|lte(X11,X12)|lte(X12,X8)|lte(X10,X11)|lte(X9,X10)|lte(X2,X9)|lte(X8,X5)|lte(X6,X7)|lte(X5,X6)|lte(X4,X3)|lte(X3,X1)|~eq(X13,X7))).
+########
+#cnf(i_0_23934, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X6)|lte(X11,X12)|lte(X12,X7)|lte(X10,X11)|lte(X9,X10)|lte(X2,X9)|lte(X7,X8)|lte(X6,X5)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X8,X13))).
+#
+#cnf(i_0_23935, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X6)|lte(X11,X12)|lte(X12,X7)|lte(X10,X11)|lte(X9,X10)|lte(X2,X9)|lte(X7,X8)|lte(X6,X5)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X13,X8))).
+#
+#cnf(i_0_24108, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X5)|lte(X11,X12)|lte(X12,X8)|lte(X10,X11)|lte(X9,X10)|lte(X2,X9)|lte(X8,X6)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X7,X13))).
+#
+#cnf(i_0_24109, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X5)|lte(X11,X12)|lte(X12,X8)|lte(X10,X11)|lte(X9,X10)|lte(X2,X9)|lte(X8,X6)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X13,X7))).
+########
+#cnf(i_0_24282, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X6)|lte(X10,X11)|lte(X11,X12)|lte(X9,X10)|lte(X8,X9)|lte(X2,X8)|lte(X7,X5)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X12,X13))).
+#
+#cnf(i_0_24283, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X6)|lte(X10,X11)|lte(X11,X12)|lte(X9,X10)|lte(X8,X9)|lte(X2,X8)|lte(X7,X5)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X13,X12))).
+#
+#cnf(i_0_24456, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X9)|lte(X11,X12)|lte(X12,X8)|lte(X10,X11)|lte(X9,X10)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X2,X13))).
+#
+#cnf(i_0_24457, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X9)|lte(X11,X12)|lte(X12,X8)|lte(X10,X11)|lte(X9,X10)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X13,X2))).
+###
+#cnf(i_0_23048, negated_conjecture, (lte(esk7_0,X2)|lte(X12,X1)|lte(X11,X12)|lte(X10,X11)|lte(X8,X9)|lte(X9,X10)|lte(X5,X8)|lte(X2,X7)|lte(X7,X6)|lte(X6,X3)|lte(X4,X5)|lte(X3,X4)|eq(esk8_0,X1)|~lte(esk8_0,X1))).
+####
+#cnf(i_0_24630, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X10)|lte(X11,X12)|lte(X12,X8)|lte(X10,X11)|lte(X2,X9)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X9,X13))).
+#
+#cnf(i_0_24631, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X10)|lte(X11,X12)|lte(X12,X8)|lte(X10,X11)|lte(X2,X9)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X13,X9))).
+#
+#cnf(i_0_24804, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X12)|lte(X12,X11)|lte(X11,X8)|lte(X9,X10)|lte(X2,X9)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X10,X13))).
+#
+#cnf(i_0_24805, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X12)|lte(X12,X11)|lte(X11,X8)|lte(X9,X10)|lte(X2,X9)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X13,X10))).
+#
+#cnf(i_0_24978, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X8)|lte(X11,X12)|lte(X10,X11)|lte(X9,X10)|lte(X2,X9)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X12,X13))).
+#
+#cnf(i_0_24979, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X8)|lte(X11,X12)|lte(X10,X11)|lte(X9,X10)|lte(X2,X9)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X13,X12))).
+#
+#cnf(i_0_25152, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X12)|lte(X12,X8)|lte(X10,X11)|lte(X9,X10)|lte(X2,X9)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X11,X13))).
+#
+#cnf(i_0_25153, negated_conjecture, (lte(esk7_0,X2)|lte(X1,esk8_0)|lte(X13,X12)|lte(X12,X8)|lte(X10,X11)|lte(X9,X10)|lte(X2,X9)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X4)|lte(X4,X3)|lte(X3,X1)|~eq(X13,X11))).
+#
+#cnf(i_0_25326, negated_conjecture, (lte(X2,esk8_0)|lte(esk7_0,X1)|lte(X12,X13)|lte(X13,X9)|lte(X11,X12)|lte(X10,X11)|lte(X1,X10)|lte(X9,X7)|lte(X8,X6)|lte(X7,X8)|lte(X6,X5)|lte(X5,X3)|lte(X3,X4)|~eq(X4,X2))).
+#
+#cnf(i_0_25327, negated_conjecture, (lte(X2,esk8_0)|lte(e
+# Failure: Resource limit exceeded (time)
+# SZS status ResourceOut
+sk7_0,X1)|lte(X12,X13)|lte(X13,X9)|lte(X11,X12)|lte(X10,X11)|lte(X1,X10)|lte(X9,X7)|lte(X8,X6)|lte(X7,X8)|lte(X6,X5)|lte(X5,X3)|lte(X3,X4)|~eq(X2,X4))).
+##############################################################################################################################################################################################################################################################################################################################################################################################################################################
+#cnf(i_0_5359, plain, (lte(X13,X9)|lte(X11,X12)|lte(X12,X13)|lte(X10,X11)|lte(X3,X10)|lte(X9,X8)|lte(X8,X6)|lte(X7,X5)|lte(X6,X7)|lte(X5,X4)|lte(X4,X1)|lte(X2,X3)|lte(X1,X2))).
+##

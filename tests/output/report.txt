@@ -73,10 +73,14 @@ WHERE (tab1.col11 <= tab1.col12) and (tab1.col12 <= tab1.col11)
 
 
 [0;31mquery13.sql[0m
-SELECT tab1.col11,
+SELECT
+    tab1.col11,
     tab1.col12
-FROM tab1
-WHERE (not tab1.col11 < tab1.col12) and (not tab1.col11 > tab1.col12)
+FROM
+    tab1
+WHERE
+    (not tab1.col11 < tab1.col12) and
+    (not tab1.col11 > tab1.col12)
 
 [0;31mquery14.sql[0m
 SELECT tab1.col11,
@@ -86,20 +90,88 @@ WHERE tab1.col11 = tab1.col12 AND
     (tab1.col11 IN ( SELECT tab1.col11 from tab1 ) )
 
 [0;31mquery20.sql[0m
-SELECT tab1.col11
-FROM tab1
-WHERE tab1.col11 in (
-    select alias.col11 from
-    (Select tab1.col11, tab1.col12 from tab1 where tab1.col11 = tab1.col12) as alias
-)
+SELECT
+    tab1.col11
+FROM
+    tab1
+WHERE
+    tab1.col11 in (
+        SELECT
+            alias.col11
+        FROM
+            (
+                SELECT
+                    tab1.col11,
+                    tab1.col12
+                FROM
+                    tab1
+                WHERE
+                    tab1.col11 = tab1.col12
+            ) as alias
+    )
 [0;31mquery21.sql[0m
-SELECT alias.col11
+SELECT
+    alias.col11
 FROM 
-    (Select col11, col12 from tab1 where col11 = col12) as alias
+    (
+        SELECT
+            tab1.col11,
+            tab1.col12
+        FROM
+            tab1
+        WHERE
+            tab1.col11 = tab1.col12
+    ) as alias
 [0;31mquery22.sql[0m
 SELECT alias.colalias
 FROM 
     (Select col11 as colalias, col12 from tab1 where col11 = col12) as alias
+[0;31mquery30.sql[0m
+SELECT tab1.col11,
+tab1.col12
+FROM tab1
+WHERE tab1.col11 < tab1.col12
+[0;31mquery31.sql[0m
+SELECT tab1.col11,
+tab1.col12
+FROM tab1
+WHERE tab1.col11 <= tab1.col12
+[0;31mquery32.sql[0m
+SELECT tab1.col11,
+tab1.col12
+FROM tab1
+WHERE tab1.col11 > tab1.col12
+[0;31mquery33.sql[0m
+SELECT tab1.col11,
+tab1.col12
+FROM tab1
+WHERE tab1.col11 < tab1.col12
+[0;31mquery34.sql[0m
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 IN (
+        SELECT
+            tab2.col21
+        FROM
+            tab2
+    )
+[0;31mquery35.sql[0m
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 NOT IN (
+        SELECT
+            tab2.col21
+        FROM
+            tab2
+    )
 [0;31mquery80.sql[0m
 SELECT tab1.col11 as alias11 #incorrect, should be tabalias1.col11
 FROM tab1 as tabalias1
@@ -119,112 +191,167 @@ query00 -- query11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query00 -- query12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query00 -- query13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query00 -- query14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query00 -- query20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query00 -- query21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query00 -- query22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query00 -- query80VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery00 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query00 -- query20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query00 -- query21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query00 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query00 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query00 -- query31[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query00 -- query32[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query00 -- query33[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query00 -- query34[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query00 -- query35[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query00 -- query80VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query00 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query01 -- query02VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query01 -- query03VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query01 -- query04VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query01 -- query05VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query01 -- query06VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query01 -- query07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query01 -- query08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query01 -- query09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query01 -- query10[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query01 -- query11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query01 -- query12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query01 -- query13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query01 -- query14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query01 -- query20VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query01 -- query21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query01 -- query22VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query01 -- query80VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery01 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query01 -- query20VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query01 -- query21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query01 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query01 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query01 -- query31[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query01 -- query32[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query01 -- query33[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query01 -- query34[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query01 -- query35[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query01 -- query80VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query01 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query02 -- query03VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query02 -- query04VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query02 -- query05VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query02 -- query06VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query02 -- query07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query02 -- query08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query02 -- query09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query02 -- query10[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query02 -- query11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query02 -- query12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query02 -- query13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query02 -- query14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query02 -- query20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query02 -- query21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query02 -- query22VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query02 -- query80VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery02 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query02 -- query20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query02 -- query21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query02 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query02 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query02 -- query31[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query02 -- query32[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query02 -- query33[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query02 -- query34[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query02 -- query35[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query02 -- query80VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query02 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query03 -- query04VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query03 -- query05VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query03 -- query06VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query03 -- query07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query03 -- query08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query03 -- query09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query03 -- query10[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query03 -- query11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query03 -- query12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query03 -- query13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query03 -- query14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query03 -- query20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query03 -- query21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query03 -- query22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query03 -- query80VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery03 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query03 -- query20VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query03 -- query21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query03 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query03 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query03 -- query31[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query03 -- query32[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query03 -- query33[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query03 -- query34[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query03 -- query35[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query03 -- query80VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query03 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query04 -- query05VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query04 -- query06VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query04 -- query07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query04 -- query08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query04 -- query09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query04 -- query10[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query04 -- query11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query04 -- query12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query04 -- query13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query04 -- query14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query04 -- query20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query04 -- query21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query04 -- query22VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query04 -- query80VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery04 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query04 -- query20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query04 -- query21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query04 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query04 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query04 -- query31[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query04 -- query32[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query04 -- query33[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query04 -- query34[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query04 -- query35[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query04 -- query80VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query04 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query05 -- query06VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query05 -- query07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query05 -- query08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query05 -- query09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query05 -- query10[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query05 -- query11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query05 -- query12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query05 -- query13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query05 -- query14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query05 -- query20VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query05 -- query21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query05 -- query22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query05 -- query80VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery05 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query05 -- query20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query05 -- query21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query05 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query05 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query05 -- query31[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query05 -- query32[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query05 -- query33[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query05 -- query34[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query05 -- query35[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query05 -- query80VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query05 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query06 -- query07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query06 -- query08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query06 -- query09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query06 -- query10[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query06 -- query11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query06 -- query12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query06 -- query13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query06 -- query14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query06 -- query20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query06 -- query21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query06 -- query22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query06 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query06 -- query80VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery06 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query06 -- query20VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query06 -- query21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query06 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query06 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query06 -- query31[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query06 -- query32[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query06 -- query33[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query06 -- query34[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query06 -- query35[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query06 -- query80VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query06 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query07 -- query08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query07 -- query09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query07 -- query10[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query07 -- query11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query07 -- query12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query07 -- query13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query07 -- query14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query07 -- query20VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query07 -- query21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query07 -- query22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query07 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query07 -- query20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query07 -- query21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query07 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query07 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query07 -- query31[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query07 -- query32[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query07 -- query33[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query07 -- query80VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery07 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query07 -- query34[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query07 -- query35[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query07 -- query80VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query07 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query08 -- query09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query08 -- query10[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query08 -- query11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query08 -- query12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query08 -- query13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query08 -- query14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query08 -- query20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query08 -- query21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query08 -- query22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query08 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query08 -- query20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query08 -- query21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query08 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query08 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query08 -- query31[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query08 -- query32[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query08 -- query33[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query08 -- query34[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query08 -- query80VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery08 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query08 -- query35[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query08 -- query80VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query08 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query09 -- query10[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query09 -- query11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query09 -- query12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query09 -- query13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query09 -- query14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query09 -- query20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query09 -- query21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query09 -- query22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query09 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query09 -- query20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query09 -- query21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query09 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query09 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query09 -- query31[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query09 -- query32[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query09 -- query33[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query09 -- query34[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query09 -- query80VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery09 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query10 -- query11VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query10 -- query12VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query10 -- query13VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mPROOF NOT FOUND[0mquery10 -- query14VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query10 -- query20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query09 -- query35[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query09 -- query80VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query09 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query10 -- query11VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query10 -- query12VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query10 -- query13VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query10 -- query14VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query10 -- query20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query10 -- query21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query10 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query10 -- query30VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery10 -- query31VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery10 -- query32VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery10 -- query33VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery10 -- query34VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery10 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query10 -- query81VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery11 -- query12VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query11 -- query13VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mPROOF NOT FOUND[0mquery11 -- query14VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query11 -- query20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query10 -- query22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query10 -- query30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query10 -- query31VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query10 -- query32VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query10 -- query33VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query10 -- query34VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query10 -- query35VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query10 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query10 -- query81VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query11 -- query12VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query11 -- query13VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query11 -- query14VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query11 -- query20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query11 -- query21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query11 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query11 -- query30VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery11 -- query31VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery11 -- query32VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery11 -- query33VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery11 -- query34VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery11 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query11 -- query81VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery12 -- query13VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery12 -- query14VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query12 -- query20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query11 -- query22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query11 -- query30VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query11 -- query31VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query11 -- query32VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query11 -- query33VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query11 -- query34VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query11 -- query35VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query11 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query11 -- query81VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query12 -- query13VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query12 -- query14VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query12 -- query20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query12 -- query21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query12 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query12 -- query30VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery12 -- query31VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery12 -- query32VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery12 -- query33VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery12 -- query34VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery12 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query12 -- query81VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery13 -- query14VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mPROOF NOT FOUND[0mquery13 -- query20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query12 -- query22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query12 -- query30VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query12 -- query31VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query12 -- query32VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query12 -- query33VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query12 -- query34VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query12 -- query35VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query12 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query12 -- query81VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query13 -- query14VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query13 -- query20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query13 -- query21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query13 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query13 -- query30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mPROOF NOT FOUND[0mquery13 -- query31VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mPROOF NOT FOUND[0mquery13 -- query32VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mPROOF NOT FOUND[0mquery13 -- query33VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mPROOF NOT FOUND[0mquery13 -- query34VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mPROOF NOT FOUND[0mquery13 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query13 -- query81VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mPROOF NOT FOUND[0mquery14 -- query20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query13 -- query22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query13 -- query30VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query13 -- query31VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query13 -- query32VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query13 -- query33VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query13 -- query34VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query13 -- query35VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query13 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query13 -- query81VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query14 -- query20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query14 -- query21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query14 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query14 -- query30VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery14 -- query31VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery14 -- query32VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery14 -- query33VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery14 -- query34VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery14 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query14 -- query81VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mPROOF NOT FOUND[0mquery20 -- query21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query20 -- query22VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query20 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query14 -- query22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query14 -- query30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query14 -- query31VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query14 -- query32VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query14 -- query33VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query14 -- query34VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query14 -- query35VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query14 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query14 -- query81VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query20 -- query21VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query20 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query20 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query20 -- query31[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query20 -- query32[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query20 -- query33[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query20 -- query34[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query20 -- query35[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query20 -- query80VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query20 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query21 -- query22VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query21 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query21 -- query22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query21 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query21 -- query31[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query21 -- query32[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query21 -- query33[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
 query21 -- query34[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query21 -- query80VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query21 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query22 -- query30[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query22 -- query31[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query22 -- query32[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query22 -- query33[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query22 -- query34[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query22 -- query80VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query22 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query80 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query21 -- query35[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query21 -- query80VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query21 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query22 -- query30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query22 -- query31VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query22 -- query32VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query22 -- query33VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query22 -- query34VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query22 -- query35VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query22 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query22 -- query81VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query30 -- query31VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query30 -- query32VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query30 -- query33VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query30 -- query34VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query30 -- query35VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query30 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query30 -- query81VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query31 -- query32VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query31 -- query33VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query31 -- query34VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query31 -- query35VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query31 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query31 -- query81VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query32 -- query33VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query32 -- query34VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query32 -- query35VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query32 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query32 -- query81VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query33 -- query34VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query33 -- query35VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query33 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query33 -- query81VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query34 -- query35VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query34 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query34 -- query81VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query35 -- query80[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query35 -- query81VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query80 -- query81[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)

@@ -56,9 +56,9 @@ fof(from_7,definition,(
 %     ]
 % }
 fof(where_8,definition,(
-    ! [COLALIAS,COL12] :
-      ( where_8(COLALIAS,COL12)
-    <=> eq(COLALIAS,COL12) ) )).
+    ! [COL11,COL12] :
+      ( where_8(COL11,COL12)
+    <=> eq(COL11,COL12) ) )).
 
 % {
 %     "select": [
@@ -79,11 +79,11 @@ fof(where_8,definition,(
 %     }
 % }
 fof(select_6,definition,(
-    ! [COLALIAS,COL12] :
-      ( select_6(COLALIAS,COL12)
+    ! [COLALIAS,COL12,COL11] :
+      ( select_6(COLALIAS,COL12,COL11)
     <=> ? [TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
           ( from_7(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15)
-          & where_8(COLALIAS,COL12) ) ) )).
+          & where_8(COL11,COL12) ) ) )).
 
 % {
 %     "select": [
@@ -104,9 +104,9 @@ fof(select_6,definition,(
 %     }
 % }
 fof(subquery_from_5,definition,(
-    ! [COLALIAS,COL12] :
-      ( subquery_from_5(COLALIAS,COL12)
-    <=> select_6(COLALIAS,COL12) ) )).
+    ! [COLALIAS,COL12,COL11] :
+      ( subquery_from_5(COLALIAS,COL12,COL11)
+    <=> select_6(COLALIAS,COL12,COL11) ) )).
 
 % [
 %     {
@@ -132,9 +132,9 @@ fof(subquery_from_5,definition,(
 %     }
 % ]
 fof(from_4,definition,(
-    ! [COLALIAS,ALIAS_COL12] :
-      ( from_4(COLALIAS,ALIAS_COL12)
-    <=> subquery_from_5(COLALIAS,ALIAS_COL12) ) )).
+    ! [ALIAS_COLALIAS,ALIAS_COL12,COL11] :
+      ( from_4(ALIAS_COLALIAS,ALIAS_COL12,COL11)
+    <=> subquery_from_5(ALIAS_COLALIAS,ALIAS_COL12,COL11) ) )).
 
 % {
 %     "select": {
@@ -163,10 +163,10 @@ fof(from_4,definition,(
 %     }
 % }
 fof(select_3,definition,(
-    ! [COLALIAS] :
-      ( select_3(COLALIAS)
+    ! [ALIAS_COLALIAS,COL11] :
+      ( select_3(ALIAS_COLALIAS,COL11)
     <=> ? [ALIAS_COL12] :
-          ( from_4(COLALIAS,ALIAS_COL12)
+          ( from_4(ALIAS_COLALIAS,ALIAS_COL12,COL11)
           & $true ) ) )).
 
 % {
@@ -196,9 +196,9 @@ fof(select_3,definition,(
 %     }
 % }
 fof(main_query_2,definition,(
-    ! [COLALIAS] :
-      ( main_query_2(COLALIAS)
-    <=> select_3(COLALIAS) ) )).
+    ! [COLALIAS,COL11] :
+      ( main_query_2(COLALIAS,COL11)
+    <=> select_3(COLALIAS,COL11) ) )).
 
 % Axioms:
 
@@ -231,6 +231,11 @@ fof(transitivity_of_less_than_or_equal,axiom,(
         & lte(Y,Z) )
      => lte(X,Z) ) )).
 
+fof(strong_connectedness_of_less_than_or_eqal,axiom,(
+    ! [X,Y] :
+      ( lte(X,Y)
+      | lte(Y,X) ) )).
+
 fof(less_than_definition,definition,(
     ! [X,Y] :
       ( lt(X,Y)
@@ -252,222 +257,262 @@ fof(greater_than_or_equal_definition,definition,(
       ( gte(X,Y)
     <=> lte(Y,X) ) )).
 
-fof(substitution_tab1_COL11,axiom,(
-    ! [X,COL11,COL12,COL13,COL14,COL15] :
-      ( ( COL11 = X
-        & tab1(COL11,COL12,COL13,COL14,COL15) )
-     => tab1(X,COL12,COL13,COL14,COL15) ) )).
-
-fof(substitution_tab1_COL12,axiom,(
-    ! [X,COL11,COL12,COL13,COL14,COL15] :
-      ( ( COL12 = X
-        & tab1(COL11,COL12,COL13,COL14,COL15) )
-     => tab1(COL11,X,COL13,COL14,COL15) ) )).
-
-fof(substitution_tab1_COL13,axiom,(
-    ! [X,COL11,COL12,COL13,COL14,COL15] :
-      ( ( COL13 = X
-        & tab1(COL11,COL12,COL13,COL14,COL15) )
-     => tab1(COL11,COL12,X,COL14,COL15) ) )).
-
-fof(substitution_tab1_COL14,axiom,(
-    ! [X,COL11,COL12,COL13,COL14,COL15] :
-      ( ( COL14 = X
-        & tab1(COL11,COL12,COL13,COL14,COL15) )
-     => tab1(COL11,COL12,COL13,X,COL15) ) )).
-
-fof(substitution_tab1_COL15,axiom,(
-    ! [X,COL11,COL12,COL13,COL14,COL15] :
-      ( ( COL15 = X
-        & tab1(COL11,COL12,COL13,COL14,COL15) )
-     => tab1(COL11,COL12,COL13,COL14,X) ) )).
-
-fof(substitution_tab2_COL21,axiom,(
-    ! [X,COL21,COL22,COL23,COL24,COL25] :
-      ( ( COL21 = X
-        & tab2(COL21,COL22,COL23,COL24,COL25) )
-     => tab2(X,COL22,COL23,COL24,COL25) ) )).
-
-fof(substitution_tab2_COL22,axiom,(
-    ! [X,COL21,COL22,COL23,COL24,COL25] :
-      ( ( COL22 = X
-        & tab2(COL21,COL22,COL23,COL24,COL25) )
-     => tab2(COL21,X,COL23,COL24,COL25) ) )).
-
-fof(substitution_tab2_COL23,axiom,(
-    ! [X,COL21,COL22,COL23,COL24,COL25] :
-      ( ( COL23 = X
-        & tab2(COL21,COL22,COL23,COL24,COL25) )
-     => tab2(COL21,COL22,X,COL24,COL25) ) )).
-
-fof(substitution_tab2_COL24,axiom,(
-    ! [X,COL21,COL22,COL23,COL24,COL25] :
-      ( ( COL24 = X
-        & tab2(COL21,COL22,COL23,COL24,COL25) )
-     => tab2(COL21,COL22,COL23,X,COL25) ) )).
-
-fof(substitution_tab2_COL25,axiom,(
-    ! [X,COL21,COL22,COL23,COL24,COL25] :
-      ( ( COL25 = X
-        & tab2(COL21,COL22,COL23,COL24,COL25) )
-     => tab2(COL21,COL22,COL23,COL24,X) ) )).
-
-fof(substitution_where_8_COLALIAS,axiom,(
-    ! [X,COLALIAS,COL12] :
-      ( ( COLALIAS = X
-        & where_8(COLALIAS,COL12) )
-     => where_8(X,COL12) ) )).
-
-fof(substitution_where_8_COL12,axiom,(
-    ! [X,COLALIAS,COL12] :
-      ( ( COL12 = X
-        & where_8(COLALIAS,COL12) )
-     => where_8(COLALIAS,X) ) )).
-
-fof(substitution_tab_FST,axiom,(
-    ! [X,FST,SND,TRD] :
-      ( ( FST = X
-        & tab(FST,SND,TRD) )
-     => tab(X,SND,TRD) ) )).
-
-fof(substitution_tab_SND,axiom,(
-    ! [X,FST,SND,TRD] :
-      ( ( SND = X
-        & tab(FST,SND,TRD) )
-     => tab(FST,X,TRD) ) )).
-
-fof(substitution_tab_TRD,axiom,(
-    ! [X,FST,SND,TRD] :
-      ( ( TRD = X
-        & tab(FST,SND,TRD) )
-     => tab(FST,SND,X) ) )).
-
-fof(substitution_from_2_ALIAS11,axiom,(
+fof(substitution_from_2_alias11,axiom,(
     ! [X,ALIAS11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15] :
-      ( ( ALIAS11 = X
+      ( ( eq(ALIAS11,X)
         & from_2(ALIAS11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15) )
      => from_2(X,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15) ) )).
 
-fof(substitution_from_2_TABALIAS1_COL12,axiom,(
+fof(substitution_from_2_tabalias1_col12,axiom,(
     ! [X,ALIAS11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15] :
-      ( ( TABALIAS1_COL12 = X
+      ( ( eq(TABALIAS1_COL12,X)
         & from_2(ALIAS11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15) )
      => from_2(ALIAS11,X,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15) ) )).
 
-fof(substitution_from_2_TABALIAS1_COL13,axiom,(
+fof(substitution_from_2_tabalias1_col13,axiom,(
     ! [X,ALIAS11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15] :
-      ( ( TABALIAS1_COL13 = X
+      ( ( eq(TABALIAS1_COL13,X)
         & from_2(ALIAS11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15) )
      => from_2(ALIAS11,TABALIAS1_COL12,X,TABALIAS1_COL14,TABALIAS1_COL15) ) )).
 
-fof(substitution_from_2_TABALIAS1_COL14,axiom,(
+fof(substitution_from_2_tabalias1_col14,axiom,(
     ! [X,ALIAS11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15] :
-      ( ( TABALIAS1_COL14 = X
+      ( ( eq(TABALIAS1_COL14,X)
         & from_2(ALIAS11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15) )
      => from_2(ALIAS11,TABALIAS1_COL12,TABALIAS1_COL13,X,TABALIAS1_COL15) ) )).
 
-fof(substitution_from_2_TABALIAS1_COL15,axiom,(
+fof(substitution_from_2_tabalias1_col15,axiom,(
     ! [X,ALIAS11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15] :
-      ( ( TABALIAS1_COL15 = X
+      ( ( eq(TABALIAS1_COL15,X)
         & from_2(ALIAS11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15) )
      => from_2(ALIAS11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,X) ) )).
 
-fof(substitution_from_7_TAB1_COL11,axiom,(
+fof(substitution_from_7_tab1_col11,axiom,(
     ! [X,TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
-      ( ( TAB1_COL11 = X
+      ( ( eq(TAB1_COL11,X)
         & from_7(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) )
      => from_7(X,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) ) )).
 
-fof(substitution_from_7_TAB1_COL12,axiom,(
+fof(substitution_from_7_tab1_col12,axiom,(
     ! [X,TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
-      ( ( TAB1_COL12 = X
+      ( ( eq(TAB1_COL12,X)
         & from_7(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) )
      => from_7(TAB1_COL11,X,TAB1_COL13,TAB1_COL14,TAB1_COL15) ) )).
 
-fof(substitution_from_7_TAB1_COL13,axiom,(
+fof(substitution_from_7_tab1_col13,axiom,(
     ! [X,TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
-      ( ( TAB1_COL13 = X
+      ( ( eq(TAB1_COL13,X)
         & from_7(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) )
      => from_7(TAB1_COL11,TAB1_COL12,X,TAB1_COL14,TAB1_COL15) ) )).
 
-fof(substitution_from_7_TAB1_COL14,axiom,(
+fof(substitution_from_7_tab1_col14,axiom,(
     ! [X,TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
-      ( ( TAB1_COL14 = X
+      ( ( eq(TAB1_COL14,X)
         & from_7(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) )
      => from_7(TAB1_COL11,TAB1_COL12,TAB1_COL13,X,TAB1_COL15) ) )).
 
-fof(substitution_from_7_TAB1_COL15,axiom,(
+fof(substitution_from_7_tab1_col15,axiom,(
     ! [X,TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
-      ( ( TAB1_COL15 = X
+      ( ( eq(TAB1_COL15,X)
         & from_7(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) )
      => from_7(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,X) ) )).
 
-fof(substitution_subquery_from_5_COLALIAS,axiom,(
-    ! [X,COLALIAS,COL12] :
-      ( ( COLALIAS = X
-        & subquery_from_5(COLALIAS,COL12) )
-     => subquery_from_5(X,COL12) ) )).
+fof(substitution_where_8_col11,axiom,(
+    ! [X,COL11,COL12] :
+      ( ( eq(COL11,X)
+        & where_8(COL11,COL12) )
+     => where_8(X,COL12) ) )).
 
-fof(substitution_subquery_from_5_COL12,axiom,(
-    ! [X,COLALIAS,COL12] :
-      ( ( COL12 = X
-        & subquery_from_5(COLALIAS,COL12) )
-     => subquery_from_5(COLALIAS,X) ) )).
+fof(substitution_where_8_col12,axiom,(
+    ! [X,COL11,COL12] :
+      ( ( eq(COL12,X)
+        & where_8(COL11,COL12) )
+     => where_8(COL11,X) ) )).
 
-fof(substitution_from_4_COLALIAS,axiom,(
-    ! [X,COLALIAS,ALIAS_COL12] :
-      ( ( COLALIAS = X
-        & from_4(COLALIAS,ALIAS_COL12) )
-     => from_4(X,ALIAS_COL12) ) )).
+fof(substitution_main_query_2_colalias,axiom,(
+    ! [X,COLALIAS,COL11] :
+      ( ( eq(COLALIAS,X)
+        & main_query_2(COLALIAS,COL11) )
+     => main_query_2(X,COL11) ) )).
 
-fof(substitution_from_4_ALIAS_COL12,axiom,(
-    ! [X,COLALIAS,ALIAS_COL12] :
-      ( ( ALIAS_COL12 = X
-        & from_4(COLALIAS,ALIAS_COL12) )
-     => from_4(COLALIAS,X) ) )).
+fof(substitution_main_query_2_col11,axiom,(
+    ! [X,COLALIAS,COL11] :
+      ( ( eq(COL11,X)
+        & main_query_2(COLALIAS,COL11) )
+     => main_query_2(COLALIAS,X) ) )).
 
-fof(substitution_select_6_COLALIAS,axiom,(
-    ! [X,COLALIAS,COL12] :
-      ( ( COLALIAS = X
-        & select_6(COLALIAS,COL12) )
-     => select_6(X,COL12) ) )).
+fof(substitution_tab1_col11,axiom,(
+    ! [X,COL11,COL12,COL13,COL14,COL15] :
+      ( ( eq(COL11,X)
+        & tab1(COL11,COL12,COL13,COL14,COL15) )
+     => tab1(X,COL12,COL13,COL14,COL15) ) )).
 
-fof(substitution_select_6_COL12,axiom,(
-    ! [X,COLALIAS,COL12] :
-      ( ( COL12 = X
-        & select_6(COLALIAS,COL12) )
-     => select_6(COLALIAS,X) ) )).
+fof(substitution_tab1_col12,axiom,(
+    ! [X,COL11,COL12,COL13,COL14,COL15] :
+      ( ( eq(COL12,X)
+        & tab1(COL11,COL12,COL13,COL14,COL15) )
+     => tab1(COL11,X,COL13,COL14,COL15) ) )).
 
-% Conjecture:
+fof(substitution_tab1_col13,axiom,(
+    ! [X,COL11,COL12,COL13,COL14,COL15] :
+      ( ( eq(COL13,X)
+        & tab1(COL11,COL12,COL13,COL14,COL15) )
+     => tab1(COL11,COL12,X,COL14,COL15) ) )).
+
+fof(substitution_tab1_col14,axiom,(
+    ! [X,COL11,COL12,COL13,COL14,COL15] :
+      ( ( eq(COL14,X)
+        & tab1(COL11,COL12,COL13,COL14,COL15) )
+     => tab1(COL11,COL12,COL13,X,COL15) ) )).
+
+fof(substitution_tab1_col15,axiom,(
+    ! [X,COL11,COL12,COL13,COL14,COL15] :
+      ( ( eq(COL15,X)
+        & tab1(COL11,COL12,COL13,COL14,COL15) )
+     => tab1(COL11,COL12,COL13,COL14,X) ) )).
+
+fof(substitution_tab2_col21,axiom,(
+    ! [X,COL21,COL22,COL23,COL24,COL25] :
+      ( ( eq(COL21,X)
+        & tab2(COL21,COL22,COL23,COL24,COL25) )
+     => tab2(X,COL22,COL23,COL24,COL25) ) )).
+
+fof(substitution_tab2_col22,axiom,(
+    ! [X,COL21,COL22,COL23,COL24,COL25] :
+      ( ( eq(COL22,X)
+        & tab2(COL21,COL22,COL23,COL24,COL25) )
+     => tab2(COL21,X,COL23,COL24,COL25) ) )).
+
+fof(substitution_tab2_col23,axiom,(
+    ! [X,COL21,COL22,COL23,COL24,COL25] :
+      ( ( eq(COL23,X)
+        & tab2(COL21,COL22,COL23,COL24,COL25) )
+     => tab2(COL21,COL22,X,COL24,COL25) ) )).
+
+fof(substitution_tab2_col24,axiom,(
+    ! [X,COL21,COL22,COL23,COL24,COL25] :
+      ( ( eq(COL24,X)
+        & tab2(COL21,COL22,COL23,COL24,COL25) )
+     => tab2(COL21,COL22,COL23,X,COL25) ) )).
+
+fof(substitution_tab2_col25,axiom,(
+    ! [X,COL21,COL22,COL23,COL24,COL25] :
+      ( ( eq(COL25,X)
+        & tab2(COL21,COL22,COL23,COL24,COL25) )
+     => tab2(COL21,COL22,COL23,COL24,X) ) )).
+
+fof(substitution_select_6_colalias,axiom,(
+    ! [X,COLALIAS,COL12,COL11] :
+      ( ( eq(COLALIAS,X)
+        & select_6(COLALIAS,COL12,COL11) )
+     => select_6(X,COL12,COL11) ) )).
+
+fof(substitution_select_6_col12,axiom,(
+    ! [X,COLALIAS,COL12,COL11] :
+      ( ( eq(COL12,X)
+        & select_6(COLALIAS,COL12,COL11) )
+     => select_6(COLALIAS,X,COL11) ) )).
+
+fof(substitution_select_6_col11,axiom,(
+    ! [X,COLALIAS,COL12,COL11] :
+      ( ( eq(COL11,X)
+        & select_6(COLALIAS,COL12,COL11) )
+     => select_6(COLALIAS,COL12,X) ) )).
+
+fof(substitution_subquery_from_5_colalias,axiom,(
+    ! [X,COLALIAS,COL12,COL11] :
+      ( ( eq(COLALIAS,X)
+        & subquery_from_5(COLALIAS,COL12,COL11) )
+     => subquery_from_5(X,COL12,COL11) ) )).
+
+fof(substitution_subquery_from_5_col12,axiom,(
+    ! [X,COLALIAS,COL12,COL11] :
+      ( ( eq(COL12,X)
+        & subquery_from_5(COLALIAS,COL12,COL11) )
+     => subquery_from_5(COLALIAS,X,COL11) ) )).
+
+fof(substitution_subquery_from_5_col11,axiom,(
+    ! [X,COLALIAS,COL12,COL11] :
+      ( ( eq(COL11,X)
+        & subquery_from_5(COLALIAS,COL12,COL11) )
+     => subquery_from_5(COLALIAS,COL12,X) ) )).
+
+fof(substitution_from_4_alias_colalias,axiom,(
+    ! [X,ALIAS_COLALIAS,ALIAS_COL12,COL11] :
+      ( ( eq(ALIAS_COLALIAS,X)
+        & from_4(ALIAS_COLALIAS,ALIAS_COL12,COL11) )
+     => from_4(X,ALIAS_COL12,COL11) ) )).
+
+fof(substitution_from_4_alias_col12,axiom,(
+    ! [X,ALIAS_COLALIAS,ALIAS_COL12,COL11] :
+      ( ( eq(ALIAS_COL12,X)
+        & from_4(ALIAS_COLALIAS,ALIAS_COL12,COL11) )
+     => from_4(ALIAS_COLALIAS,X,COL11) ) )).
+
+fof(substitution_from_4_col11,axiom,(
+    ! [X,ALIAS_COLALIAS,ALIAS_COL12,COL11] :
+      ( ( eq(COL11,X)
+        & from_4(ALIAS_COLALIAS,ALIAS_COL12,COL11) )
+     => from_4(ALIAS_COLALIAS,ALIAS_COL12,X) ) )).
+
+fof(substitution_select_3_colalias,axiom,(
+    ! [X,COLALIAS,COL11] :
+      ( ( eq(COLALIAS,X)
+        & select_3(COLALIAS,COL11) )
+     => select_3(X,COL11) ) )).
+
+fof(substitution_select_3_col11,axiom,(
+    ! [X,COLALIAS,COL11] :
+      ( ( eq(COL11,X)
+        & select_3(COLALIAS,COL11) )
+     => select_3(COLALIAS,X) ) )).
+
+fof(substitution_tab_fst,axiom,(
+    ! [X,FST,SND,TRD] :
+      ( ( eq(FST,X)
+        & tab(FST,SND,TRD) )
+     => tab(X,SND,TRD) ) )).
+
+fof(substitution_tab_snd,axiom,(
+    ! [X,FST,SND,TRD] :
+      ( ( eq(SND,X)
+        & tab(FST,SND,TRD) )
+     => tab(FST,X,TRD) ) )).
+
+fof(substitution_tab_trd,axiom,(
+    ! [X,FST,SND,TRD] :
+      ( ( eq(TRD,X)
+        & tab(FST,SND,TRD) )
+     => tab(FST,SND,X) ) )).
+
+% These queries cannot be equivalent; different numbers of columns are selected
 
 fof(equivalence_check,conjecture,(
-    ! [ALIAS11] :
-      ( main_query_1(ALIAS11)
-    <=> main_query_2(ALIAS11) ) )).
+    $false )).
 
-% main_query_2; columns: ['COLALIAS']; external: []
+% from_2; columns: ['ALIAS11', 'TABALIAS1_COL12', 'TABALIAS1_COL13', 'TABALIAS1_COL14', 'TABALIAS1_COL15']; external: []
+
+% from_7; columns: ['TAB1_COL11', 'TAB1_COL12', 'TAB1_COL13', 'TAB1_COL14', 'TAB1_COL15']; external: []
+
+% select_1; columns: ['ALIAS11']; external: []
+
+% main_query_1; columns: ['ALIAS11']; external: []
+
+% where_8; columns: []; external: ['COL11', 'COL12']
+
+% main_query_2; columns: ['COLALIAS']; external: ['COL11']
 
 % tab1; columns: ['COL11', 'COL12', 'COL13', 'COL14', 'COL15']; external: []
 
 % tab2; columns: ['COL21', 'COL22', 'COL23', 'COL24', 'COL25']; external: []
 
-% where_8; columns: []; external: ['COLALIAS', 'COL12']
+% select_6; columns: ['COLALIAS', 'COL12']; external: ['COL11']
+
+% subquery_from_5; columns: ['COLALIAS', 'COL12']; external: ['COL11']
+
+% from_4; columns: ['ALIAS_COLALIAS', 'ALIAS_COL12']; external: ['COL11']
+
+% select_3; columns: ['COLALIAS']; external: ['COL11']
 
 % tab; columns: ['FST', 'SND', 'TRD']; external: []
-
-% from_2; columns: ['ALIAS11', 'TABALIAS1_COL12', 'TABALIAS1_COL13', 'TABALIAS1_COL14', 'TABALIAS1_COL15']; external: []
-
-% main_query_1; columns: ['ALIAS11']; external: []
-
-% from_7; columns: ['TAB1_COL11', 'TAB1_COL12', 'TAB1_COL13', 'TAB1_COL14', 'TAB1_COL15']; external: []
-
-% subquery_from_5; columns: ['COLALIAS', 'COL12']; external: []
-
-% select_1; columns: ['ALIAS11']; external: []
-
-% from_4; columns: ['COLALIAS', 'ALIAS_COL12']; external: []
-
-% select_6; columns: ['COLALIAS', 'COL12']; external: []
-
-% select_3; columns: ['COLALIAS']; external: []
 
