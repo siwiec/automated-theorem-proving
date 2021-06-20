@@ -1,122 +1,969 @@
-% Refutation found. Thanks to Tanya!
-% SZS status Theorem for query_08_query_10_tptp4X
-% SZS output start Proof for query_08_query_10_tptp4X
-1. ! [X0,X1,X2,X3,X4] : (from_2(X0,X1,X2,X3,X4) <=> tab1(X0,X1,X2,X3,X4)) [input]
-2. ! [X0] : (where_3(X0) <=> (~gt(X0,X0) & ~lt(X0,X0))) [input]
-3. ! [X0] : (select_1(X0) <=> ? [X1,X2,X3,X4] : (where_3(X0) & from_2(X0,X1,X2,X3,X4))) [input]
-4. ! [X0] : (main_query_1(X0) <=> select_1(X0)) [input]
-5. ! [X0,X5,X6,X7,X8] : (from_8(X0,X5,X6,X7,X8) <=> tab1(X0,X5,X6,X7,X8)) [input]
-6. ! [X0] : (select_7(X0) <=> ? [X5,X6,X7,X8] : ($true & from_8(X0,X5,X6,X7,X8))) [input]
-7. ! [X0] : (subquery_from_6(X0) <=> select_7(X0)) [input]
-8. ! [X9] : (from_5(X9) <=> subquery_from_6(X9)) [input]
-9. ! [X9] : (select_4(X9) <=> ($true & from_5(X9))) [input]
-10. ! [X0] : (main_query_2(X0) <=> select_4(X0)) [input]
-11. ! [X10] : eq(X10,X10) [input]
-18. ! [X10,X11] : (lt(X10,X11) <=> (~eq(X10,X11) & lte(X10,X11))) [input]
-19. ! [X10,X11] : (gt(X10,X11) <=> lt(X11,X10)) [input]
-42. ! [X0] : (main_query_1(X0) <=> main_query_2(X0)) [input]
-43. ~! [X0] : (main_query_1(X0) <=> main_query_2(X0)) [negated conjecture 42]
-44. ! [X0,X1,X2,X3,X4] : (from_8(X0,X1,X2,X3,X4) <=> tab1(X0,X1,X2,X3,X4)) [rectify 5]
-45. ! [X0] : (select_7(X0) <=> ? [X1,X2,X3,X4] : ($true & from_8(X0,X1,X2,X3,X4))) [rectify 6]
-46. ! [X0] : (select_7(X0) <=> ? [X1,X2,X3,X4] : from_8(X0,X1,X2,X3,X4)) [true and false elimination 45]
-47. ! [X0] : (from_5(X0) <=> subquery_from_6(X0)) [rectify 8]
-48. ! [X0] : (select_4(X0) <=> ($true & from_5(X0))) [rectify 9]
-49. ! [X0] : (select_4(X0) <=> from_5(X0)) [true and false elimination 48]
-50. ! [X0] : eq(X0,X0) [rectify 11]
-57. ! [X0,X1] : (lt(X0,X1) <=> (~eq(X0,X1) & lte(X0,X1))) [rectify 18]
-58. ! [X0,X1] : (gt(X0,X1) <=> lt(X1,X0)) [rectify 19]
-126. ? [X0] : (main_query_1(X0) <~> main_query_2(X0)) [ennf transformation 43]
-127. ! [X0,X1,X2,X3,X4] : ((from_2(X0,X1,X2,X3,X4) | ~tab1(X0,X1,X2,X3,X4)) & (tab1(X0,X1,X2,X3,X4) | ~from_2(X0,X1,X2,X3,X4))) [nnf transformation 1]
-128. ! [X0] : ((where_3(X0) | (gt(X0,X0) | lt(X0,X0))) & ((~gt(X0,X0) & ~lt(X0,X0)) | ~where_3(X0))) [nnf transformation 2]
-129. ! [X0] : ((where_3(X0) | gt(X0,X0) | lt(X0,X0)) & ((~gt(X0,X0) & ~lt(X0,X0)) | ~where_3(X0))) [flattening 128]
-130. ! [X0] : ((select_1(X0) | ! [X1,X2,X3,X4] : (~where_3(X0) | ~from_2(X0,X1,X2,X3,X4))) & (? [X1,X2,X3,X4] : (where_3(X0) & from_2(X0,X1,X2,X3,X4)) | ~select_1(X0))) [nnf transformation 3]
-131. ! [X0] : ((select_1(X0) | ! [X1,X2,X3,X4] : (~where_3(X0) | ~from_2(X0,X1,X2,X3,X4))) & (? [X5,X6,X7,X8] : (where_3(X0) & from_2(X0,X5,X6,X7,X8)) | ~select_1(X0))) [rectify 130]
-132. ! [X0] : (? [X5,X6,X7,X8] : (where_3(X0) & from_2(X0,X5,X6,X7,X8)) => (where_3(X0) & from_2(X0,sK0(X0),sK1(X0),sK2(X0),sK3(X0)))) [choice axiom]
-133. ! [X0] : ((select_1(X0) | ! [X1,X2,X3,X4] : (~where_3(X0) | ~from_2(X0,X1,X2,X3,X4))) & ((where_3(X0) & from_2(X0,sK0(X0),sK1(X0),sK2(X0),sK3(X0))) | ~select_1(X0))) [skolemisation 131,132]
-134. ! [X0] : ((main_query_1(X0) | ~select_1(X0)) & (select_1(X0) | ~main_query_1(X0))) [nnf transformation 4]
-135. ! [X0,X1,X2,X3,X4] : ((from_8(X0,X1,X2,X3,X4) | ~tab1(X0,X1,X2,X3,X4)) & (tab1(X0,X1,X2,X3,X4) | ~from_8(X0,X1,X2,X3,X4))) [nnf transformation 44]
-136. ! [X0] : ((select_7(X0) | ! [X1,X2,X3,X4] : ~from_8(X0,X1,X2,X3,X4)) & (? [X1,X2,X3,X4] : from_8(X0,X1,X2,X3,X4) | ~select_7(X0))) [nnf transformation 46]
-137. ! [X0] : ((select_7(X0) | ! [X1,X2,X3,X4] : ~from_8(X0,X1,X2,X3,X4)) & (? [X5,X6,X7,X8] : from_8(X0,X5,X6,X7,X8) | ~select_7(X0))) [rectify 136]
-138. ! [X0] : (? [X5,X6,X7,X8] : from_8(X0,X5,X6,X7,X8) => from_8(X0,sK4(X0),sK5(X0),sK6(X0),sK7(X0))) [choice axiom]
-139. ! [X0] : ((select_7(X0) | ! [X1,X2,X3,X4] : ~from_8(X0,X1,X2,X3,X4)) & (from_8(X0,sK4(X0),sK5(X0),sK6(X0),sK7(X0)) | ~select_7(X0))) [skolemisation 137,138]
-140. ! [X0] : ((subquery_from_6(X0) | ~select_7(X0)) & (select_7(X0) | ~subquery_from_6(X0))) [nnf transformation 7]
-141. ! [X0] : ((from_5(X0) | ~subquery_from_6(X0)) & (subquery_from_6(X0) | ~from_5(X0))) [nnf transformation 47]
-142. ! [X0] : ((select_4(X0) | ~from_5(X0)) & (from_5(X0) | ~select_4(X0))) [nnf transformation 49]
-143. ! [X0] : ((main_query_2(X0) | ~select_4(X0)) & (select_4(X0) | ~main_query_2(X0))) [nnf transformation 10]
-146. ! [X0,X1] : ((lt(X0,X1) | (eq(X0,X1) | ~lte(X0,X1))) & ((~eq(X0,X1) & lte(X0,X1)) | ~lt(X0,X1))) [nnf transformation 57]
-147. ! [X0,X1] : ((lt(X0,X1) | eq(X0,X1) | ~lte(X0,X1)) & ((~eq(X0,X1) & lte(X0,X1)) | ~lt(X0,X1))) [flattening 146]
-148. ! [X0,X1] : ((gt(X0,X1) | ~lt(X1,X0)) & (lt(X1,X0) | ~gt(X0,X1))) [nnf transformation 58]
-149. ? [X0] : ((~main_query_2(X0) | ~main_query_1(X0)) & (main_query_2(X0) | main_query_1(X0))) [nnf transformation 126]
-150. ? [X0] : ((~main_query_2(X0) | ~main_query_1(X0)) & (main_query_2(X0) | main_query_1(X0))) => ((~main_query_2(sK8) | ~main_query_1(sK8)) & (main_query_2(sK8) | main_query_1(sK8))) [choice axiom]
-151. (~main_query_2(sK8) | ~main_query_1(sK8)) & (main_query_2(sK8) | main_query_1(sK8)) [skolemisation 149,150]
-152. ~from_2(X0,X1,X2,X3,X4) | tab1(X0,X1,X2,X3,X4) [cnf transformation 127]
-153. ~tab1(X0,X1,X2,X3,X4) | from_2(X0,X1,X2,X3,X4) [cnf transformation 127]
-156. gt(X0,X0) | where_3(X0) | lt(X0,X0) [cnf transformation 129]
-157. from_2(X0,sK0(X0),sK1(X0),sK2(X0),sK3(X0)) | ~select_1(X0) [cnf transformation 133]
-159. ~from_2(X0,X1,X2,X3,X4) | ~where_3(X0) | select_1(X0) [cnf transformation 133]
-160. ~main_query_1(X0) | select_1(X0) [cnf transformation 134]
-161. ~select_1(X0) | main_query_1(X0) [cnf transformation 134]
-162. ~from_8(X0,X1,X2,X3,X4) | tab1(X0,X1,X2,X3,X4) [cnf transformation 135]
-163. ~tab1(X0,X1,X2,X3,X4) | from_8(X0,X1,X2,X3,X4) [cnf transformation 135]
-164. from_8(X0,sK4(X0),sK5(X0),sK6(X0),sK7(X0)) | ~select_7(X0) [cnf transformation 139]
-165. ~from_8(X0,X1,X2,X3,X4) | select_7(X0) [cnf transformation 139]
-166. ~subquery_from_6(X0) | select_7(X0) [cnf transformation 140]
-167. ~select_7(X0) | subquery_from_6(X0) [cnf transformation 140]
-168. ~from_5(X0) | subquery_from_6(X0) [cnf transformation 141]
-169. ~subquery_from_6(X0) | from_5(X0) [cnf transformation 141]
-170. ~select_4(X0) | from_5(X0) [cnf transformation 142]
-171. ~from_5(X0) | select_4(X0) [cnf transformation 142]
-172. ~main_query_2(X0) | select_4(X0) [cnf transformation 143]
-173. ~select_4(X0) | main_query_2(X0) [cnf transformation 143]
-174. eq(X0,X0) [cnf transformation 50]
-184. ~eq(X0,X1) | ~lt(X0,X1) [cnf transformation 147]
-186. ~gt(X0,X1) | lt(X1,X0) [cnf transformation 148]
-208. main_query_2(sK8) | main_query_1(sK8) [cnf transformation 151]
-209. ~main_query_2(sK8) | ~main_query_1(sK8) [cnf transformation 151]
-211. 0 <=> main_query_1(sK8) [avatar definition]
-212. main_query_1(sK8) <- {0} [avatar component clause 211]
-214. 1 <=> ~main_query_1(sK8) [avatar definition]
-215. ~main_query_1(sK8) <- {1} [avatar component clause 214]
-217. 2 <=> main_query_2(sK8) [avatar definition]
-218. main_query_2(sK8) <- {2} [avatar component clause 217]
-220. 3 <=> ~main_query_2(sK8) [avatar definition]
-221. ~main_query_2(sK8) <- {3} [avatar component clause 220]
-222. ~1 | ~3 [avatar split clause 209,220,214]
-223. 0 | 2 [avatar split clause 208,217,211]
-224. select_4(sK8) <- {2} [resolution 172,218]
-225. from_5(sK8) <- {2} [resolution 224,170]
-228. subquery_from_6(sK8) <- {2} [resolution 225,168]
-230. select_7(sK8) <- {2} [resolution 228,166]
-236. ~lt(X0,X0) [resolution 184,174]
-238. where_3(X1) | lt(X1,X1) | lt(X1,X1) [resolution 156,186]
-239. where_3(X1) | lt(X1,X1) [duplicate literal removal 238]
-240. where_3(X1) [subsumption resolution 239,236]
-264. tab1(X0,sK0(X0),sK1(X0),sK2(X0),sK3(X0)) | ~select_1(X0) [resolution 157,152]
-306. tab1(X0,sK4(X0),sK5(X0),sK6(X0),sK7(X0)) | ~select_7(X0) [resolution 164,162]
-425. from_8(X1,sK0(X1),sK1(X1),sK2(X1),sK3(X1)) | ~select_1(X1) [resolution 264,163]
-431. from_2(X0,sK4(X0),sK5(X0),sK6(X0),sK7(X0)) | ~select_7(X0) [resolution 306,153]
-439. ~select_1(X1) | select_7(X1) [resolution 425,165]
-441. ~select_7(X1) | ~where_3(X1) | select_1(X1) [resolution 431,159]
-447. ~select_7(X1) | select_1(X1) [subsumption resolution 441,240]
-450. select_1(sK8) <- {2} [resolution 447,230]
-454. main_query_1(sK8) <- {2} [resolution 450,161]
-456. $false <- {1, 2} [subsumption resolution 454,215]
-457. 1 | ~2 [avatar contradiction clause 456]
-458. select_1(sK8) <- {0} [resolution 212,160]
-461. select_7(sK8) <- {0} [resolution 458,439]
-467. subquery_from_6(sK8) <- {0} [resolution 461,167]
-470. from_5(sK8) <- {0} [resolution 467,169]
-480. select_4(sK8) <- {0} [resolution 470,171]
-489. main_query_2(sK8) <- {0} [resolution 480,173]
-491. $false <- {0, 3} [subsumption resolution 489,221]
-492. ~0 | 3 [avatar contradiction clause 491]
-493. $false [avatar sat refutation 222,223,457,492]
-% SZS output end Proof for query_08_query_10_tptp4X
+Satisfiable!
+% SZS status CounterSatisfiable for query_08_query_10_tptp4X
+% # SZS output start Saturation.
+tff(u1748,axiom,
+    (![X1, X3, X0, X2, X4] : ((~from_5(X0,X1,X2,X3,X4) | tab1(X0,X1,X2,X3,X4))))).
+
+tff(u1747,axiom,
+    (![X1, X3, X0, X2, X4] : ((~from_5(X0,X1,X2,X3,X4) | select_4(X0,X1))))).
+
+tff(u1746,axiom,
+    (![X1, X3, X5, X0, X2, X4] : ((~from_5(X1,X2,X3,X4,X5) | from_5(X0,X2,X3,X4,X5) | ~eq(X1,X0))))).
+
+tff(u1745,axiom,
+    (![X1, X3, X5, X0, X2, X4] : ((~from_5(X1,X2,X3,X4,X5) | from_5(X1,X0,X3,X4,X5) | ~eq(X2,X0))))).
+
+tff(u1744,axiom,
+    (![X1, X3, X5, X0, X2, X4] : ((~from_5(X1,X2,X3,X4,X5) | from_5(X1,X2,X0,X4,X5) | ~eq(X3,X0))))).
+
+tff(u1743,axiom,
+    (![X1, X3, X5, X0, X2, X4] : ((~from_5(X1,X2,X3,X4,X5) | from_5(X1,X2,X3,X0,X5) | ~eq(X4,X0))))).
+
+tff(u1742,axiom,
+    (![X1, X3, X5, X0, X2, X4] : ((~from_5(X1,X2,X3,X4,X5) | from_5(X1,X2,X3,X4,X0) | ~eq(X5,X0))))).
+
+tff(u1741,axiom,
+    (![X1, X0, X2] : ((from_5(X0,X1,sK0(X0,X1),sK1(X0,X1),X2) | ~eq(sK2(X0,X1),X2) | ~select_4(X0,X1))))).
+
+tff(u1740,axiom,
+    (![X16, X18, X17] : ((from_5(X16,X17,sK3(X16,X17),sK4(X16,X17),X18) | ~select_6(X16,X17) | ~eq(sK5(X16,X17),X18))))).
+
+tff(u1739,axiom,
+    (![X22, X25, X23, X24] : ((from_5(X23,X24,sK0(X22,X24),sK1(X22,X24),X25) | ~select_4(X22,X24) | ~eq(X22,X23) | ~eq(sK2(X22,X24),X25))))).
+
+tff(u1738,axiom,
+    (![X22, X25, X23, X24] : ((from_5(X24,X23,sK0(X24,X22),sK1(X24,X22),X25) | ~select_4(X24,X22) | ~eq(X22,X23) | ~eq(sK2(X24,X22),X25))))).
+
+tff(u1737,axiom,
+    (![X22, X25, X23, X24] : ((from_5(X22,X23,X24,sK1(X22,X23),X25) | ~select_4(X22,X23) | ~eq(sK0(X22,X23),X24) | ~eq(sK2(X22,X23),X25))))).
+
+tff(u1736,axiom,
+    (![X22, X25, X23, X24] : ((from_5(X22,X23,sK0(X22,X23),X24,X25) | ~select_4(X22,X23) | ~eq(sK1(X22,X23),X24) | ~eq(sK2(X22,X23),X25))))).
+
+tff(u1735,axiom,
+    (![X32, X29, X31, X28, X30] : ((from_5(X30,X31,sK0(X28,X29),sK1(X28,X29),X32) | ~eq(X28,X30) | ~eq(X29,X31) | ~select_4(X28,X29) | ~eq(sK2(X28,X29),X32))))).
+
+tff(u1734,axiom,
+    (![X32, X29, X31, X28, X30] : ((from_5(X30,X29,X31,sK1(X28,X29),X32) | ~eq(X28,X30) | ~eq(sK0(X28,X29),X31) | ~select_4(X28,X29) | ~eq(sK2(X28,X29),X32))))).
+
+tff(u1733,axiom,
+    (![X32, X29, X31, X28, X30] : ((from_5(X28,X30,X31,sK1(X28,X29),X32) | ~eq(X29,X30) | ~eq(sK0(X28,X29),X31) | ~select_4(X28,X29) | ~eq(sK2(X28,X29),X32))))).
+
+tff(u1732,axiom,
+    (![X32, X29, X31, X28, X30] : ((from_5(X30,X29,sK0(X28,X29),X31,X32) | ~eq(X28,X30) | ~eq(sK1(X28,X29),X31) | ~select_4(X28,X29) | ~eq(sK2(X28,X29),X32))))).
+
+tff(u1731,axiom,
+    (![X32, X29, X31, X28, X30] : ((from_5(X28,X30,sK0(X28,X29),X31,X32) | ~eq(X29,X30) | ~eq(sK1(X28,X29),X31) | ~select_4(X28,X29) | ~eq(sK2(X28,X29),X32))))).
+
+tff(u1730,axiom,
+    (![X32, X29, X31, X28, X30] : ((from_5(X28,X29,X30,X31,X32) | ~eq(sK0(X28,X29),X30) | ~eq(sK1(X28,X29),X31) | ~select_4(X28,X29) | ~eq(sK2(X28,X29),X32))))).
+
+tff(u1729,axiom,
+    (![X34, X36, X38, X35, X37, X39] : ((from_5(X35,X37,X38,sK1(X34,X36),X39) | ~eq(X36,X37) | ~select_4(X34,X36) | ~eq(sK0(X34,X36),X38) | ~eq(X34,X35) | ~eq(sK2(X34,X36),X39))))).
+
+tff(u1728,axiom,
+    (![X34, X36, X38, X35, X37, X39] : ((from_5(X35,X37,sK0(X34,X36),X38,X39) | ~eq(X36,X37) | ~select_4(X34,X36) | ~eq(sK1(X34,X36),X38) | ~eq(X34,X35) | ~eq(sK2(X34,X36),X39))))).
+
+tff(u1727,axiom,
+    (![X1, X0, X2] : ((from_5(X0,X1,sK0(X0,X1),X2,sK2(X0,X1)) | ~eq(sK1(X0,X1),X2) | ~select_4(X0,X1))))).
+
+tff(u1726,axiom,
+    (![X18, X20, X19, X21] : ((from_5(X19,X20,sK0(X18,X20),X21,sK2(X18,X20)) | ~select_4(X18,X20) | ~eq(X18,X19) | ~eq(sK1(X18,X20),X21))))).
+
+tff(u1725,axiom,
+    (![X18, X20, X19, X21] : ((from_5(X20,X19,sK0(X20,X18),X21,sK2(X20,X18)) | ~select_4(X20,X18) | ~eq(X18,X19) | ~eq(sK1(X20,X18),X21))))).
+
+tff(u1724,axiom,
+    (![X18, X20, X19, X21] : ((from_5(X18,X19,X20,X21,sK2(X18,X19)) | ~select_4(X18,X19) | ~eq(sK0(X18,X19),X20) | ~eq(sK1(X18,X19),X21))))).
+
+tff(u1723,axiom,
+    (![X25, X27, X23, X24, X26] : ((from_5(X25,X24,X26,X27,sK2(X23,X24)) | ~eq(X23,X25) | ~eq(sK0(X23,X24),X26) | ~select_4(X23,X24) | ~eq(sK1(X23,X24),X27))))).
+
+tff(u1722,axiom,
+    (![X25, X27, X23, X24, X26] : ((from_5(X23,X25,X26,X27,sK2(X23,X24)) | ~eq(X24,X25) | ~eq(sK0(X23,X24),X26) | ~select_4(X23,X24) | ~eq(sK1(X23,X24),X27))))).
+
+tff(u1721,axiom,
+    (![X32, X29, X31, X33, X28, X30] : ((from_5(X29,X31,X32,X33,sK2(X28,X30)) | ~eq(X30,X31) | ~select_4(X28,X30) | ~eq(sK0(X28,X30),X32) | ~eq(X28,X29) | ~eq(sK1(X28,X30),X33))))).
+
+tff(u1720,axiom,
+    (![X25, X27, X23, X24, X26] : ((from_5(X25,X26,sK0(X23,X24),X27,sK2(X23,X24)) | ~eq(X23,X25) | ~eq(X24,X26) | ~select_4(X23,X24) | ~eq(sK1(X23,X24),X27))))).
+
+tff(u1719,axiom,
+    (![X1, X0] : ((from_5(X0,X1,sK0(X0,X1),sK1(X0,X1),sK2(X0,X1)) | ~select_4(X0,X1))))).
+
+tff(u1718,axiom,
+    (![X1, X0, X2] : ((from_5(X0,X1,sK0(X2,X1),sK1(X2,X1),sK2(X2,X1)) | ~eq(X2,X0) | ~select_4(X2,X1))))).
+
+tff(u1717,axiom,
+    (![X1, X0, X2] : ((from_5(X0,X1,sK0(X0,X2),sK1(X0,X2),sK2(X0,X2)) | ~eq(X2,X1) | ~select_4(X0,X2))))).
+
+tff(u1716,axiom,
+    (![X11, X13, X10, X12] : ((from_5(X11,X13,sK0(X10,X12),sK1(X10,X12),sK2(X10,X12)) | ~select_4(X10,X12) | ~eq(X10,X11) | ~eq(X12,X13))))).
+
+tff(u1715,axiom,
+    (![X1, X0, X2] : ((from_5(X0,X1,X2,sK1(X0,X1),sK2(X0,X1)) | ~eq(sK0(X0,X1),X2) | ~select_4(X0,X1))))).
+
+tff(u1714,axiom,
+    (![X16, X15, X17, X14] : ((from_5(X15,X16,X17,sK1(X14,X16),sK2(X14,X16)) | ~select_4(X14,X16) | ~eq(X14,X15) | ~eq(sK0(X14,X16),X17))))).
+
+tff(u1713,axiom,
+    (![X16, X15, X17, X14] : ((from_5(X16,X15,X17,sK1(X16,X14),sK2(X16,X14)) | ~select_4(X16,X14) | ~eq(X14,X15) | ~eq(sK0(X16,X14),X17))))).
+
+tff(u1712,axiom,
+    (![X18, X20, X22, X19, X21] : ((from_5(X20,X21,X22,sK1(X18,X19),sK2(X18,X19)) | ~eq(X18,X20) | ~eq(X19,X21) | ~select_4(X18,X19) | ~eq(sK0(X18,X19),X22))))).
+
+tff(u1711,axiom,
+    (![X1, X0] : ((from_5(X0,X1,sK3(X0,X1),sK4(X0,X1),sK5(X0,X1)) | ~select_6(X0,X1))))).
+
+tff(u1710,axiom,
+    (![X5, X4, X6] : ((from_5(X6,X5,sK3(X4,X5),sK4(X4,X5),sK5(X4,X5)) | ~select_6(X4,X5) | ~eq(X4,X6))))).
+
+tff(u1709,axiom,
+    (![X9, X7, X8] : ((from_5(X7,X9,sK3(X7,X8),sK4(X7,X8),sK5(X7,X8)) | ~select_6(X7,X8) | ~eq(X8,X9))))).
+
+tff(u1708,axiom,
+    (![X11, X10, X12] : ((from_5(X10,X11,X12,sK4(X10,X11),sK5(X10,X11)) | ~select_6(X10,X11) | ~eq(sK3(X10,X11),X12))))).
+
+tff(u1707,axiom,
+    (![X13, X15, X14] : ((from_5(X13,X14,sK3(X13,X14),X15,sK5(X13,X14)) | ~select_6(X13,X14) | ~eq(sK4(X13,X14),X15))))).
+
+tff(u1706,axiom,
+    (![X1, X3, X0, X2, X4] : ((~tab1(X0,X1,X2,X3,X4) | from_5(X0,X1,X2,X3,X4))))).
+
+tff(u1705,axiom,
+    (![X1, X3, X5, X0, X2, X4] : ((~tab1(X1,X2,X3,X4,X5) | tab1(X0,X2,X3,X4,X5) | ~eq(X1,X0))))).
+
+tff(u1704,axiom,
+    (![X1, X3, X5, X0, X2, X4] : ((~tab1(X1,X2,X3,X4,X5) | tab1(X1,X0,X3,X4,X5) | ~eq(X2,X0))))).
+
+tff(u1703,axiom,
+    (![X1, X3, X5, X0, X2, X4] : ((~tab1(X1,X2,X3,X4,X5) | tab1(X1,X2,X0,X4,X5) | ~eq(X3,X0))))).
+
+tff(u1702,axiom,
+    (![X1, X3, X5, X0, X2, X4] : ((~tab1(X1,X2,X3,X4,X5) | tab1(X1,X2,X3,X0,X5) | ~eq(X4,X0))))).
+
+tff(u1701,axiom,
+    (![X1, X3, X5, X0, X2, X4] : ((~tab1(X1,X2,X3,X4,X5) | tab1(X1,X2,X3,X4,X0) | ~eq(X5,X0))))).
+
+tff(u1700,axiom,
+    (![X1, X3, X5, X7, X0, X2, X4, X6] : ((~tab1(X0,X2,X3,X4,X5) | from_7(X1,X2,X3,X4,X5,sK6(X6,X7),sK7(X6,X7),sK8(X6,X7),sK9(X6,X7),sK10(X6,X7)) | ~eq(X0,X1) | ~select_6(X6,X7))))).
+
+tff(u1699,axiom,
+    (![X1, X3, X5, X7, X0, X2, X4, X6] : ((~tab1(X2,X0,X3,X4,X5) | from_7(X2,X1,X3,X4,X5,sK6(X6,X7),sK7(X6,X7),sK8(X6,X7),sK9(X6,X7),sK10(X6,X7)) | ~eq(X0,X1) | ~select_6(X6,X7))))).
+
+tff(u1698,axiom,
+    (![X1, X3, X5, X7, X0, X2, X4, X6] : ((~tab1(X2,X3,X0,X4,X5) | from_7(X2,X3,X1,X4,X5,sK6(X6,X7),sK7(X6,X7),sK8(X6,X7),sK9(X6,X7),sK10(X6,X7)) | ~eq(X0,X1) | ~select_6(X6,X7))))).
+
+tff(u1697,axiom,
+    (![X1, X3, X5, X7, X0, X2, X4, X6] : ((~tab1(X2,X3,X4,X0,X5) | from_7(X2,X3,X4,X1,X5,sK6(X6,X7),sK7(X6,X7),sK8(X6,X7),sK9(X6,X7),sK10(X6,X7)) | ~eq(X0,X1) | ~select_6(X6,X7))))).
+
+tff(u1696,axiom,
+    (![X1, X3, X5, X7, X0, X2, X4, X6] : ((~tab1(X2,X3,X4,X5,X0) | from_7(X2,X3,X4,X5,X1,sK6(X6,X7),sK7(X6,X7),sK8(X6,X7),sK9(X6,X7),sK10(X6,X7)) | ~eq(X0,X1) | ~select_6(X6,X7))))).
+
+tff(u1695,axiom,
+    (![X1, X0] : ((tab1(X0,X1,sK0(X0,X1),sK1(X0,X1),sK2(X0,X1)) | ~select_4(X0,X1))))).
+
+tff(u1694,axiom,
+    (![X1, X0, X2] : ((tab1(X0,X1,sK0(X0,X1),sK1(X0,X1),X2) | ~select_4(X0,X1) | ~eq(sK2(X0,X1),X2))))).
+
+tff(u1693,axiom,
+    (![X3, X5, X4] : ((tab1(X3,X4,sK0(X3,X4),X5,sK2(X3,X4)) | ~select_4(X3,X4) | ~eq(sK1(X3,X4),X5))))).
+
+tff(u1692,axiom,
+    (![X16, X18, X15, X17] : ((tab1(X15,X16,sK0(X15,X16),X18,X17) | ~eq(sK2(X15,X16),X17) | ~select_4(X15,X16) | ~eq(sK1(X15,X16),X18))))).
+
+tff(u1691,axiom,
+    (![X9, X11, X10] : ((tab1(X9,X11,sK0(X9,X10),sK1(X9,X10),sK2(X9,X10)) | ~select_4(X9,X10) | ~eq(X10,X11))))).
+
+tff(u1690,axiom,
+    (![X9, X7, X8, X10] : ((tab1(X7,X10,sK0(X7,X8),sK1(X7,X8),X9) | ~eq(sK2(X7,X8),X9) | ~select_4(X7,X8) | ~eq(X8,X10))))).
+
+tff(u1689,axiom,
+    (![X9, X7, X8, X10] : ((tab1(X7,X10,sK0(X7,X8),X9,sK2(X7,X8)) | ~eq(sK1(X7,X8),X9) | ~select_4(X7,X8) | ~eq(X8,X10))))).
+
+tff(u1688,axiom,
+    (![X20, X22, X19, X21, X23] : ((tab1(X19,X22,sK0(X19,X20),X23,X21) | ~select_4(X19,X20) | ~eq(X20,X22) | ~eq(sK2(X19,X20),X21) | ~eq(sK1(X19,X20),X23))))).
+
+tff(u1687,axiom,
+    (![X13, X12, X14] : ((tab1(X14,X13,sK0(X12,X13),sK1(X12,X13),sK2(X12,X13)) | ~select_4(X12,X13) | ~eq(X12,X14))))).
+
+tff(u1686,axiom,
+    (![X3, X5, X4, X6] : ((tab1(X6,X4,sK0(X3,X4),sK1(X3,X4),X5) | ~eq(sK2(X3,X4),X5) | ~select_4(X3,X4) | ~eq(X3,X6))))).
+
+tff(u1685,axiom,
+    (![X3, X5, X4, X6] : ((tab1(X6,X4,sK0(X3,X4),X5,sK2(X3,X4)) | ~eq(sK1(X3,X4),X5) | ~select_4(X3,X4) | ~eq(X3,X6))))).
+
+tff(u1684,axiom,
+    (![X20, X22, X19, X21, X23] : ((tab1(X22,X20,sK0(X19,X20),X23,X21) | ~select_4(X19,X20) | ~eq(X19,X22) | ~eq(sK2(X19,X20),X21) | ~eq(sK1(X19,X20),X23))))).
+
+tff(u1683,axiom,
+    (![X3, X5, X4, X6] : ((tab1(X6,X5,sK0(X3,X4),sK1(X3,X4),sK2(X3,X4)) | ~eq(X4,X5) | ~select_4(X3,X4) | ~eq(X3,X6))))).
+
+tff(u1682,axiom,
+    (![X9, X11, X13, X10, X12] : ((tab1(X12,X13,sK0(X9,X10),sK1(X9,X10),X11) | ~select_4(X9,X10) | ~eq(X9,X12) | ~eq(sK2(X9,X10),X11) | ~eq(X10,X13))))).
+
+tff(u1681,axiom,
+    (![X9, X11, X13, X10, X12] : ((tab1(X12,X13,sK0(X9,X10),X11,sK2(X9,X10)) | ~select_4(X9,X10) | ~eq(X9,X12) | ~eq(sK1(X9,X10),X11) | ~eq(X10,X13))))).
+
+tff(u1680,axiom,
+    (![X25, X27, X23, X24, X26, X28] : ((tab1(X25,X27,sK0(X23,X24),X28,X26) | ~eq(X23,X25) | ~eq(sK2(X23,X24),X26) | ~eq(X24,X27) | ~select_4(X23,X24) | ~eq(sK1(X23,X24),X28))))).
+
+tff(u1679,axiom,
+    (![X7, X8, X6] : ((tab1(X6,X7,X8,sK1(X6,X7),sK2(X6,X7)) | ~select_4(X6,X7) | ~eq(sK0(X6,X7),X8))))).
+
+tff(u1678,axiom,
+    (![X11, X13, X12, X14] : ((tab1(X11,X12,X14,sK1(X11,X12),X13) | ~eq(sK2(X11,X12),X13) | ~select_4(X11,X12) | ~eq(sK0(X11,X12),X14))))).
+
+tff(u1677,axiom,
+    (![X3, X5, X4, X6] : ((tab1(X6,X4,X5,sK1(X3,X4),sK2(X3,X4)) | ~eq(sK0(X3,X4),X5) | ~select_4(X3,X4) | ~eq(X3,X6))))).
+
+tff(u1676,axiom,
+    (![X16, X18, X15, X17, X14] : ((tab1(X17,X15,X18,sK1(X14,X15),X16) | ~select_4(X14,X15) | ~eq(X14,X17) | ~eq(sK2(X14,X15),X16) | ~eq(sK0(X14,X15),X18))))).
+
+tff(u1675,axiom,
+    (![X9, X7, X8, X10] : ((tab1(X7,X10,X9,sK1(X7,X8),sK2(X7,X8)) | ~eq(sK0(X7,X8),X9) | ~select_4(X7,X8) | ~eq(X8,X10))))).
+
+tff(u1674,axiom,
+    (![X16, X18, X15, X17, X14] : ((tab1(X14,X17,X18,sK1(X14,X15),X16) | ~select_4(X14,X15) | ~eq(X15,X17) | ~eq(sK2(X14,X15),X16) | ~eq(sK0(X14,X15),X18))))).
+
+tff(u1673,axiom,
+    (![X9, X11, X13, X10, X12] : ((tab1(X12,X13,X11,sK1(X9,X10),sK2(X9,X10)) | ~select_4(X9,X10) | ~eq(X9,X12) | ~eq(sK0(X9,X10),X11) | ~eq(X10,X13))))).
+
+tff(u1672,axiom,
+    (![X18, X20, X22, X17, X19, X21] : ((tab1(X19,X21,X22,sK1(X17,X18),X20) | ~eq(X17,X19) | ~eq(sK2(X17,X18),X20) | ~eq(X18,X21) | ~select_4(X17,X18) | ~eq(sK0(X17,X18),X22))))).
+
+tff(u1671,axiom,
+    (![X9, X8, X10] : ((tab1(X8,X9,X10,sK4(X8,X9),sK5(X8,X9)) | ~select_6(X8,X9) | ~eq(sK3(X8,X9),X10))))).
+
+tff(u1670,axiom,
+    (![X11, X13, X12, X14] : ((tab1(X11,X12,X14,X13,sK2(X11,X12)) | ~eq(sK1(X11,X12),X13) | ~select_4(X11,X12) | ~eq(sK0(X11,X12),X14))))).
+
+tff(u1669,axiom,
+    (![X16, X18, X15, X17, X14] : ((tab1(X17,X15,X18,X16,sK2(X14,X15)) | ~select_4(X14,X15) | ~eq(X14,X17) | ~eq(sK1(X14,X15),X16) | ~eq(sK0(X14,X15),X18))))).
+
+tff(u1668,axiom,
+    (![X16, X18, X15, X17, X14] : ((tab1(X14,X17,X18,X16,sK2(X14,X15)) | ~select_4(X14,X15) | ~eq(X15,X17) | ~eq(sK1(X14,X15),X16) | ~eq(sK0(X14,X15),X18))))).
+
+tff(u1667,axiom,
+    (![X18, X20, X22, X17, X19, X21] : ((tab1(X19,X21,X22,X20,sK2(X17,X18)) | ~eq(X17,X19) | ~eq(sK1(X17,X18),X20) | ~eq(X18,X21) | ~select_4(X17,X18) | ~eq(sK0(X17,X18),X22))))).
+
+tff(u1666,axiom,
+    (![X20, X22, X19, X21, X23] : ((tab1(X19,X20,X22,X23,X21) | ~select_4(X19,X20) | ~eq(sK0(X19,X20),X22) | ~eq(sK2(X19,X20),X21) | ~eq(sK1(X19,X20),X23))))).
+
+tff(u1665,axiom,
+    (![X1, X0] : ((tab1(X0,X1,sK3(X0,X1),sK4(X0,X1),sK5(X0,X1)) | ~select_6(X0,X1))))).
+
+tff(u1664,axiom,
+    (![X3, X2, X4] : ((tab1(X4,X3,sK3(X2,X3),sK4(X2,X3),sK5(X2,X3)) | ~select_6(X2,X3) | ~eq(X2,X4))))).
+
+tff(u1663,axiom,
+    (![X5, X7, X6] : ((tab1(X5,X7,sK3(X5,X6),sK4(X5,X6),sK5(X5,X6)) | ~select_6(X5,X6) | ~eq(X6,X7))))).
+
+tff(u1662,axiom,
+    (![X11, X13, X12] : ((tab1(X11,X12,sK3(X11,X12),X13,sK5(X11,X12)) | ~select_6(X11,X12) | ~eq(sK4(X11,X12),X13))))).
+
+tff(u1661,axiom,
+    (![X16, X15, X14] : ((tab1(X14,X15,sK3(X14,X15),sK4(X14,X15),X16) | ~select_6(X14,X15) | ~eq(sK5(X14,X15),X16))))).
+
+tff(u1660,axiom,
+    (![X1, X0] : ((~select_4(X0,X1) | subquery_from_3(X0,X1))))).
+
+tff(u1659,negated_conjecture,
+    ((~main_query_1(sK11,sK12)) | select_4(sK11,sK12))).
+
+tff(u1658,axiom,
+    (![X1, X0] : ((~subquery_from_3(X0,X1) | from_2(X0,X1))))).
+
+tff(u1657,axiom,
+    (![X1, X0] : ((~subquery_from_3(X0,X1) | select_4(X0,X1))))).
+
+tff(u1656,negated_conjecture,
+    ((~main_query_1(sK11,sK12)) | subquery_from_3(sK11,sK12))).
+
+tff(u1655,axiom,
+    (![X1, X0] : ((~from_2(X0,X1) | select_1(X0,X1))))).
+
+tff(u1654,axiom,
+    (![X1, X0] : ((~from_2(X0,X1) | subquery_from_3(X0,X1))))).
+
+tff(u1653,negated_conjecture,
+    ((~main_query_1(sK11,sK12)) | from_2(sK11,sK12))).
+
+tff(u1652,axiom,
+    (![X1, X0] : ((~select_1(X0,X1) | main_query_1(X0,X1))))).
+
+tff(u1651,axiom,
+    (![X1, X0] : ((~select_1(X0,X1) | from_2(X0,X1))))).
+
+tff(u1650,negated_conjecture,
+    ((~main_query_1(sK11,sK12)) | select_1(sK11,sK12))).
+
+tff(u1649,axiom,
+    (![X1, X0] : ((~main_query_1(X0,X1) | select_1(X0,X1))))).
+
+tff(u1648,negated_conjecture,
+    ((~main_query_1(sK11,sK12)) | main_query_1(sK11,sK12))).
+
+tff(u1647,axiom,
+    (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((~from_7(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | tab1(X0,X1,X2,X3,X4))))).
+
+tff(u1646,axiom,
+    (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((~from_7(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | tab2(X5,X6,X7,X8,X9))))).
+
+tff(u1645,axiom,
+    (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((~from_7(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | select_6(X0,X1))))).
+
+tff(u1644,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~from_7(X1,X2,X3,X4,X5,X6,X7,X8,X9,X10) | from_7(X0,X2,X3,X4,X5,X6,X7,X8,X9,X10) | ~eq(X1,X0))))).
+
+tff(u1643,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~from_7(X1,X2,X3,X4,X5,X6,X7,X8,X9,X10) | from_7(X1,X0,X3,X4,X5,X6,X7,X8,X9,X10) | ~eq(X2,X0))))).
+
+tff(u1642,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~from_7(X1,X2,X3,X4,X5,X6,X7,X8,X9,X10) | from_7(X1,X2,X0,X4,X5,X6,X7,X8,X9,X10) | ~eq(X3,X0))))).
+
+tff(u1641,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~from_7(X1,X2,X3,X4,X5,X6,X7,X8,X9,X10) | from_7(X1,X2,X3,X0,X5,X6,X7,X8,X9,X10) | ~eq(X4,X0))))).
+
+tff(u1640,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~from_7(X1,X2,X3,X4,X5,X6,X7,X8,X9,X10) | from_7(X1,X2,X3,X4,X0,X6,X7,X8,X9,X10) | ~eq(X5,X0))))).
+
+tff(u1639,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~from_7(X1,X2,X3,X4,X5,X6,X7,X8,X9,X10) | from_7(X1,X2,X3,X4,X5,X0,X7,X8,X9,X10) | ~eq(X6,X0))))).
+
+tff(u1638,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~from_7(X1,X2,X3,X4,X5,X6,X7,X8,X9,X10) | from_7(X1,X2,X3,X4,X5,X6,X0,X8,X9,X10) | ~eq(X7,X0))))).
+
+tff(u1637,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~from_7(X1,X2,X3,X4,X5,X6,X7,X8,X9,X10) | from_7(X1,X2,X3,X4,X5,X6,X7,X0,X9,X10) | ~eq(X8,X0))))).
+
+tff(u1636,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~from_7(X1,X2,X3,X4,X5,X6,X7,X8,X9,X10) | from_7(X1,X2,X3,X4,X5,X6,X7,X8,X0,X10) | ~eq(X9,X0))))).
+
+tff(u1635,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~from_7(X1,X2,X3,X4,X5,X6,X7,X8,X9,X10) | from_7(X1,X2,X3,X4,X5,X6,X7,X8,X9,X0) | ~eq(X10,X0))))).
+
+tff(u1634,axiom,
+    (![X9, X1, X3, X5, X7, X8, X0, X2, X4, X6] : ((from_7(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | ~tab2(X5,X6,X7,X8,X9) | ~tab1(X0,X1,X2,X3,X4))))).
+
+tff(u1633,axiom,
+    (![X1, X3, X5, X7, X0, X2, X4, X6] : ((from_7(X3,X4,X5,X6,X7,X2,sK7(X0,X1),sK8(X0,X1),sK9(X0,X1),sK10(X0,X1)) | ~eq(sK6(X0,X1),X2) | ~tab1(X3,X4,X5,X6,X7) | ~select_6(X0,X1))))).
+
+tff(u1632,axiom,
+    (![X1, X3, X5, X7, X0, X2, X4, X6] : ((from_7(X3,X4,X5,X6,X7,sK6(X0,X1),X2,sK8(X0,X1),sK9(X0,X1),sK10(X0,X1)) | ~eq(sK7(X0,X1),X2) | ~tab1(X3,X4,X5,X6,X7) | ~select_6(X0,X1))))).
+
+tff(u1631,axiom,
+    (![X1, X3, X5, X7, X0, X2, X4, X6] : ((from_7(X3,X4,X5,X6,X7,sK6(X0,X1),sK7(X0,X1),X2,sK9(X0,X1),sK10(X0,X1)) | ~eq(sK8(X0,X1),X2) | ~tab1(X3,X4,X5,X6,X7) | ~select_6(X0,X1))))).
+
+tff(u1630,axiom,
+    (![X13, X12, X14] : ((from_7(X12,X13,X14,sK4(X12,X13),sK5(X12,X13),sK6(X12,X13),sK7(X12,X13),sK8(X12,X13),sK9(X12,X13),sK10(X12,X13)) | ~select_6(X12,X13) | ~eq(sK3(X12,X13),X14))))).
+
+tff(u1629,axiom,
+    (![X1, X0] : ((from_7(X0,X1,sK3(X0,X1),sK4(X0,X1),sK5(X0,X1),sK6(X0,X1),sK7(X0,X1),sK8(X0,X1),sK9(X0,X1),sK10(X0,X1)) | ~select_6(X0,X1))))).
+
+tff(u1628,axiom,
+    (![X7, X8, X6] : ((from_7(X8,X7,sK3(X6,X7),sK4(X6,X7),sK5(X6,X7),sK6(X6,X7),sK7(X6,X7),sK8(X6,X7),sK9(X6,X7),sK10(X6,X7)) | ~select_6(X6,X7) | ~eq(X6,X8))))).
+
+tff(u1627,axiom,
+    (![X9, X11, X10] : ((from_7(X9,X11,sK3(X9,X10),sK4(X9,X10),sK5(X9,X10),sK6(X9,X10),sK7(X9,X10),sK8(X9,X10),sK9(X9,X10),sK10(X9,X10)) | ~select_6(X9,X10) | ~eq(X10,X11))))).
+
+tff(u1626,axiom,
+    (![X16, X15, X17] : ((from_7(X15,X16,sK3(X15,X16),X17,sK5(X15,X16),sK6(X15,X16),sK7(X15,X16),sK8(X15,X16),sK9(X15,X16),sK10(X15,X16)) | ~select_6(X15,X16) | ~eq(sK4(X15,X16),X17))))).
+
+tff(u1625,axiom,
+    (![X18, X20, X19] : ((from_7(X18,X19,sK3(X18,X19),sK4(X18,X19),X20,sK6(X18,X19),sK7(X18,X19),sK8(X18,X19),sK9(X18,X19),sK10(X18,X19)) | ~select_6(X18,X19) | ~eq(sK5(X18,X19),X20))))).
+
+tff(u1624,axiom,
+    (![X22, X21, X23] : ((from_7(X21,X22,sK3(X21,X22),sK4(X21,X22),sK5(X21,X22),X23,sK7(X21,X22),sK8(X21,X22),sK9(X21,X22),sK10(X21,X22)) | ~select_6(X21,X22) | ~eq(sK6(X21,X22),X23))))).
+
+tff(u1623,axiom,
+    (![X25, X24, X26] : ((from_7(X24,X25,sK3(X24,X25),sK4(X24,X25),sK5(X24,X25),sK6(X24,X25),X26,sK8(X24,X25),sK9(X24,X25),sK10(X24,X25)) | ~select_6(X24,X25) | ~eq(sK7(X24,X25),X26))))).
+
+tff(u1622,axiom,
+    (![X27, X29, X28] : ((from_7(X27,X28,sK3(X27,X28),sK4(X27,X28),sK5(X27,X28),sK6(X27,X28),sK7(X27,X28),X29,sK9(X27,X28),sK10(X27,X28)) | ~select_6(X27,X28) | ~eq(sK8(X27,X28),X29))))).
+
+tff(u1621,axiom,
+    (![X32, X31, X30] : ((from_7(X30,X31,sK3(X30,X31),sK4(X30,X31),sK5(X30,X31),sK6(X30,X31),sK7(X30,X31),sK8(X30,X31),X32,sK10(X30,X31)) | ~select_6(X30,X31) | ~eq(sK9(X30,X31),X32))))).
+
+tff(u1620,axiom,
+    (![X34, X33, X35] : ((from_7(X33,X34,sK3(X33,X34),sK4(X33,X34),sK5(X33,X34),sK6(X33,X34),sK7(X33,X34),sK8(X33,X34),sK9(X33,X34),X35) | ~select_6(X33,X34) | ~eq(sK10(X33,X34),X35))))).
+
+tff(u1619,axiom,
+    (![X1, X3, X5, X0, X2, X4] : ((~tab2(X1,X2,X3,X4,X5) | tab2(X0,X2,X3,X4,X5) | ~eq(X1,X0))))).
+
+tff(u1618,axiom,
+    (![X1, X3, X5, X0, X2, X4] : ((~tab2(X1,X2,X3,X4,X5) | tab2(X1,X0,X3,X4,X5) | ~eq(X2,X0))))).
+
+tff(u1617,axiom,
+    (![X1, X3, X5, X0, X2, X4] : ((~tab2(X1,X2,X3,X4,X5) | tab2(X1,X2,X0,X4,X5) | ~eq(X3,X0))))).
+
+tff(u1616,axiom,
+    (![X1, X3, X5, X0, X2, X4] : ((~tab2(X1,X2,X3,X4,X5) | tab2(X1,X2,X3,X0,X5) | ~eq(X4,X0))))).
+
+tff(u1615,axiom,
+    (![X1, X3, X5, X0, X2, X4] : ((~tab2(X1,X2,X3,X4,X5) | tab2(X1,X2,X3,X4,X0) | ~eq(X5,X0))))).
+
+tff(u1614,axiom,
+    ((~(![X20, X22, X21, X23, X24] : (~tab2(X20,X21,X22,X23,X24)))) | (![X20, X22, X21, X23, X24] : (~tab2(X20,X21,X22,X23,X24))))).
+
+tff(u1613,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~tab2(X5,X6,X7,X8,X9) | ~eq(X10,X0) | from_7(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | ~tab1(X10,X1,X2,X3,X4))))).
+
+tff(u1612,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~tab2(X5,X6,X7,X8,X9) | ~eq(X10,X1) | from_7(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | ~tab1(X0,X10,X2,X3,X4))))).
+
+tff(u1611,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~tab2(X5,X6,X7,X8,X9) | ~eq(X10,X2) | from_7(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | ~tab1(X0,X1,X10,X3,X4))))).
+
+tff(u1610,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~tab2(X5,X6,X7,X8,X9) | ~eq(X10,X3) | from_7(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | ~tab1(X0,X1,X2,X10,X4))))).
+
+tff(u1609,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~tab2(X5,X6,X7,X8,X9) | ~eq(X10,X4) | from_7(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | ~tab1(X0,X1,X2,X3,X10))))).
+
+tff(u1608,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~tab2(X10,X6,X7,X8,X9) | ~eq(X10,X5) | from_7(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | ~tab1(X0,X1,X2,X3,X4))))).
+
+tff(u1607,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~tab2(X5,X10,X7,X8,X9) | ~eq(X10,X6) | from_7(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | ~tab1(X0,X1,X2,X3,X4))))).
+
+tff(u1606,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~tab2(X5,X6,X10,X8,X9) | ~eq(X10,X7) | from_7(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | ~tab1(X0,X1,X2,X3,X4))))).
+
+tff(u1605,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~tab2(X5,X6,X7,X10,X9) | ~eq(X10,X8) | from_7(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | ~tab1(X0,X1,X2,X3,X4))))).
+
+tff(u1604,axiom,
+    (![X9, X1, X3, X5, X7, X8, X10, X0, X2, X4, X6] : ((~tab2(X5,X6,X7,X8,X10) | ~eq(X10,X9) | from_7(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9) | ~tab1(X0,X1,X2,X3,X4))))).
+
+tff(u1603,axiom,
+    (![X3, X2] : ((tab2(sK6(X2,X3),sK7(X2,X3),sK8(X2,X3),sK9(X2,X3),sK10(X2,X3)) | ~select_6(X2,X3))))).
+
+tff(u1602,axiom,
+    (![X1, X0, X2] : ((tab2(sK6(X0,X1),sK7(X0,X1),sK8(X0,X1),sK9(X0,X1),X2) | ~select_6(X0,X1) | ~eq(sK10(X0,X1),X2))))).
+
+tff(u1601,axiom,
+    (![X3, X5, X4] : ((tab2(sK6(X3,X4),sK7(X3,X4),sK8(X3,X4),X5,sK10(X3,X4)) | ~select_6(X3,X4) | ~eq(sK9(X3,X4),X5))))).
+
+tff(u1600,axiom,
+    (![X7, X8, X6] : ((tab2(sK6(X6,X7),sK7(X6,X7),X8,sK9(X6,X7),sK10(X6,X7)) | ~select_6(X6,X7) | ~eq(sK8(X6,X7),X8))))).
+
+tff(u1599,axiom,
+    (![X9, X11, X10] : ((tab2(sK6(X9,X10),X11,sK8(X9,X10),sK9(X9,X10),sK10(X9,X10)) | ~select_6(X9,X10) | ~eq(sK7(X9,X10),X11))))).
+
+tff(u1598,axiom,
+    (![X13, X12, X14] : ((tab2(X14,sK7(X12,X13),sK8(X12,X13),sK9(X12,X13),sK10(X12,X13)) | ~select_6(X12,X13) | ~eq(sK6(X12,X13),X14))))).
+
+tff(u1597,axiom,
+    ((~(![X20, X22, X21, X23, X24] : (~tab2(X20,X21,X22,X23,X24)))) | (![X1, X0] : (~select_6(X0,X1))))).
+
+tff(u1596,axiom,
+    (![X3, X2] : ((~select_6(X2,X3) | select_4(X2,X3))))).
+
+tff(u1595,axiom,
+    (![X1, X0] : ((~select_6(X0,X1) | main_query_2(X0,X1))))).
+
+tff(u1594,axiom,
+    (![X1, X0] : ((~main_query_2(X0,X1) | select_6(X0,X1))))).
+
+tff(u1593,negated_conjecture,
+    ((~~main_query_2(sK11,sK12)) | ~main_query_2(sK11,sK12))).
+
+tff(u1592,axiom,
+    (![X1, X0] : ((~eq(X0,X1) | eq(X1,X0))))).
+
+tff(u1591,axiom,
+    (![X1, X0, X2] : ((~eq(X1,X2) | eq(X0,X2) | ~eq(X0,X1))))).
+
+tff(u1590,axiom,
+    (![X1, X0] : ((~eq(X0,X1) | lte(X0,X1))))).
+
+tff(u1589,axiom,
+    (![X1, X0] : ((~eq(X0,X1) | lte(X1,X0))))).
+
+tff(u1588,axiom,
+    (![X1, X0, X2] : ((~eq(X1,X0) | ~select_1(X1,X2) | select_1(X0,X2))))).
+
+tff(u1587,axiom,
+    (![X1, X0, X2] : ((~eq(X2,X0) | ~select_1(X1,X2) | select_1(X1,X0))))).
+
+tff(u1586,axiom,
+    (![X1, X0, X2] : ((~eq(X1,X0) | ~main_query_2(X1,X2) | main_query_2(X0,X2))))).
+
+tff(u1585,axiom,
+    (![X1, X0, X2] : ((~eq(X2,X0) | ~main_query_2(X1,X2) | main_query_2(X1,X0))))).
+
+tff(u1584,axiom,
+    (![X1, X0, X2] : ((~eq(X1,X0) | ~select_4(X1,X2) | select_4(X0,X2))))).
+
+tff(u1583,axiom,
+    (![X1, X0, X2] : ((~eq(X2,X0) | ~select_4(X1,X2) | select_4(X1,X0))))).
+
+tff(u1582,axiom,
+    (![X1, X0, X2] : ((~eq(X1,X0) | ~subquery_from_3(X1,X2) | subquery_from_3(X0,X2))))).
+
+tff(u1581,axiom,
+    (![X1, X0, X2] : ((~eq(X2,X0) | ~subquery_from_3(X1,X2) | subquery_from_3(X1,X0))))).
+
+tff(u1580,axiom,
+    (![X1, X0, X2] : ((~eq(X1,X0) | ~from_2(X1,X2) | from_2(X0,X2))))).
+
+tff(u1579,axiom,
+    (![X1, X0, X2] : ((~eq(X2,X0) | ~from_2(X1,X2) | from_2(X1,X0))))).
+
+tff(u1578,axiom,
+    (![X1, X0, X2] : ((~eq(X1,X0) | ~main_query_1(X1,X2) | main_query_1(X0,X2))))).
+
+tff(u1577,axiom,
+    (![X1, X0, X2] : ((~eq(X2,X0) | ~main_query_1(X1,X2) | main_query_1(X1,X0))))).
+
+tff(u1576,axiom,
+    (![X1, X0, X2] : ((~eq(X1,X0) | ~select_6(X1,X2) | select_6(X0,X2))))).
+
+tff(u1575,axiom,
+    (![X1, X0, X2] : ((~eq(X2,X0) | ~select_6(X1,X2) | select_6(X1,X0))))).
+
+tff(u1574,axiom,
+    (![X9, X7, X8, X6] : ((~eq(X7,X9) | ~select_4(X6,X8) | from_5(X9,X8,sK0(X6,X8),sK1(X6,X8),sK2(X6,X8)) | ~eq(X6,X7))))).
+
+tff(u1573,axiom,
+    (![X11, X13, X10, X12] : ((~eq(X11,X13) | ~select_4(X12,X10) | from_5(X12,X13,sK0(X12,X10),sK1(X12,X10),sK2(X12,X10)) | ~eq(X10,X11))))).
+
+tff(u1572,axiom,
+    (![X9, X7, X8, X10] : ((~eq(X9,X10) | ~eq(X8,X9) | tab1(X7,X10,sK0(X7,X8),sK1(X7,X8),sK2(X7,X8)) | ~select_4(X7,X8))))).
+
+tff(u1571,axiom,
+    (![X3, X5, X4, X6] : ((~eq(X5,X6) | ~eq(X3,X5) | tab1(X6,X4,sK0(X3,X4),sK1(X3,X4),sK2(X3,X4)) | ~select_4(X3,X4))))).
+
+tff(u1570,axiom,
+    (![X5, X7, X4, X6] : ((~eq(X5,X7) | ~eq(X4,X6) | ~select_4(X4,X5) | select_4(X6,X7))))).
+
+tff(u1569,axiom,
+    (![X9, X11, X8, X10, X12] : ((~eq(X10,X12) | ~eq(X8,X10) | ~eq(X9,X11) | from_5(X12,X11,sK0(X8,X9),sK1(X8,X9),sK2(X8,X9)) | ~select_4(X8,X9))))).
+
+tff(u1568,axiom,
+    (![X16, X13, X15, X17, X14] : ((~eq(X16,X17) | ~eq(X13,X15) | ~eq(X14,X16) | from_5(X15,X17,sK0(X13,X14),sK1(X13,X14),sK2(X13,X14)) | ~select_4(X13,X14))))).
+
+tff(u1567,axiom,
+    (![X5, X7, X8, X4, X6] : ((~eq(X7,X8) | ~select_4(X6,X4) | ~eq(X6,X7) | tab1(X8,X5,sK0(X6,X4),sK1(X6,X4),sK2(X6,X4)) | ~eq(X4,X5))))).
+
+tff(u1566,axiom,
+    (![X9, X11, X13, X10, X12] : ((~eq(X11,X12) | ~select_4(X11,X9) | ~eq(X9,X10) | tab1(X12,X13,sK0(X11,X9),sK1(X11,X9),sK2(X11,X9)) | ~eq(X10,X13))))).
+
+tff(u1565,axiom,
+    (![X16, X15, X17, X14] : ((~eq(sK0(X14,X15),X16) | ~select_4(X14,X15) | from_5(X14,X15,X17,sK1(X14,X15),sK2(X14,X15)) | ~eq(X16,X17))))).
+
+tff(u1564,axiom,
+    (![X11, X13, X12, X14] : ((~eq(sK0(X11,X12),X13) | ~select_4(X11,X12) | tab1(X11,X12,X14,sK1(X11,X12),sK2(X11,X12)) | ~eq(X13,X14))))).
+
+tff(u1563,axiom,
+    (![X9, X11, X8, X10, X12] : ((~eq(sK0(X8,X9),X11) | ~eq(X8,X10) | ~select_4(X8,X9) | from_5(X12,X9,X11,sK1(X8,X9),sK2(X8,X9)) | ~eq(X10,X12))))).
+
+tff(u1562,axiom,
+    (![X18, X20, X22, X19, X21] : ((~eq(sK0(X18,X19),X21) | ~eq(X18,X20) | ~select_4(X18,X19) | from_5(X20,X19,X22,sK1(X18,X19),sK2(X18,X19)) | ~eq(X21,X22))))).
+
+tff(u1561,axiom,
+    (![X16, X13, X15, X17, X14] : ((~eq(sK0(X13,X14),X16) | ~eq(X14,X15) | ~select_4(X13,X14) | from_5(X13,X17,X16,sK1(X13,X14),sK2(X13,X14)) | ~eq(X15,X17))))).
+
+tff(u1560,axiom,
+    (![X18, X20, X22, X19, X21] : ((~eq(sK0(X18,X19),X21) | ~eq(X19,X20) | ~select_4(X18,X19) | from_5(X18,X20,X22,sK1(X18,X19),sK2(X18,X19)) | ~eq(X21,X22))))).
+
+tff(u1559,axiom,
+    (![X5, X7, X8, X4, X6] : ((~eq(sK0(X4,X5),X6) | ~select_4(X4,X5) | ~eq(X4,X7) | tab1(X8,X5,X6,sK1(X4,X5),sK2(X4,X5)) | ~eq(X7,X8))))).
+
+tff(u1558,axiom,
+    (![X16, X18, X15, X17, X14] : ((~eq(sK0(X14,X15),X16) | ~select_4(X14,X15) | ~eq(X14,X17) | tab1(X17,X15,X18,sK1(X14,X15),sK2(X14,X15)) | ~eq(X16,X18))))).
+
+tff(u1557,axiom,
+    (![X9, X11, X13, X10, X12] : ((~eq(sK0(X9,X10),X11) | ~select_4(X9,X10) | ~eq(X10,X12) | tab1(X9,X13,X11,sK1(X9,X10),sK2(X9,X10)) | ~eq(X12,X13))))).
+
+tff(u1556,axiom,
+    (![X16, X18, X15, X17, X14] : ((~eq(sK0(X14,X15),X16) | ~select_4(X14,X15) | ~eq(X15,X17) | tab1(X14,X17,X18,sK1(X14,X15),sK2(X14,X15)) | ~eq(X16,X18))))).
+
+tff(u1555,axiom,
+    (![X11, X13, X15, X10, X12, X14] : ((~eq(sK0(X10,X12),X14) | ~eq(X12,X13) | ~select_4(X10,X12) | ~eq(X10,X11) | from_5(X15,X13,X14,sK1(X10,X12),sK2(X10,X12)) | ~eq(X11,X15))))).
+
+tff(u1554,axiom,
+    (![X16, X18, X20, X17, X19, X21] : ((~eq(sK0(X16,X18),X20) | ~eq(X18,X19) | ~select_4(X16,X18) | ~eq(X16,X17) | from_5(X17,X21,X20,sK1(X16,X18),sK2(X16,X18)) | ~eq(X19,X21))))).
+
+tff(u1553,axiom,
+    (![X22, X25, X27, X23, X24, X26] : ((~eq(sK0(X22,X24),X26) | ~eq(X24,X25) | ~select_4(X22,X24) | ~eq(X22,X23) | from_5(X23,X25,X27,sK1(X22,X24),sK2(X22,X24)) | ~eq(X26,X27))))).
+
+tff(u1552,axiom,
+    (![X9, X5, X7, X8, X10, X6] : ((~eq(sK0(X5,X6),X8) | ~eq(X5,X7) | ~select_4(X5,X6) | ~eq(X6,X9) | tab1(X10,X9,X8,sK1(X5,X6),sK2(X5,X6)) | ~eq(X7,X10))))).
+
+tff(u1551,axiom,
+    (![X16, X11, X13, X15, X12, X14] : ((~eq(sK0(X11,X12),X14) | ~eq(X11,X13) | ~select_4(X11,X12) | ~eq(X12,X15) | tab1(X13,X16,X14,sK1(X11,X12),sK2(X11,X12)) | ~eq(X15,X16))))).
+
+tff(u1550,axiom,
+    (![X18, X20, X22, X17, X19, X21] : ((~eq(sK0(X17,X18),X20) | ~eq(X17,X19) | ~select_4(X17,X18) | ~eq(X18,X21) | tab1(X19,X21,X22,sK1(X17,X18),sK2(X17,X18)) | ~eq(X20,X22))))).
+
+tff(u1549,axiom,
+    (![X18, X20, X19, X21] : ((~eq(sK1(X18,X19),X20) | ~select_4(X18,X19) | from_5(X18,X19,sK0(X18,X19),X21,sK2(X18,X19)) | ~eq(X20,X21))))).
+
+tff(u1548,axiom,
+    (![X16, X18, X15, X17] : ((~eq(sK1(X15,X16),X17) | ~select_4(X15,X16) | tab1(X15,X16,sK0(X15,X16),X18,sK2(X15,X16)) | ~eq(X17,X18))))).
+
+tff(u1547,axiom,
+    (![X9, X11, X8, X10, X12] : ((~eq(sK1(X8,X9),X11) | ~eq(X8,X10) | ~select_4(X8,X9) | from_5(X12,X9,sK0(X8,X9),X11,sK2(X8,X9)) | ~eq(X10,X12))))).
+
+tff(u1546,axiom,
+    (![X25, X27, X23, X24, X26] : ((~eq(sK1(X23,X24),X26) | ~eq(X23,X25) | ~select_4(X23,X24) | from_5(X25,X24,sK0(X23,X24),X27,sK2(X23,X24)) | ~eq(X26,X27))))).
+
+tff(u1545,axiom,
+    (![X16, X13, X15, X17, X14] : ((~eq(sK1(X13,X14),X16) | ~eq(X14,X15) | ~select_4(X13,X14) | from_5(X13,X17,sK0(X13,X14),X16,sK2(X13,X14)) | ~eq(X15,X17))))).
+
+tff(u1544,axiom,
+    (![X25, X27, X23, X24, X26] : ((~eq(sK1(X23,X24),X26) | ~eq(X24,X25) | ~select_4(X23,X24) | from_5(X23,X25,sK0(X23,X24),X27,sK2(X23,X24)) | ~eq(X26,X27))))).
+
+tff(u1543,axiom,
+    (![X18, X20, X22, X19, X21] : ((~eq(sK1(X18,X19),X21) | ~eq(sK0(X18,X19),X20) | ~select_4(X18,X19) | from_5(X18,X19,X22,X21,sK2(X18,X19)) | ~eq(X20,X22))))).
+
+tff(u1542,axiom,
+    (![X25, X27, X23, X24, X26] : ((~eq(sK1(X23,X24),X26) | ~eq(sK0(X23,X24),X25) | ~select_4(X23,X24) | from_5(X23,X24,X25,X27,sK2(X23,X24)) | ~eq(X26,X27))))).
+
+tff(u1541,axiom,
+    (![X5, X7, X8, X4, X6] : ((~eq(sK1(X4,X5),X6) | ~select_4(X4,X5) | ~eq(X4,X7) | tab1(X8,X5,sK0(X4,X5),X6,sK2(X4,X5)) | ~eq(X7,X8))))).
+
+tff(u1540,axiom,
+    (![X20, X22, X19, X21, X23] : ((~eq(sK1(X19,X20),X21) | ~select_4(X19,X20) | ~eq(X19,X22) | tab1(X22,X20,sK0(X19,X20),X23,sK2(X19,X20)) | ~eq(X21,X23))))).
+
+tff(u1539,axiom,
+    (![X9, X11, X13, X10, X12] : ((~eq(sK1(X9,X10),X11) | ~select_4(X9,X10) | ~eq(X10,X12) | tab1(X9,X13,sK0(X9,X10),X11,sK2(X9,X10)) | ~eq(X12,X13))))).
+
+tff(u1538,axiom,
+    (![X20, X22, X19, X21, X23] : ((~eq(sK1(X19,X20),X21) | ~select_4(X19,X20) | ~eq(X20,X22) | tab1(X19,X22,sK0(X19,X20),X23,sK2(X19,X20)) | ~eq(X21,X23))))).
+
+tff(u1537,axiom,
+    (![X16, X18, X15, X17, X14] : ((~eq(sK1(X14,X15),X16) | ~select_4(X14,X15) | ~eq(sK0(X14,X15),X17) | tab1(X14,X15,X18,X16,sK2(X14,X15)) | ~eq(X17,X18))))).
+
+tff(u1536,axiom,
+    (![X20, X22, X19, X21, X23] : ((~eq(sK1(X19,X20),X21) | ~select_4(X19,X20) | ~eq(sK0(X19,X20),X22) | tab1(X19,X20,X22,X23,sK2(X19,X20)) | ~eq(X21,X23))))).
+
+tff(u1535,axiom,
+    (![X11, X13, X15, X10, X12, X14] : ((~eq(sK1(X10,X12),X14) | ~eq(X12,X13) | ~select_4(X10,X12) | ~eq(X10,X11) | from_5(X15,X13,sK0(X10,X12),X14,sK2(X10,X12)) | ~eq(X11,X15))))).
+
+tff(u1534,axiom,
+    (![X16, X18, X20, X17, X19, X21] : ((~eq(sK1(X16,X18),X20) | ~eq(X18,X19) | ~select_4(X16,X18) | ~eq(X16,X17) | from_5(X17,X21,sK0(X16,X18),X20,sK2(X16,X18)) | ~eq(X19,X21))))).
+
+tff(u1533,axiom,
+    (![X32, X29, X31, X33, X28, X30] : ((~eq(sK1(X28,X30),X32) | ~eq(X30,X31) | ~select_4(X28,X30) | ~eq(X28,X29) | from_5(X29,X31,sK0(X28,X30),X33,sK2(X28,X30)) | ~eq(X32,X33))))).
+
+tff(u1532,axiom,
+    (![X11, X13, X15, X10, X12, X14] : ((~eq(sK1(X10,X12),X14) | ~eq(sK0(X10,X12),X13) | ~select_4(X10,X12) | ~eq(X10,X11) | from_5(X15,X12,X13,X14,sK2(X10,X12)) | ~eq(X11,X15))))).
+
+tff(u1531,axiom,
+    (![X22, X25, X27, X23, X24, X26] : ((~eq(sK1(X22,X24),X26) | ~eq(sK0(X22,X24),X25) | ~select_4(X22,X24) | ~eq(X22,X23) | from_5(X23,X24,X27,X26,sK2(X22,X24)) | ~eq(X25,X27))))).
+
+tff(u1530,axiom,
+    (![X32, X29, X31, X33, X28, X30] : ((~eq(sK1(X28,X30),X32) | ~eq(sK0(X28,X30),X31) | ~select_4(X28,X30) | ~eq(X28,X29) | from_5(X29,X30,X31,X33,sK2(X28,X30)) | ~eq(X32,X33))))).
+
+tff(u1529,axiom,
+    (![X16, X18, X20, X17, X19, X21] : ((~eq(sK1(X18,X16),X20) | ~eq(sK0(X18,X16),X19) | ~select_4(X18,X16) | ~eq(X16,X17) | from_5(X18,X21,X19,X20,sK2(X18,X16)) | ~eq(X17,X21))))).
+
+tff(u1528,axiom,
+    (![X22, X25, X27, X23, X24, X26] : ((~eq(sK1(X24,X22),X26) | ~eq(sK0(X24,X22),X25) | ~select_4(X24,X22) | ~eq(X22,X23) | from_5(X24,X23,X27,X26,sK2(X24,X22)) | ~eq(X25,X27))))).
+
+tff(u1527,axiom,
+    (![X32, X29, X31, X33, X28, X30] : ((~eq(sK1(X30,X28),X32) | ~eq(sK0(X30,X28),X31) | ~select_4(X30,X28) | ~eq(X28,X29) | from_5(X30,X29,X31,X33,sK2(X30,X28)) | ~eq(X32,X33))))).
+
+tff(u1526,axiom,
+    (![X9, X5, X7, X8, X10, X6] : ((~eq(sK1(X5,X6),X8) | ~eq(X5,X7) | ~select_4(X5,X6) | ~eq(X6,X9) | tab1(X10,X9,sK0(X5,X6),X8,sK2(X5,X6)) | ~eq(X7,X10))))).
+
+tff(u1525,axiom,
+    (![X16, X11, X13, X15, X12, X14] : ((~eq(sK1(X11,X12),X14) | ~eq(X11,X13) | ~select_4(X11,X12) | ~eq(X12,X15) | tab1(X13,X16,sK0(X11,X12),X14,sK2(X11,X12)) | ~eq(X15,X16))))).
+
+tff(u1524,axiom,
+    (![X25, X27, X23, X24, X26, X28] : ((~eq(sK1(X23,X24),X26) | ~eq(X23,X25) | ~select_4(X23,X24) | ~eq(X24,X27) | tab1(X25,X27,sK0(X23,X24),X28,sK2(X23,X24)) | ~eq(X26,X28))))).
+
+tff(u1523,axiom,
+    (![X9, X5, X7, X8, X10, X6] : ((~eq(sK1(X5,X6),X8) | ~eq(X5,X7) | ~select_4(X5,X6) | ~eq(sK0(X5,X6),X9) | tab1(X10,X6,X9,X8,sK2(X5,X6)) | ~eq(X7,X10))))).
+
+tff(u1522,axiom,
+    (![X18, X20, X22, X17, X19, X21] : ((~eq(sK1(X17,X18),X20) | ~eq(X17,X19) | ~select_4(X17,X18) | ~eq(sK0(X17,X18),X21) | tab1(X19,X18,X22,X20,sK2(X17,X18)) | ~eq(X21,X22))))).
+
+tff(u1521,axiom,
+    (![X25, X27, X23, X24, X26, X28] : ((~eq(sK1(X23,X24),X26) | ~eq(X23,X25) | ~select_4(X23,X24) | ~eq(sK0(X23,X24),X27) | tab1(X25,X24,X27,X28,sK2(X23,X24)) | ~eq(X26,X28))))).
+
+tff(u1520,axiom,
+    (![X16, X11, X13, X15, X12, X14] : ((~eq(sK1(X11,X12),X14) | ~eq(X12,X13) | ~select_4(X11,X12) | ~eq(sK0(X11,X12),X15) | tab1(X11,X16,X15,X14,sK2(X11,X12)) | ~eq(X13,X16))))).
+
+tff(u1519,axiom,
+    (![X18, X20, X22, X17, X19, X21] : ((~eq(sK1(X17,X18),X20) | ~eq(X18,X19) | ~select_4(X17,X18) | ~eq(sK0(X17,X18),X21) | tab1(X17,X19,X22,X20,sK2(X17,X18)) | ~eq(X21,X22))))).
+
+tff(u1518,axiom,
+    (![X25, X27, X23, X24, X26, X28] : ((~eq(sK1(X23,X24),X26) | ~eq(X24,X25) | ~select_4(X23,X24) | ~eq(sK0(X23,X24),X27) | tab1(X23,X25,X27,X28,sK2(X23,X24)) | ~eq(X26,X28))))).
+
+tff(u1517,axiom,
+    (![X16, X18, X13, X15, X17, X12, X14] : ((~eq(sK1(X14,X12),X17) | ~select_4(X14,X12) | ~eq(sK0(X14,X12),X15) | ~eq(X14,X16) | ~eq(X12,X13) | from_5(X18,X13,X15,X17,sK2(X14,X12)) | ~eq(X16,X18))))).
+
+tff(u1516,axiom,
+    (![X20, X22, X25, X19, X21, X23, X24] : ((~eq(sK1(X21,X19),X24) | ~select_4(X21,X19) | ~eq(sK0(X21,X19),X22) | ~eq(X21,X23) | ~eq(X19,X20) | from_5(X23,X25,X22,X24,sK2(X21,X19)) | ~eq(X20,X25))))).
+
+tff(u1515,axiom,
+    (![X32, X27, X29, X31, X26, X28, X30] : ((~eq(sK1(X28,X26),X31) | ~select_4(X28,X26) | ~eq(sK0(X28,X26),X29) | ~eq(X28,X30) | ~eq(X26,X27) | from_5(X30,X27,X32,X31,sK2(X28,X26)) | ~eq(X29,X32))))).
+
+tff(u1514,axiom,
+    (![X34, X36, X38, X33, X35, X37, X39] : ((~eq(sK1(X35,X33),X38) | ~select_4(X35,X33) | ~eq(sK0(X35,X33),X36) | ~eq(X35,X37) | ~eq(X33,X34) | from_5(X37,X34,X36,X39,sK2(X35,X33)) | ~eq(X38,X39))))).
+
+tff(u1513,axiom,
+    (![X9, X11, X7, X8, X10, X12, X6] : ((~eq(sK1(X6,X8),X9) | ~eq(X6,X7) | ~eq(X8,X10) | ~select_4(X6,X8) | ~eq(sK0(X6,X8),X11) | tab1(X12,X10,X11,X9,sK2(X6,X8)) | ~eq(X7,X12))))).
+
+tff(u1512,axiom,
+    (![X16, X18, X13, X15, X17, X19, X14] : ((~eq(sK1(X13,X15),X16) | ~eq(X13,X14) | ~eq(X15,X17) | ~select_4(X13,X15) | ~eq(sK0(X13,X15),X18) | tab1(X14,X19,X18,X16,sK2(X13,X15)) | ~eq(X17,X19))))).
+
+tff(u1511,axiom,
+    (![X20, X22, X25, X21, X23, X24, X26] : ((~eq(sK1(X20,X22),X23) | ~eq(X20,X21) | ~eq(X22,X24) | ~select_4(X20,X22) | ~eq(sK0(X20,X22),X25) | tab1(X21,X24,X26,X23,sK2(X20,X22)) | ~eq(X25,X26))))).
+
+tff(u1510,axiom,
+    (![X32, X27, X29, X31, X33, X28, X30] : ((~eq(sK1(X27,X29),X30) | ~eq(X27,X28) | ~eq(X29,X31) | ~select_4(X27,X29) | ~eq(sK0(X27,X29),X32) | tab1(X28,X31,X32,X33,sK2(X27,X29)) | ~eq(X30,X33))))).
+
+tff(u1509,axiom,
+    (![X22, X25, X23, X24] : ((~eq(sK2(X22,X23),X24) | ~select_4(X22,X23) | from_5(X22,X23,sK0(X22,X23),sK1(X22,X23),X25) | ~eq(X24,X25))))).
+
+tff(u1508,axiom,
+    (![X20, X22, X19, X21] : ((~eq(sK2(X19,X20),X21) | ~select_4(X19,X20) | tab1(X19,X20,sK0(X19,X20),sK1(X19,X20),X22) | ~eq(X21,X22))))).
+
+tff(u1507,axiom,
+    (![X9, X11, X8, X10, X12] : ((~eq(sK2(X8,X9),X11) | ~eq(X8,X10) | ~select_4(X8,X9) | from_5(X12,X9,sK0(X8,X9),sK1(X8,X9),X11) | ~eq(X10,X12))))).
+
+tff(u1506,axiom,
+    (![X32, X29, X31, X28, X30] : ((~eq(sK2(X28,X29),X31) | ~eq(X28,X30) | ~select_4(X28,X29) | from_5(X30,X29,sK0(X28,X29),sK1(X28,X29),X32) | ~eq(X31,X32))))).
+
+tff(u1505,axiom,
+    (![X16, X13, X15, X17, X14] : ((~eq(sK2(X13,X14),X16) | ~eq(X14,X15) | ~select_4(X13,X14) | from_5(X13,X17,sK0(X13,X14),sK1(X13,X14),X16) | ~eq(X15,X17))))).
+
+tff(u1504,axiom,
+    (![X32, X29, X31, X28, X30] : ((~eq(sK2(X28,X29),X31) | ~eq(X29,X30) | ~select_4(X28,X29) | from_5(X28,X30,sK0(X28,X29),sK1(X28,X29),X32) | ~eq(X31,X32))))).
+
+tff(u1503,axiom,
+    (![X18, X20, X22, X19, X21] : ((~eq(sK2(X18,X19),X21) | ~eq(sK0(X18,X19),X20) | ~select_4(X18,X19) | from_5(X18,X19,X22,sK1(X18,X19),X21) | ~eq(X20,X22))))).
+
+tff(u1502,axiom,
+    (![X32, X29, X31, X28, X30] : ((~eq(sK2(X28,X29),X31) | ~eq(sK0(X28,X29),X30) | ~select_4(X28,X29) | from_5(X28,X29,X30,sK1(X28,X29),X32) | ~eq(X31,X32))))).
+
+tff(u1501,axiom,
+    (![X25, X27, X23, X24, X26] : ((~eq(sK2(X23,X24),X26) | ~eq(sK1(X23,X24),X25) | ~select_4(X23,X24) | from_5(X23,X24,sK0(X23,X24),X27,X26) | ~eq(X25,X27))))).
+
+tff(u1500,axiom,
+    (![X32, X29, X31, X28, X30] : ((~eq(sK2(X28,X29),X31) | ~eq(sK1(X28,X29),X30) | ~select_4(X28,X29) | from_5(X28,X29,sK0(X28,X29),X30,X32) | ~eq(X31,X32))))).
+
+tff(u1499,axiom,
+    (![X5, X7, X8, X4, X6] : ((~eq(sK2(X4,X5),X6) | ~select_4(X4,X5) | ~eq(X4,X7) | tab1(X8,X5,sK0(X4,X5),sK1(X4,X5),X6) | ~eq(X7,X8))))).
+
+tff(u1498,axiom,
+    (![X25, X27, X24, X26, X28] : ((~eq(sK2(X24,X25),X26) | ~select_4(X24,X25) | ~eq(X24,X27) | tab1(X27,X25,sK0(X24,X25),sK1(X24,X25),X28) | ~eq(X26,X28))))).
+
+tff(u1497,axiom,
+    (![X9, X11, X13, X10, X12] : ((~eq(sK2(X9,X10),X11) | ~select_4(X9,X10) | ~eq(X10,X12) | tab1(X9,X13,sK0(X9,X10),sK1(X9,X10),X11) | ~eq(X12,X13))))).
+
+tff(u1496,axiom,
+    (![X25, X27, X24, X26, X28] : ((~eq(sK2(X24,X25),X26) | ~select_4(X24,X25) | ~eq(X25,X27) | tab1(X24,X27,sK0(X24,X25),sK1(X24,X25),X28) | ~eq(X26,X28))))).
+
+tff(u1495,axiom,
+    (![X16, X18, X15, X17, X14] : ((~eq(sK2(X14,X15),X16) | ~select_4(X14,X15) | ~eq(sK0(X14,X15),X17) | tab1(X14,X15,X18,sK1(X14,X15),X16) | ~eq(X17,X18))))).
+
+tff(u1494,axiom,
+    (![X25, X27, X24, X26, X28] : ((~eq(sK2(X24,X25),X26) | ~select_4(X24,X25) | ~eq(sK0(X24,X25),X27) | tab1(X24,X25,X27,sK1(X24,X25),X28) | ~eq(X26,X28))))).
+
+tff(u1493,axiom,
+    (![X20, X22, X19, X21, X23] : ((~eq(sK2(X19,X20),X21) | ~select_4(X19,X20) | ~eq(sK1(X19,X20),X22) | tab1(X19,X20,sK0(X19,X20),X23,X21) | ~eq(X22,X23))))).
+
+tff(u1492,axiom,
+    (![X25, X27, X24, X26, X28] : ((~eq(sK2(X24,X25),X26) | ~select_4(X24,X25) | ~eq(sK1(X24,X25),X27) | tab1(X24,X25,sK0(X24,X25),X27,X28) | ~eq(X26,X28))))).
+
+tff(u1491,axiom,
+    (![X11, X13, X15, X10, X12, X14] : ((~eq(sK2(X10,X12),X14) | ~eq(X12,X13) | ~select_4(X10,X12) | ~eq(X10,X11) | from_5(X15,X13,sK0(X10,X12),sK1(X10,X12),X14) | ~eq(X11,X15))))).
+
+tff(u1490,axiom,
+    (![X16, X18, X20, X17, X19, X21] : ((~eq(sK2(X16,X18),X20) | ~eq(X18,X19) | ~select_4(X16,X18) | ~eq(X16,X17) | from_5(X17,X21,sK0(X16,X18),sK1(X16,X18),X20) | ~eq(X19,X21))))).
+
+tff(u1489,axiom,
+    (![X34, X36, X38, X35, X37, X39] : ((~eq(sK2(X34,X36),X38) | ~eq(X36,X37) | ~select_4(X34,X36) | ~eq(X34,X35) | from_5(X35,X37,sK0(X34,X36),sK1(X34,X36),X39) | ~eq(X38,X39))))).
+
+tff(u1488,axiom,
+    (![X34, X36, X38, X35, X37, X39] : ((~eq(sK2(X34,X36),X39) | ~eq(sK0(X34,X36),X37) | ~select_4(X34,X36) | ~eq(sK1(X34,X36),X38) | from_5(X35,X36,X37,X38,X39) | ~eq(X34,X35))))).
+
+tff(u1487,axiom,
+    (![X11, X13, X15, X10, X12, X14] : ((~eq(sK2(X10,X12),X14) | ~eq(sK0(X10,X12),X13) | ~select_4(X10,X12) | ~eq(X10,X11) | from_5(X15,X12,X13,sK1(X10,X12),X14) | ~eq(X11,X15))))).
+
+tff(u1486,axiom,
+    (![X22, X25, X27, X23, X24, X26] : ((~eq(sK2(X22,X24),X26) | ~eq(sK0(X22,X24),X25) | ~select_4(X22,X24) | ~eq(X22,X23) | from_5(X23,X24,X27,sK1(X22,X24),X26) | ~eq(X25,X27))))).
+
+tff(u1485,axiom,
+    (![X34, X36, X38, X35, X37, X39] : ((~eq(sK2(X34,X36),X38) | ~eq(sK0(X34,X36),X37) | ~select_4(X34,X36) | ~eq(X34,X35) | from_5(X35,X36,X37,sK1(X34,X36),X39) | ~eq(X38,X39))))).
+
+tff(u1484,axiom,
+    (![X11, X13, X15, X10, X12, X14] : ((~eq(sK2(X10,X12),X14) | ~eq(sK1(X10,X12),X13) | ~select_4(X10,X12) | ~eq(X10,X11) | from_5(X15,X12,sK0(X10,X12),X13,X14) | ~eq(X11,X15))))).
+
+tff(u1483,axiom,
+    (![X32, X29, X31, X33, X28, X30] : ((~eq(sK2(X28,X30),X32) | ~eq(sK1(X28,X30),X31) | ~select_4(X28,X30) | ~eq(X28,X29) | from_5(X29,X30,sK0(X28,X30),X33,X32) | ~eq(X31,X33))))).
+
+tff(u1482,axiom,
+    (![X34, X36, X38, X35, X37, X39] : ((~eq(sK2(X34,X36),X38) | ~eq(sK1(X34,X36),X37) | ~select_4(X34,X36) | ~eq(X34,X35) | from_5(X35,X36,sK0(X34,X36),X37,X39) | ~eq(X38,X39))))).
+
+tff(u1481,axiom,
+    (![X34, X36, X38, X35, X37, X39] : ((~eq(sK2(X36,X34),X39) | ~eq(sK0(X36,X34),X37) | ~select_4(X36,X34) | ~eq(sK1(X36,X34),X38) | from_5(X36,X35,X37,X38,X39) | ~eq(X34,X35))))).
+
+tff(u1480,axiom,
+    (![X16, X18, X20, X17, X19, X21] : ((~eq(sK2(X18,X16),X20) | ~eq(sK0(X18,X16),X19) | ~select_4(X18,X16) | ~eq(X16,X17) | from_5(X18,X21,X19,sK1(X18,X16),X20) | ~eq(X17,X21))))).
+
+tff(u1479,axiom,
+    (![X22, X25, X27, X23, X24, X26] : ((~eq(sK2(X24,X22),X26) | ~eq(sK0(X24,X22),X25) | ~select_4(X24,X22) | ~eq(X22,X23) | from_5(X24,X23,X27,sK1(X24,X22),X26) | ~eq(X25,X27))))).
+
+tff(u1478,axiom,
+    (![X34, X36, X38, X35, X37, X39] : ((~eq(sK2(X36,X34),X38) | ~eq(sK0(X36,X34),X37) | ~select_4(X36,X34) | ~eq(X34,X35) | from_5(X36,X35,X37,sK1(X36,X34),X39) | ~eq(X38,X39))))).
+
+tff(u1477,axiom,
+    (![X16, X18, X20, X17, X19, X21] : ((~eq(sK2(X18,X16),X20) | ~eq(sK1(X18,X16),X19) | ~select_4(X18,X16) | ~eq(X16,X17) | from_5(X18,X21,sK0(X18,X16),X19,X20) | ~eq(X17,X21))))).
+
+tff(u1476,axiom,
+    (![X32, X29, X31, X33, X28, X30] : ((~eq(sK2(X30,X28),X32) | ~eq(sK1(X30,X28),X31) | ~select_4(X30,X28) | ~eq(X28,X29) | from_5(X30,X29,sK0(X30,X28),X33,X32) | ~eq(X31,X33))))).
+
+tff(u1475,axiom,
+    (![X34, X36, X38, X35, X37, X39] : ((~eq(sK2(X36,X34),X38) | ~eq(sK1(X36,X34),X37) | ~select_4(X36,X34) | ~eq(X34,X35) | from_5(X36,X35,sK0(X36,X34),X37,X39) | ~eq(X38,X39))))).
+
+tff(u1474,axiom,
+    (![X22, X25, X27, X23, X24, X26] : ((~eq(sK2(X22,X23),X26) | ~eq(sK1(X22,X23),X25) | ~select_4(X22,X23) | ~eq(sK0(X22,X23),X24) | from_5(X22,X23,X27,X25,X26) | ~eq(X24,X27))))).
+
+tff(u1473,axiom,
+    (![X32, X29, X31, X33, X28, X30] : ((~eq(sK2(X28,X29),X32) | ~eq(sK1(X28,X29),X31) | ~select_4(X28,X29) | ~eq(sK0(X28,X29),X30) | from_5(X28,X29,X30,X33,X32) | ~eq(X31,X33))))).
+
+tff(u1472,axiom,
+    (![X34, X36, X38, X35, X37, X39] : ((~eq(sK2(X34,X35),X38) | ~eq(sK1(X34,X35),X37) | ~select_4(X34,X35) | ~eq(sK0(X34,X35),X36) | from_5(X34,X35,X36,X37,X39) | ~eq(X38,X39))))).
+
+tff(u1471,axiom,
+    (![X9, X5, X7, X8, X10, X6] : ((~eq(sK2(X5,X6),X8) | ~eq(X5,X7) | ~select_4(X5,X6) | ~eq(X6,X9) | tab1(X10,X9,sK0(X5,X6),sK1(X5,X6),X8) | ~eq(X7,X10))))).
+
+tff(u1470,axiom,
+    (![X16, X11, X13, X15, X12, X14] : ((~eq(sK2(X11,X12),X14) | ~eq(X11,X13) | ~select_4(X11,X12) | ~eq(X12,X15) | tab1(X13,X16,sK0(X11,X12),sK1(X11,X12),X14) | ~eq(X15,X16))))).
+
+tff(u1469,axiom,
+    (![X32, X34, X29, X31, X33, X30] : ((~eq(sK2(X29,X30),X32) | ~eq(X29,X31) | ~select_4(X29,X30) | ~eq(X30,X33) | tab1(X31,X33,sK0(X29,X30),sK1(X29,X30),X34) | ~eq(X32,X34))))).
+
+tff(u1468,axiom,
+    (![X9, X5, X7, X8, X10, X6] : ((~eq(sK2(X5,X6),X8) | ~eq(X5,X7) | ~select_4(X5,X6) | ~eq(sK0(X5,X6),X9) | tab1(X10,X6,X9,sK1(X5,X6),X8) | ~eq(X7,X10))))).
+
+tff(u1467,axiom,
+    (![X18, X20, X22, X17, X19, X21] : ((~eq(sK2(X17,X18),X20) | ~eq(X17,X19) | ~select_4(X17,X18) | ~eq(sK0(X17,X18),X21) | tab1(X19,X18,X22,sK1(X17,X18),X20) | ~eq(X21,X22))))).
+
+tff(u1466,axiom,
+    (![X25, X27, X23, X24, X26, X28] : ((~eq(sK2(X23,X24),X26) | ~eq(X23,X25) | ~select_4(X23,X24) | ~eq(sK0(X23,X24),X27) | tab1(X25,X24,X27,X28,X26) | ~eq(sK1(X23,X24),X28))))).
+
+tff(u1465,axiom,
+    (![X32, X34, X29, X31, X33, X30] : ((~eq(sK2(X29,X30),X32) | ~eq(X29,X31) | ~select_4(X29,X30) | ~eq(sK0(X29,X30),X33) | tab1(X31,X30,X33,sK1(X29,X30),X34) | ~eq(X32,X34))))).
+
+tff(u1464,axiom,
+    (![X9, X5, X7, X8, X10, X6] : ((~eq(sK2(X5,X6),X8) | ~eq(X5,X7) | ~select_4(X5,X6) | ~eq(sK1(X5,X6),X9) | tab1(X10,X6,sK0(X5,X6),X9,X8) | ~eq(X7,X10))))).
+
+tff(u1463,axiom,
+    (![X25, X27, X23, X24, X26, X28] : ((~eq(sK2(X23,X24),X26) | ~eq(X23,X25) | ~select_4(X23,X24) | ~eq(sK1(X23,X24),X27) | tab1(X25,X24,sK0(X23,X24),X28,X26) | ~eq(X27,X28))))).
+
+tff(u1462,axiom,
+    (![X32, X34, X29, X31, X33, X30] : ((~eq(sK2(X29,X30),X32) | ~eq(X29,X31) | ~select_4(X29,X30) | ~eq(sK1(X29,X30),X33) | tab1(X31,X30,sK0(X29,X30),X33,X34) | ~eq(X32,X34))))).
+
+tff(u1461,axiom,
+    (![X16, X11, X13, X15, X12, X14] : ((~eq(sK2(X11,X12),X14) | ~eq(X12,X13) | ~select_4(X11,X12) | ~eq(sK0(X11,X12),X15) | tab1(X11,X16,X15,sK1(X11,X12),X14) | ~eq(X13,X16))))).
+
+tff(u1460,axiom,
+    (![X18, X20, X22, X17, X19, X21] : ((~eq(sK2(X17,X18),X20) | ~eq(X18,X19) | ~select_4(X17,X18) | ~eq(sK0(X17,X18),X21) | tab1(X17,X19,X22,sK1(X17,X18),X20) | ~eq(X21,X22))))).
+
+tff(u1459,axiom,
+    (![X25, X27, X23, X24, X26, X28] : ((~eq(sK2(X23,X24),X26) | ~eq(X24,X25) | ~select_4(X23,X24) | ~eq(sK0(X23,X24),X27) | tab1(X23,X25,X27,X28,X26) | ~eq(sK1(X23,X24),X28))))).
+
+tff(u1458,axiom,
+    (![X32, X34, X29, X31, X33, X30] : ((~eq(sK2(X29,X30),X32) | ~eq(X30,X31) | ~select_4(X29,X30) | ~eq(sK0(X29,X30),X33) | tab1(X29,X31,X33,sK1(X29,X30),X34) | ~eq(X32,X34))))).
+
+tff(u1457,axiom,
+    (![X16, X11, X13, X15, X12, X14] : ((~eq(sK2(X11,X12),X14) | ~eq(X12,X13) | ~select_4(X11,X12) | ~eq(sK1(X11,X12),X15) | tab1(X11,X16,sK0(X11,X12),X15,X14) | ~eq(X13,X16))))).
+
+tff(u1456,axiom,
+    (![X25, X27, X23, X24, X26, X28] : ((~eq(sK2(X23,X24),X26) | ~eq(X24,X25) | ~select_4(X23,X24) | ~eq(sK1(X23,X24),X27) | tab1(X23,X25,sK0(X23,X24),X28,X26) | ~eq(X27,X28))))).
+
+tff(u1455,axiom,
+    (![X32, X34, X29, X31, X33, X30] : ((~eq(sK2(X29,X30),X32) | ~eq(X30,X31) | ~select_4(X29,X30) | ~eq(sK1(X29,X30),X33) | tab1(X29,X31,sK0(X29,X30),X33,X34) | ~eq(X32,X34))))).
+
+tff(u1454,axiom,
+    (![X18, X20, X22, X17, X19, X21] : ((~eq(sK2(X17,X18),X20) | ~eq(sK0(X17,X18),X19) | ~select_4(X17,X18) | ~eq(sK1(X17,X18),X21) | tab1(X17,X18,X22,X21,X20) | ~eq(X19,X22))))).
+
+tff(u1453,axiom,
+    (![X25, X27, X23, X24, X26, X28] : ((~eq(sK2(X23,X24),X26) | ~eq(sK0(X23,X24),X25) | ~select_4(X23,X24) | ~eq(sK1(X23,X24),X27) | tab1(X23,X24,X25,X28,X26) | ~eq(X27,X28))))).
+
+tff(u1452,axiom,
+    (![X32, X34, X29, X31, X33, X30] : ((~eq(sK2(X29,X30),X32) | ~eq(sK0(X29,X30),X31) | ~select_4(X29,X30) | ~eq(sK1(X29,X30),X33) | tab1(X29,X30,X31,X33,X34) | ~eq(X32,X34))))).
+
+tff(u1451,axiom,
+    (![X40, X42, X44, X46, X41, X43, X45] : ((~eq(sK2(X42,X40),X46) | ~select_4(X42,X40) | ~eq(sK0(X42,X40),X43) | ~eq(X42,X44) | ~eq(sK1(X42,X40),X45) | from_5(X44,X41,X43,X45,X46) | ~eq(X40,X41))))).
+
+tff(u1450,axiom,
+    (![X16, X18, X13, X15, X17, X12, X14] : ((~eq(sK2(X14,X12),X17) | ~select_4(X14,X12) | ~eq(sK0(X14,X12),X15) | ~eq(X14,X16) | ~eq(X12,X13) | from_5(X18,X13,X15,sK1(X14,X12),X17) | ~eq(X16,X18))))).
+
+tff(u1449,axiom,
+    (![X20, X22, X25, X19, X21, X23, X24] : ((~eq(sK2(X21,X19),X24) | ~select_4(X21,X19) | ~eq(sK0(X21,X19),X22) | ~eq(X21,X23) | ~eq(X19,X20) | from_5(X23,X25,X22,sK1(X21,X19),X24) | ~eq(X20,X25))))).
+
+tff(u1448,axiom,
+    (![X32, X27, X29, X31, X26, X28, X30] : ((~eq(sK2(X28,X26),X31) | ~select_4(X28,X26) | ~eq(sK0(X28,X26),X29) | ~eq(X28,X30) | ~eq(X26,X27) | from_5(X30,X27,X32,sK1(X28,X26),X31) | ~eq(X29,X32))))).
+
+tff(u1447,axiom,
+    (![X40, X42, X44, X46, X41, X43, X45] : ((~eq(sK2(X42,X40),X45) | ~select_4(X42,X40) | ~eq(sK0(X42,X40),X43) | ~eq(X42,X44) | ~eq(X40,X41) | from_5(X44,X41,X43,sK1(X42,X40),X46) | ~eq(X45,X46))))).
+
+tff(u1446,axiom,
+    (![X16, X18, X13, X15, X17, X12, X14] : ((~eq(sK2(X14,X12),X17) | ~select_4(X14,X12) | ~eq(sK1(X14,X12),X15) | ~eq(X14,X16) | ~eq(X12,X13) | from_5(X18,X13,sK0(X14,X12),X15,X17) | ~eq(X16,X18))))).
+
+tff(u1445,axiom,
+    (![X20, X22, X25, X19, X21, X23, X24] : ((~eq(sK2(X21,X19),X24) | ~select_4(X21,X19) | ~eq(sK1(X21,X19),X22) | ~eq(X21,X23) | ~eq(X19,X20) | from_5(X23,X25,sK0(X21,X19),X22,X24) | ~eq(X20,X25))))).
+
+tff(u1444,axiom,
+    (![X34, X36, X38, X33, X35, X37, X39] : ((~eq(sK2(X35,X33),X38) | ~select_4(X35,X33) | ~eq(sK1(X35,X33),X36) | ~eq(X35,X37) | ~eq(X33,X34) | from_5(X37,X34,sK0(X35,X33),X39,X38) | ~eq(X36,X39))))).
+
+tff(u1443,axiom,
+    (![X40, X42, X44, X46, X41, X43, X45] : ((~eq(sK2(X42,X40),X45) | ~select_4(X42,X40) | ~eq(sK1(X42,X40),X43) | ~eq(X42,X44) | ~eq(X40,X41) | from_5(X44,X41,sK0(X42,X40),X43,X46) | ~eq(X45,X46))))).
+
+tff(u1442,axiom,
+    (![X9, X11, X7, X8, X10, X12, X6] : ((~eq(sK2(X6,X8),X9) | ~eq(X6,X7) | ~eq(X8,X10) | ~select_4(X6,X8) | ~eq(sK0(X6,X8),X11) | tab1(X12,X10,X11,sK1(X6,X8),X9) | ~eq(X7,X12))))).
+
+tff(u1441,axiom,
+    (![X16, X18, X13, X15, X17, X19, X14] : ((~eq(sK2(X13,X15),X16) | ~eq(X13,X14) | ~eq(X15,X17) | ~select_4(X13,X15) | ~eq(sK0(X13,X15),X18) | tab1(X14,X19,X18,sK1(X13,X15),X16) | ~eq(X17,X19))))).
+
+tff(u1440,axiom,
+    (![X20, X22, X25, X21, X23, X24, X26] : ((~eq(sK2(X20,X22),X23) | ~eq(X20,X21) | ~eq(X22,X24) | ~select_4(X20,X22) | ~eq(sK0(X20,X22),X25) | tab1(X21,X24,X26,sK1(X20,X22),X23) | ~eq(X25,X26))))).
+
+tff(u1439,axiom,
+    (![X32, X27, X29, X31, X33, X28, X30] : ((~eq(sK2(X27,X29),X30) | ~eq(X27,X28) | ~eq(X29,X31) | ~select_4(X27,X29) | ~eq(sK0(X27,X29),X32) | tab1(X28,X31,X32,X33,X30) | ~eq(sK1(X27,X29),X33))))).
+
+tff(u1438,axiom,
+    (![X40, X34, X36, X38, X35, X37, X39] : ((~eq(sK2(X34,X36),X37) | ~eq(X34,X35) | ~eq(X36,X38) | ~select_4(X34,X36) | ~eq(sK0(X34,X36),X39) | tab1(X35,X38,X39,sK1(X34,X36),X40) | ~eq(X37,X40))))).
+
+tff(u1437,axiom,
+    (![X9, X11, X7, X8, X10, X12, X6] : ((~eq(sK2(X6,X8),X9) | ~eq(X6,X7) | ~eq(X8,X10) | ~select_4(X6,X8) | ~eq(sK1(X6,X8),X11) | tab1(X12,X10,sK0(X6,X8),X11,X9) | ~eq(X7,X12))))).
+
+tff(u1436,axiom,
+    (![X16, X18, X13, X15, X17, X19, X14] : ((~eq(sK2(X13,X15),X16) | ~eq(X13,X14) | ~eq(X15,X17) | ~select_4(X13,X15) | ~eq(sK1(X13,X15),X18) | tab1(X14,X19,sK0(X13,X15),X18,X16) | ~eq(X17,X19))))).
+
+tff(u1435,axiom,
+    (![X32, X27, X29, X31, X33, X28, X30] : ((~eq(sK2(X27,X29),X30) | ~eq(X27,X28) | ~eq(X29,X31) | ~select_4(X27,X29) | ~eq(sK1(X27,X29),X32) | tab1(X28,X31,sK0(X27,X29),X33,X30) | ~eq(X32,X33))))).
+
+tff(u1434,axiom,
+    (![X40, X34, X36, X38, X35, X37, X39] : ((~eq(sK2(X34,X36),X37) | ~eq(X34,X35) | ~eq(X36,X38) | ~select_4(X34,X36) | ~eq(sK1(X34,X36),X39) | tab1(X35,X38,sK0(X34,X36),X39,X40) | ~eq(X37,X40))))).
+
+tff(u1433,axiom,
+    (![X0] : (eq(X0,X0)))).
+
+tff(u1432,axiom,
+    (![X1, X0, X2] : ((~lte(X1,X2) | lte(X0,X2) | ~lte(X0,X1))))).
+
+tff(u1431,axiom,
+    (![X1, X0] : ((~lte(X1,X0) | eq(X0,X1) | ~lte(X0,X1))))).
+
+tff(u1430,axiom,
+    (![X0] : (lte(X0,X0)))).
+
+% # SZS output end Saturation.
 % ------------------------------
 % Version: Vampire 4.2.2 (commit e1949dd on 2017-12-14 18:39:21 +0000)
-% Termination reason: Refutation
+% Termination reason: Satisfiable
 
-% Memory used [KB]: 4989
-% Time elapsed: 0.032 s
+% Memory used [KB]: 5628
+% Time elapsed: 0.055 s
 % ------------------------------
 % ------------------------------

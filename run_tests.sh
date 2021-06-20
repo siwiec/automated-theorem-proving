@@ -4,7 +4,7 @@ cd tests
 
 OUTPUT_DIR="output"
 REPORT="${OUTPUT_DIR}/report.txt"
-TIMEOUT=30
+TIMEOUT=10
 rm -rf "${OUTPUT_DIR}"
 mkdir -p "${OUTPUT_DIR}"
 touch "${REPORT}"
@@ -68,18 +68,23 @@ for query1 in *.sql; do
             if [ ! -s "${vampire_file}" ] # output file is empty
             then
                 echo -en "\033[0;33mNO OUPUT\033[0m       " | tee -a "${REPORT}"
+
             elif grep "^% Time limit reached!" "${vampire_file}" &> /dev/null
             then
                 echo -en "\033[0;33mTIMEOUT\033[0m        " | tee -a "${REPORT}"
+
             elif grep "^% Refutation found. Thanks to Tanya!" ${vampire_file} &> /dev/null
             then
                 echo -en "\033[0;32mEQUIVALENT\033[0m     " | tee -a "${REPORT}"
+
             elif grep "^% Refutation not found" "${vampire_file}" &> /dev/null
             then
                 echo -en "\033[0;33mPROOF NOT FOUND\033[0m" | tee -a "${REPORT}"
+
             elif grep "^Satisfiable" "${vampire_file}" &> /dev/null
             then
                 echo -en "\033[0;31mNOT EQUIVALENT\033[0m " | tee -a "${REPORT}"
+
             else
                 echo -en "\033[0;33mUNKNOWN\033[0m        " | tee -a "${REPORT}"
             fi
@@ -92,18 +97,23 @@ for query1 in *.sql; do
             if [ ! -s "${eprover_file}" ] # output file is empty
             then
                 echo -en "\033[0;33mNO OUPUT\033[0m       " | tee -a "${REPORT}"
-            elif grep "^Problem" ${eprover_file} &> /dev/null
-            then
-                echo -en "\033[0;33mERROR\033[0m          " | tee -a "${REPORT}"
+
             elif grep "^# Failure: Resource limit exceeded (time)" ${eprover_file} &> /dev/null
             then
                 echo -en "\033[0;33mTIMEOUT\033[0m        " | tee -a "${REPORT}"
-            elif grep "^# Proof found!" ${eprover_file} &> /dev/null
+
+            elif grep "^# Failure" ${eprover_file} &> /dev/null
             then
-                echo -en "\033[0;32mEQUIVALENT\033[0m     " | tee -a "${REPORT}"
-            elif grep "^# No proof found!" ${eprover_file} &> /dev/null
+                echo -en "\033[0;33mERROR\033[0m        " | tee -a "${REPORT}"
+
+            elif grep "^# SZS status CounterSatisfiable" ${eprover_file} &> /dev/null
             then
-                echo -en "\033[0;33mPROOF NOT FOUND\033[0m" | tee -a "${REPORT}"
+                echo -en "\033[0;31mNOT EQUIVALENT\033[0m" | tee -a "${REPORT}"
+
+            elif grep "^# SZS status Theorem" ${eprover_file} &> /dev/null
+            then
+                echo -en "\033[0;32mEQUIVALENT\033[0m" | tee -a "${REPORT}"
+
             else
                 echo -en "\033[0;33mUNKNOWN\033[0m " | tee -a "${REPORT}"
             fi

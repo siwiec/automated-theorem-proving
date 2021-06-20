@@ -1,96 +1,103 @@
 % [
-%     {
-%         "value": "tab1",
-%         "name": "tabalias1"
-%     }
+%     "tab1"
 % ]
-fof(from_5, definition, ( ! [TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15] : (from_5 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15) <=> ( ( tab1 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15)) )))).
+fof(from_2, definition, ( ! [TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (from_2 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15) <=> ( ( tab1 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) )))).
 % {
-%     "select": {
-%         "value": "tabalias1.col11"
-%     },
-%     "from": {
-%         "value": "tab1",
-%         "name": "tabalias1"
-%     }
-% }
-fof(select_4, definition, ( ! [TABALIAS1_COL11] : (select_4 ( TABALIAS1_COL11) <=> ( ? [TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15] :  ( from_5 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15 )  & $true )  )  ) )).
-% {
-%     "select": {
-%         "value": "tabalias1.col11"
-%     },
-%     "from": {
-%         "value": "tab1",
-%         "name": "tabalias1"
-%     }
-% }
-fof(subquery_from_3, definition, ( ! [COL11] : (subquery_from_3 ( COL11) <=> (select_4 ( COL11))))).
-% [
-%     {
-%         "value": {
-%             "select": {
-%                 "value": "tabalias1.col11"
-%             },
-%             "from": {
-%                 "value": "tab1",
-%                 "name": "tabalias1"
+%     "and": [
+%         {
+%             "not": {
+%                 "lt": [
+%                     "tab1.col11",
+%                     "tab1.col11"
+%                 ]
 %             }
 %         },
-%         "name": "subquery"
-%     }
-% ]
-fof(from_2, definition, ( ! [SUBQUERY_COL11] : (from_2 ( SUBQUERY_COL11) <=> ( ( subquery_from_3 ( SUBQUERY_COL11)) )))).
-% {
-%     "select": {
-%         "value": "subquery.col11"
-%     },
-%     "from": {
-%         "value": {
-%             "select": {
-%                 "value": "tabalias1.col11"
-%             },
-%             "from": {
-%                 "value": "tab1",
-%                 "name": "tabalias1"
+%         {
+%             "not": {
+%                 "gt": [
+%                     "tab1.col11",
+%                     "tab1.col11"
+%                 ]
 %             }
+%         }
+%     ]
+% }
+fof(where_3, definition, ( ! [TAB1_COL11] : (where_3 ( TAB1_COL11) <=> ( ( ( ~ lt ( TAB1_COL11, TAB1_COL11 )  )  & ( ~ gt ( TAB1_COL11, TAB1_COL11 )  )  ) )))).
+% {
+%     "select": [
+%         {
+%             "value": "tab1.col11"
 %         },
-%         "name": "subquery"
+%         {
+%             "value": "tab1.col12"
+%         }
+%     ],
+%     "from": "tab1",
+%     "where": {
+%         "and": [
+%             {
+%                 "not": {
+%                     "lt": [
+%                         "tab1.col11",
+%                         "tab1.col11"
+%                     ]
+%                 }
+%             },
+%             {
+%                 "not": {
+%                     "gt": [
+%                         "tab1.col11",
+%                         "tab1.col11"
+%                     ]
+%                 }
+%             }
+%         ]
 %     }
 % }
-fof(select_1, definition, ( ! [SUBQUERY_COL11] : (select_1 ( SUBQUERY_COL11) <=> ( ( from_2 ( SUBQUERY_COL11 )  & $true )  )  ) )).
+fof(select_1, definition, ( ! [TAB1_COL11, TAB1_COL12] : (select_1 ( TAB1_COL11, TAB1_COL12) <=> ( ? [TAB1_COL13, TAB1_COL14, TAB1_COL15] :  ( from_2 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15 )  & where_3 ( TAB1_COL11 )  )  )  ) )).
 % {
-%     "select": {
-%         "value": "subquery.col11"
-%     },
-%     "from": {
-%         "value": {
-%             "select": {
-%                 "value": "tabalias1.col11"
-%             },
-%             "from": {
-%                 "value": "tab1",
-%                 "name": "tabalias1"
-%             }
+%     "select": [
+%         {
+%             "value": "tab1.col11"
 %         },
-%         "name": "subquery"
+%         {
+%             "value": "tab1.col12"
+%         }
+%     ],
+%     "from": "tab1",
+%     "where": {
+%         "and": [
+%             {
+%                 "not": {
+%                     "lt": [
+%                         "tab1.col11",
+%                         "tab1.col11"
+%                     ]
+%                 }
+%             },
+%             {
+%                 "not": {
+%                     "gt": [
+%                         "tab1.col11",
+%                         "tab1.col11"
+%                     ]
+%                 }
+%             }
+%         ]
 %     }
 % }
-fof(main_query_1, definition, ( ! [COL11] : (main_query_1 ( COL11) <=> (select_1 ( COL11))))).
+fof(main_query_1, definition, ( ! [COL11, COL12] : (main_query_1 ( COL11, COL12) <=> (select_1 ( COL11, COL12))))).
 % [
 %     "tab1"
 % ]
-fof(from_7, definition, ( ! [TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (from_7 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15) <=> ( ( tab1 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) )))).
-% [
-%     "tab1"
-% ]
-fof(from_14, definition, ( ! [TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (from_14 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15) <=> ( ( tab1 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) )))).
+fof(from_8, definition, ( ! [TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (from_8 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15) <=> ( ( tab1 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) )))).
 % {
 %     "eq": [
 %         "tab1.col11",
 %         "tab1.col12"
 %     ]
 % }
-fof(where_15, definition, ( ! [TAB1_COL11, TAB1_COL12] : (where_15 ( TAB1_COL11, TAB1_COL12) <=> (eq ( TAB1_COL11, TAB1_COL12 ) )))).
+fof(where_9, definition, ( ! [TAB1_COL11, TAB1_COL12] : (where_9 ( TAB1_COL11, TAB1_COL12) <=> (eq ( TAB1_COL11, TAB1_COL12 ) )))).
 % {
 %     "select": [
 %         {
@@ -108,7 +115,7 @@ fof(where_15, definition, ( ! [TAB1_COL11, TAB1_COL12] : (where_15 ( TAB1_COL11,
 %         ]
 %     }
 % }
-fof(select_13, definition, ( ! [TAB1_COL11, TAB1_COL12] : (select_13 ( TAB1_COL11, TAB1_COL12) <=> ( ? [TAB1_COL13, TAB1_COL14, TAB1_COL15] :  ( from_14 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15 )  & where_15 ( TAB1_COL11, TAB1_COL12 )  )  )  ) )).
+fof(select_7, definition, ( ! [TAB1_COL11, TAB1_COL12] : (select_7 ( TAB1_COL11, TAB1_COL12) <=> ( ? [TAB1_COL13, TAB1_COL14, TAB1_COL15] :  ( from_8 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15 )  & where_9 ( TAB1_COL11, TAB1_COL12 )  )  )  ) )).
 % {
 %     "select": [
 %         {
@@ -126,7 +133,7 @@ fof(select_13, definition, ( ! [TAB1_COL11, TAB1_COL12] : (select_13 ( TAB1_COL1
 %         ]
 %     }
 % }
-fof(subquery_from_12, definition, ( ! [COL11, COL12] : (subquery_from_12 ( COL11, COL12) <=> (select_13 ( COL11, COL12))))).
+fof(subquery_from_6, definition, ( ! [COL11, COL12] : (subquery_from_6 ( COL11, COL12) <=> (select_7 ( COL11, COL12))))).
 % [
 %     {
 %         "value": {
@@ -146,167 +153,72 @@ fof(subquery_from_12, definition, ( ! [COL11, COL12] : (subquery_from_12 ( COL11
 %                 ]
 %             }
 %         },
-%         "name": "alias"
+%         "name": "subquery_alias"
 %     }
 % ]
-fof(from_11, definition, ( ! [ALIAS_COL11, ALIAS_COL12] : (from_11 ( ALIAS_COL11, ALIAS_COL12) <=> ( ( subquery_from_12 ( ALIAS_COL11, ALIAS_COL12)) )))).
+fof(from_5, definition, ( ! [SUBQUERY_ALIAS_COL11, SUBQUERY_ALIAS_COL12] : (from_5 ( SUBQUERY_ALIAS_COL11, SUBQUERY_ALIAS_COL12) <=> ( ( subquery_from_6 ( SUBQUERY_ALIAS_COL11, SUBQUERY_ALIAS_COL12)) )))).
 % {
-%     "select": {
-%         "value": "alias.col11"
-%     },
-%     "from": {
-%         "value": {
-%             "select": [
-%                 {
-%                     "value": "tab1.col11"
-%                 },
-%                 {
-%                     "value": "tab1.col12"
-%                 }
-%             ],
-%             "from": "tab1",
-%             "where": {
-%                 "eq": [
-%                     "tab1.col11",
-%                     "tab1.col12"
-%                 ]
-%             }
-%         },
-%         "name": "alias"
-%     }
-% }
-fof(select_10, definition, ( ! [ALIAS_COL11] : (select_10 ( ALIAS_COL11) <=> ( ? [ALIAS_COL12] :  ( from_11 ( ALIAS_COL11, ALIAS_COL12 )  & $true )  )  ) )).
-% {
-%     "select": {
-%         "value": "alias.col11"
-%     },
-%     "from": {
-%         "value": {
-%             "select": [
-%                 {
-%                     "value": "tab1.col11"
-%                 },
-%                 {
-%                     "value": "tab1.col12"
-%                 }
-%             ],
-%             "from": "tab1",
-%             "where": {
-%                 "eq": [
-%                     "tab1.col11",
-%                     "tab1.col12"
-%                 ]
-%             }
-%         },
-%         "name": "alias"
-%     }
-% }
-fof(where_8_subquery_9, definition, ( ! [COL11] : (where_8_subquery_9 ( COL11) <=> (select_10 ( COL11))))).
-% {
-%     "in": [
-%         "tab1.col11",
+%     "select": [
 %         {
-%             "select": {
-%                 "value": "alias.col11"
-%             },
-%             "from": {
-%                 "value": {
-%                     "select": [
-%                         {
-%                             "value": "tab1.col11"
-%                         },
-%                         {
-%                             "value": "tab1.col12"
-%                         }
-%                     ],
-%                     "from": "tab1",
-%                     "where": {
-%                         "eq": [
-%                             "tab1.col11",
-%                             "tab1.col12"
-%                         ]
-%                     }
-%                 },
-%                 "name": "alias"
-%             }
+%             "value": "subquery_alias.col11"
+%         },
+%         {
+%             "value": "subquery_alias.col12"
 %         }
-%     ]
-% }
-fof(where_8, definition, ( ! [TAB1_COL11] : (where_8 ( TAB1_COL11) <=> ( ( where_8_subquery_9 ( TAB1_COL11)))))).
-% {
-%     "select": {
-%         "value": "tab1.col11"
-%     },
-%     "from": "tab1",
-%     "where": {
-%         "in": [
-%             "tab1.col11",
-%             {
-%                 "select": {
-%                     "value": "alias.col11"
+%     ],
+%     "from": {
+%         "value": {
+%             "select": [
+%                 {
+%                     "value": "tab1.col11"
 %                 },
-%                 "from": {
-%                     "value": {
-%                         "select": [
-%                             {
-%                                 "value": "tab1.col11"
-%                             },
-%                             {
-%                                 "value": "tab1.col12"
-%                             }
-%                         ],
-%                         "from": "tab1",
-%                         "where": {
-%                             "eq": [
-%                                 "tab1.col11",
-%                                 "tab1.col12"
-%                             ]
-%                         }
-%                     },
-%                     "name": "alias"
+%                 {
+%                     "value": "tab1.col12"
 %                 }
+%             ],
+%             "from": "tab1",
+%             "where": {
+%                 "eq": [
+%                     "tab1.col11",
+%                     "tab1.col12"
+%                 ]
 %             }
-%         ]
+%         },
+%         "name": "subquery_alias"
 %     }
 % }
-fof(select_6, definition, ( ! [TAB1_COL11] : (select_6 ( TAB1_COL11) <=> ( ? [TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] :  ( from_7 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15 )  & where_8 ( TAB1_COL11 )  )  )  ) )).
+fof(select_4, definition, ( ! [SUBQUERY_ALIAS_COL11, SUBQUERY_ALIAS_COL12] : (select_4 ( SUBQUERY_ALIAS_COL11, SUBQUERY_ALIAS_COL12) <=> ( ( from_5 ( SUBQUERY_ALIAS_COL11, SUBQUERY_ALIAS_COL12 )  & $true )  )  ) )).
 % {
-%     "select": {
-%         "value": "tab1.col11"
-%     },
-%     "from": "tab1",
-%     "where": {
-%         "in": [
-%             "tab1.col11",
-%             {
-%                 "select": {
-%                     "value": "alias.col11"
+%     "select": [
+%         {
+%             "value": "subquery_alias.col11"
+%         },
+%         {
+%             "value": "subquery_alias.col12"
+%         }
+%     ],
+%     "from": {
+%         "value": {
+%             "select": [
+%                 {
+%                     "value": "tab1.col11"
 %                 },
-%                 "from": {
-%                     "value": {
-%                         "select": [
-%                             {
-%                                 "value": "tab1.col11"
-%                             },
-%                             {
-%                                 "value": "tab1.col12"
-%                             }
-%                         ],
-%                         "from": "tab1",
-%                         "where": {
-%                             "eq": [
-%                                 "tab1.col11",
-%                                 "tab1.col12"
-%                             ]
-%                         }
-%                     },
-%                     "name": "alias"
+%                 {
+%                     "value": "tab1.col12"
 %                 }
+%             ],
+%             "from": "tab1",
+%             "where": {
+%                 "eq": [
+%                     "tab1.col11",
+%                     "tab1.col12"
+%                 ]
 %             }
-%         ]
+%         },
+%         "name": "subquery_alias"
 %     }
 % }
-fof(main_query_2, definition, ( ! [COL11] : (main_query_2 ( COL11) <=> (select_6 ( COL11))))).
+fof(main_query_2, definition, ( ! [COL11, COL12] : (main_query_2 ( COL11, COL12) <=> (select_4 ( COL11, COL12))))).
 % Axioms:
 
 fof(reflexivity_of_equality, axiom, ( ! [X] : eq(X, X) )).
@@ -315,82 +227,72 @@ fof(transitivity_of_equality, axiom, ( ! [X,Y,Z] : ( ( eq(X, Y) & eq(Y, Z) ) => 
 fof(reflexivity_of_less_than_or_equal, axiom, ( ! [X] : lte(X,X) )).
 fof(antisymmetry_of_less_than_or_equal, axiom, ( ! [X,Y] : ( ( lte(X,Y) & lte(Y,X) ) <=> eq(X, Y) ) )).
 fof(transitivity_of_less_than_or_equal, axiom, ( ! [X,Y,Z] : ( ( lte(X,Y) & lte(Y,Z) ) => lte(X,Z) ) )).
-fof(strong_connectedness_of_less_than_or_equal, axiom, ( ! [X,Y] : ( lte(X,Y) | lte(Y,X) ) )).
 fof(less_than_definition, definition, ( ! [X,Y] : ( ( lt(X,Y) ) <=> ( lte(X,Y) & (~ eq(X,Y))) ) )).
 fof(greater_than_definition, definition, ( ! [X,Y] : ( ( gt(X,Y) ) <=>  ( lt(Y,X)) ) )).
 fof(not_equal_definition, definition, ( ! [X,Y] : ( ( neq(X,Y) ) <=> (~ eq(X,Y)) ) )).
 fof(greater_than_or_equal_definition, definition, ( ! [X,Y] : ( ( gte(X,Y) ) <=> (lte(Y,X))) )).
-fof(substitution_select_13_col11, axiom, ( ! [X, COL11, COL12] : (( eq(COL11, X) & select_13 ( COL11, COL12)) => select_13 ( X, COL12)))).
-fof(substitution_select_13_col12, axiom, ( ! [X, COL11, COL12] : (( eq(COL12, X) & select_13 ( COL11, COL12)) => select_13 ( COL11, X)))).
-fof(substitution_from_5_tabalias1_col11, axiom, ( ! [X, TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15] : (( eq(TABALIAS1_COL11, X) & from_5 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15)) => from_5 ( X, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15)))).
-fof(substitution_from_5_tabalias1_col12, axiom, ( ! [X, TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15] : (( eq(TABALIAS1_COL12, X) & from_5 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15)) => from_5 ( TABALIAS1_COL11, X, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15)))).
-fof(substitution_from_5_tabalias1_col13, axiom, ( ! [X, TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15] : (( eq(TABALIAS1_COL13, X) & from_5 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15)) => from_5 ( TABALIAS1_COL11, TABALIAS1_COL12, X, TABALIAS1_COL14, TABALIAS1_COL15)))).
-fof(substitution_from_5_tabalias1_col14, axiom, ( ! [X, TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15] : (( eq(TABALIAS1_COL14, X) & from_5 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15)) => from_5 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, X, TABALIAS1_COL15)))).
-fof(substitution_from_5_tabalias1_col15, axiom, ( ! [X, TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15] : (( eq(TABALIAS1_COL15, X) & from_5 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15)) => from_5 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, X)))).
-fof(substitution_where_15_tab1_col11, axiom, ( ! [X, TAB1_COL11, TAB1_COL12] : (( eq(TAB1_COL11, X) & where_15 ( TAB1_COL11, TAB1_COL12)) => where_15 ( X, TAB1_COL12)))).
-fof(substitution_where_15_tab1_col12, axiom, ( ! [X, TAB1_COL11, TAB1_COL12] : (( eq(TAB1_COL12, X) & where_15 ( TAB1_COL11, TAB1_COL12)) => where_15 ( TAB1_COL11, X)))).
-fof(substitution_from_11_alias_col11, axiom, ( ! [X, ALIAS_COL11, ALIAS_COL12] : (( eq(ALIAS_COL11, X) & from_11 ( ALIAS_COL11, ALIAS_COL12)) => from_11 ( X, ALIAS_COL12)))).
-fof(substitution_from_11_alias_col12, axiom, ( ! [X, ALIAS_COL11, ALIAS_COL12] : (( eq(ALIAS_COL12, X) & from_11 ( ALIAS_COL11, ALIAS_COL12)) => from_11 ( ALIAS_COL11, X)))).
-fof(substitution_subquery_from_12_col11, axiom, ( ! [X, COL11, COL12] : (( eq(COL11, X) & subquery_from_12 ( COL11, COL12)) => subquery_from_12 ( X, COL12)))).
-fof(substitution_subquery_from_12_col12, axiom, ( ! [X, COL11, COL12] : (( eq(COL12, X) & subquery_from_12 ( COL11, COL12)) => subquery_from_12 ( COL11, X)))).
-fof(substitution_tab2_col21, axiom, ( ! [X, COL21, COL22, COL23, COL24, COL25] : (( eq(COL21, X) & tab2 ( COL21, COL22, COL23, COL24, COL25)) => tab2 ( X, COL22, COL23, COL24, COL25)))).
-fof(substitution_tab2_col22, axiom, ( ! [X, COL21, COL22, COL23, COL24, COL25] : (( eq(COL22, X) & tab2 ( COL21, COL22, COL23, COL24, COL25)) => tab2 ( COL21, X, COL23, COL24, COL25)))).
-fof(substitution_tab2_col23, axiom, ( ! [X, COL21, COL22, COL23, COL24, COL25] : (( eq(COL23, X) & tab2 ( COL21, COL22, COL23, COL24, COL25)) => tab2 ( COL21, COL22, X, COL24, COL25)))).
-fof(substitution_tab2_col24, axiom, ( ! [X, COL21, COL22, COL23, COL24, COL25] : (( eq(COL24, X) & tab2 ( COL21, COL22, COL23, COL24, COL25)) => tab2 ( COL21, COL22, COL23, X, COL25)))).
-fof(substitution_tab2_col25, axiom, ( ! [X, COL21, COL22, COL23, COL24, COL25] : (( eq(COL25, X) & tab2 ( COL21, COL22, COL23, COL24, COL25)) => tab2 ( COL21, COL22, COL23, COL24, X)))).
-fof(substitution_from_7_tab1_col11, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL11, X) & from_7 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_7 ( X, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)))).
-fof(substitution_from_7_tab1_col12, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL12, X) & from_7 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_7 ( TAB1_COL11, X, TAB1_COL13, TAB1_COL14, TAB1_COL15)))).
-fof(substitution_from_7_tab1_col13, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL13, X) & from_7 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_7 ( TAB1_COL11, TAB1_COL12, X, TAB1_COL14, TAB1_COL15)))).
-fof(substitution_from_7_tab1_col14, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL14, X) & from_7 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_7 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, X, TAB1_COL15)))).
-fof(substitution_from_7_tab1_col15, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL15, X) & from_7 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_7 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, X)))).
+fof(substitution_select_7_col11, axiom, ( ! [X, COL11, COL12] : (( eq(COL11, X) & select_7 ( COL11, COL12)) => select_7 ( X, COL12)))).
+fof(substitution_select_7_col12, axiom, ( ! [X, COL11, COL12] : (( eq(COL12, X) & select_7 ( COL11, COL12)) => select_7 ( COL11, X)))).
+fof(substitution_main_query_1_col11, axiom, ( ! [X, COL11, COL12] : (( eq(COL11, X) & main_query_1 ( COL11, COL12)) => main_query_1 ( X, COL12)))).
+fof(substitution_main_query_1_col12, axiom, ( ! [X, COL11, COL12] : (( eq(COL12, X) & main_query_1 ( COL11, COL12)) => main_query_1 ( COL11, X)))).
+fof(substitution_subquery_from_6_col11, axiom, ( ! [X, COL11, COL12] : (( eq(COL11, X) & subquery_from_6 ( COL11, COL12)) => subquery_from_6 ( X, COL12)))).
+fof(substitution_subquery_from_6_col12, axiom, ( ! [X, COL11, COL12] : (( eq(COL12, X) & subquery_from_6 ( COL11, COL12)) => subquery_from_6 ( COL11, X)))).
+fof(substitution_from_5_subquery_alias_col11, axiom, ( ! [X, SUBQUERY_ALIAS_COL11, SUBQUERY_ALIAS_COL12] : (( eq(SUBQUERY_ALIAS_COL11, X) & from_5 ( SUBQUERY_ALIAS_COL11, SUBQUERY_ALIAS_COL12)) => from_5 ( X, SUBQUERY_ALIAS_COL12)))).
+fof(substitution_from_5_subquery_alias_col12, axiom, ( ! [X, SUBQUERY_ALIAS_COL11, SUBQUERY_ALIAS_COL12] : (( eq(SUBQUERY_ALIAS_COL12, X) & from_5 ( SUBQUERY_ALIAS_COL11, SUBQUERY_ALIAS_COL12)) => from_5 ( SUBQUERY_ALIAS_COL11, X)))).
+fof(substitution_from_2_tab1_col11, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL11, X) & from_2 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_2 ( X, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)))).
+fof(substitution_from_2_tab1_col12, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL12, X) & from_2 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_2 ( TAB1_COL11, X, TAB1_COL13, TAB1_COL14, TAB1_COL15)))).
+fof(substitution_from_2_tab1_col13, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL13, X) & from_2 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_2 ( TAB1_COL11, TAB1_COL12, X, TAB1_COL14, TAB1_COL15)))).
+fof(substitution_from_2_tab1_col14, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL14, X) & from_2 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_2 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, X, TAB1_COL15)))).
+fof(substitution_from_2_tab1_col15, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL15, X) & from_2 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_2 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, X)))).
 fof(substitution_tab1_col11, axiom, ( ! [X, COL11, COL12, COL13, COL14, COL15] : (( eq(COL11, X) & tab1 ( COL11, COL12, COL13, COL14, COL15)) => tab1 ( X, COL12, COL13, COL14, COL15)))).
 fof(substitution_tab1_col12, axiom, ( ! [X, COL11, COL12, COL13, COL14, COL15] : (( eq(COL12, X) & tab1 ( COL11, COL12, COL13, COL14, COL15)) => tab1 ( COL11, X, COL13, COL14, COL15)))).
 fof(substitution_tab1_col13, axiom, ( ! [X, COL11, COL12, COL13, COL14, COL15] : (( eq(COL13, X) & tab1 ( COL11, COL12, COL13, COL14, COL15)) => tab1 ( COL11, COL12, X, COL14, COL15)))).
 fof(substitution_tab1_col14, axiom, ( ! [X, COL11, COL12, COL13, COL14, COL15] : (( eq(COL14, X) & tab1 ( COL11, COL12, COL13, COL14, COL15)) => tab1 ( COL11, COL12, COL13, X, COL15)))).
 fof(substitution_tab1_col15, axiom, ( ! [X, COL11, COL12, COL13, COL14, COL15] : (( eq(COL15, X) & tab1 ( COL11, COL12, COL13, COL14, COL15)) => tab1 ( COL11, COL12, COL13, COL14, X)))).
-fof(substitution_from_14_tab1_col11, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL11, X) & from_14 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_14 ( X, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)))).
-fof(substitution_from_14_tab1_col12, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL12, X) & from_14 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_14 ( TAB1_COL11, X, TAB1_COL13, TAB1_COL14, TAB1_COL15)))).
-fof(substitution_from_14_tab1_col13, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL13, X) & from_14 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_14 ( TAB1_COL11, TAB1_COL12, X, TAB1_COL14, TAB1_COL15)))).
-fof(substitution_from_14_tab1_col14, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL14, X) & from_14 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_14 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, X, TAB1_COL15)))).
-fof(substitution_from_14_tab1_col15, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL15, X) & from_14 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_14 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, X)))).
+fof(substitution_where_9_tab1_col11, axiom, ( ! [X, TAB1_COL11, TAB1_COL12] : (( eq(TAB1_COL11, X) & where_9 ( TAB1_COL11, TAB1_COL12)) => where_9 ( X, TAB1_COL12)))).
+fof(substitution_where_9_tab1_col12, axiom, ( ! [X, TAB1_COL11, TAB1_COL12] : (( eq(TAB1_COL12, X) & where_9 ( TAB1_COL11, TAB1_COL12)) => where_9 ( TAB1_COL11, X)))).
+fof(substitution_select_4_col11, axiom, ( ! [X, COL11, COL12] : (( eq(COL11, X) & select_4 ( COL11, COL12)) => select_4 ( X, COL12)))).
+fof(substitution_select_4_col12, axiom, ( ! [X, COL11, COL12] : (( eq(COL12, X) & select_4 ( COL11, COL12)) => select_4 ( COL11, X)))).
+fof(substitution_main_query_2_col11, axiom, ( ! [X, COL11, COL12] : (( eq(COL11, X) & main_query_2 ( COL11, COL12)) => main_query_2 ( X, COL12)))).
+fof(substitution_main_query_2_col12, axiom, ( ! [X, COL11, COL12] : (( eq(COL12, X) & main_query_2 ( COL11, COL12)) => main_query_2 ( COL11, X)))).
+fof(substitution_tab2_col21, axiom, ( ! [X, COL21, COL22, COL23, COL24, COL25] : (( eq(COL21, X) & tab2 ( COL21, COL22, COL23, COL24, COL25)) => tab2 ( X, COL22, COL23, COL24, COL25)))).
+fof(substitution_tab2_col22, axiom, ( ! [X, COL21, COL22, COL23, COL24, COL25] : (( eq(COL22, X) & tab2 ( COL21, COL22, COL23, COL24, COL25)) => tab2 ( COL21, X, COL23, COL24, COL25)))).
+fof(substitution_tab2_col23, axiom, ( ! [X, COL21, COL22, COL23, COL24, COL25] : (( eq(COL23, X) & tab2 ( COL21, COL22, COL23, COL24, COL25)) => tab2 ( COL21, COL22, X, COL24, COL25)))).
+fof(substitution_tab2_col24, axiom, ( ! [X, COL21, COL22, COL23, COL24, COL25] : (( eq(COL24, X) & tab2 ( COL21, COL22, COL23, COL24, COL25)) => tab2 ( COL21, COL22, COL23, X, COL25)))).
+fof(substitution_tab2_col25, axiom, ( ! [X, COL21, COL22, COL23, COL24, COL25] : (( eq(COL25, X) & tab2 ( COL21, COL22, COL23, COL24, COL25)) => tab2 ( COL21, COL22, COL23, COL24, X)))).
+fof(substitution_select_1_col11, axiom, ( ! [X, COL11, COL12] : (( eq(COL11, X) & select_1 ( COL11, COL12)) => select_1 ( X, COL12)))).
+fof(substitution_select_1_col12, axiom, ( ! [X, COL11, COL12] : (( eq(COL12, X) & select_1 ( COL11, COL12)) => select_1 ( COL11, X)))).
+fof(substitution_from_8_tab1_col11, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL11, X) & from_8 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_8 ( X, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)))).
+fof(substitution_from_8_tab1_col12, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL12, X) & from_8 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_8 ( TAB1_COL11, X, TAB1_COL13, TAB1_COL14, TAB1_COL15)))).
+fof(substitution_from_8_tab1_col13, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL13, X) & from_8 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_8 ( TAB1_COL11, TAB1_COL12, X, TAB1_COL14, TAB1_COL15)))).
+fof(substitution_from_8_tab1_col14, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL14, X) & from_8 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_8 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, X, TAB1_COL15)))).
+fof(substitution_from_8_tab1_col15, axiom, ( ! [X, TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15] : (( eq(TAB1_COL15, X) & from_8 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, TAB1_COL15)) => from_8 ( TAB1_COL11, TAB1_COL12, TAB1_COL13, TAB1_COL14, X)))).
 % Conjecture:
 
-fof(equivalence_check, conjecture, ( ! [ COL11 ] : ( main_query_1(COL11) <=> main_query_2(COL11) ) )).
-% select_13; columns: ['COL11', 'COL12']; external: []
+fof(equivalence_check, conjecture, ( ! [ COL11, COL12 ] : ( main_query_1(COL11, COL12) <=> main_query_2(COL11, COL12) ) )).
+% select_7; columns: ['COL11', 'COL12']; external: []
 
-% select_1; columns: ['COL11']; external: []
+% main_query_1; columns: ['COL11', 'COL12']; external: []
 
-% from_5; columns: ['TABALIAS1_COL11', 'TABALIAS1_COL12', 'TABALIAS1_COL13', 'TABALIAS1_COL14', 'TABALIAS1_COL15']; external: []
+% subquery_from_6; columns: ['COL11', 'COL12']; external: []
 
-% where_15; columns: ['TAB1_COL11', 'TAB1_COL12']; external: []
+% from_5; columns: ['SUBQUERY_ALIAS_COL11', 'SUBQUERY_ALIAS_COL12']; external: []
 
-% from_11; columns: ['ALIAS_COL11', 'ALIAS_COL12']; external: []
-
-% subquery_from_3; columns: ['COL11']; external: []
-
-% subquery_from_12; columns: ['COL11', 'COL12']; external: []
-
-% where_8; columns: ['TAB1_COL11']; external: []
-
-% main_query_2; columns: ['COL11']; external: []
-
-% select_4; columns: ['COL11']; external: []
-
-% select_6; columns: ['COL11']; external: []
-
-% tab2; columns: ['COL21', 'COL22', 'COL23', 'COL24', 'COL25']; external: []
-
-% from_7; columns: ['TAB1_COL11', 'TAB1_COL12', 'TAB1_COL13', 'TAB1_COL14', 'TAB1_COL15']; external: []
+% from_2; columns: ['TAB1_COL11', 'TAB1_COL12', 'TAB1_COL13', 'TAB1_COL14', 'TAB1_COL15']; external: []
 
 % tab1; columns: ['COL11', 'COL12', 'COL13', 'COL14', 'COL15']; external: []
 
-% where_8_subquery_9; columns: ['COL11']; external: []
+% where_9; columns: ['TAB1_COL11', 'TAB1_COL12']; external: []
 
-% main_query_1; columns: ['COL11']; external: []
+% select_4; columns: ['COL11', 'COL12']; external: []
 
-% from_2; columns: ['SUBQUERY_COL11']; external: []
+% main_query_2; columns: ['COL11', 'COL12']; external: []
 
-% select_10; columns: ['COL11']; external: []
+% tab2; columns: ['COL21', 'COL22', 'COL23', 'COL24', 'COL25']; external: []
 
-% from_14; columns: ['TAB1_COL11', 'TAB1_COL12', 'TAB1_COL13', 'TAB1_COL14', 'TAB1_COL15']; external: []
+% select_1; columns: ['COL11', 'COL12']; external: []
+
+% where_3; columns: ['TAB1_COL11']; external: []
+
+% from_8; columns: ['TAB1_COL11', 'TAB1_COL12', 'TAB1_COL13', 'TAB1_COL14', 'TAB1_COL15']; external: []
 

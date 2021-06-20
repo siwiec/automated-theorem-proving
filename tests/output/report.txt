@@ -1,75 +1,120 @@
 [0;31mquery_01.sql[0m
-SELECT tab1.col11
-FROM tab1
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
 
 [0;31mquery_02.sql[0m
-SELECT tab1.col11 as alias11
-FROM tab1
+SELECT
+    tab1.col11 AS alias11,
+    tab1.col12
+FROM
+    tab1
 
 [0;31mquery_03.sql[0m
-SELECT tabalias1.col11
-FROM tab1 as tabalias1
+SELECT
+    tab1_alias.col11,
+    tab1_alias.col12
+FROM
+    tab1 AS tab1_alias
 
 
 [0;31mquery_04.sql[0m
-SELECT tabalias1.col11 as alias11
-FROM tab1 as tabalias1
-
-
+SELECT
+    tab1_alias.col11 AS alias11,
+    tab1_alias.col12 AS alias12
+FROM
+    tab1 AS tab1_alias
 [0;31mquery_05.sql[0m
-SELECT tab1.col11 as alias11
-FROM tab1
-WHERE alias11 = alias11
-[0;31mquery_06.sql[0m
-SELECT tab1.col11
-FROM tab1
-WHERE tab1.col11 = tab1.col11
-
-
-[0;31mquery_07.sql[0m
-SELECT subquery.col11
-FROM
-(SELECT tabalias1.col11
-FROM tab1 as tabalias1) as subquery
-
-
-[0;31mquery_08.sql[0m
-SELECT tab1.col11 as alias11
-FROM tab1
-WHERE ((not (alias11 < alias11)) and (not (alias11 > alias11)))
-[0;31mquery_09.sql[0m
-SELECT tab1.col11
-FROM tab1
-WHERE ((tab1.col11 <= tab1.col11) and (tab1.col11 >= tab1.col11))
-
-
-[0;31mquery_10.sql[0m
-SELECT subquery.alias11
-FROM
-(SELECT tabalias1.col11 as alias11
-FROM tab1 as tabalias1) as subquery
-
-
-[0;31mquery_11.sql[0m
-SELECT tab1.col11,
+SELECT
+    tab1.col11,
     tab1.col12
-FROM tab1
-WHERE tab1.col11 = tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 = tab1.col11
+[0;31mquery_06.sql[0m
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    (tab1.col11 <= tab1.col11) AND
+        (tab1.col11 >= tab1.col11)
+[0;31mquery_07.sql[0m
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    (NOT tab1.col11 < tab1.col11) AND
+        (NOT tab1.col11 > tab1.col11)
+[0;31mquery_08.sql[0m
+SELECT
+    subquery_alias.col11,
+    subquery_alias.col12
+FROM
+    (
+        SELECT
+            tab1_alias.col11,
+            tab1_alias.col12
+        FROM
+            tab1 AS tab1_alias
+    ) AS subquery_alias
+
+[0;31mquery_09.sql[0m
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 IN (
+        SELECT
+            tab1.col11
+        FROM
+            tab1
+    )
+[0;31mquery_10.sql[0m
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1,
+    tab2
+[0;31mquery_11.sql[0m
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 = tab1.col12
 
 
 [0;31mquery_12.sql[0m
-SELECT tabalias1.col11,
-tabalias1.col12
-FROM tab1 as tabalias1
-WHERE tabalias1.col11 = tabalias1.col12
+SELECT
+    tab1_alias.col11,
+    tab1_alias.col12
+FROM
+    tab1 as tab1_alias
+WHERE
+    tab1_alias.col11 = tab1_alias.col12
 
 
 [0;31mquery_13.sql[0m
 
-SELECT tab1.col11,
+SELECT
+    tab1.col11,
     tab1.col12
-FROM tab1
-WHERE (tab1.col11 <= tab1.col12) and (tab1.col12 <= tab1.col11)
+FROM
+    tab1
+WHERE
+    (tab1.col11 <= tab1.col12) AND
+        (tab1.col12 <= tab1.col11)
 
 
 [0;31mquery_14.sql[0m
@@ -79,8 +124,8 @@ SELECT
 FROM
     tab1
 WHERE
-    (not tab1.col11 < tab1.col12) and
-    (not tab1.col11 > tab1.col12)
+    (NOT tab1.col11 < tab1.col12) AND
+    (NOT tab1.col11 > tab1.col12)
 
 [0;31mquery_15.sql[0m
 SELECT
@@ -90,32 +135,15 @@ FROM
     tab1
 WHERE
     (tab1.col11 = tab1.col12) AND
-    (tab1.col11 IN ( SELECT tab1.col11 from tab1 ) )
+        (tab1.col11 IN (
+            SELECT tab1.col11 FROM tab1
+        ))
 
 [0;31mquery_16.sql[0m
 SELECT
-    tab1.col11
+    subquery_alias.col11,
+    subquery_alias.col12
 FROM
-    tab1
-WHERE
-    tab1.col11 in (
-        SELECT
-            alias.col11
-        FROM
-            (
-                SELECT
-                    tab1.col11,
-                    tab1.col12
-                FROM
-                    tab1
-                WHERE
-                    tab1.col11 = tab1.col12
-            ) as alias
-    )
-[0;31mquery_17.sql[0m
-SELECT
-    alias.col11
-FROM 
     (
         SELECT
             tab1.col11,
@@ -124,32 +152,42 @@ FROM
             tab1
         WHERE
             tab1.col11 = tab1.col12
-    ) as alias
+    ) AS subquery_alias
+[0;31mquery_17.sql[0m
+SELECT
+    subquery_alias.col11,
+    subquery_alias.col12
+FROM
+    (
+        SELECT
+            tab1.col11,
+            tab1.col12
+        FROM
+            tab1
+        WHERE
+            tab1.col11 <= tab1.col12
+    )
+WHERE
+    subquery_alias.col11 >= subquery_alias.col12
 [0;31mquery_18.sql[0m
-SELECT alias.colalias
-FROM 
-    (Select col11 as colalias, col12 from tab1 where col11 = col12) as alias
+SELECT 
+    tab1.col12,
+    tab2.col22
+FROM
+    tab1,
+    tab2
+WHERE
+    tab1.col11 < tab2.col21
 [0;31mquery_19.sql[0m
-SELECT tab1.col11,
-tab1.col12
-FROM tab1
-WHERE tab1.col11 < tab1.col12
+SELECT 
+    tab1.col12,
+    tab2.col22
+FROM
+    tab1,
+    tab2
+WHERE
+    (tab1.col11 <= tab2.col21) AND (tab1.col11 != tab2.col21)
 [0;31mquery_20.sql[0m
-SELECT tab1.col11,
-tab1.col12
-FROM tab1
-WHERE tab1.col11 <= tab1.col12
-[0;31mquery_21.sql[0m
-SELECT tab1.col11,
-tab1.col12
-FROM tab1
-WHERE tab1.col11 > tab1.col12
-[0;31mquery_22.sql[0m
-SELECT tab1.col11,
-tab1.col12
-FROM tab1
-WHERE tab1.col11 < tab1.col12
-[0;31mquery_23.sql[0m
 SELECT
     tab1.col11,
     tab1.col12
@@ -162,7 +200,57 @@ WHERE
         FROM
             tab2
     )
+[0;31mquery_21.sql[0m
+-- this query normally would not be equivalent to Query 20, since it could return duplicated values
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1,
+    tab2
+WHERE
+    tab1.col11 = tab2.col21
+[0;31mquery_22.sql[0m
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 < tab1.col12
+[0;31mquery_23.sql[0m
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 <= tab1.col12
 [0;31mquery_24.sql[0m
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 > tab1.col12
+[0;31mquery_25.sql[0m
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 >= tab1.col12
+[0;31mquery_26.sql[0m
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 != tab1.col12
+[0;31mquery_27.sql[0m
 SELECT
     tab1.col11,
     tab1.col12
@@ -171,203 +259,71 @@ FROM
 WHERE
     tab1.col11 NOT IN (
         SELECT
+            tab1.col11
+        FROM
+            tab1
+    )
+[0;31mquery_28.sql[0m
+SELECT
+    tab1.col11,
+    tab1.col12 AS col12_alias
+FROM
+    tab1
+WHERE
+    tab1.col11 IN (
+        SELECT
+            tab1.col11
+        FROM
+            tab1
+        WHERE
+            tab1.col11 = col12_alias -- external variable
+    )
+[0;31mquery_29.sql[0m
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1,
+    tab2
+WHERE
+    tab1.col11 IN (
+        SELECT
             tab2.col21
         FROM
             tab2
+        WHERE
+            tab2.col21 = tab1.col11 -- external variable
     )
-[0;31mquery_25.sql[0m
+
+
+[0;31mquery_30.sql[0m
 SELECT
     tab1.col11,
-    tab1.col12 AS col12_alias,
-    tab2_alias.col12,
-    tab2_alias.col22 AS col22_alias,
-    subquery.subquery_col
+    tab1.col12
 FROM
     tab1,
-    tab2 as tab2_alias,
-    (
-        SELECT
-            tab1.col11 AS subquery_col
-        FROM
-            tab1
-    ) AS subquery
+    tab2
 WHERE
     (
-        tab1.col11 < col12_alias AND
-        tab2_alias.col12 IN (
+        tab1.col11 NOT IN (
             SELECT
-                tab1.col11
+                tab2.col21
             FROM
-                tab1
+                tab2
+            WHERE
+                tab2.col21 != tab1.col11 -- external variable
         )
-    ) OR (tab2_alias.col12 <= subquery.subquery_col)
+    ) AND (
+        tab1.col11 IN (
+            SELECT
+                tab2.col21
+            FROM
+                tab2
+            WHERE
+                tab2.col21 = tab1.col11 -- external variable
+        )
+    )
+
 
 [0;31m#############################################[0m
-query_01 -- query_02VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_01 -- query_03VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_01 -- query_04VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_01 -- query_05VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_01 -- query_06VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_01 -- query_07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_01 -- query_08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_01 -- query_09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_01 -- query_10VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_01 -- query_11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_01 -- query_12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_01 -- query_13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_01 -- query_14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_01 -- query_15[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_01 -- query_16VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_01 -- query_17VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_01 -- query_18[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_01 -- query_19[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_01 -- query_20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_01 -- query_21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_01 -- query_22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_01 -- query_23[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_01 -- query_24[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_01 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_02 -- query_03VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_02 -- query_04VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_02 -- query_05VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_02 -- query_06VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_02 -- query_07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_02 -- query_08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_02 -- query_09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_02 -- query_10VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_02 -- query_11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_02 -- query_12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_02 -- query_13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_02 -- query_14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_02 -- query_15[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_02 -- query_16VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_02 -- query_17VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_02 -- query_18[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_02 -- query_19[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_02 -- query_20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_02 -- query_21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_02 -- query_22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_02 -- query_23[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_02 -- query_24[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_02 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_03 -- query_04VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_03 -- query_05VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_03 -- query_06VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_03 -- query_07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_03 -- query_08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_03 -- query_09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_03 -- query_10VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_03 -- query_11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_03 -- query_12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_03 -- query_13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_03 -- query_14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_03 -- query_15[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_03 -- query_16VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_03 -- query_17VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_03 -- query_18[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_03 -- query_19[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_03 -- query_20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_03 -- query_21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_03 -- query_22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_03 -- query_23[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_03 -- query_24[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_03 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_04 -- query_05VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_04 -- query_06VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_04 -- query_07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_04 -- query_08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_04 -- query_09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_04 -- query_10VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_04 -- query_11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_04 -- query_12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_04 -- query_13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_04 -- query_14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_04 -- query_15[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_04 -- query_16VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_04 -- query_17VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_04 -- query_18[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_04 -- query_19[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_04 -- query_20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_04 -- query_21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_04 -- query_22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_04 -- query_23[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_04 -- query_24[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_04 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_05 -- query_06VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_05 -- query_07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_05 -- query_08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_05 -- query_09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_05 -- query_10VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_05 -- query_11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_05 -- query_12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_05 -- query_13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_05 -- query_14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_05 -- query_15[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_05 -- query_16VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_05 -- query_17VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_05 -- query_18[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_05 -- query_19[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_05 -- query_20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_05 -- query_21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_05 -- query_22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_05 -- query_23[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_05 -- query_24[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_05 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_06 -- query_07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_06 -- query_08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_06 -- query_09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_06 -- query_10VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_06 -- query_11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_06 -- query_12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_06 -- query_13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_06 -- query_14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_06 -- query_15[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_06 -- query_16VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_06 -- query_17VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_06 -- query_18[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_06 -- query_19[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_06 -- query_20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_06 -- query_21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_06 -- query_22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_06 -- query_23[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_06 -- query_24[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_06 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_07 -- query_08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_07 -- query_09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_07 -- query_10VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_07 -- query_11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_07 -- query_12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_07 -- query_13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_07 -- query_14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_07 -- query_15[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_07 -- query_16VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_07 -- query_17VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_07 -- query_18[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_07 -- query_19[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_07 -- query_20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_07 -- query_21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_07 -- query_22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_07 -- query_23[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_07 -- query_24[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_07 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_08 -- query_09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_08 -- query_10VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_08 -- query_11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_08 -- query_12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_08 -- query_13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_08 -- query_14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_08 -- query_15[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_08 -- query_16VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_08 -- query_17VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_08 -- query_18[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_08 -- query_19[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_08 -- query_20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_08 -- query_21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_08 -- query_22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_08 -- query_23[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_08 -- query_24[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_08 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_09 -- query_10VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_09 -- query_11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_09 -- query_12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_09 -- query_13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_09 -- query_14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_09 -- query_15[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_09 -- query_16VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_09 -- query_17VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_09 -- query_18[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_09 -- query_19[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_09 -- query_20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_09 -- query_21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_09 -- query_22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_09 -- query_23[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_09 -- query_24[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_09 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_10 -- query_11[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_10 -- query_12[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_10 -- query_13[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_10 -- query_14[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_10 -- query_15[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_10 -- query_16VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_10 -- query_17VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_10 -- query_18[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_10 -- query_19[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_10 -- query_20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_10 -- query_21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_10 -- query_22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_10 -- query_23[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_10 -- query_24[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_10 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_11 -- query_12VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_11 -- query_13VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_11 -- query_14VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_11 -- query_15VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_11 -- query_16[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_11 -- query_17[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_11 -- query_18VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_11 -- query_19VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_11 -- query_20VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_11 -- query_21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_11 -- query_22VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_11 -- query_23VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_11 -- query_24VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_11 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_12 -- query_13VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_12 -- query_14VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_12 -- query_15VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_12 -- query_16[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_12 -- query_17[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_12 -- query_18VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_12 -- query_19VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_12 -- query_20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_12 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_12 -- query_22VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_12 -- query_23VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_12 -- query_24VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_12 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_13 -- query_14VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_13 -- query_15VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_13 -- query_16[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_13 -- query_17[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_13 -- query_18VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_13 -- query_19VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_13 -- query_20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_13 -- query_21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_13 -- query_22VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_13 -- query_23VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_13 -- query_24VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_13 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_14 -- query_15VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_14 -- query_16[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_14 -- query_17[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_14 -- query_18VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_14 -- query_19VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_14 -- query_20VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_14 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_14 -- query_22VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_14 -- query_23VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_14 -- query_24VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_14 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_15 -- query_16[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_15 -- query_17[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_15 -- query_18VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_15 -- query_19VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_15 -- query_20VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_15 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_15 -- query_22VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_15 -- query_23VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_15 -- query_24VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_15 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_16 -- query_17VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_16 -- query_18[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_16 -- query_19[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_16 -- query_20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_16 -- query_21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_16 -- query_22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_16 -- query_23[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_16 -- query_24[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_16 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_17 -- query_18[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_17 -- query_19[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_17 -- query_20[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_17 -- query_21[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_17 -- query_22[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_17 -- query_23[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_17 -- query_24[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_17 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_18 -- query_19VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_18 -- query_20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_18 -- query_21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_18 -- query_22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_18 -- query_23VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_18 -- query_24VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_18 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_19 -- query_20VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_19 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_19 -- query_22VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m     query_19 -- query_23VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_19 -- query_24VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_19 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_20 -- query_21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_20 -- query_22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_20 -- query_23VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_20 -- query_24VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_20 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_21 -- query_22VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_21 -- query_23VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_21 -- query_24VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_21 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_22 -- query_23VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_22 -- query_24VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_22 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_23 -- query_24VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_23 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
-query_24 -- query_25[0;31mNOT EQUIVALENT[0m (numbers of columns do not match)
+query_01 -- query_02VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_01 -- query_03VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_01 -- query_04VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_01 -- query_05VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_01 -- query_06VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_01 -- query_07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_01 -- query_08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_01 -- query_09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_01 -- query_10VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_01 -- query_11VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_01 -- query_12VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_01 -- query_13VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_01 -- query_14VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_01 -- query_15VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_01 -- query_16VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_01 -- query_17VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_01 -- query_18VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_01 -- query_19VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_01 -- query_20VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_01 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_01 -- query_22VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_01 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_01 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_01 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_01 -- query_26VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_01 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_01 -- query_28VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_01 -- query_29VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_01 -- query_30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_02 -- query_03VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_02 -- query_04VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_02 -- query_05VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_02 -- query_06VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_02 -- query_07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_02 -- query_08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_02 -- query_09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_02 -- query_10VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_02 -- query_11VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_02 -- query_12VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_02 -- query_13VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_02 -- query_14VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;31mNOT EQUIVALENT[0mquery_02 -- query_15VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_02 -- query_16VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_02 -- query_17VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_02 -- query_18VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_02 -- query_19VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_02 -- query_20VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_02 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_02 -- query_22VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_02 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_02 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_02 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_02 -- query_26VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_02 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_02 -- query_28VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_02 -- query_29VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_02 -- query_30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_03 -- query_04VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_03 -- query_05VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_03 -- query_06VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_03 -- query_07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_03 -- query_08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_03 -- query_09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_03 -- query_10VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_03 -- query_11VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_03 -- query_12VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_03 -- query_13VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_03 -- query_14VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_03 -- query_15VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_03 -- query_16VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_03 -- query_17VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_03 -- query_18VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_03 -- query_19VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_03 -- query_20VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_03 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_03 -- query_22VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_03 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_03 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_03 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_03 -- query_26VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_03 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_03 -- query_28VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_03 -- query_29VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_03 -- query_30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_04 -- query_05VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_04 -- query_06VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_04 -- query_07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_04 -- query_08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_04 -- query_09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_04 -- query_10VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_04 -- query_11VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_04 -- query_12VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_04 -- query_13VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_04 -- query_14VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_04 -- query_15VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_04 -- query_16VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_04 -- query_17VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_04 -- query_18VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_04 -- query_19VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_04 -- query_20VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_04 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_04 -- query_22VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_04 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_04 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_04 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_04 -- query_26VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_04 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_04 -- query_28VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_04 -- query_29VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_04 -- query_30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_05 -- query_06VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_05 -- query_07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_05 -- query_08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_05 -- query_09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_05 -- query_10VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_05 -- query_11VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_05 -- query_12VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_05 -- query_13VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_05 -- query_14VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_05 -- query_15VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_05 -- query_16VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_05 -- query_17VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_05 -- query_18VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_05 -- query_19VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_05 -- query_20VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_05 -- query_21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_05 -- query_22VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_05 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_05 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_05 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_05 -- query_26VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_05 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_05 -- query_28VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_05 -- query_29VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_05 -- query_30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_06 -- query_07VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_06 -- query_08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_06 -- query_09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_06 -- query_10VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_06 -- query_11VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_06 -- query_12VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_06 -- query_13VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_06 -- query_14VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_06 -- query_15VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_06 -- query_16VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_06 -- query_17VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_06 -- query_18VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_06 -- query_19VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_06 -- query_20VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_06 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_06 -- query_22VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_06 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_06 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_06 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_06 -- query_26VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_06 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_06 -- query_28VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_06 -- query_29VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_06 -- query_30VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_07 -- query_08VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_07 -- query_09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_07 -- query_10VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_07 -- query_11VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_07 -- query_12VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_07 -- query_13VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_07 -- query_14VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_07 -- query_15VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_07 -- query_16VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_07 -- query_17VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;31mNOT EQUIVALENT[0mquery_07 -- query_18VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_07 -- query_19VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_07 -- query_20VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_07 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_07 -- query_22VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_07 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_07 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_07 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_07 -- query_26VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_07 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_07 -- query_28VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_07 -- query_29VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_07 -- query_30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_08 -- query_09VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_08 -- query_10VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_08 -- query_11VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_08 -- query_12VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_08 -- query_13VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_08 -- query_14VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_08 -- query_15VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_08 -- query_16VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_08 -- query_17VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_08 -- query_18VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_08 -- query_19VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_08 -- query_20VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_08 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_08 -- query_22VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_08 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_08 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_08 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_08 -- query_26VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_08 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_08 -- query_28VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_08 -- query_29VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_08 -- query_30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_09 -- query_10VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_09 -- query_11VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_09 -- query_12VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_09 -- query_13VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_09 -- query_14VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_09 -- query_15VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_09 -- query_16VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_09 -- query_17VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_09 -- query_18VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_09 -- query_19VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_09 -- query_20VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_09 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_09 -- query_22VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_09 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_09 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_09 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_09 -- query_26VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_09 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_09 -- query_28VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_09 -- query_29VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_09 -- query_30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_10 -- query_11VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_10 -- query_12VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_10 -- query_13VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_10 -- query_14VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_10 -- query_15VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_10 -- query_16VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_10 -- query_17VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_10 -- query_18VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_10 -- query_19VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_10 -- query_20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_10 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_10 -- query_22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_10 -- query_23VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_10 -- query_24VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_10 -- query_25VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_10 -- query_26VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_10 -- query_27VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_10 -- query_28VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_10 -- query_29VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_10 -- query_30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_11 -- query_12VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_11 -- query_13VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_11 -- query_14VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;31mNOT EQUIVALENT[0mquery_11 -- query_15VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_11 -- query_16VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_11 -- query_17VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_11 -- query_18VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_11 -- query_19VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_11 -- query_20VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_11 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_11 -- query_22VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_11 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_11 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_11 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_11 -- query_26VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_11 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_11 -- query_28VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_11 -- query_29VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_11 -- query_30VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_12 -- query_13VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_12 -- query_14VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;31mNOT EQUIVALENT[0mquery_12 -- query_15VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_12 -- query_16VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_12 -- query_17VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_12 -- query_18VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_12 -- query_19VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_12 -- query_20VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_12 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_12 -- query_22VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_12 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_12 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_12 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_12 -- query_26VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_12 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_12 -- query_28VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_12 -- query_29VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_12 -- query_30VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_13 -- query_14VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_13 -- query_15VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_13 -- query_16VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_13 -- query_17VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_13 -- query_18VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_13 -- query_19VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_13 -- query_20VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_13 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_13 -- query_22VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_13 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_13 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_13 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_13 -- query_26VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;31mNOT EQUIVALENT[0mquery_13 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_13 -- query_28VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_13 -- query_29VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_13 -- query_30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_14 -- query_15VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;31mNOT EQUIVALENT[0mquery_14 -- query_16VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_14 -- query_17VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_14 -- query_18VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_14 -- query_19VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_14 -- query_20VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_14 -- query_21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_14 -- query_22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;31mNOT EQUIVALENT[0mquery_14 -- query_23VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;31mNOT EQUIVALENT[0mquery_14 -- query_24VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_14 -- query_25VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;31mNOT EQUIVALENT[0mquery_14 -- query_26VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;31mNOT EQUIVALENT[0mquery_14 -- query_27VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;31mNOT EQUIVALENT[0mquery_14 -- query_28VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_14 -- query_29VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_14 -- query_30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_15 -- query_16VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_15 -- query_17VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_15 -- query_18VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_15 -- query_19VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_15 -- query_20VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_15 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_15 -- query_22VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_15 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_15 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_15 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_15 -- query_26VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_15 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_15 -- query_28VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_15 -- query_29VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_15 -- query_30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_16 -- query_17VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_16 -- query_18VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_16 -- query_19VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_16 -- query_20VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_16 -- query_21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_16 -- query_22VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_16 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_16 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_16 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_16 -- query_26VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_16 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_16 -- query_28VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_16 -- query_29VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_16 -- query_30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_17 -- query_18VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_17 -- query_19VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_17 -- query_20VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_17 -- query_21VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_17 -- query_22VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_17 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_17 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_17 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_17 -- query_26VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_17 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_17 -- query_28VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_17 -- query_29VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_17 -- query_30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_18 -- query_19VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_18 -- query_20VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_18 -- query_21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_18 -- query_22VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_18 -- query_23VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_18 -- query_24VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_18 -- query_25VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_18 -- query_26VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_18 -- query_27VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_18 -- query_28VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_18 -- query_29VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_18 -- query_30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_19 -- query_20VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_19 -- query_21VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_19 -- query_22VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_19 -- query_23VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_19 -- query_24VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_19 -- query_25VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_19 -- query_26VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_19 -- query_27VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_19 -- query_28VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_19 -- query_29VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_19 -- query_30VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_20 -- query_21VAMPIRE: [0;33mNO OUPUT[0m       EPROVER: [0;32mEQUIVALENT[0mquery_20 -- query_22VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_20 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_20 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_20 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_20 -- query_26VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_20 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_20 -- query_28VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_20 -- query_29VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_20 -- query_30VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_21 -- query_22VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_21 -- query_23VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_21 -- query_24VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_21 -- query_25VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_21 -- query_26VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_21 -- query_27VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_21 -- query_28VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_21 -- query_29VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0mquery_21 -- query_30VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;33mTIMEOUT[0m        query_22 -- query_23VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_22 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_22 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_22 -- query_26VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_22 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_22 -- query_28VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_22 -- query_29VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_22 -- query_30VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_23 -- query_24VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_23 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_23 -- query_26VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_23 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_23 -- query_28VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_23 -- query_29VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_23 -- query_30VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_24 -- query_25VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_24 -- query_26VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;31mNOT EQUIVALENT[0mquery_24 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_24 -- query_28VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_24 -- query_29VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_24 -- query_30VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_25 -- query_26VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;31mNOT EQUIVALENT[0mquery_25 -- query_27VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_25 -- query_28VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;31mNOT EQUIVALENT[0mquery_25 -- query_29VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_25 -- query_30VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_26 -- query_27VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;31mNOT EQUIVALENT[0mquery_26 -- query_28VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;31mNOT EQUIVALENT[0mquery_26 -- query_29VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_26 -- query_30VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_27 -- query_28VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_27 -- query_29VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_27 -- query_30VAMPIRE: [0;33mTIMEOUT[0m        EPROVER: [0;33mTIMEOUT[0m        query_28 -- query_29VAMPIRE: [0;33mPROOF NOT FOUND[0mEPROVER: [0;33mTIMEOUT[0m        query_28 -- query_30VAMPIRE: [0;31mNOT EQUIVALENT[0m EPROVER: [0;33mTIMEOUT[0m        query_29 -- query_30VAMPIRE: [0;32mEQUIVALENT[0m     EPROVER: [0;32mEQUIVALENT[0m
