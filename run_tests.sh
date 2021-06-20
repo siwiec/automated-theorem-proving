@@ -4,7 +4,7 @@ cd tests
 
 OUTPUT_DIR="output"
 REPORT="${OUTPUT_DIR}/report.txt"
-TIMEOUT=60
+TIMEOUT=30
 rm -rf "${OUTPUT_DIR}"
 mkdir -p "${OUTPUT_DIR}"
 touch "${REPORT}"
@@ -41,7 +41,7 @@ for query1 in *.sql; do
             echo -n "       "
 
             # run translation
-            python ../translate.py database.schema "${query1}" "${query2}" > "${raw_file}" 2> "${log_file}"
+            python ../translate.py database_schema.json "${query1}" "${query2}" > "${raw_file}" 2> "${log_file}"
             CONJECTURE=$? # 1 if conjecture was generated, 0 otherwise
 
             # run tptp4X
