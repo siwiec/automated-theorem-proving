@@ -1,5 +1,6 @@
-SELECT subquery.alias11
+SELECT
+    tab1.col11,
+    tab1.col12
 FROM
-(SELECT tabalias1.col11 as alias11
-FROM tab1 as tabalias1) as subquery
-
+    tab1,
+    tab2

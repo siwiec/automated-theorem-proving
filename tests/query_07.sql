@@ -1,5 +1,8 @@
-SELECT subquery.col11
+SELECT
+    tab1.col11,
+    tab1.col12
 FROM
-(SELECT tabalias1.col11
-FROM tab1 as tabalias1) as subquery
-
+    tab1
+WHERE
+    (NOT tab1.col11 < tab1.col11) AND
+        (NOT tab1.col11 > tab1.col11)

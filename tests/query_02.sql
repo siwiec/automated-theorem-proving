@@ -1,2 +1,5 @@
-SELECT tab1.col11 as alias11
-FROM tab1
+SELECT
+    tab1.col11 AS alias11,
+    tab1.col12
+FROM
+    tab1

@@ -1,3 +1,11 @@
-SELECT tab1.col11 as alias11
-FROM tab1
-WHERE ((not (alias11 < alias11)) and (not (alias11 > alias11)))
+SELECT
+    subquery_alias.col11,
+    subquery_alias.col12
+FROM
+    (
+        SELECT
+            tab1_alias.col11,
+            tab1_alias.col12
+        FROM
+            tab1 AS tab1_alias
+    ) AS subquery_alias

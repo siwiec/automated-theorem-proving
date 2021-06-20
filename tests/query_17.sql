@@ -1,6 +1,7 @@
 SELECT
-    alias.col11
-FROM 
+    subquery_alias.col11,
+    subquery_alias.col12
+FROM
     (
         SELECT
             tab1.col11,
@@ -8,5 +9,7 @@ FROM
         FROM
             tab1
         WHERE
-            tab1.col11 = tab1.col12
-    ) as alias
+            tab1.col11 <= tab1.col12
+    )
+WHERE
+    subquery_alias.col11 >= subquery_alias.col12

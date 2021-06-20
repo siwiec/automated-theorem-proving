@@ -176,16 +176,16 @@ def translate_from(statement, values, columns):
         
         if isinstance(subquery, dict):
 
-            assert('value' in subquery)
-            assert('name' in subquery)
-
             value = subquery['value']
             if isinstance(value, dict):
                 subquery_name = translate_query(value, get_id("subquery_from"))
             else: # aliased simple table
                 subquery_name = value
 
-            alias = make_predicate(subquery['name']) # alias of a subquery or a table
+            if 'name' in subquery:
+                alias = make_predicate(subquery['name']) # alias of a subquery or a table
+            else:
+                alias = make_predicate(get_id('subquery'))
 
             subquery_columns = get_columns(subquery_name)
             subquery_external = get_external(subquery_name)

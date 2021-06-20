@@ -4,5 +4,5 @@ SELECT
 FROM
     tab1
 WHERE
-    (not tab1.col11 < tab1.col12) and
-    (not tab1.col11 > tab1.col12)
+    (NOT tab1.col11 < tab1.col12) AND
+    (NOT tab1.col11 > tab1.col12)
