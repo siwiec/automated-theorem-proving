@@ -225,7 +225,7 @@ fof(transitivity_of_less_than_or_equal,axiom,(
         & lte(Y,Z) )
      => lte(X,Z) ) )).
 
-fof(strong_connectedness_of_less_than_or_eqal,axiom,(
+fof(strong_connectedness_of_less_than_or_equal,axiom,(
     ! [X,Y] :
       ( lte(X,Y)
       | lte(Y,X) ) )).
@@ -280,6 +280,36 @@ fof(substitution_tab2_col25,axiom,(
       ( ( eq(COL25,X)
         & tab2(COL21,COL22,COL23,COL24,COL25) )
      => tab2(COL21,COL22,COL23,COL24,X) ) )).
+
+fof(substitution_from_2_tab1_col11,axiom,(
+    ! [X,TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
+      ( ( eq(TAB1_COL11,X)
+        & from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) )
+     => from_2(X,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) ) )).
+
+fof(substitution_from_2_tab1_col12,axiom,(
+    ! [X,TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
+      ( ( eq(TAB1_COL12,X)
+        & from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) )
+     => from_2(TAB1_COL11,X,TAB1_COL13,TAB1_COL14,TAB1_COL15) ) )).
+
+fof(substitution_from_2_tab1_col13,axiom,(
+    ! [X,TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
+      ( ( eq(TAB1_COL13,X)
+        & from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) )
+     => from_2(TAB1_COL11,TAB1_COL12,X,TAB1_COL14,TAB1_COL15) ) )).
+
+fof(substitution_from_2_tab1_col14,axiom,(
+    ! [X,TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
+      ( ( eq(TAB1_COL14,X)
+        & from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) )
+     => from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,X,TAB1_COL15) ) )).
+
+fof(substitution_from_2_tab1_col15,axiom,(
+    ! [X,TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
+      ( ( eq(TAB1_COL15,X)
+        & from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) )
+     => from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,X) ) )).
 
 fof(substitution_from_8_alias11,axiom,(
     ! [X,ALIAS11,TABALIAS1_COL12,TABALIAS1_COL13,TABALIAS1_COL14,TABALIAS1_COL15] :
@@ -341,54 +371,6 @@ fof(substitution_tab1_col15,axiom,(
         & tab1(COL11,COL12,COL13,COL14,COL15) )
      => tab1(COL11,COL12,COL13,COL14,X) ) )).
 
-fof(substitution_from_2_tab1_col11,axiom,(
-    ! [X,TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
-      ( ( eq(TAB1_COL11,X)
-        & from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) )
-     => from_2(X,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) ) )).
-
-fof(substitution_from_2_tab1_col12,axiom,(
-    ! [X,TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
-      ( ( eq(TAB1_COL12,X)
-        & from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) )
-     => from_2(TAB1_COL11,X,TAB1_COL13,TAB1_COL14,TAB1_COL15) ) )).
-
-fof(substitution_from_2_tab1_col13,axiom,(
-    ! [X,TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
-      ( ( eq(TAB1_COL13,X)
-        & from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) )
-     => from_2(TAB1_COL11,TAB1_COL12,X,TAB1_COL14,TAB1_COL15) ) )).
-
-fof(substitution_from_2_tab1_col14,axiom,(
-    ! [X,TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
-      ( ( eq(TAB1_COL14,X)
-        & from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) )
-     => from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,X,TAB1_COL15) ) )).
-
-fof(substitution_from_2_tab1_col15,axiom,(
-    ! [X,TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
-      ( ( eq(TAB1_COL15,X)
-        & from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) )
-     => from_2(TAB1_COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,X) ) )).
-
-fof(substitution_tab_fst,axiom,(
-    ! [X,FST,SND,TRD] :
-      ( ( eq(FST,X)
-        & tab(FST,SND,TRD) )
-     => tab(X,SND,TRD) ) )).
-
-fof(substitution_tab_snd,axiom,(
-    ! [X,FST,SND,TRD] :
-      ( ( eq(SND,X)
-        & tab(FST,SND,TRD) )
-     => tab(FST,X,TRD) ) )).
-
-fof(substitution_tab_trd,axiom,(
-    ! [X,FST,SND,TRD] :
-      ( ( eq(TRD,X)
-        & tab(FST,SND,TRD) )
-     => tab(FST,SND,X) ) )).
-
 % Conjecture:
 
 fof(equivalence_check,conjecture,(
@@ -400,25 +382,23 @@ fof(equivalence_check,conjecture,(
 
 % tab2; columns: ['COL21', 'COL22', 'COL23', 'COL24', 'COL25']; external: []
 
-% from_8; columns: ['ALIAS11', 'TABALIAS1_COL12', 'TABALIAS1_COL13', 'TABALIAS1_COL14', 'TABALIAS1_COL15']; external: []
-
-% select_7; columns: ['ALIAS11']; external: []
-
-% tab1; columns: ['COL11', 'COL12', 'COL13', 'COL14', 'COL15']; external: []
-
-% from_5; columns: ['SUBQUERY_ALIAS11']; external: []
-
-% main_query_1; columns: ['COL11']; external: []
+% main_query_2; columns: ['ALIAS11']; external: []
 
 % from_2; columns: ['TAB1_COL11', 'TAB1_COL12', 'TAB1_COL13', 'TAB1_COL14', 'TAB1_COL15']; external: []
 
-% tab; columns: ['FST', 'SND', 'TRD']; external: []
+% select_7; columns: ['ALIAS11']; external: []
 
-% select_1; columns: ['COL11']; external: []
+% from_8; columns: ['ALIAS11', 'TABALIAS1_COL12', 'TABALIAS1_COL13', 'TABALIAS1_COL14', 'TABALIAS1_COL15']; external: []
 
 % subquery_from_6; columns: ['ALIAS11']; external: []
 
+% from_5; columns: ['SUBQUERY_ALIAS11']; external: []
+
+% select_1; columns: ['COL11']; external: []
+
 % select_4; columns: ['ALIAS11']; external: []
 
-% main_query_2; columns: ['ALIAS11']; external: []
+% tab1; columns: ['COL11', 'COL12', 'COL13', 'COL14', 'COL15']; external: []
+
+% main_query_1; columns: ['COL11']; external: []
 

@@ -14,21 +14,21 @@ def log(*args):
     if debug:
         print(*args, file=sys.stderr)
 
-def make_variables(x):
-    if isinstance(x, str):
-        return x.strip().replace('.', '_').upper()
-    if isinstance(x, list):
-        return list(map(make_variables, x))
+def make_variable(x):
+    assert(isinstance(x, str))
+    return x.strip().replace('.', '_').upper()
 
-def make_predicates(x):
-    if isinstance(x, str):
-        return x.strip().replace('.', '_').lower()
-    if isinstance(x, list):
-        return list(map(make_predicates, x))
+def make_variables(x):
+    assert(isinstance(x, list))
+    return list(map(make_variable, x))
+
+def make_predicate(x):
+    assert(isinstance(x, str))
+    return x.strip().replace('.', '_').lower()
 
 def get_columns(predicate):
     global columns
-    predicate = make_predicates(predicate)
+    predicate = make_predicate(predicate)
     return columns.get(predicate, [])
 
 def set_columns(predicate, variables):
@@ -36,7 +36,7 @@ def set_columns(predicate, variables):
     global columns
     if not isinstance(variables, list):
         variables = [variables]
-    predicate = make_predicates(predicate)
+    predicate = make_predicate(predicate)
     variables = make_variables(variables)
     for x in variables:
         assert(x not in get_external(predicate))
@@ -52,7 +52,7 @@ def add_columns(predicate, variables):
 
 def get_external(predicate): # external variables used within query
     global external
-    predicate = make_predicates(predicate)
+    predicate = make_predicate(predicate)
     return external.get(predicate, [])
 
 def set_external(predicate, variables):
@@ -60,7 +60,7 @@ def set_external(predicate, variables):
     global external
     if not isinstance(variables, list):
         variables = [variables]
-    predicate = make_predicates(predicate)
+    predicate = make_predicate(predicate)
     variables = make_variables(variables)
     for x in variables:
         assert(x not in get_columns(predicate))
@@ -75,7 +75,7 @@ def add_external(predicate, variables):
     set_external(predicate, external + variables)
 
 def get_variables(predicate):
-    predicate = make_predicates(predicate)
+    predicate = make_predicate(predicate)
     return get_columns(predicate) + get_external(predicate)
 
 def get_predicates():
@@ -112,7 +112,7 @@ def build_axioms():
     save("fof(reflexivity_of_less_than_or_equal, axiom, ( ! [X] : lte(X,X) )).")
     save("fof(antisymmetry_of_less_than_or_equal, axiom, ( ! [X,Y] : ( ( lte(X,Y) & lte(Y,X) ) <=> eq(X, Y) ) )).")
     save("fof(transitivity_of_less_than_or_equal, axiom, ( ! [X,Y,Z] : ( ( lte(X,Y) & lte(Y,Z) ) => lte(X,Z) ) )).")
-    save("fof(strong_connectedness_of_less_than_or_eqal, axiom, ( ! [X,Y] : ( lte(X,Y) | lte(Y,X) ) )).")
+    save("fof(strong_connectedness_of_less_than_or_equal, axiom, ( ! [X,Y] : ( lte(X,Y) | lte(Y,X) ) )).")
 
     save("fof(less_than_definition, definition, ( ! [X,Y] : ( ( lt(X,Y) ) <=> ( lte(X,Y) & (~ eq(X,Y))) ) )).")
     save("fof(greater_than_definition, definition, ( ! [X,Y] : ( ( gt(X,Y) ) <=>  ( lt(Y,X)) ) )).")
@@ -185,7 +185,7 @@ def translate_from(statement, values, columns):
             else: # aliased simple table
                 subquery_name = value
 
-            alias = make_predicates(subquery['name']) # alias of a subquery or a table
+            alias = make_predicate(subquery['name']) # alias of a subquery or a table
 
             subquery_columns = get_columns(subquery_name)
             subquery_external = get_external(subquery_name)
@@ -206,7 +206,7 @@ def translate_from(statement, values, columns):
 
         else:
             assert(isinstance(subquery, str))
-            table_name = make_predicates(subquery)
+            table_name = make_predicate(subquery)
             table_columns = get_columns(table_name)
             log("table name", table_name, "table_columns", table_columns)
             assert(table_columns)
@@ -248,8 +248,8 @@ def translate_where(statement, from_name, values, columns):
 
         for x in ['eq', 'neq', 'lt', 'lte', 'gt', 'gte']:
             if x in item:
-                fst = make_variables(item[x][0])
-                snd = make_variables(item[x][1])
+                fst = make_variable(item[x][0])
+                snd = make_variable(item[x][1])
                 #fst = aliases.get(fst, fst)
                 #snd = aliases.get(snd, snd)
 
@@ -266,7 +266,7 @@ def translate_where(statement, from_name, values, columns):
 
         for x in ['in', 'nin']:
             if x in item:
-                fst = make_variables(item[x][0])
+                fst = make_variable(item[x][0])
                 #fst = aliases.get(fst, fst)
                 if fst not in known_variables: # not defined in FROM!
                     add_external(where_name, fst)
@@ -344,11 +344,11 @@ def translate_select(statement):
         selected = [selected]
     
     # local variables (resolved aliases)
-    values = [ make_variables(x['value']) for x in selected ] # list of values TABLENAME_COLUMNNAME
-    aliased_values = [ make_variables(x['name']) if 'name' in x else make_variables(x['value']) for x in selected]
+    values = [ make_variable(x['value']) for x in selected ] # list of values TABLENAME_COLUMNNAME
+    aliased_values = [ make_variable(x['name']) if 'name' in x else make_variable(x['value']) for x in selected]
 
     # exposed columns
-    columns = [ make_variables(x['name']) if 'name' in x else make_variables(x['value'].split('.')[-1]) for x in selected ]
+    columns = [ make_variable(x['name']) if 'name' in x else make_variable(x['value'].split('.')[-1]) for x in selected ]
 
 
     # Parsing of the FROM clause
@@ -426,19 +426,14 @@ def translate_query(statement, name=None):
         return statement
 
 
-
-"""
-"""
-def tptp(sql, name=None):
-    try:
-        log(sql)
-        statement = moz_sql_parser.parse(sql)
-        log(statement)
-    except Exception as e:
-        log(e)
-        sys.exit(-1)
+def query_tptp(sql, name=None):
+    log(sql)
+    statement = moz_sql_parser.parse(sql)
+    log(json.dumps(statement, indent=4))
     translate_query(statement, name)
 
+
+    
 
 if __name__ == '__main__':
 
@@ -447,27 +442,38 @@ if __name__ == '__main__':
         sys.exit(-1)
 
     # read database schema
+    #try:
     with open(sys.argv[1]) as f:
-        for line in f.readlines():
-            items = line.strip().split()
-            if items:
-                set_columns(items[0], items[1:])
+        schema = f.read().lower()
+    log(schema)
+    parsed_schema = json.loads(schema)
+    log(json.dumps(parsed_schema, indent=4))
+    for table_name, table_columns in parsed_schema.items():
+        log('for', table_name, table_columns)
+        set_columns(table_name, table_columns)
+
+
+    #except Exception as e:
+        #log(e)
+        #sys.exit(-1)
+
     
     # read two query files
-    try:
-        with open(sys.argv[2]) as f:
-            sql1 = f.read().lower()
-        with open(sys.argv[3]) as f:
-            sql2 = f.read().lower()
-    except Exception as e:
-        log(e)
-        sys.exit(-1)
+    #try:
+    with open(sys.argv[2]) as f:
+        sql1 = f.read().lower()
+    with open(sys.argv[3]) as f:
+        sql2 = f.read().lower()
 
     log("Translating " + sys.argv[2] + "...")
-    tptp(sql1, 'main_query_1')
+    query_tptp(sql1, 'main_query_1')
 
     log("Translating " + sys.argv[3] + "...")
-    tptp(sql2, 'main_query_2')
+    query_tptp(sql2, 'main_query_2')
+    #except Exception as e:
+        #log(e)
+        #sys.exit(-1)
+
 
     conjecture = build_axioms()
         

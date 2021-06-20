@@ -111,7 +111,7 @@ fof(transitivity_of_equality, axiom, ( ! [X,Y,Z] : ( ( eq(X, Y) & eq(Y, Z) ) => 
 fof(reflexivity_of_less_than_or_equal, axiom, ( ! [X] : lte(X,X) )).
 fof(antisymmetry_of_less_than_or_equal, axiom, ( ! [X,Y] : ( ( lte(X,Y) & lte(Y,X) ) <=> eq(X, Y) ) )).
 fof(transitivity_of_less_than_or_equal, axiom, ( ! [X,Y,Z] : ( ( lte(X,Y) & lte(Y,Z) ) => lte(X,Z) ) )).
-fof(strong_connectedness_of_less_than_or_eqal, axiom, ( ! [X,Y] : ( lte(X,Y) | lte(Y,X) ) )).
+fof(strong_connectedness_of_less_than_or_equal, axiom, ( ! [X,Y] : ( lte(X,Y) | lte(Y,X) ) )).
 fof(less_than_definition, definition, ( ! [X,Y] : ( ( lt(X,Y) ) <=> ( lte(X,Y) & (~ eq(X,Y))) ) )).
 fof(greater_than_definition, definition, ( ! [X,Y] : ( ( gt(X,Y) ) <=>  ( lt(Y,X)) ) )).
 fof(not_equal_definition, definition, ( ! [X,Y] : ( ( neq(X,Y) ) <=> (~ eq(X,Y)) ) )).
@@ -121,11 +121,6 @@ fof(substitution_from_7_tabalias1_col12, axiom, ( ! [X, TABALIAS1_COL11, TABALIA
 fof(substitution_from_7_tabalias1_col13, axiom, ( ! [X, TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15] : (( eq(TABALIAS1_COL13, X) & from_7 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15)) => from_7 ( TABALIAS1_COL11, TABALIAS1_COL12, X, TABALIAS1_COL14, TABALIAS1_COL15)))).
 fof(substitution_from_7_tabalias1_col14, axiom, ( ! [X, TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15] : (( eq(TABALIAS1_COL14, X) & from_7 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15)) => from_7 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, X, TABALIAS1_COL15)))).
 fof(substitution_from_7_tabalias1_col15, axiom, ( ! [X, TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15] : (( eq(TABALIAS1_COL15, X) & from_7 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15)) => from_7 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, X)))).
-fof(substitution_tab1_col11, axiom, ( ! [X, COL11, COL12, COL13, COL14, COL15] : (( eq(COL11, X) & tab1 ( COL11, COL12, COL13, COL14, COL15)) => tab1 ( X, COL12, COL13, COL14, COL15)))).
-fof(substitution_tab1_col12, axiom, ( ! [X, COL11, COL12, COL13, COL14, COL15] : (( eq(COL12, X) & tab1 ( COL11, COL12, COL13, COL14, COL15)) => tab1 ( COL11, X, COL13, COL14, COL15)))).
-fof(substitution_tab1_col13, axiom, ( ! [X, COL11, COL12, COL13, COL14, COL15] : (( eq(COL13, X) & tab1 ( COL11, COL12, COL13, COL14, COL15)) => tab1 ( COL11, COL12, X, COL14, COL15)))).
-fof(substitution_tab1_col14, axiom, ( ! [X, COL11, COL12, COL13, COL14, COL15] : (( eq(COL14, X) & tab1 ( COL11, COL12, COL13, COL14, COL15)) => tab1 ( COL11, COL12, COL13, X, COL15)))).
-fof(substitution_tab1_col15, axiom, ( ! [X, COL11, COL12, COL13, COL14, COL15] : (( eq(COL15, X) & tab1 ( COL11, COL12, COL13, COL14, COL15)) => tab1 ( COL11, COL12, COL13, COL14, X)))).
 fof(substitution_tab2_col21, axiom, ( ! [X, COL21, COL22, COL23, COL24, COL25] : (( eq(COL21, X) & tab2 ( COL21, COL22, COL23, COL24, COL25)) => tab2 ( X, COL22, COL23, COL24, COL25)))).
 fof(substitution_tab2_col22, axiom, ( ! [X, COL21, COL22, COL23, COL24, COL25] : (( eq(COL22, X) & tab2 ( COL21, COL22, COL23, COL24, COL25)) => tab2 ( COL21, X, COL23, COL24, COL25)))).
 fof(substitution_tab2_col23, axiom, ( ! [X, COL21, COL22, COL23, COL24, COL25] : (( eq(COL23, X) & tab2 ( COL21, COL22, COL23, COL24, COL25)) => tab2 ( COL21, COL22, X, COL24, COL25)))).
@@ -136,33 +131,33 @@ fof(substitution_from_2_tabalias1_col12, axiom, ( ! [X, TABALIAS1_COL11, TABALIA
 fof(substitution_from_2_tabalias1_col13, axiom, ( ! [X, TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15] : (( eq(TABALIAS1_COL13, X) & from_2 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15)) => from_2 ( TABALIAS1_COL11, TABALIAS1_COL12, X, TABALIAS1_COL14, TABALIAS1_COL15)))).
 fof(substitution_from_2_tabalias1_col14, axiom, ( ! [X, TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15] : (( eq(TABALIAS1_COL14, X) & from_2 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15)) => from_2 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, X, TABALIAS1_COL15)))).
 fof(substitution_from_2_tabalias1_col15, axiom, ( ! [X, TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15] : (( eq(TABALIAS1_COL15, X) & from_2 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, TABALIAS1_COL15)) => from_2 ( TABALIAS1_COL11, TABALIAS1_COL12, TABALIAS1_COL13, TABALIAS1_COL14, X)))).
-fof(substitution_tab_fst, axiom, ( ! [X, FST, SND, TRD] : (( eq(FST, X) & tab ( FST, SND, TRD)) => tab ( X, SND, TRD)))).
-fof(substitution_tab_snd, axiom, ( ! [X, FST, SND, TRD] : (( eq(SND, X) & tab ( FST, SND, TRD)) => tab ( FST, X, TRD)))).
-fof(substitution_tab_trd, axiom, ( ! [X, FST, SND, TRD] : (( eq(TRD, X) & tab ( FST, SND, TRD)) => tab ( FST, SND, X)))).
+fof(substitution_tab1_col11, axiom, ( ! [X, COL11, COL12, COL13, COL14, COL15] : (( eq(COL11, X) & tab1 ( COL11, COL12, COL13, COL14, COL15)) => tab1 ( X, COL12, COL13, COL14, COL15)))).
+fof(substitution_tab1_col12, axiom, ( ! [X, COL11, COL12, COL13, COL14, COL15] : (( eq(COL12, X) & tab1 ( COL11, COL12, COL13, COL14, COL15)) => tab1 ( COL11, X, COL13, COL14, COL15)))).
+fof(substitution_tab1_col13, axiom, ( ! [X, COL11, COL12, COL13, COL14, COL15] : (( eq(COL13, X) & tab1 ( COL11, COL12, COL13, COL14, COL15)) => tab1 ( COL11, COL12, X, COL14, COL15)))).
+fof(substitution_tab1_col14, axiom, ( ! [X, COL11, COL12, COL13, COL14, COL15] : (( eq(COL14, X) & tab1 ( COL11, COL12, COL13, COL14, COL15)) => tab1 ( COL11, COL12, COL13, X, COL15)))).
+fof(substitution_tab1_col15, axiom, ( ! [X, COL11, COL12, COL13, COL14, COL15] : (( eq(COL15, X) & tab1 ( COL11, COL12, COL13, COL14, COL15)) => tab1 ( COL11, COL12, COL13, COL14, X)))).
 % Conjecture:
 
 fof(equivalence_check, conjecture, ( ! [ COL11 ] : ( main_query_1(COL11) <=> main_query_2(COL11) ) )).
+% from_7; columns: ['TABALIAS1_COL11', 'TABALIAS1_COL12', 'TABALIAS1_COL13', 'TABALIAS1_COL14', 'TABALIAS1_COL15']; external: []
+
+% from_4; columns: ['SUBQUERY_COL11']; external: []
+
+% select_3; columns: ['COL11']; external: []
+
 % main_query_2; columns: ['COL11']; external: []
 
 % main_query_1; columns: ['COL11']; external: []
 
-% from_7; columns: ['TABALIAS1_COL11', 'TABALIAS1_COL12', 'TABALIAS1_COL13', 'TABALIAS1_COL14', 'TABALIAS1_COL15']; external: []
+% tab2; columns: ['COL21', 'COL22', 'COL23', 'COL24', 'COL25']; external: []
+
+% select_6; columns: ['COL11']; external: []
+
+% from_2; columns: ['TABALIAS1_COL11', 'TABALIAS1_COL12', 'TABALIAS1_COL13', 'TABALIAS1_COL14', 'TABALIAS1_COL15']; external: []
+
+% tab1; columns: ['COL11', 'COL12', 'COL13', 'COL14', 'COL15']; external: []
 
 % subquery_from_5; columns: ['COL11']; external: []
 
 % select_1; columns: ['COL11']; external: []
-
-% from_4; columns: ['SUBQUERY_COL11']; external: []
-
-% tab1; columns: ['COL11', 'COL12', 'COL13', 'COL14', 'COL15']; external: []
-
-% select_3; columns: ['COL11']; external: []
-
-% select_6; columns: ['COL11']; external: []
-
-% tab2; columns: ['COL21', 'COL22', 'COL23', 'COL24', 'COL25']; external: []
-
-% from_2; columns: ['TABALIAS1_COL11', 'TABALIAS1_COL12', 'TABALIAS1_COL13', 'TABALIAS1_COL14', 'TABALIAS1_COL15']; external: []
-
-% tab; columns: ['FST', 'SND', 'TRD']; external: []
 

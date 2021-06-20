@@ -4,7 +4,7 @@ cd tests
 
 OUTPUT_DIR="output"
 REPORT="${OUTPUT_DIR}/report.txt"
-TIMEOUT=10
+TIMEOUT=60
 rm -rf "${OUTPUT_DIR}"
 mkdir -p "${OUTPUT_DIR}"
 touch "${REPORT}"
@@ -34,7 +34,7 @@ for query1 in *.sql; do
             tptp_file="${OUTPUT_DIR}/${query1/.sql/}_${query2/.sql}_tptp4X.tptp"
             vampire_file="${OUTPUT_DIR}/${query1/.sql/}_${query2/.sql}_vampire.txt"
             eprover_file="${OUTPUT_DIR}/${query1/.sql/}_${query2/.sql}_eprover.txt"
-            log_file="${OUTPUT_DIR}/${query1/.sql/}_${query2/.sql}.log"
+            log_file="${OUTPUT_DIR}/${query1/.sql/}_${query2/.sql}_log.txt"
 
 
             echo -en "${query1/.sql/} -- ${query2/.sql/}" | tee -a "${REPORT}"
@@ -50,7 +50,7 @@ for query1 in *.sql; do
             then
                 echo "TPTPX4: NO OUTPUT" | tee -a "${REPORT}"
                 continue
-            elif grep "^ERROR" ${tptp_file} &> /dev/null
+            elif grep "^ERROR" "${tptp_file}" &> /dev/null
             then
                 echo -e "TPTP4X: ERROR" | tee -a "${REPORT}"
                 continue
@@ -68,16 +68,16 @@ for query1 in *.sql; do
             if [ ! -s "${vampire_file}" ] # output file is empty
             then
                 echo -en "\033[0;33mNO OUPUT\033[0m       " | tee -a "${REPORT}"
-            elif grep "^% Time limit reached!" ${vampire_file} &> /dev/null
+            elif grep "^% Time limit reached!" "${vampire_file}" &> /dev/null
             then
                 echo -en "\033[0;33mTIMEOUT\033[0m        " | tee -a "${REPORT}"
             elif grep "^% Refutation found. Thanks to Tanya!" ${vampire_file} &> /dev/null
             then
                 echo -en "\033[0;32mEQUIVALENT\033[0m     " | tee -a "${REPORT}"
-            elif grep "^% Refutation not found" ${vampire_file} &> /dev/null
+            elif grep "^% Refutation not found" "${vampire_file}" &> /dev/null
             then
                 echo -en "\033[0;33mPROOF NOT FOUND\033[0m" | tee -a "${REPORT}"
-            elif grep "^Satisfiable" ${vampire_file} &> /dev/null
+            elif grep "^Satisfiable" "${vampire_file}" &> /dev/null
             then
                 echo -en "\033[0;31mNOT EQUIVALENT\033[0m " | tee -a "${REPORT}"
             else
@@ -88,7 +88,7 @@ for query1 in *.sql; do
 
             # run eprover
             echo -n "EPROVER: " | tee -a "${REPORT}"
-            ../provers/E/eprover --auto --cpu-limit=${TIMEOUT} "${tptp_file}" > "${eprover_file}" 2>> "${log_file}"
+            ../provers/E/eprover --auto --cpu-limit="${TIMEOUT}" "${tptp_file}" > "${eprover_file}" 2>> "${log_file}"
             if [ ! -s "${eprover_file}" ] # output file is empty
             then
                 echo -en "\033[0;33mNO OUPUT\033[0m       " | tee -a "${REPORT}"
