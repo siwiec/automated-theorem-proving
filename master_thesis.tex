@@ -1,0 +1,2658 @@
+%
+% Niniejszy plik stanowi przykład formatowania pracy magisterskiej na
+% Wydziale MIM UW.  Szkielet użytych poleceń można wykorzystywać do
+% woli, np. formatujac wlasna prace.
+%
+% Zawartosc merytoryczna stanowi oryginalnosiagniecie
+% naukowosciowe Marcina Wolinskiego.  Wszelkie prawa zastrzeżone.
+%
+% Copyright (c) 2001 by Marcin Woliński <M.Wolinski@gust.org.pl>
+% Poprawki spowodowane zmianami przepisów - Marcin Szczuka, 1.10.2004
+% Poprawki spowodowane zmianami przepisow i ujednolicenie 
+% - Seweryn Karłowicz, 05.05.2006
+% Dodanie wielu autorów i tłumaczenia na angielski - Kuba Pochrybniak, 29.11.2016
+
+% dodaj opcję [licencjacka] dla pracy licencjackiej
+% dodaj opcję [en] dla wersji angielskiej (mogą być obie: [licencjacka,en])
+\documentclass[magisterska,en]{pracamgr}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{syntax}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{makecell}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{verbatim}
+\usepackage{textcomp}
+
+% Dane magistranta:
+\autor{Mateusz Piotr Siwiec}{332521}
+
+\title{Testing of semantic equivalence of database queries using automatic theorem proving systems}
+\titlepl{Testowanie semantycznej równoważności zapytań bazodanowych z wykorzystaniem systemów automatycznego dowodzenia twierdzeń}
+
+\kierunek{Computer Science}
+
+% informatyka - nie okreslamy zakresu (opcja zakomentowana)
+% matematyka - zakres moze pozostac nieokreslony,
+% a jesli ma byc okreslony dla pracy mgr,
+% to przyjmuje jedna z wartosci:
+% {metod matematycznych w finansach}
+% {metod matematycznych w ubezpieczeniach}
+% {matematyki stosowanej}
+% {nauczania matematyki}
+% Dla pracy licencjackiej mamy natomiast
+% mozliwosc wpisania takiej wartosci zakresu:
+% {Jednoczesnych Studiow Ekonomiczno--Matematycznych}
+
+% \zakres{Tu wpisac, jesli trzeba, jedna z opcji podanych wyzej}
+
+% Praca wykonana pod kierunkiem:
+% (podać tytuł/stopień imię i nazwisko opiekuna
+% Instytut
+% ew. Wydział ew. Uczelnia (jeżeli nie MIM UW))
+\opiekun{dr hab. Henryk Michalewski\\
+  Instytut Informatyki\\
+  }
+
+\date{June 2021}
+
+%Podać dziedzinę wg klasyfikacji Socrates-Erasmus:
+\dziedzina{ 
+11.3 Informatics, Computer Science
+}
+
+%Klasyfikacja tematyczna wedlug AMS (matematyka) lub ACM (informatyka)
+\klasyfikacja{D. Software TODO\\
+  D.127. Blabalgorithms TODO\\
+  D.127.6. Numerical blabalysis TODO}
+
+\keywords{SQL, automated theorem proving}
+
+\newtheorem{defi}{Definition}[section]
+\newtheorem{theo}{Theorem}[section]
+\newtheorem{lemm}{Lemma}[section]
+
+\newcommand{\code}[1]{\texttt{#1}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The purpose of this thesis is to implement and describe the process of translating database queries from a subset of the Structured Query Language database language into first-order logic expressions in the TPTP syntax, and to test the semantical equivalence of the queries using automated theorem provers.
+The thesis consists of a description of syntax and semantics of SQL queries, a mathematical description of database queries in terms of relational algebra and first-order logic, the implementation of a translation algorithm for SQL queries into their first-order logic representation in the TPTP syntax and the results of proving the equivalence of SQL queries using automated theorem provers (Vampire and E).
+\end{abstract}
+
+\tableofcontents
+%\listoffigures
+\lstlistoflistings
+\listoftables
+
+% LISTINGS OPTIONS
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+\setlength{\grammarparsep}{1pt plus 0pt minus 0pt} % increase separation between rules
+\setlength{\grammarindent}{13em} % increase separation between LHS/RHS 
+
+\chapter{Introduction}
+
+In order to define the semantical equivalence of SQL queries and proceed with translating the queries into their first-order logic representation, some basic concepts regarding relational databases and the structure and semantics of the SQL database language need to be defined. SQL is a complex and powerful language, so this thesis covers only a small subset of all possible SQL queries, which are common for most commercially available implementations.
+
+
+\section{Relational databases}
+
+A \emph{relational database} is a database which is based on the relational model, in which the data is structured in a way that is consistent with the first-order predicate logic. The data is organised into tables, which consist of columns (also called \emph{attributes} or \emph{fields}) and rows (sometimes referred to as \emph{tuples} or \emph{records}. A relational database can be interacted with using a \emph{relational database management system} (RDBMS). It allows users to modify the tables and their contents, querying the database in order to retrieve information, manage access permissions, and perform other operations on the database.
+
+\section{Database schema}
+
+Database schema is a logical representation of the database. It describes the structure and properties of the database tables, such as table and column names and types, as well as relations between different tables of the database and constraints for stored records.
+
+\begin{lstlisting}[language=SQL, caption=Example database schema definition]
+CREATE TABLE clients (
+  client_id INT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  address VARCHAR(255),
+  phone_no VARCHAR(255)
+);
+
+CREATE TABLE products (
+  product_id INT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  PRICE INT NOT NULL
+);
+
+CREATE TABLE purchases (
+    client_id INT NOT NULL,
+    product_id INT NOT NULL,
+    amount INT NOT NULL
+);
+\end{lstlisting}
+
+\section{Database queries}
+
+Database queries are used to perform certain actions on database. Every query that is used to request data from a database is called a \emph{select database query}. Each database query, depending on the database implementation, has to be written in a specific format. For most relational databases the query language of choice is the Structured Query Language (SQL), which was first described by the American National Standards Institute (ANSI) in 1986, and one year later by the International Organization for Standardization (ISO) \cite{iso-sql-1998}. Although both standards describe both the syntax and semantics of the language, most commercially available and most popular databases do not follow the standard exactly, and implement additional functionalities and features. The most basic SQL queries, however, often do not vary in both syntax and semantics across different implementations.
+
+Practical databases, apart from select database queries, also implement additional types of queries such as \emph{action queries}, which are used to modify the contents of the database or perform other administrative actions.
+
+\section{Syntax of SQL queries}
+
+\subsection{SQL Query}
+
+Each SQL query is of the following form
+\begin{grammar}
+<query> ::= <select clause> \newline <from clause> \newline [ <where clause> ] \newline [ <group by clause> ] \newline [ <having clause> ] \newline [ <order by clause> ]
+\end{grammar}
+Every select query has the following general structure
+\begin{lstlisting}[language=SQL, caption=SQL query structure]
+SELECT ...
+FROM ...
+WHERE ...
+GROUP BY ...
+HAVING ...
+ORDER BY ...
+\end{lstlisting}
+Such queries can be concatenated together row-wise using the \code{UNION} clause (described in sections \ref{union-syntax} and \ref{union-semantics}) or column-wise using the \code{JOIN} clause (described in sections \ref{join-syntax} and \ref{join-semantics}).
+
+\subsection{\code{SELECT} clause}
+
+All selected columns must be separated by a \code{,} (comma) symbol.
+Additionally each selected column can be optionally aliased, by following the selected value by a new column name (with an optional \code{AS} clause). A generic \code{SELECT} clause if defined by the following BNF grammar
+\begin{grammar}
+<select clause> ::= \code{SELECT} [\code{DISTINCT}] <select list>
+
+<select list> ::= <select sublist> [ { \code{,} <select sublist> }... ]
+
+<select sublist> ::= \code{*} \alt <table name>\code{.*} \alt <column name> [[\code{AS}] <alias>] \alt <table name>\code{.}<column name> [[\code{AS}] <alias>] \alt <value expression> [[\code{AS}] <alias>]
+\end{grammar}
+
+\subsection{\code{FROM} clause}
+
+The \code{FROM} clause is used to specify from which tables data can be retrieved. Similarly to the column list in \code{SELECT} statements, all entries must be separated be a comma, and can optionally be aliased. If two tables have the same name, the results of the query depend on the SQL implementation -- either some or all tables get renamed, or an error is raised.
+
+Each select query can be treated as a table itself. This allows for nesting queries within each other. If a \code{SELECT} query is listed in the \code{FROM} statement, it should be aliased to avoid ambiguity in referencing the table.
+
+
+\begin{grammar}
+<from clause> ::= \code{FROM} <table reference list>
+
+<table reference list> ::= <table reference> [ { \code{,} <table reference> }... ]
+
+<table reference> ::= <table name> [[\code{AS}] <table alias>] \alt \code{(} <query> \code{)} \code{AS} <table alias> 
+\end{grammar}
+
+\subsection{\code{WHERE} clause}
+
+The optional \code{WHERE} clause is use to specify a number of conditions that need to be met in order for each record to be returned. The conditions are a number of atomic logical statements such as \code{table1.column1 = table2.column1} or \code{table1.column1 is not null} joined with logical operators such as \code{AND}, \code{OR}, etc. 
+
+Within a \code{WHERE} statement it is allowed to reference values visible both in the current select statement and the outer select statement -- similarly to how variable visibility scopes work in most imperative languages.
+
+\begin{grammar}
+<where clause> ::= \code{WHERE} <condition>
+
+<condition> ::= <boolean expression>
+
+<boolean expression> ::= <boolean term>
+    \alt <boolean expression> \code{OR} <boolean term>
+    \alt \code {(} <boolean expression> \code{)}
+
+<boolean term> ::= <boolean factor>
+    \alt <boolean term> \code{AND} <boolean factor>
+
+<boolean factor> ::= [ \code{NOT} ] <boolean test>
+
+<boolean test> ::= \code{True}
+    \alt \code{False}
+    \alt <column name or alias> <binop> <column name or alias>
+    \alt [ \code{NOT} ] \code{EXISTS} <sub-query>
+    \alt <column name or alias> [ \code{NOT} ] \code{IN} <sub-query>
+    
+<binop> ::= \code{=}
+    \alt \code{!=}
+    \alt \code{\textless}
+    \alt \code{\textless=}
+    \alt \code{>}
+    \alt \code{>=}
+
+<sub-query> ::= <table name>
+    \alt \code{(} <query> \code{)}
+\end{grammar}
+
+
+\subsection{\code{GROUP BY} clause}
+
+The \code{GROUP BY} clause is most often used for applying aggregation functions. This allows multiple rows to be joined based on some condition into one row.
+
+\begin{grammar}
+<group by clause> ::= \code{GROUP BY} <column list>
+
+<column list> ::= <column name or alias> [ \code{,} <column list> ]
+\end{grammar}
+
+
+\subsection{\code{HAVING} clause}
+
+Has the same meaning as the \code{WHERE} clause, however those conditions are evaluated after the \code{GROUP BY} clause is evaluated, and therefore can reference the results of aggregation functions such as \code{count(...)}, \code{sum(...)}, \code{min(...)} etc.
+
+\begin{grammar}
+<having clause> ::= \code{HAVING} <condition>
+\end{grammar}
+
+\subsection{\code{ORDER BY} clause}
+
+The \code{ORDER BY} clause is used to specify an order in which returned rows should be output.
+
+\begin{grammar}
+<order by clause> ::= \code{ORDER BY} <column list>
+\end{grammar}
+
+
+\subsection{\code{UNION} clause}\label{union-syntax}
+
+The \code{UNION} is used to append results of one single query to another.
+
+\begin{grammar}
+<union clause> ::= <simple query> [\code{UNION} <union clause>]
+\end{grammar}
+
+\subsection{\code{JOIN} clause}\label{join-syntax}
+
+\begin{grammar}
+    <join clause> ::= <sub-query> \code{CROSS JOIN} <sub-query>
+    \alt <sub-query> \code{INNER JOIN} <sub-query> [ \code{ON} <condition> ]
+    \alt <sub-query> \code{LEFT OUTER JOIN} <sub-query> [ \code{ON} <condition> ]
+    \alt <sub-query> \code{RIGHT OUTER JOIN} <sub-query> [ \code{ON} <condition> ]
+    \alt <sub-query> \code{FULL OUTER JOIN} <sub-query> [ \code{ON} <condition> ]
+\end{grammar}
+%\subsection{\code{EXISTS} and \code{NOT EXISTS} clauses}
+
+
+
+\section{Semantics of SQL queries}
+
+%\subsection{SQL Query}
+%TODO
+%Query is an abstraction wrapping a \code{SELECT} query into a table-like %predicate
+
+\subsection{\code{SELECT} clause}
+
+A \code{SELECT} statement retrieves zero or more rows from one or more database tables. The \code{SELECT} clause is used to specify which columns should be retrieved from which tables. There are multiple ways to specify which columns are to be returned. Each column can be selected by one or more of the following
+\begin{itemize}
+    \item a column name,
+    \item a column name preceded by a table name (\code{table_name.column_name}),
+    \item a table name followed by \code{.*},
+    \item an \code{*} symbol,
+    \item a value expression or a function application.
+\end{itemize}
+
+If a column name is unambiguous (it exists only in one of the tables specified in the \code{FROM} clause), the table name does not have to be specified to select the column. If, however, there is more than one table exposing a column with the same name, the column name must be preceded by the table name followed by \code{.}. 
+
+The \code{table_name.*} is equivalent to selecting all the columns from the table \code{table_name}. Therefore the two \code{SELECT} statements are equivalent:
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    table_1.*
+FROM
+    table_1
+\end{lstlisting}
+\begin{lstlisting}[language=SQL]
+SELECT
+    table_1.column_1,
+    table_1.column_2,
+    ...
+    table_1.column_n
+FROM
+    table_1
+
+\end{lstlisting}
+Where \code{table_1} has columns \code{column_1}, \code{column_2}, ..., \code{column_n}.
+
+The \code{*} is equivalent to selecting all the columns from all tables specified in the \code{FROM} statement. Therefore the two \code{SELECT} statements are equivalent:
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    *
+FROM
+    table_1,
+    table_2,
+    ...
+    table_n
+\end{lstlisting}
+\begin{lstlisting}[language=SQL]
+SELECT
+    table_1.*,
+    table_2.*,
+    ...
+    table_n.*
+FROM
+    table_1,
+    table_2,
+    ...
+    table_n
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    column_name AS alias
+\end{lstlisting}
+
+
+Each column selected without using the \code{*} symbol can be aliased. This effectively sets a new name for the column, although in many implementations it is still possible to reference the column using its original identifier. If a column is not given an alias it can be referenced either by its \code{column_name} (if it is unambiguous) or by \code{table_name.column_name}.
+
+If a \code{DISTINCT} clause is present, all duplicated rows are removed from the query output.
+
+
+When a selected column is aliased, its name within in the resulting table is set to the alias.  Otherwise, the column name is usually the same as its name in the original table, although, depending on the SQL implementation the name can be set to several different values. If a selected value is not a column name -- an aggregation function such as \code{count(*)}, \code{sum(item_count)}etc. -- the resulting column may be, for example, a text representation of the selected expression or any unique arbitrary value. Most, but not all, implementations also ensure that all column names are unique. If two columns have the same name, one or both of them may be renamed (for example by appending \code{_1} to the name) to make it unique.
+
+
+\subsection{\code{FROM} clause}
+The \code{FROM} clause is used to specify the list of tables from which the columns are selected. Each table in the \code{FROM} clause can be either a table name from the database schema, a view (available in some database implementations) or a sub-query. Every subquery specified in the \code{FROM} clause may reference externally visible columns and tables, which has different behaviours depending in the implementation. More often than not, the uniqueness of the specified table names if enforced, similarly to the column names.
+
+\subsection{\code{WHERE} clause}
+
+The \code{WHERE} clause is used to filter out the resulting rows based on a value of a boolean expression. If the \code{WHERE} clause is present, the resulting rows are all the rows from the Cartesian product of the selected tables, for which the \code{WHERE} condition holds.
+\begin{defi}[Cartesian product of two SQL tables]
+A \emph{Cartesian product} $T_1 \times T_2$ of two SQL tables $T_1$, $T_2$ is the set of all rows from table $T_1$, each concatenated with every row from table $T_2$.
+\end{defi}
+The above definition generalizes for $n$ number of tables. The condition after the \code{WHERE} clause is evaluated for every row and only these rows for which the condition is true are returned by the query.
+If the \code{WHERE} clause is not present, the query is equivalent to the same query with the for which the condition after the \code{WHERE} clause is true for all rows.
+The condition in the \code{WHERE} clause is constructed using logical operators (\code{AND}, \code{OR}) with their regular semantics, constant values (\code{True}, \code{False}), binary operators (\code{=}, \code{!=} (not equal), \code{<}, \code{<=}, \code{>}, \code{>=}), as well as \code{EXISTS}, \code{NOT EXISTS}, \code{IN} and \code{NOT IN} clauses.
+
+
+
+\subsection{\code{GROUP BY} clause}
+The \code{GROUP BY} clause is used to merge multiple rows together if they have matching values in the specified columns. This allows for applying aggregation function on other columns. For example for the following table
+\begin{center}
+\begin{tabular}{r|c|c|c|}
+     Table: & \multicolumn{3}{c|}{\code{tab1}} \\
+     \hline
+     Columns: & \code{col11} & \code{col12} & \code{col13} \\
+     \hline
+     Values: & \code{A} & \code{A} & \code{1}  \\
+             & \code{A} & \code{B} & \code{2}  \\
+             & \code{A} & \code{B} & \code{4}  \\
+             & \code{A} & \code{B} & \code{8}  \\
+             & \code{B} & \code{D} & \code{16} \\
+             & \code{B} & \code{D} & \code{32} \\
+             & \code{B} & \code{C} & \code{64}
+\end{tabular}
+\end{center}
+An SQL query
+\begin{lstlisting}[language=SQL]
+SELECT
+    col11,
+    col12,
+    sum(col13) AS sum_col13
+FROM
+    tab1
+GROUP BY
+    col11,
+    col12
+\end{lstlisting}
+would give the following result
+\begin{center}
+\begin{tabular}{r|c|c|c|}
+     Columns: & \code{col11} & \code{col12} & \code{sum_col13} \\
+     \hline
+     Values: & \code{A} & \code{A} & \code{1}  \\
+             & \code{A} & \code{B} & \code{14} \\
+             & \code{B} & \code{D} & \code{48} \\
+             & \code{B} & \code{C} & \code{64}
+\end{tabular}
+\end{center}
+
+The rows 2, 3, 4 and rows 5, and 6 were merged together because of the same values in the first two columns. The value in the last column in the sum of \code{col13} for the merged rows.
+
+\subsection{\code{HAVING} clause}
+
+The \code{HAVING} clause has a similar semantics to the \code{WHERE} clause, however the condition within the \code{HAVING} clause is evaluated after the \code{GROUP BY} clause is evaluated. This allows for referencing for example the results of aggregation functions that are performed during the evaluation of the \code{GROUP BY} clause.
+
+\subsection{\code{ORDER BY} clause}
+The \code{ORDER BY} clause is used to specify the order of the returned columns. The list of rows is sorted using a stable sorting algorithm sequentially by every column specified in the clause.
+
+\subsection{\code{UNION} clause}\label{union-semantics}
+The \code{UNION} clause is used to concatenate the results of two queries. The resulting table contains first the set of rows from the first query and than the rows from the second query, often preserving their order. In order for this clause to be valid both tables need to have the same number of columns. Additionally the order of columns is important, since the columns must be of matching types. Also, in many implementation matching column names are required.
+
+\subsection{\code{JOIN} clause}\label{join-semantics}
+The \code{JOIN} clause is used to combine rows from two different tables. Depending on the implementation, the \code{JOIN} clause comes in different types:
+\begin{itemize}
+    \item \code{CROSS JOIN},
+    \item \code{INNER JOIN},
+    \item \code{LEFT OUTER JOIN},
+    \item \code{RIGHT OUTER JOIN},
+    \item \code{FULL OUTER JOIN}.
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{r|c|c|c|c|}
+     Table: & \multicolumn{2}{c|}{\code{tab1}} & \multicolumn{2}{c|}{\code{tab2}} \\
+     \hline
+     Columns: & \code{col11} & \code{col12} & \code{col21} & \code{col22} \\
+     \hline
+     Values: & \code{A} & \code{1} & \code{B} & \code{1} \\
+             & \code{C} & \code{2} & \code{D} & \code{3}
+\end{tabular}
+\end{center}
+
+The \code{CROSS JOIN} clause returns the Cartesian product of the two tables -- every row from the first table is joined with every row of the second table. It is the only type of the \code{JOIN} clause for which the \code{ON} clause is not allowed.
+
+\begin{center}
+\begin{tabular}{r|c|c|c|c|}
+     Table: & \multicolumn{4}{c|}{\code{tab1 CROSS JOIN tab2}} \\
+     \hline
+     Columns: & \code{col11} & \code{col12} & \code{col21} & \code{col22} \\
+     \hline
+     Values: & \code{A} & \code{1} & \code{B} & \code{1} \\
+             & \code{A} & \code{1} & \code{D} & \code{3} \\
+             & \code{C} & \code{2} & \code{B} & \code{1} \\
+             & \code{C} & \code{2} & \code{D} & \code{3} \\
+\end{tabular}
+\end{center}
+
+The \code{INNER JOIN} clause returns rows in the \code{CROSS JOIN}, for which the boolean condition holds.
+
+\begin{center}
+\begin{tabular}{r|c|c|c|c|}
+     Table: & \multicolumn{4}{c|}{\makecell{\code{tab1 INNER JOIN} \\ \code{tab2 ON col12 = col22}}} \\
+     \hline
+     Columns: & \code{col11} & \code{col12} & \code{col21} & \code{col22} \\
+     \hline
+     Values: & \code{A} & \code{1} & \code{B} & \code{1}
+\end{tabular}
+\end{center}
+
+The \code{LEFT OUTER JOIN} clause returns all the rows from the \code{INNER JOIN} and also rows from the first table for which there is not matching row in the second table. The values of the missing rows is set to \code{null}. The \code{null} value is a constant value used to represent a missing value of any type, which is useful practical applications of SQL.
+
+\begin{center}
+\begin{tabular}{r|c|c|c|c|}
+     Table:   & \multicolumn{4}{c|}{\makecell{\code{tab1 LEFT OUTER JOIN} \\ \code{tab2 ON col12 = col22}}} \\
+     \hline
+     Columns: & \code{col11} & \code{col12} & \code{col21} & \code{col22} \\
+     \hline
+     Values:  & \code{A} & \code{1} & \code{B} & \code{1} \\
+              & \code{C} & \code{2} & \code{null} & \code{null} \\
+\end{tabular}
+\end{center}
+
+
+The \code{RIGHT OUTER JOIN} works in a similar way to the  \code{LEFT OUTER JOIN}, only the preserved rows without a matching counterpart come from the second table.
+
+\begin{center}
+\begin{tabular}{r|c|c|c|c|}
+     Table: & \multicolumn{4}{c|}{\makecell{\code{tab1 RIGHT OUTER JOIN} \\ \code{tab2 ON col12 = col22}}} \\
+     \hline
+     Columns: & \code{col11} & \code{col12} & \code{col21} & \code{col22} \\
+     \hline
+     Values: & \code{A} & \code{1} & \code{B} & \code{1} \\
+      & \code{null} & \code{null} & \code{D} & \code{3}
+\end{tabular}
+\end{center}
+
+The \code{FULL OUTER JOIN} clause returns all the rows that would be returned by either \code{LEFT OUTER JOIN} or \code{RIGHT OUTER JOIN}.
+
+\begin{center}
+\begin{tabular}{r|c|c|c|c|}
+     Table: & \multicolumn{4}{c|}{\makecell{\code{tab1 FULL OUTER JOIN} \\ \code{tab2 ON col12 = col22}}} \\
+     \hline
+     Columns: & \code{col11} & \code{col12} & \code{col21} & \code{col22} \\
+     \hline
+     Values: & \code{A} & \code{1} & \code{B} & \code{1} \\
+     & \code{C} & \code{2} & \code{null} & \code{null} \\
+     & \code{null} & \code{null} & \code{D} & \code{3}
+\end{tabular}
+\end{center}
+
+\subsection{\code{IN} and \code{NOT IN} clauses}
+The \code{IN} and \code{NOT IN} are used to check if a value exists in a list of values. The list of values can be specified either by providing a subquery (that returns a single column), a single-column table, or explicitly listing the values.
+
+\begin{lstlisting}[language=SQL]
+...
+WHERE
+    column IN (value1, value2, ...)
+    ...
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL]
+WHERE
+    column IN (
+        SELECT
+            single_column
+        FROM
+            ...
+    )
+    ...
+\end{lstlisting}
+
+%\subsection{\code{EXISTS} and \code{NOT EXISTS} clauses}
+
+\section{Implementations}
+
+SQL varies slightly between different implementations, but the general syntax and semantics for basic queries remain the same.
+
+In order to facilitate a better user experience and address different business requirements, all major database management systems producers implement custom functions and functionalities that are outside of the scope of the SQL standard. Moreover, some semantic ambiguities in SQL are resolved in different ways in all of the most popular implementations.
+
+Depending on the implementation of a database, different column naming conventions may be used. This can often lead to either ambiguous meanings of some queries, and therefore the same SQL queries might not be equivalent across all database implementations.
+
+A problem that arises even in simple SQL queries has to do with duplicate column names and the resolution of the duplicated columns. The following example clearly shows the two possible interpretation of the same query.
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    user.id,
+    application.id
+FROM
+    user,
+    application
+WHERE
+    id = 1;
+\end{lstlisting}
+
+The problem is that the condition in the \code{WHERE} clause can refer to either of the selected columns. Since the query effectively selects two columns, both named \code{id} it is necessary to somehow resolve the ambiguity in the \code{WHERE} clause. Depending on the implementation, if the programmer does not provide unique aliases for the columns, this can be handled in various ways. Either the second column is renamed according to certain rules (for example to \code{id_1}, to avoid duplicated names), both columns are renamed (for example to \code{user_id}, \code{application_id}), or an error is raised.
+
+Another instance where ambiguous variable names might lead to different semantics of a query arises when an inner query references a variable from an outer \code{SELECT} statement or when dealing with \code{EXISTS} and \code{NOT EXISTS} clauses.
+
+\begin{lstlisting}[language=SQL, caption=Variable shadowing]
+SELECT
+    users.name as name,
+    subquery_alias.name as product_name
+FROM
+    users,
+    (
+        SELECT
+            products.name as name
+        FROM
+            products
+        WHERE
+            name = 'apple' -- name refers to product.name
+    ) AS subquery_alias
+WHERE
+    name = 'John Doe' -- name refers to user.name
+\end{lstlisting}
+
+Additional clauses and functions are not in the scope of this analysis, however some clarification with regards to the SQL semantics is necessary. Lets take two tables \code{tab1}, \code{tab2}, both of which have just one column named \code{col}. In the example below, it is not clear from which table the column should be selected.
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    col -- should be referenced as `tab1.col` or `tab2.col`
+FROM
+    tab1,
+    tab2
+\end{lstlisting}
+
+To avoid these ambiguities, in the further analysis the uniqueness of all column names within any given scope is assumed. If a column is not aliased and selected by \code{table.column} it is assumed that the column name outside this query is \code{column}. If within a single query two columns have the same name, at least one of them needs to be aliased with a unique identifier.
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    -- at least one of those should be aliased to have a unique name within this scope
+    tab1.col,
+    tab2.col
+FROM
+    tab1,
+    tab2
+\end{lstlisting}
+
+
+It is worth noting the fact that such semantics of column aliasing is not present in the most common implementations of commercial databases. In most popular databases, to increase the usability, it is possible to reference a column by its original name, so, for example, the following queries would be valid:
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    tab1.col11 AS col11_alias,
+    tab1.col12,
+    tab1.col13
+FROM
+    tab1
+WHERE
+    tab1.col11 < tab1.col13 -- instead of `col11_alias < tab1.col13`
+\end{lstlisting}
+\begin{lstlisting}[language=SQL]
+SELECT
+    tab1.col11 AS col11_alias,
+    tab1.col12,
+    tab1.col13
+FROM
+    tab1
+WHERE
+    col11 < col13 -- instead of `col11_alias < tab1.col13`
+\end{lstlisting}
+
+This is possible due to significantly more complicated deduction methods, which allow for referencing columns (or tables) in many synonymous ways, as long as they do not introduce any ambiguities.
+
+
+
+
+
+
+
+\chapter{Mathematical description of databases and database queries}
+
+\section{Relational algebra}
+
+Relational algebras are a mathematical formalism used to describe relational databases and data queries. It was first proposed as a model for databases and data queries in \cite{codd}. In the model, a database is described by a number of relations. A relation is defined as a set of $n$-tuples -- $R \subset S_1, S_2, \dots, S_n$ , where $S_i$ is the domain of the respective data field.
+
+\subsection{Table representation}
+
+In Codd's analyses tables are used as a convenient representation of the underlying relations in order to abstract from column ordering, which matters in the relational model, but can be ignored in the table representation. Therefore, a table is a valid representation of an $n$-ary relation $R$ must have the following properties:
+\begin{enumerate}
+    \item Each table row must represent a $n$-ary tuple from $R$,
+    \item All rows must be distinct (there are no row duplicates).
+    \item The order of rows is not relevant.
+    \item The order of columns matches the respective $S_1, S_2, \dots, S_n$ sets.
+    \item The meaning of each column is represented by a column name.
+\end{enumerate}
+
+\subsection{Operations on relations}
+Since relations are effectively set, all set operations can be applied to relation, providing some additional conditions are met.
+
+\begin{defi}[Permutation]
+A \emph{permutation} of a relation $R$ is a relation $S$ created by applying a permutation to all elements of $R$.
+\end{defi}
+
+\begin{defi}[Projection]
+A \emph{projection} $\pi_{a_1, a_2, a_3, \dots, a_n}$ of a relation $R$ of arity $r>=n$ is a relation created by selecting a subset of attributes of relation $R$.
+\end{defi}
+
+\begin{defi}[Cartesian product]
+A \emph{Cartesian product} of two relations $R$ of arity $r$ and $S$ or arity $s$ in a relation $R\times S$ of arity $r+s$, such that
+$$
+    R\times S = \{(x_1, x_2, x_3, \dots, x_r, y_1, y_2, y_3, \dots, y_s)\ |\ (x1, x_2, x_3, \dots, x_r) \in R\ \land\ (y_1, y_2, y_3, \dots, y_s) \in S\}
+$$
+\end{defi}
+
+\begin{defi}[Selection]
+A \emph{selection} $\sigma_\phi$ of on a relation $R$, where $\phi$ is a propositional logic formula, is a relation
+$$
+\sigma_\phi(R) = \{(x1, x_2, x_3, \dots, x_r)\ |\ (x1, x_2, x_3, \dots, x_r) \in R\ \land\ \phi((x1, x_2, x_3, \dots, x_r)))\}
+$$
+\end{defi}
+
+\begin{defi}[Union]
+A \emph{union} of two relation $R$ and $S$ of the same arity $r$ is a relation
+$$
+    R\cup S = \{ (x_1, x_2, x_3, \dots, x_r) | (x_1, x_2, x_3, \dots, x_r) \in R\ \lor\ (x_1, x_2, x_3, \dots, x_r)\in S \}
+$$
+\end{defi}
+
+\subsection{Limitations}
+
+Each relation has a matching table representation, however in practical implementations, every database table can be considered as an ordered multi-set of tuples of the same arity. Therefore, some of the tables are not possible to be directly represented in terms of relational algebra.
+
+In order to analyse database queries in terms of relational algebra it is necessary to assume certain limitation on the database structure and the set of acceptable select queries:
+\begin{itemize}
+    \item all columns contain values of the same abstract type from an totally ordered set,
+    \item the order of columns does not matter,
+    \item no constants are used within a query,
+    \item the order of rows in any table, or returned by any query is not relevant.
+\end{itemize}
+This in turn means, that clauses \code{GROUP BY}, \code{HAVING}, \code{ORDER BY} are not represented in this model.
+
+\begin{comment}
+\subsection{Queries without sub-queries}
+Consider queries without nesting. Such queries can be translated directly by defining a new relation $R \subset domain(R_1) \times domain(R_2)\times \dots \times domain(R_N)$, where $R_1, R_2, \dots, R_N$ are relations representing the tables in the \code{FROM} clause of the original query. The final relation $S \subset R$ can be obtained by removing all elements of $R$ that do not satisfy the \code{WHERE} condition.
+
+
+\end{comment}
+
+
+\section{Semantic equivalence of database queries}
+
+\begin{defi}[Semantic equivalence of SQL queries]
+Let $D$ be a database schema and let $Query_1$ and $Query_2$ be SQL queries that are defined for a database of schema $D$. $Query_1$ and $Query_2$ are said to be \emph{semantically equivalent}, if and only if all of the following conditions are satisfied:
+\begin{itemize}
+    \item $Query_1$ and $Query_2$ have arity $n$
+    \item $\forall_{(x_1, x_2, \dots, x_n)}\ Query_1((x_1, x_2, \dots, x_n)) \iff Query_2((x_1, x_2, \dots, x_n))$
+\end{itemize}
+\end{defi}
+
+This means that two SQL queries are semantically equivalent, if and only if both queries operate on the same database, and both return the same number of columns and the same set of rows, regardless of the contents of the database. For the purpose of this analysis only \emph{sets} of rows are considered -- the number of occurrences of each row, as well as the order in which the rows are presented does not affect the semantical equivalence of any two queries.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Scope of the analysis}
+In order to analyse the equivalence of SQL a subset of acceptable SQL queries have to be be defined.
+
+In commercially available implementations SQL is a very complex language with many additional functionalities, such built-in function, aggregation functions, etc. In this thesi, the scope of the analysis includes only a small subset of SQL and imposes certain restrictions as to which queries are considered valid. For the purpose of this work, we define Simple SQL, which, additionally to the limited number of allowed clauses, also requires certain column and table naming conventions.
+
+\begin{defi}[Simple SQL]
+An SQL query is a Simple SQL query if it meets all of the following conditions:
+\begin{enumerate}
+    \item There are no other clauses than:\\\code{SELECT}, \code{FROM}, \code{WHERE}, \code{AS}, \code{IN}, \code{NOT IN}, \code{EXISTS}, \code{NOT EXISTS}.
+    \item All elements after the \code{SELECT} clause are of one of the following forms:
+    \begin{itemize}
+        \item \code{table_name.column_name}
+        \item \code{table_name.column_name AS column_alias}
+        \item \code{table_alias.column_name}
+        \item \code{table_alias.column_name AS column_alias}
+    \end{itemize}
+    \item If a selected column is aliased, it must be referred to by its alias.
+    \item If a selected column is not aliased, it must be referred to it by its full name\\(i.e. \code{table_name.column_name} or \code{table_alias.column_name}),
+    \item Within a \code{SELECT} clause, all effective column names \\(\code{column_alias} if it exists, \code{column_name} otherwise) must be unique,
+    \item All elements after the \code{FROM} clause are of the following form:
+    \begin{itemize}
+        \item \code{table_name}
+        \item \code{table_name AS table_alias}
+        \item \code{<select-statement> AS table_alias}
+    \end{itemize}
+    \item If a table in a \code{FROM} clause is aliased it must be referred to by its alias,
+    \item Within a \code{FROM} clause all effective table names\\(\code{table_alias} if it exists, \code{table_alias} otherwise) must be unique,
+    \item The condition after an optional \code{WHERE} clause is of the following form:
+    \begin{grammar}
+        <where clause> ::= \code{WHERE} <search condition>
+        
+        <search condition> ::= <boolean value expression>
+        
+        <boolean value expression> ::=   <boolean term>
+            \alt <boolean value expression> \code{OR} <boolean term>
+            \alt \code{(} <boolean value expression> \code{)}
+        
+        <boolean term> ::= <boolean factor>
+            \alt <boolean term> \code{AND} <boolean factor>
+        
+        <boolean factor> ::= [ \code{NOT} ] <boolean test>
+        
+        <boolean test> ::= \code{TRUE}
+            \alt \code{FALSE}
+            \alt <column name or alias> <binop> <column name or alias>
+            \alt <column name or alias> \code{IN} <table name or a sub-query>
+            \alt <column name or alias> \code{NOT IN} <table name or a sub-query>
+            %\alt \code{EXISTS} <table name or a sub-query>
+            %\alt \code{NOT EXISTS} <table name, table alias or a sub-query>
+            
+        <binop> ::= \code{=} | \code{!=} | \code{\textless} | \code{\textless=} | \code{>} | \code{>=}
+    \end{grammar}
+    \item Each sub-query can reference only columns defined in its own \code{FROM} clause, or any selected column in its parents' queries.
+\end{enumerate}
+\end{defi}
+
+Additionally, all \code{SELECT} clauses are effectively \code{SELECT DISTINCT} clauses\\i.e. no row duplicates are returned.
+
+Each \code{SELECT} statement exposes its columns by their effective names.
+
+
+\chapter{Implementation}
+\section{Program input}
+The program takes as input three text files -- one containing a description of a database schema, and two with SQL queries. In the first file the database schema is described by a number of lines, each containing a table name and space-separated column names.
+
+\begin{lstlisting}
+$ ./translate database_schema.json query_01.sql query_02.sql
+\end{lstlisting}
+\begin{lstlisting}[language=Python]
+# database_schema.json
+{
+    "tab1": [
+        "col11",
+        "col12",
+        "col13",
+        "col14",
+        "col15"
+    ],
+    "tab2": [
+        "col21",
+        "col22",
+        "col23",
+        "col24",
+        "col25"
+    ]
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL]
+-- query_01.sql
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+\end{lstlisting}
+\begin{lstlisting}[language=SQL]
+-- query_02.sql
+SELECT
+    tab1.col11 AS alias11,
+    tab1.col12
+FROM
+    tab1
+\end{lstlisting}
+
+\section{Program output}
+All three files are processed sequentially and both queries are independently translated into a number of TPTP statements. Both translations are printed into a single text file, along with all the generated axioms and a final statement containing the equivalence conjecture.
+
+\section{Translation of a database schema definition}
+
+For the purpose of testing database queries equivalence the database schema has to be translated into a mapping from table names into lists of column names. This is not translated directly into an AST of a first-order logic formula, but provides a context which is necessary to properly translate the queries. For example, the following DDL statement
+
+\begin{lstlisting}[language=SQL, caption=Sample database schema definition]
+CREATE TABLE tab1 (
+    col11 NUMBER(4),
+    col12 NUMBER(4),
+    col13 NUMBER(4),
+    col14 NUMBER(4),
+    col15 NUMBER(4),
+);
+
+CREATE TABLE tab2 (
+    col21 NUMBER(4),
+    col22 NUMBER(4),
+    col23 NUMBER(4),
+    col24 NUMBER(4),
+    col25 NUMBER(4),
+);
+\end{lstlisting}
+
+is parsed into an abstract syntax tree
+results in the following mappings stored as Python dictionaries
+
+\begin{lstlisting}[language=Python, caption=Database schema representation]
+{
+    "tab1": [
+        "col11",
+        "col12",
+        "col13",
+        "col14",
+        "col15"
+    ],
+    "tab2": [
+        "col21",
+        "col22",
+        "col23",
+        "col24",
+        "col25"
+    ]
+}
+
+\end{lstlisting}
+
+During the translation process, those mappings are stored within a global scope in order to provide a context needed to formulate logical predicates representing global table references. Such mapping give basis for creating the proper predicates \code{tabi(coli1, coli2, coli3, ..., colin)} that holds if end only if the row \code{(coli1, coli2, coli3, ..., colin)]} exists in the table \code{tabi}.
+
+\section{Translation of SQL queries}
+
+\section{Parsing of an SQL query}
+The parsing of SQL queries was implemented using a Moz SQL Parser \cite{mozsqlparser}, that translates SQL queries into an abstract syntax tree (AST) representation as nested Python dictionaries.
+
+
+
+The abstract syntax tree of the following SQL query
+\begin{lstlisting}[language=SQL, caption=Sample \code{SELECT} statement]
+SELECT
+    tab1.col11,
+    tab1.col12 AS col12_alias,
+    tab2_alias.col12,
+    tab2_alias.col22 AS col22_alias,
+    subquery.subquery_col
+FROM
+    tab1,
+    tab2 as tab2_alias,
+    (
+        SELECT
+            tab1.col11 AS subquery_col
+        FROM
+            tab1
+    ) AS subquery
+WHERE
+    (
+        tab1.col11 < col12_alias AND
+        tab2_alias.col12 IN (
+            SELECT
+                tab1.col11
+            FROM
+                tab1
+        )
+    ) OR (tab2_alias.col12 <= subquery.subquery_col)
+\end{lstlisting}
+results in the following abstract syntax tree
+
+%\vfill
+%\pagebreak
+\begin{lstlisting}[language=Python, caption=Abstract syntax tree representation in Python]
+{
+    "select": [
+        { "value": "tab1.col11" },
+        {
+            "value": "tab1.col12",
+            "name": "col12_alias"
+        },
+        { "value": "tab2_alias.col12" },
+        {
+            "value": "tab2_alias.col22",
+            "name": "col22_alias"
+        },
+        { "value": "subquery.subquery_col" }
+    ],
+    "from": [
+        "tab1",
+        {
+            "value": "tab2",
+            "name": "tab2_alias"
+        },
+        {
+            "value": {
+                "select": {
+                    "value": "tab1.col11",
+                    "name": "subquery_col"
+                },
+                "from": "tab1"
+            },
+            "name": "subquery"
+        }
+    ],
+    "where": {
+        "or": [
+            {
+                "and": [
+                    {
+                        "lt": [ "tab1.col11", "col12_alias" ]
+                    },
+                    {
+                        "in": [
+                            "tab2_alias.col12",
+                            {
+                                "select": {
+                                    "value": "tab1.col11"
+                                },
+                                "from": "tab1"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lte": [ "tab2_alias.col12", "subquery.subquery_col" ]
+            }
+        ]
+    }
+}
+
+\end{lstlisting}
+
+The translation of the \code{SELECT} clause depends on the result of translating the \code{FROM} and \code{WHERE} clauses. The \code{FROM} clause is where all new variables visible within the scope of the query are defined. The information about newly defined tables (and their columns) is passed to the code responsible for translating the \code{WHERE} clause, along with the aliases defined in the \code{SELECT} clause. The process of translating a \code{SELECT} clause consists of three main parts:
+\begin{enumerate}
+    \item translation of the \code{FROM} clause, 
+    \item translation of the \code{WHERE} clause (based on information gathered in the previous step and aliases set in the \code{SELECT} clause),
+    \item translation of the final \code{SELECT} clause and the definition of the new predicate for the \code{SELECT} clause.
+\end{enumerate}
+
+
+\section{Translation of \code{FROM} statements}
+
+Since the \code{FROM} statement consists of a list of independent table references, the translation of \code{FROM} statements results in a conjunction of translation of its members.
+
+Each table reference is always one of the following:
+\begin{itemize}
+    \item a simple table name (which must be defined in the database schema),
+    \item an aliased table name,
+    \item a sub-query (which always has to be aliased).
+\end{itemize}
+
+\subsection{Translation of simple table name references}
+
+Each table name reference is translated based on the table name defined in the database schema and aliases set within the \code{SELECT} clause.
+
+
+In order to translate a simple table name reference the columns of the table are looked up in the current database schema and are properly renamed by prepending the name of the table to all column names.
+
+Lets assume that the database schema is defined simply by:
+\begin{lstlisting}[language=SQL, caption={}]
+CREATE TABLE tab1 (
+    col11 NUMBER(4),
+    col12 NUMBER(4),
+    col13 NUMBER(4),
+);
+\end{lstlisting}
+
+Then, the following \code{FROM} clause
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    tab1.col11,
+    tab1.col12,
+    tab1.col13
+FROM
+    ...
+    tab1,
+    ...
+...
+\end{lstlisting}
+
+would have columns named \code{TAB1_COL11}, \code{TAB1_COL12}, \code{TAB1_COL13}, so the predicate generated for the entire \code{FROM} clause would look like
+
+\begin{lstlisting}[language=Prolog]
+fof(from,definition,(
+    ! [...,TAB1_COL11,TAB1_COL12,TAB1_COL13,...] :
+      ( from(...,TAB1_COL11,TAB1_COL12,TAB1_COL13,...)
+    <=> ... & tab1(TAB1_COL11,TAB1_COL12,TAB1_COL13) & ...) )).
+\end{lstlisting}
+
+However, if the column names are aliased within the \code{SELECT} statement it is necessary to replace the original column names with their aliases. This is due to the fact, that the predicate defining the \code{FROM} clause is referenced only in the outer \code{SELECT} clause translation, which uses the aliases as the only way of referencing the aliased values. For instance, if the query had the following structure
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    tab1.col11 AS col11_alias,
+    tab1.col12,
+    tab1.col13
+FROM
+    ...
+    tab1,
+    ...
+...
+\end{lstlisting}
+
+this would result in the following definition for the \code{FROM} predicate
+
+\begin{lstlisting}[language=Prolog]
+fof(from,definition,(
+    ! [...,COL11_ALIAS,TAB1_COL12,TAB1_COL13,...] :
+      ( from(...,COL11_ALIAS,TAB1_COL12,TAB1_COL13,...)
+    <=> ... & tab1(COL11_ALIAS,TAB1_COL12,TAB1_COL13) & ...) )).
+\end{lstlisting}
+
+
+
+\subsection{Translation of aliased table name references}
+
+The translation of aliased table name references is quite similar to the previous case. The only difference is that the column names are set to be \code{ALIAS_COLUMN_NAME} instead of \code{TABLE_NAME_COLUMN_NAME}. Therefore, the following query
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    tab1_alias.col11,
+    tab1_alias.col12,
+    tab1_alias.col13
+FROM
+    ...
+    tab1 as tab1_alias,
+    ...
+...
+\end{lstlisting}
+results in the following translation:
+
+\begin{lstlisting}[language=Prolog]
+fof(from,definition,(
+    ! [...,TAB1_ALIAS_COL11,TAB1_ALIAS_COL12,TAB1_ALIAS_COL13,...] :
+      ( from(...,TAB1_ALIAS_COL11,TAB1_ALIAS_COL12,TAB1_ALIAS_COL13,...)
+    <=> ... & tab1(TAB1_ALIAS.COL11,TAB1_ALIAS_COL12,TAB1_ALIAS_COL13) & ...) )).
+\end{lstlisting}
+
+Similarly, if any of the selected columns is aliased, the translation follows the same rules as in the simple table name reference case, so
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    tab1_alias.col11 AS col11_alias,
+    tab1_alias.col12,
+    tab1_alias.col13
+FROM
+    ...
+    tab1 as tab1_alias,
+    ...
+...
+\end{lstlisting}
+results in the following translation:
+
+\begin{lstlisting}[language=Prolog]
+fof(from,definition,(
+    ! [...,COL11_ALIAS,TAB1_ALIAS_COL12,TAB1_ALIAS_COL13,...] :
+      ( from(...,COL11_ALIAS,TAB1_ALIAS_COL12,TAB1_ALIAS_COL13,...)
+    <=> ... & tab1(COL11_ALIAS,TAB1_ALIAS_COL12,TAB1_ALIAS_COL13) & ...) )).
+\end{lstlisting}
+
+Also, for the purpose of simplification and clarity, the implementation does not allow for referencing an aliased table by its original name. Hence, the following query is not correct
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    tab1_alias.col11 AS col11_alias,
+    tab1_alias.col12,
+    tab1.col13 -- should be `tab1_alias.col13` instead
+FROM
+    tab1 as tab1_alias
+WHERE
+    tab1.col11 = tab1_alias.col12
+        -- should be `tab1_alias.col11 = = tab1_alias.col12` instead
+\end{lstlisting}
+
+
+\subsection{Translation of sub-query table references}
+
+The translation of a sub-query table reference is the most complex case in the \code{FROM} clause translation. The main difference is the fact that:
+\begin{itemize}
+    \item the sub-query has to be recursively translated,
+    \item the sub-query might use externally defined variables (e.g. columns defined in its outer queries).
+\end{itemize}
+
+The translation process consists of multiple steps.
+
+First, the sub-query is translated as a standalone query. During this translation the proper predicate is defined, and the lists of the columns it exposes, and the list of all externally defined and the list of all externally defined variables are evaluated. This can be shown by translating two sub-query table references, one of which uses externally defined variables, and the other one does not.
+
+\subsubsection{Uncorrelated sub-queries}
+Queries with nesting can be translated recursively by first translating the nested queries to a relation, that can be then treated as a simple table references. For example, for a table
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+    \hline
+    \multicolumn{3}{|c|}{\code{tab1}} \\
+    \hline
+    \code{col11} & \code{col12} & \code{col13} \\
+    \hline
+    \code{1} & \code{2} & \code{3} \\ 
+    \code{1} & \code{0} & \code{1} \\ 
+    \code{1} & \code{2} & \code{1} \\ 
+    \hline
+\end{tabular}
+\end{center}
+the following query
+
+\begin{lstlisting}[language=SQL]
+SELECT subquery_alias.col11,
+       subquery_alias.col12
+FROM
+    (
+        SELECT
+            tab1.col11,
+            tab1.col12,
+            tab1.col13
+        FROM
+            tab1
+        WHERE
+            tab1.col11 = tab1.col13
+    ) AS subquery_alias
+WHERE
+    subquery_alias.col11 < subquery_alias.col12
+\end{lstlisting}
+can be represented as
+
+
+\begin{align*}
+    Nested &= \{ r \in Table : r.column1 = r.column3 \}\\
+    Nested &= \{ (1, 0, 1), (1, 2, 1) \}\\
+    Outer &= \pi_{column1, column2} (\{ r \in Nested : r.column1 < column2 \})\\
+    Outer &= \{ (1, 2, 1) \} 
+\end{align*}
+where $Table$ is a relation $Table \subset \mathbb{Z}^3$ containing all rows of \code{table1}.
+
+In this case the query can be treated as an aliased table name reference, since from the semantical perspective a predicate for such query and a predicate for an aliased table behave in the same way.
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    ...,
+    subquery.col11
+    ...
+FROM
+    ...,
+    (
+        SELECT
+            tab1.col11,
+            tab1.col12
+        FROM
+            tab1
+    ) as subquery,
+    ...
+\end{lstlisting}
+
+The inner query does depend any variables that are not defined in its \code{FROM} clause. After the sub-query is translated the proper predicate is generated.
+\begin{lstlisting}[language=Prolog]
+fof(subquery,definition,(
+    ! [COL11,COL12] :
+      ( subquery(COL11,COL12)
+    <=> ... ) )). 
+\end{lstlisting}
+
+This can be utilised in the \code{FROM} clause translation in the same way an aliased table name reference.
+
+\begin{lstlisting}[language=Prolog]
+fof(from,definition,(
+    ! [...,SUBQUERY_COL11,SUBQUERY_COL12,...] :
+      ( from(...,SUBQUERY_COL11,SUBQUERY_COL12,...)
+    <=> ... & subquery(SUBQUERY_COL11,SUBQUERY_COL12) & ... ) )). 
+\end{lstlisting}
+
+If any of the columns selected from the sub-query is aliased, its alias replaces the column name in the above TPTP translation, as in the previous case.
+
+\subsubsection{Correlated sub-queries}
+In the case of correlated queries i.e. when an external value is required to evaluate a subquery, an additional position in the predicate has to be used. 
+Queries utilizing external variables can be translated recursively by first translating the nested queries to a relation, that can be then treated as a simple table references. For example, for a table
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+    \hline
+    \multicolumn{3}{|c|}{\code{tab1}} \\
+    \hline
+    \code{col11} & \code{col12} & \code{col13} \\
+    \hline
+    \code{1} & \code{2} & \code{3} \\ 
+    \code{1} & \code{0} & \code{1} \\ 
+    \code{1} & \code{2} & \code{1} \\ 
+    \hline
+\end{tabular}
+\end{center}
+the following query
+
+\begin{lstlisting}[language=SQL]
+SELECT subquery_alias.col11,
+       subquery_alias.col12
+FROM
+    (
+        SELECT
+            tab1.col11,
+            tab1.col12,
+            tab1.col13
+        FROM
+            tab1
+        WHERE
+            tab1.col11 = tab1.col13
+    ) AS subquery_alias
+WHERE
+    subquery_alias.col11 < subquery_alias.col12
+\end{lstlisting}
+can be represented as
+
+
+\begin{align*}
+    Nested &= \{ r \in Table : r.column1 = r.column3 \}\\
+    Nested &= \{ (1, 0, 1), (1, 2, 1) \}\\
+    Outer &= \pi_{column1, column2} (\{ r \in Nested : r.column1 < column2 \})\\
+    Outer &= \{ (1, 2, 1) \} 
+\end{align*}
+where $Table$ is a relation $Table \subset \mathbb{Z}^3$ containing all rows of \code{table1}.
+If an external variable is used within a sub-query, it needs to be passed from an outer select statement and included in all generated predicates, as if it was an additional column, that cannot be selected from it.
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    ...,
+    subquery.col11,
+    tab1.col12 as external_variable
+    ...
+FROM
+    ...,
+    tab1,
+    (
+        SELECT
+            tab1.col11
+        FROM
+            tab1
+        WHERE
+            tab1.col11 = external_variable
+    ) as subquery,
+    ...
+\end{lstlisting}
+
+In the above example the variable \code{tab1.col12} (aliased to \code{external variable} is passed down to the inner query. Note, that it has to be aliased, otherwise the \code{tab1.col12} column in the inner query would shadow it in this scope and would not be accessible.
+
+To translate the above query the recursive translation of the sub-query is the first step. The predicate for this sub-query will have one additional parameter \code{external_variable}, that needs to be passed first to the \code{FROM} predicate and then to the sub-query.
+
+This will result in the following TPTP code
+
+\begin{lstlisting}[language=Prolog]
+fof(from,definition,(
+    ! [...,SUBQUERY_COL11,...,EXTERNAL_VARIABLE,...] :
+      ( from(...,SUBQUERY_COL11,...,EXTERNAL_VARIABLE,...)
+    <=> ... & subquery(SUBQUERY_COL11,EXTERNAL_VARIABLE) & ... ) )).
+    %       selected columns ^          ^ externally defined variable(s)
+\end{lstlisting}
+
+Since at least one of the table references in the \code{FROM} utilises an external variable this needs to be propagated to the \code{FROM} clause translation. This means that, the variable must be defined in the scope where the \code{FROM} predicate is used (either in an outer query or in another table reference in that same \code{FROM} clause), and must be passed to it as a additional parameter.
+
+Therefore, the \code{FROM} predicate will have the form of if any of the externally defined variables is not defined in the \code{FROM} clause. \code{from(<selected-columns>,<external-variables>}.
+
+\subsection{Final \code{FROM} predicate construction}
+
+After every table reference in the list is translated the single predicate for the entire \code{FROM} clause must be generated.
+
+First, all the newly defined columns are collected from all table references. This will result in a list of variables in the form of: \code{<table name or table alias or sub-query alias>_<column name exposed by this table>}. Then, external variables that are used in all sub-queries and are not in the newly defined columns list, are aggregated. Those two lists are then used to construct the following predicate for the \code{FROM} clause.
+
+\begin{lstlisting}[language=Prolog]
+fof(from,definition,(
+    ! [<newly-defined-columns>,<external-variables>] :
+      ( from(<newly-defined-columns>,<external-variables>)
+    <=> (
+        <predicate-1>(<columns-1>,<external-variables-2>) &
+        <predicate-2>(<columns-1>,<external-variables-2>) &
+        ...
+        <predicate-n>(<columns-n>,<external-variables-n>)
+        ) ) )).
+\end{lstlisting}
+
+Where
+\begin{itemize}
+    \item each \code{<predicate-i>} is a unique name identifying a single table reference (either a table name or an alias)
+    \item each \code{<columns-i>} is the list of columns exposed by the respective table with all aliased values replaced by their aliases
+    \item each \code{<external-variables-i>} is empty or contains all external variables used by its corresponding table reference
+    \item \code{<newly-defined-columns>} is a list of values in all \code{<columns-i>}
+    \item \code{<external-variables>} is a list of all values in all \code{<external-variables-i>}, which do not appear in \code{<newly-defined-columns>}
+\end{itemize}
+
+\section{Translation of \code{WHERE} statements}
+
+The translation of the \code{WHERE} clause depends on the variables defined in the \code{FROM} clause. By the time the \code{WHERE} clause is translated, there exists a predicate for the \code{FROM} clause along with the columns it defines and the external variables it utilises.
+
+The \code{WHERE} clause might also use some additional externally defined variables as well as utilise sub-queries.
+
+\subsection{Translation of expressions}
+
+An expression in the \code{WHERE} clause is always one of:
+\begin{itemize}
+    \item a two-argument boolean expression such as
+        \begin{itemize}
+            \item \code{leq} (the $\leq$ operator)
+            \item \code{lt} (the $<$ operator)
+            \item \code{geq} (the $\geq$ operator)
+            \item \code{gt} (the $>$ operator)
+            \item \code{eq} (the $=$ operator)
+            \item \code{neq} (the $\neq$ operator)
+        \end{itemize}
+    \item \code{IN} and \code{NOT IN} expression
+    \item \code{EXISTS} and \code{NOT EXISTS} expression
+    \item a two argument logical expression such as
+        \begin{itemize}
+            \item \code{AND} (the $\land$ operator)
+            \item \code{OR} (the $\lor$ operator)
+        \end{itemize}
+    \item a one argument logical expression \code{NOT} (the $\neg$ operator)
+\end{itemize}
+
+The natural order of operation is used for all logical expressions, and the implementation supports the use of \code{(} and \code{)}.
+
+\subsection{Translation of boolean expressions}
+
+Each boolean expression is parsed and translated independently from other expressions. It is translated directly to the corresponding predicate.
+\renewcommand{\arraystretch}{1.5}
+\begin{center}
+ \begin{tabular}{ c | c }
+ SQL boolean expression & First-order logic expression in the TPTP syntax \\
+ \hline
+ \code{tab1.col11 <= tab1.col12} & \code{( leq(TAB1_COL11, TAB1_COL12) )} \\
+ \code{tab1.col11 < tab1.col12} & \code{( lt(TAB1_COL11, TAB1_COL12) )} \\  
+ \code{tab1.col11 >= tab1.col12} & \code{( geq(TAB1_COL11, TAB1_COL12) )} \\ 
+ \code{tab1.col11 > tab1.col12} & \code{( gt(TAB1_COL11, TAB1_COL12) )} \\ 
+ \code{tab1.col11 = tab1.col12} & \code{( eq(TAB1_COL11, TAB1_COL12) )} \\
+ \code{tab1.col11 != tab1.col12} & \code{( neq(TAB1_COL11, TAB1_COL12) )}
+\end{tabular}
+\end{center}
+
+The definition generation for all known predicates is explained in the section \ref{sec:axioms}.
+
+All variables that appear in any boolean expression are looked up in the list of variables defined in the \code{FROM} clause. If the variable does not exit in this list, it means that this is an externally defined variable and must be defined in an outer query. All other variables used by the predicate are added to the list of columns used by the \code{WHERE} clause.
+
+\subsection{Translation of \code{IN} and \code{NOT IN} expressions}
+
+In SQL Simple the \code{IN} and \code{NOT IN} clauses can be used in three different ways.
+\begin{enumerate}
+    \item <column name or alias> [\code{NOT}] \code{IN} <simple table name>
+    \item <column name or alias> [\code{NOT}] \code{IN} <table or sub-query alias>
+    \item <column name or alias> [\code{NOT}] \code{IN} <sub-query>
+\end{enumerate}
+
+The simplest case in which the \code{IN} and \code{NOT IN} clauses can be used is when a simple table name is used as the second argument
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    ...,
+    tab1.col11,
+    ...
+FROM
+    ...,
+    tab1,
+    ...
+WHERE
+    ...
+    tab1.col11 IN tab2 -- table tab2 must have exactly one column
+    ...
+\end{lstlisting}
+
+The \code{IN} condition in the above example is translated simply into a single predicate, which must hold for the given variable. The resulting TPTP formula is included in the final \code{WHERE} clause translation as in previous cases
+
+\begin{lstlisting}[language=Prolog]
+fof(where,definition,(
+    ! [..., TAB1_COL11, ...] :
+      ( where_5(..., TAB1_COL11, ...)
+    <=> tab2(TAB1_COL11) ) )). 
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    ...,
+    tab1.col11,
+    ...
+FROM
+    ...,
+    tab1,
+    (
+        SELECT
+            X  -- only one column can be selected
+        FROM
+            ...
+    ) AS subquery_alias,
+    ...
+WHERE
+    ...
+    tab1.col11 IN subquery_alias
+    ...
+\end{lstlisting}
+
+\begin{lstlisting}[language=Prolog]
+fof(where_subquery,definition,(
+    ! [X, <external variables>] :
+      ( where_subquery(X, <external variables>)
+    <=> select(X, <external variables>) ) )). 
+
+
+fof(where,definition,(
+    ! [..., TAB1_COL11, ...] :
+      ( where_5(..., TAB1_COL11, ...)
+    <=> subquery(TAB1_COL11, <external variables>) ) )). 
+\end{lstlisting}
+
+Where the \code{subquery} is a predicate defined during the translation of the \code{FROM} clause.
+
+The sub-query can also be defined directly in the \code{IN}/\code{NOT IN} expression.
+
+\begin{lstlisting}[language=SQL]
+SELECT
+    ...,
+    tab1.col11,
+    ...
+FROM
+    ...,
+    tab1,
+    ...
+WHERE
+    ...
+    tab1.col11 IN (
+        SELECT
+            X -- only one column can be selected
+        FROM
+            ...
+        WHERE
+            ...
+    )
+    ...
+\end{lstlisting}
+
+Then, the sub-query is given a new unique alias (needed to create a proper predicate), and then is referenced in the same way as in the previous case. \code{NOT IN} translation generated in the same way, only a negation is added to the condition, based on the fact that:
+$$
+\forall_x \forall_{table} : (x \code{ NOT IN } table) \iff (\neg (x \code{ IN } table))
+$$
+
+
+
+
+%\subsection{Translation of \code{EXISTS} and \code{NOT EXISTS} expressions}
+
+
+\subsection{Translation of logical expressions}
+
+Each logical expression is translated by recursively translating its operands and joining their first-order logic formulas.
+
+\renewcommand{\arraystretch}{1.5}
+\begin{center}
+ \begin{tabular}{ c | c }
+ SQL logical expression & First-order logic expression in the TPTP syntax \\
+ \hline
+ \code{<exp1> and <exp2>} & \code{( <exp1-formula> \& <exp2-formula> )} \\
+ \code{<exp1> or <exp2>} & \code{( <exp1-formula> | <exp2-formula> )} \\
+ \code{not <exp1>} & \code{( $\sim$ <exp1-formula> )}
+\end{tabular}
+\end{center}
+
+
+
+
+\section{Translation of \code{SELECT} statements}
+
+The final part of translating an SQL query into a TPTP syntax is the translation of the \code{SELECT} clause. After the \code{FROM} and \code{WHERE} clauses are translated the list of selected columns must be parsed. Each column can be selected in one of two ways
+\begin{enumerate}
+    \item as a simple column reference: \code{<table-name-or-alias>.<column-name>}
+    \item as an aliased column reference: \code{<table-name-or-alias>.<column-name> AS <column-alias>}
+\end{enumerate}
+If a column is aliased in the \code{SELECT} clause it is required for it to be referenced exclusively by the alias. This allows for a significant simplification and helps avoid having multiple columns with the same names.
+
+If a column is not explicitly aliased, it is automatically assigned the same name as in its original table. This means that, for example, the following query
+\begin{lstlisting}[language=SQL, caption=Sample \code{SELECT} statement]
+SELECT
+    tab1.col11 as col11 alias,
+    tab1.col12 as col12_alias,
+    tab1.col13
+FROM
+    tab1
+\end{lstlisting}
+would expose columns \code{col11_alias}, \code{col12_alias}, \code{col13} in that order.
+
+A full translation of the simplest SQL query into the TPTP syntax results in one predicate defining the query and the columns it exposes as well as the definition of all additional predicates: one for each of the \code{SELECT}, \code{FROM}, and \code{WHERE} clauses.
+
+In the examples below the following database schema is assumed:
+\renewcommand{\arraystretch}{1.5}
+\begin{center}
+ \begin{tabular}{ c | c }
+ Table name & Columns \\
+ \hline
+ \code{tab1} & \code{ col11, col12, col13, col14, col15 } \\
+  \code{tab2} & \code{ col21, col22, col23, col24, col25 }
+\end{tabular}
+\end{center}
+For each translation the common part is the list of axioms for boolean expressions, as well as substitution axioms for all tables defined in the database schema.
+
+
+A simple SQL query, which selects the entire first column \code{col11} from the table \code{tab1}
+
+\begin{lstlisting}[language=SQL, caption=SQL query]
+SELECT
+    tab1.col11
+FROM
+    tab1
+\end{lstlisting}
+results in the following translation into the TPTP syntax
+\begin{lstlisting}[language=Prolog, caption=TPTP translation]
+fof(from_2,definition,(
+    ! [COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
+      ( from_2(COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15)
+    <=> tab1(COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15) ) )).
+
+fof(select_1,definition,(
+    ! [COL11] :
+      ( select_1(COL11)
+    <=> ? [TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15] :
+          ( from_2(COL11,TAB1_COL12,TAB1_COL13,TAB1_COL14,TAB1_COL15)
+          & $true ) ) )).
+
+fof(main_query_1,definition,(
+    ! [COL11] :
+      ( main_query_1(COL11)
+    <=> select_1(COL11) ) )).
+
+\end{lstlisting}
+
+
+\section{Axiom generation} \label{sec:axioms}
+
+The generated translation abstracts from the internal type of values within the tables. The equivalence of two queries is determined based on relation between values returned by those queries. In the implementation it was assumed that the space of all possible values in columns is a fully ordered set. The axioms defining the properties of relations \code{lt} ($<$), \code{gt} ($>$), \code{leq} ($\leq$), \code{geq} ($\geq$), \code{eq} ($=$), \code{neq} ($\neq$) are hardcoded in the implementation and included in every equivalence test. The list of all substitution axioms is dynamically generated after all used predicates for database tables, queries, \code{SELECT}, \code{FROM}, \code{WHERE} and other SQL clauses are defined.
+
+\subsection{Axioms for the $=$ relation}
+The axioms for the \code{leq} ($\leq$) relation are:
+\begin{itemize}
+\item reflexivity
+$$
+\forall x : x=x,
+$$
+\item symmetry
+$$
+\forall x, y : (x=y) \implies (y=x),
+$$
+\item transitivity
+$$
+\forall x, y, z : ((x=y) \land (y=z)) \implies (x=z)
+$$
+\end{itemize}
+Which results in the following TPTP definitions:
+\begin{lstlisting}[language=Prolog, caption=TPTP axioms for \code{eq}]
+fof(reflexivity_of_equality,axiom,(
+    ! [X] : eq(X,X) )). 
+
+fof(symmetry_of_equality,axiom,(
+    ! [X,Y] :
+      ( eq(X,Y)
+     => eq(Y,X) ) )). 
+
+fof(transitivity_of_equality,axiom,(
+    ! [X,Y,Z] :
+      ( ( eq(X,Y)
+        & eq(Y,Z) )
+     => eq(X,Z) ) )). 
+\end{lstlisting}
+
+
+\subsection{Axioms for the \code{lte} ($\leq$) relation}
+The axioms for the $\leq$ relation, necessary to create a partially ordered set of all variables, are:
+\begin{itemize}
+\item reflexivity
+$$
+\forall x : x \leq x,
+$$
+\item antisymmetry
+$$
+\forall x, y : ((x \leq y) \land (y \leq x)) \implies (x=y),
+$$
+\item transitivity
+$$
+\forall x, y, z : ((x \leq y) \land (y \leq z)) \implies (x \leq z).
+$$
+\end{itemize}
+
+Which result in the following TPTP formulas
+\begin{lstlisting}[language=Prolog, caption=TPTP axioms for \code{lte} ($\leq))$]
+fof(reflexivity_of_less_than_or_equal,axiom,(
+    ! [X] : lte(X,X) )). 
+
+fof(antisymmetry_of_less_than_or_equal,axiom,(
+    ! [X,Y] :
+      ( ( lte(X,Y)
+        & lte(Y,X) )
+    <=> eq(X,Y) ) )). 
+
+fof(transitivity_of_less_than_or_equal,axiom,(
+    ! [X,Y,Z] :
+      ( ( lte(X,Y)
+        & lte(Y,Z) )
+     => lte(X,Z) ) )).
+\end{lstlisting}
+
+\begin{comment}
+Additionally, to make the space of all variables a totally ordered set, strong connectedness of the \code{lte} relation is required.
+
+$$
+\forall x, y : (x \leq y) \lor (y \leq x)
+$$
+\end{comment}
+
+Which results in the following TPTP formula
+\begin{lstlisting}[language=Prolog, caption=TPTP axiom for the strong connectedness of \code{lte} ($\leq$)]
+fof(strong_connectedness_of_less_than_or_equal,axiom,(
+    ! [X,Y] :
+      ( lte(X,Y)
+      | lte(Y,X) ) )).
+\end{lstlisting}
+
+
+
+\subsection{Axioms for \code{lt} ($<$), \code{gt} ($>$), \code{geq} ($\geq$), \code{neq} ($\neq$) relations}
+The other relations ($\geq$, $<$, $>$, $\neq$) are defined in terms of $\leq$ and $=$ by the following:
+\subsubsection{Definition of \code{lt} ($<$)}
+$$
+\forall x, y : (x<y) \mathrel{\overset{\text{def}}{\iff}} (( x<=y) \land (\neg (x=y)))
+$$
+\subsubsection{Definition of \code{gt} ($>$)}
+$$
+\forall x, y : (x>y) \mathrel{\overset{\text{def}}{\iff}} (y<x)
+$$
+
+\subsubsection{Definition of \code{geq} ($\geq$)}
+$$
+\forall x, y : (x \geq y) \mathrel{\overset{\text{def}}{\iff}} (y \leq x)
+$$
+\subsubsection{Definition of \code{neq} ($\neq$)}
+$$
+\forall x, y : (x \neq y) \mathrel{\overset{\text{def}}{\iff}} (\neg (x=y))
+$$
+
+Which result in the following TPTP formulas
+
+\begin{lstlisting}[language=Prolog, caption={TPTP definitions for \code{lt} ($<$), \code{gt} ($>$), \code{gte} ($\geq$), \code{neq} ($\neq$)}]
+fof(less_than_definition,definition,(
+    ! [X,Y] :
+      ( lt(X,Y)
+    <=> ( lte(X,Y)
+        & (~ eq(X,Y) )) ) )).
+
+fof(greater_than_definition,definition,(
+    ! [X,Y] :
+      ( gt(X,Y)
+    <=> lt(Y,X) ) )).
+
+fof(greater_than_or_equal_definition,definition,(
+    ! [X,Y] :
+      ( gte(X,Y)
+    <=> lte(Y,X) ) )).
+    
+fof(not_equal_definition,definition,(
+    ! [X,Y] :
+      ( neq(X,Y)
+    <=> ~ eq(X,Y) ) )).
+\end{lstlisting}
+
+\subsection{Substitution axioms}
+After all necessary equality and inequality predicates are defined, substitution axioms must are generated. For each predicate with arity $n$, $n$ separate substitution axioms are provided. Given a predicate $red(x_1, x_2, \dots, x_n)$, the following substitution axioms are generated:
+
+\begin{align*}
+\forall_{x_1, x_2, \dots, x_n, y} : (x_1 = y \land pred(x_1, x_2, \dots, x_n) ) \\
+\implies pred(y, x_2, x_3, x_4 \dots, x_n) \\
+\forall_{x_1, x_2, \dots, x_n, y} : (x_2 = y \land pred(x_1, x_2, \dots, x_n) ) \\
+\implies pred(x_1, y, x_3, x_4 \dots, x_n) \\
+\forall_{x_1, x_2, \dots, x_n, y} : (x_3 = y \land pred(x_1, x_2, \dots, x_n) ) \\
+\implies pred(x_1, x_2, y, x_4 \dots, x_n) \\
+\dots \\
+\forall_{x_1, x_2, \dots, x_n, y} : (x_n = y \land pred(x_1, x_2, \dots, x_n) ) \\
+\implies pred(x_1, x_2, x_3, x_4 \dots, y) \\
+\end{align*}
+In general the all substitution axioms are defined by the following formula
+\begin{align*}
+\forall_{pred \in P} \forall_{i \in \{1, 2, \dots, n\}} \forall_{x_1, x_2, \dots, x_n, y} :(x_i = y \land pred(x_1, x_2, \dots, x_n) ) \\
+\implies pred(x_1, x_2, \dots, x_{i-1}, y, x_{i+1}, \dots, x_n)
+\end{align*}
+Where $P$ is the set of all the predicates used in the translated query. This ensures that, if a predicate is true for given tuple, substituting any value in the tuple with a value equal to it, preserves the predicate.
+
+For example, given a table \code{tab1} with columns \code{col11}, \code{col12}, \code{col13}, the following substitution axioms are generated, each one for another column of the table \code{tab}
+
+\begin{lstlisting}[language=Prolog, caption={TPTP substitution axioms for tables}]
+fof(substitution_tab_COL11,axiom,(
+    ! [X,COL11,COL12,COL13] :
+      ( ( eq(COL11,X)
+        & tab(COL11,COL12,COL13) )
+     => tab(X,COL12,COL13) ) )). 
+
+fof(substitution_tab_COL12,axiom,(
+    ! [X,COL11,COL12,COL13] :
+      ( ( eq(COL12,X)
+        & tab(COL11,COL12,COL13) )
+     => tab(COL11,X,COL13) ) )). 
+
+fof(substitution_tab_COL13,axiom,(
+    ! [X,COL11,COL12,COL13] :
+      ( ( eq(COL13,X)
+        & tab(COL11,COL12,COL13) )
+     => tab(COL11,COL12,X) ) )).
+\end{lstlisting}
+
+
+% \section{Complexity of the translation}
+
+
+
+
+\chapter{Equivalence testing}
+
+\section{Testing the semantic equivalence of database queries}
+
+In order to test the semantic equivalence of two SQL queries the two queries must first be translated into their TPTP representations and a TPTP conjecture must be added. The conjecture is always of the form
+\begin{lstlisting}
+fof(equivalence_check,conjecture,(
+    ! [<columns>] :
+      ( main_query_1(<columns>)
+    <=> main_query_2(<columns>) ) )). 
+\end{lstlisting}
+Where \code{main_query_1} and \code{main_query_2} are the predicates of the two queries, and \code<columns> are the names of the columns returned by the first query. This, however, only works if the two queries result in the same number of columns being returned. Otherwise, the queries are not equivalent by definition.
+
+After the conjecture and all the necessary predicates, definitions and axioms are added, the resulting TPTP code can be used as input for automated theorem provers such as Vampire or E.
+
+\subsection{Automated theorem proving}
+
+
+There are multiple publicly available implementations of automated theorem provers for first order logic. The two implementation used in this analysis are Vampire (version 4.2.2) \cite{vampire}, and E (version 2.3 "Gielle") \cite{eprover}. 
+
+
+\subsection{Results}
+
+For the purpose of testing a number of sample SQL queries were generated along with a common database schema, that was shared across all queries. For every pair of queries the translation script was run, the output TPTP file was validated, and after that it was passed a a run-time argument for both Vampire and E provers.
+Both Vampire and E were run with its default settings for the first-order logic theorem proving, and their timeout set to 10 seconds. The output of both programs was used to create a table of equivalence for pairs of queries.
+\begin{lstlisting}[language=Python, caption=Database schema]
+{
+    "tab1": [
+        "col11",
+        "col12",
+        "col13",
+        "col14",
+        "col15"
+    ],
+    "tab2": [
+        "col21",
+        "col22",
+        "col23",
+        "col24",
+        "col25"
+    ]
+}
+\end{lstlisting}
+The queries were split into equivalence classes:
+\begin{itemize}
+    \item Queries 1-9 returned columns \code{col11} and \code{col12} of all rows from table \code{tab1},
+    \item Query 10 returned the same columns as queries 1-9, but also included the table \code{tab2} in the \code{FROM} clause. Since the resulting rows are a Cartesian product of \code{tab1} and \code{tab2}, the query in not equivalent to other queries, because the table \code{tab2} may be empty and then no rows are returned.
+    \item Queries 11-17 returned columns \code{col11} and \code{col12} of rows for which \code{col11} was equal to \code{col12} from table \code{tab1},
+    \item TODO: other queries
+\end{itemize}
+
+
+
+\newcommand{\EQ}{\textcolor{ForestGreen}{\code{EQ}}}
+\newcommand{\NF}{\textcolor{orange}{\code{NF}}}
+\newcommand{\NE}{\textcolor{red}{\code{NE}}}
+\newcommand{\TO}{\textcolor{gray}{\code{TO}}}
+\newcommand{\ER}{\textcolor{black}{\code{ER}}}
+
+
+
+The results of testing the equivalence of all pairs of SQL queries are presented in tables \ref{table:vampire}, \ref{table:vampire2} for Vampire, and tables \ref{table:e}, and \ref{table:e2} for E. Both tables are symmetric, due to the fact that the names of predicates of the order or the TPTP formulas does not affect the outcome of the two automated theorem provers.
+The following symbols are used in the tables:
+\begin{itemize}
+    \item \EQ\ (equivalent): the two queries are semantically equivalent,
+    \item \NF\ (proof not found): the program failed to construct a proof,
+    \item \NE\ (not equivalent): the two queries are not equivalent,
+    \item \TO\ (timeout): the program was terminated before it managed to find the proof.
+    \item \ER\ (error): the program was terminated due to an error
+\end{itemize}
+
+\begin{lstlisting}[language=SQL, caption=Query 1]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 2]
+SELECT
+    tab1.col11 AS alias11,
+    tab1.col12
+FROM
+    tab1
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 3]
+SELECT
+    tab1_alias.col11,
+    tab1_alias.col12
+FROM
+    tab1 AS tab1_alias
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 4]
+SELECT
+    tab1_alias.col11 AS alias11,
+    tab1_alias.col12 AS alias12
+FROM
+    tab1 AS tab1_alias
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 5]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 = tab1.col11
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 6]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    (tab1.col11 <= tab1.col11) AND
+        (tab1.col11 >= tab1.col11)
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 7]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    (NOT tab1.col11 < tab1.col11) AND
+        (NOT tab1.col11 > tab1.col11)
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 8]
+SELECT
+    subquery_alias.col11,
+    subquery_alias.col12
+FROM
+    (
+        SELECT
+            tab1_alias.col11,
+            tab1_alias.col12
+        FROM
+            tab1 AS tab1_alias
+    ) AS subquery_alias
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 9]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 IN (
+        SELECT
+            tab1.col11
+        FROM
+            tab1
+    )
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 10]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1,
+    tab2
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 11]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 = tab1.col12
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 12]
+SELECT
+    tab1_alias.col11,
+    tab1_alias.col12
+FROM
+    tab1 as tab1_alias
+WHERE
+    tab1_alias.col11 = tab1_alias.col12
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 13]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    (tab1.col11 <= tab1.col12) AND
+        (tab1.col12 <= tab1.col11)
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 14]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    (NOT tab1.col11 < tab1.col12) AND
+    (NOT tab1.col11 > tab1.col12)
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 15]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    (tab1.col11 = tab1.col12) AND
+        (tab1.col11 IN (
+            SELECT tab1.col11 FROM tab1
+        ))
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 16]
+SELECT
+    subquery_alias.col11,
+    subquery_alias.col12
+FROM
+    (
+        SELECT
+            tab1.col11,
+            tab1.col12
+        FROM
+            tab1
+        WHERE
+            tab1.col11 = tab1.col12
+    ) AS subquery_alias
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 17]
+SELECT
+    subquery_alias.col11,
+    subquery_alias.col12
+FROM
+    (
+        SELECT
+            tab1.col11,
+            tab1.col12
+        FROM
+            tab1
+        WHERE
+            tab1.col11 <= tab1.col12
+    )
+WHERE
+    subquery_alias.col11 >= subquery_alias.col12
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 18]
+SELECT 
+    tab1.col12,
+    tab2.col22
+FROM
+    tab1,
+    tab2
+WHERE
+    tab1.col11 < tab2.col21
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 19]
+SELECT 
+    tab1.col12,
+    tab2.col22
+FROM
+    tab1,
+    tab2
+WHERE
+    (tab1.col11 <= tab2.col21) AND (tab1.col11 != tab2.col21)
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 20]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 IN (
+        SELECT
+            tab2.col21
+        FROM
+            tab2
+    )
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 21]
+-- this query normally would not be equivalent to Query 20, since it could return duplicated values
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1,
+    tab2
+WHERE
+    tab1.col11 = tab2.col21
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 22]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 < tab1.col12
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 23]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 <= tab1.col12
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 24]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 > tab1.col12
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 25]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 >= tab1.col12
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 26]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 != tab1.col12
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 27]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1
+WHERE
+    tab1.col11 NOT IN (
+        SELECT
+            tab1.col11
+        FROM
+            tab1
+    )
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 28]
+SELECT
+    tab1.col11,
+    tab1.col12 AS col12_alias
+FROM
+    tab1
+WHERE
+    tab1.col11 IN (
+        SELECT
+            tab1.col11
+        FROM
+            tab1
+        WHERE
+            tab1.col11 = col12_alias -- external variable
+    )
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 29]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1,
+    tab2
+WHERE
+    tab1.col11 IN (
+        SELECT
+            tab2.col21
+        FROM
+            tab2
+        WHERE
+            tab2.col21 = tab1.col11 -- external variable
+    )
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption=Query 30]
+SELECT
+    tab1.col11,
+    tab1.col12
+FROM
+    tab1,
+    tab2
+WHERE
+    (
+        tab1.col11 NOT IN (
+            SELECT
+                tab2.col21
+            FROM
+                tab2
+            WHERE
+                tab2.col21 != tab1.col11 -- external variable
+        )
+    ) AND (
+        tab1.col11 IN (
+            SELECT
+                tab2.col21
+            FROM
+                tab2
+            WHERE
+                tab2.col21 = tab1.col11 -- external variable
+        )
+    )
+\end{lstlisting}
+
+
+
+
+
+\begin{table}
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+       & 01  & 02  & 03  & 04  & 05 &  06  & 07  & 08  & 09  & 10  & 11  & 12  & 13  & 14  & 15  \\
+    \hline
+01 &     & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \NE & \NE & \NE & \NE & \NF & \NE \\
+02 & \EQ &     & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \NE & \NE & \NE & \NE & \TO & \NE \\
+03 & \EQ & \EQ &     & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \NE & \NE & \NE & \NE & \NF & \NE \\
+04 & \EQ & \EQ & \EQ &     & \EQ & \EQ & \EQ & \EQ & \EQ & \NE & \NE & \NE & \NE & \NF & \NE \\
+05 & \EQ & \EQ & \EQ & \EQ &     & \EQ & \EQ & \EQ & \EQ & \NE & \NE & \NE & \NE & \NF & \NE \\
+06 & \EQ & \EQ & \EQ & \EQ & \EQ &     & \EQ & \EQ & \EQ & \NE & \NE & \NE & \NE & \NE & \NE \\
+07 & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ &     & \EQ & \EQ & \NE & \NE & \NE & \NE & \NE & \NE \\
+08 & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ &     & \EQ & \NE & \NE & \NE & \NE & \NF & \NE \\
+09 & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ &     & \NE & \NE & \NE & \NE & \NF & \NE \\
+10 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE &     & \NF & \TO & \NF & \NF & \NF \\
+11 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF &     & \EQ & \EQ & \TO & \EQ \\
+12 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \TO & \EQ &     & \EQ & \TO & \EQ \\
+13 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \EQ & \EQ &     & \NE & \EQ \\
+14 & \NF & \TO & \NF & \NF & \NF & \NE & \NE & \NF & \NF & \NF & \TO & \TO & \NE &     & \TO \\
+15 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \EQ & \EQ & \EQ & \TO &     \\
+16 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \EQ & \EQ & \EQ & \NF & \EQ \\
+17 & \NE & \NE & \NE & \NE & \NE & \NE & \TO & \NE & \NE & \NF & \NE & \NE & \NE & \NF & \NE \\
+18 & \NF & \NF & \NF & \NF & \TO & \NF & \NF & \NF & \NF & \TO & \NF & \NF & \NF & \TO & \TO \\
+19 & \NF & \NF & \TO & \NF & \TO & \TO & \TO & \TO & \NF & \TO & \NF & \NF & \TO & \TO & \TO \\
+20 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \TO & \NE & \NE & \NE & \NF & \NE \\
+21 & \NF & \NF & \NF & \NF & \TO & \NF & \NF & \NF & \NF & \NF & \NF & \NF & \NF & \TO & \NF \\
+22 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \TO & \NE & \NE & \NE & \TO & \NE \\
+23 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \NE & \NE & \NE & \TO & \NE \\
+24 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \NE & \NE & \NE & \NF & \NE \\
+25 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \NE & \NE & \NE & \TO & \NE \\
+26 & \NF & \TO & \TO & \TO & \NE & \NF & \NF & \TO & \TO & \NF & \NE & \NE & \TO & \TO & \NF \\
+27 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \NE & \NE & \NE & \TO & \NE \\
+28 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \EQ & \EQ & \EQ & \NF & \EQ \\
+29 & \TO & \TO & \TO & \NF & \NF & \TO & \NF & \TO & \TO & \TO & \TO & \NF & \NF & \TO & \TO \\
+30 & \TO & \TO & \TO & \TO & \TO & \NF & \TO & \TO & \TO & \TO & \NE & \NE & \TO & \TO & \TO
+
+
+
+     
+\end{tabular}
+\caption{Results for Vampire}
+\label{table:vampire}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+       & 16  & 17  & 18  & 19  & 20  & 21  & 22  & 23  & 24  & 25  & 26  & 27  & 28  & 29  & 30  \\
+    \hline
+01 & \NE & \NE & \NF & \NF & \NE & \NF & \NE & \NE & \NE & \NE & \NF & \NE & \NE & \TO & \TO \\
+02 & \NE & \NE & \NF & \NF & \NE & \NF & \NE & \NE & \NE & \NE & \TO & \NE & \NE & \TO & \TO \\
+03 & \NE & \NE & \NF & \TO & \NE & \NF & \NE & \NE & \NE & \NE & \TO & \NE & \NE & \TO & \TO \\
+04 & \NE & \NE & \NF & \NF & \NE & \NF & \NE & \NE & \NE & \NE & \TO & \NE & \NE & \NF & \TO \\
+05 & \NE & \NE & \TO & \TO & \NE & \TO & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \TO \\
+06 & \NE & \NE & \NF & \TO & \NE & \NF & \NE & \NE & \NE & \NE & \NF & \NE & \NE & \TO & \NF \\
+07 & \NE & \TO & \NF & \TO & \NE & \NF & \NE & \NE & \NE & \NE & \NF & \NE & \NE & \NF & \TO \\
+08 & \NE & \NE & \NF & \TO & \NE & \NF & \NE & \NE & \NE & \NE & \TO & \NE & \NE & \TO & \TO \\
+09 & \NE & \NE & \NF & \NF & \NE & \NF & \NE & \NE & \NE & \NE & \TO & \NE & \NE & \TO & \TO \\
+10 & \NF & \NF & \TO & \TO & \TO & \NF & \TO & \NF & \NF & \NF & \NF & \NF & \NF & \TO & \TO \\
+11 & \EQ & \NE & \NF & \NF & \NE & \NF & \NE & \NE & \NE & \NE & \NE & \NE & \EQ & \TO & \NE \\
+12 & \EQ & \NE & \NF & \NF & \NE & \NF & \NE & \NE & \NE & \NE & \NE & \NE & \EQ & \NF & \NE \\
+13 & \EQ & \NE & \NF & \TO & \NE & \NF & \NE & \NE & \NE & \NE & \TO & \NE & \EQ & \NF & \TO \\
+14 & \NF & \NF & \TO & \TO & \NF & \TO & \TO & \TO & \NF & \TO & \TO & \TO & \NF & \TO & \TO \\
+15 & \EQ & \NE & \TO & \TO & \NE & \NF & \NE & \NE & \NE & \NE & \NF & \NE & \EQ & \TO & \TO \\
+16 &     & \NE & \NF & \TO & \NE & \TO & \NE & \NE & \NE & \NE & \NE & \NE & \EQ & \TO & \TO \\
+17 & \NE &     & \TO & \TO & \NE & \NF & \NF & \NE & \NE & \NE & \NF & \NE & \NE & \TO & \TO \\
+18 & \NF & \TO &     & \EQ & \NF & \TO & \NF & \NF & \NF & \NF & \NF & \NF & \NF & \NF & \TO \\
+19 & \TO & \TO & \EQ &     & \TO & \TO & \TO & \NF & \TO & \NF & \TO & \NF & \TO & \NF & \NF \\
+20 & \NE & \NE & \NF & \TO &     & \ER & \NE & \NE & \NE & \NE & \NF & \NE & \NE & \EQ & \EQ \\
+21 & \TO & \NF & \TO & \TO & \ER &     & \NF & \NF & \NF & \TO & \NF & \TO & \TO & \EQ & \EQ \\
+22 & \NE & \NF & \NF & \TO & \NE & \NF &     & \NE & \NE & \NE & \NF & \NE & \NE & \TO & \NF \\
+23 & \NE & \NE & \NF & \NF & \NE & \NF & \NE &     & \NE & \NE & \NF & \NE & \NE & \TO & \NF \\
+24 & \NE & \NE & \NF & \TO & \NE & \NF & \NE & \NE &     & \NE & \TO & \NE & \NE & \TO & \NF \\
+25 & \NE & \NE & \NF & \NF & \NE & \TO & \NE & \NE & \NE &     & \NF & \NE & \NE & \NF & \NF \\
+26 & \NE & \NF & \NF & \TO & \NF & \NF & \NF & \NF & \TO & \NF &     & \TO & \TO & \NF & \NF \\
+27 & \NE & \NE & \NF & \NF & \NE & \TO & \NE & \NE & \NE & \NE & \TO &     & \NE & \TO & \TO \\
+28 & \EQ & \NE & \NF & \TO & \NE & \TO & \NE & \NE & \NE & \NE & \TO & \NE &     & \NF & \NE \\
+29 & \TO & \TO & \NF & \NF & \EQ & \EQ & \TO & \TO & \TO & \NF & \NF & \TO & \NF &     & \EQ \\
+30 & \TO & \TO & \TO & \NF & \EQ & \EQ & \NF & \NF & \NF & \NF & \NF & \TO & \NE & \EQ &     \\
+
+\end{tabular}
+\caption{Results for Vampire (continuation)}
+\label{table:vampire2}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+       & 01  & 02  & 03  & 04  & 05  & 06  & 07  & 08  & 09  & 10  & 11  & 12  & 13  & 14  & 15  \\
+    \hline
+01 &      & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \NE & \NE & \NE & \NE & \NF & \NE \\
+02 & \EQ &      & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \NE & \NE & \NE & \NE & \TO & \NE \\
+03 & \EQ & \EQ &      & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \NE & \NE & \NE & \NE & \NF & \NE \\
+04 & \EQ & \EQ & \EQ &      & \EQ & \EQ & \EQ & \EQ & \EQ & \NE & \NE & \NE & \NE & \NF & \NE \\
+05 & \EQ & \EQ & \EQ & \EQ &      & \EQ & \EQ & \EQ & \EQ & \NE & \NE & \NE & \NE & \NF & \NE \\
+06 & \EQ & \EQ & \EQ & \EQ & \EQ &      & \EQ & \EQ & \EQ & \NE & \NE & \NE & \NE & \NE & \NE \\
+07 & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ &      & \EQ & \EQ & \NE & \NE & \NE & \NE & \NE & \NE \\
+08 & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ &      & \EQ & \NE & \NE & \NE & \NE & \NF & \NE \\
+09 & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ & \EQ &      & \NE & \NE & \NE & \NE & \NF & \NE \\
+10 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE &      & \NF & \TO & \NF & \NF & \NF \\
+11 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF &      & \EQ & \EQ & \TO & \EQ \\
+12 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \TO & \EQ &      & \EQ & \TO & \EQ \\
+13 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \EQ & \EQ &      & \NE & \EQ \\
+14 & \NF & \TO & \NF & \NF & \NF & \NE & \NE & \NF & \NF & \NF & \TO & \TO & \NE &      & \TO \\
+15 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \EQ & \EQ & \EQ & \TO &      \\
+16 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \EQ & \EQ & \EQ & \NF & \EQ \\
+17 & \NE & \NE & \NE & \NE & \NE & \NE & \TO & \NE & \NE & \NF & \NE & \NE & \NE & \NF & \NE \\
+18 & \NF & \NF & \NF & \NF & \TO & \NF & \NF & \NF & \NF & \TO & \NF & \NF & \NF & \TO & \TO \\
+19 & \NF & \NF & \TO & \NF & \TO & \TO & \TO & \TO & \NF & \TO & \NF & \NF & \TO & \TO & \TO \\
+20 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \TO & \NE & \NE & \NE & \NF & \NE \\
+21 & \NF & \NF & \NF & \NF & \TO & \NF & \NF & \NF & \NF & \NF & \NF & \NF & \NF & \TO & \NF \\
+22 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \TO & \NE & \NE & \NE & \TO & \NE \\
+23 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \NE & \NE & \NE & \TO & \NE \\
+24 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \NE & \NE & \NE & \NF & \NE \\
+25 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \NE & \NE & \NE & \TO & \NE \\
+26 & \NF & \TO & \TO & \TO & \NE & \NF & \NF & \TO & \TO & \NF & \NE & \NE & \TO & \TO & \NF \\
+27 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \NE & \NE & \NE & \TO & \NE \\
+28 & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \EQ & \EQ & \EQ & \NF & \EQ \\
+29 & \TO & \TO & \TO & \NF & \NF & \TO & \NF & \TO & \TO & \TO & \TO & \NF & \NF & \TO & \TO \\
+30 & \TO & \TO & \TO & \TO & \TO & \NF & \TO & \TO & \TO & \TO & \NE & \NE & \TO & \TO & \TO
+
+\end{tabular}
+\caption{Results for E}
+\label{table:e}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+       & 16  & 17  & 18  & 19  & 20  & 21  & 22  & 23  & 24  & 25  & 26  & 27  & 28  & 29  & 30  \\
+    \hline
+01 & \NE & \NE & \NF & \NF & \NE & \NF & \NE & \NE & \NE & \NE & \NF & \NE & \NE & \TO & \TO \\
+02 & \NE & \NE & \NF & \NF & \NE & \NF & \NE & \NE & \NE & \NE & \TO & \NE & \NE & \TO & \TO \\
+03 & \NE & \NE & \NF & \TO & \NE & \NF & \NE & \NE & \NE & \NE & \TO & \NE & \NE & \TO & \TO \\
+04 & \NE & \NE & \NF & \NF & \NE & \NF & \NE & \NE & \NE & \NE & \TO & \NE & \NE & \NF & \TO \\
+05 & \NE & \NE & \TO & \TO & \NE & \TO & \NE & \NE & \NE & \NE & \NE & \NE & \NE & \NF & \TO \\
+06 & \NE & \NE & \NF & \TO & \NE & \NF & \NE & \NE & \NE & \NE & \NF & \NE & \NE & \TO & \NF \\
+07 & \NE & \TO & \NF & \TO & \NE & \NF & \NE & \NE & \NE & \NE & \NF & \NE & \NE & \NF & \TO \\
+08 & \NE & \NE & \NF & \TO & \NE & \NF & \NE & \NE & \NE & \NE & \TO & \NE & \NE & \TO & \TO \\
+09 & \NE & \NE & \NF & \NF & \NE & \NF & \NE & \NE & \NE & \NE & \TO & \NE & \NE & \TO & \TO \\
+10 & \NF & \NF & \TO & \TO & \TO & \NF & \TO & \NF & \NF & \NF & \NF & \NF & \NF & \TO & \TO \\
+11 & \EQ & \NE & \NF & \NF & \NE & \NF & \NE & \NE & \NE & \NE & \NE & \NE & \EQ & \TO & \NE \\
+12 & \EQ & \NE & \NF & \NF & \NE & \NF & \NE & \NE & \NE & \NE & \NE & \NE & \EQ & \NF & \NE \\
+13 & \EQ & \NE & \NF & \TO & \NE & \NF & \NE & \NE & \NE & \NE & \TO & \NE & \EQ & \NF & \TO \\
+14 & \NF & \NF & \TO & \TO & \NF & \TO & \TO & \TO & \NF & \TO & \TO & \TO & \NF & \TO & \TO \\
+15 & \EQ & \NE & \TO & \TO & \NE & \NF & \NE & \NE & \NE & \NE & \NF & \NE & \EQ & \TO & \TO \\
+16 &     & \NE & \NF & \TO & \NE & \TO & \NE & \NE & \NE & \NE & \NE & \NE & \EQ & \TO & \TO \\
+17 & \NE &     & \TO & \TO & \NE & \NF & \NF & \NE & \NE & \NE & \NF & \NE & \NE & \TO & \TO \\
+18 & \NF & \TO &     & \EQ & \NF & \TO & \NF & \NF & \NF & \NF & \NF & \NF & \NF & \NF & \TO \\
+19 & \TO & \TO & \EQ &     & \TO & \TO & \TO & \NF & \TO & \NF & \TO & \NF & \TO & \NF & \NF \\
+20 & \NE & \NE & \NF & \TO &     & \EQ & \NE & \NE & \NE & \NE & \NF & \NE & \NE & \EQ & \EQ \\
+21 & \TO & \NF & \TO & \TO & \EQ &     & \NF & \NF & \NF & \TO & \NF & \TO & \TO & \EQ & \EQ \\
+22 & \NE & \NF & \NF & \TO & \NE & \NF &     & \NE & \NE & \NE & \NF & \NE & \NE & \TO & \NF \\
+23 & \NE & \NE & \NF & \NF & \NE & \NF & \NE &     & \NE & \NE & \NF & \NE & \NE & \TO & \NF \\
+24 & \NE & \NE & \NF & \TO & \NE & \NF & \NE & \NE &     & \NE & \TO & \NE & \NE & \TO & \NF \\
+25 & \NE & \NE & \NF & \NF & \NE & \TO & \NE & \NE & \NE &     & \NF & \NE & \NE & \NF & \NF \\
+26 & \NE & \NF & \NF & \TO & \NF & \NF & \NF & \NF & \TO & \NF &     & \TO & \TO & \NF & \NF \\
+27 & \NE & \NE & \NF & \NF & \NE & \TO & \NE & \NE & \NE & \NE & \TO &     & \NE & \TO & \TO \\
+28 & \EQ & \NE & \NF & \TO & \NE & \TO & \NE & \NE & \NE & \NE & \TO & \NE &     & \NF & \NE \\
+29 & \TO & \TO & \NF & \NF & \EQ & \EQ & \TO & \TO & \TO & \NF & \NF & \TO & \NF &     & \EQ \\
+30 & \TO & \TO & \TO & \NF & \EQ & \EQ & \NF & \NF & \NF & \NF & \NF & \TO & \NE & \EQ &     
+
+\end{tabular}
+\caption{Results for E (continuation)}
+\label{table:e2}
+\end{table}
+
+
+\vfill
+\pagebreak
+
+\begin{lstlisting}[caption=Example partial output for Vampire for two equivalent queries (Query 1 and Query 2)]
+% Refutation found. Thanks to Tanya!
+% SZS status Theorem for query_01_query_02
+% SZS output start Proof for query_01_query_02
+1. ! [X0,X1,X2,X3,X4] : (from_2(X0,X1,X2,X3,X4) <=> tab1(X0,X1,X2,X3,X4)) [input]
+2. ! [X0,X1] : (select_1(X0,X1) <=> ? [X2,X3,X4] : ($true & from_2(X0,X1,X2,X3,X4))) [input]
+3. ! [X5,X6] : (main_query_1(X5,X6) <=> select_1(X5,X6)) [input]
+4. ! [X7,X1,X2,X3,X4] : (from_4(X7,X1,X2,X3,X4) <=> tab1(X7,X1,X2,X3,X4)) [input]
+
+[...]
+
+% SZS output end Proof for query_01_query_02
+% ------------------------------
+% Version: Vampire 4.2.2 (commit e1949dd on 2017-12-14 18:39:21 +0000)
+% Termination reason: Refutation
+
+% Memory used [KB]: 4989
+% Time elapsed: 0.011 s
+% ------------------------------
+% ------------------------------
+
+\end{lstlisting}
+
+
+\begin{lstlisting}[caption=Example partial output for Vampire for two not equivalent queries (Query 1 and Query 11)]
+Satisfiable!
+% SZS status CounterSatisfiable for query_01_query_11
+% # SZS output start Saturation.
+tff(u2668,axiom,
+    (![X1, X3, X0, X2, X4] : ((~from_2(X0,X1,X2,X3,X4) | tab1(X0,X1,X2,X3,X4))))).
+
+tff(u2667,axiom,
+    (![X1, X3, X0, X2, X4] : ((~from_2(X0,X1,X2,X3,X4) | select_1(X0,X1))))).
+
+tff(u2666,axiom,
+    (![X1, X3, X5, X0, X2, X4] : ((~from_2(X1,X2,X3,X4,X5) | from_2(X0,X2,X3,X4,X5) | ~eq(X1,X0))))).
+
+[...]
+
+% # SZS output end Saturation.
+% ------------------------------
+% Version: Vampire 4.2.2 (commit e1949dd on 2017-12-14 18:39:21 +0000)
+% Termination reason: Satisfiable
+
+% Memory used [KB]: 5884
+% Time elapsed: 0.055 s
+% ------------------------------
+% ------------------------------
+
+\end{lstlisting}
+\vfill
+\pagebreak
+\begin{lstlisting}[caption=Example partial output for E for two equivalent queries (Query 1 and Query 2)]
+# No SInE strategy applied
+
+# Auto-Ordering is analysing problem.
+# Problem is type GHNSNFFMF22MS
+# Auto-mode selected ordering type KBO6
+# Auto-mode selected ordering precedence scheme <invfreq>
+# Auto-mode selected weight ordering scheme <invfreqrank>
+#
+# Auto-Heuristic is analysing problem.
+# Problem is type GHNSNFFMF22MS
+# Auto-Mode selected heuristic SAT001_MinMin_rr
+# and selection function SelectMaxLComplexAvoidPosPred.
+#
+# No equality, disabling AC handling.
+#
+# Initializing proof state
+#
+#cnf(i_0_58, negated_conjecture, (main_query_2(esk7_0,esk8_0)|main_query_1(esk7_0,esk8_0))).
+#
+#cnf(i_0_59, negated_conjecture, (~main_query_2(esk7_0,esk8_0)|~main_query_1(esk7_0,esk8_0))).
+#
+#cnf(i_0_13, plain, (eq(X1,X1))).
+
+[...]
+
+# Proof found!
+# SZS status Theorem
+# Parsed axioms                        : 45
+# Removed by relevancy pruning/SinE    : 0
+# Initial clauses                      : 59
+# Removed in clause preprocessing      : 0
+# Initial clauses in saturation        : 59
+# Processed clauses                    : 158
+# ...of these trivial                  : 0
+# ...subsumed                          : 8
+# ...remaining for further processing  : 150
+# Other redundant clauses eliminated   : 0
+# Clauses deleted for lack of memory   : 0
+# Backward-subsumed                    : 0
+# Backward-rewritten                   : 1
+# Generated clauses                    : 127
+# ...of the previous two non-trivial   : 94
+# Contextual simplify-reflections      : 0
+# Paramodulations                      : 126
+# Factorizations                       : 0
+# Equation resolutions                 : 0
+# Propositional unsat checks           : 0
+#    Propositional check models        : 0
+#    Propositional check unsatisfiable : 0
+#    Propositional clauses             : 0
+#    Propositional clauses after purity: 0
+#    Propositional unsat core size     : 0
+#    Propositional preprocessing time  : 0.000
+#    Propositional encoding time       : 0.000
+#    Propositional solver time         : 0.000
+#    Success case prop preproc time    : 0.000
+#    Success case prop encoding time   : 0.000
+#    Success case prop solver time     : 0.000
+# Current number of processed clauses  : 89
+#    Positive orientable unit clauses  : 3
+#    Positive unorientable unit clauses: 0
+#    Negative unit clauses             : 1
+#    Non-unit-clauses                  : 85
+# Current number of unprocessed clauses: 54
+# ...number of literals in the above   : 175
+# Current number of archived formulas  : 0
+# Current number of archived clauses   : 61
+# Clause-clause subsumption calls (NU) : 2958
+# Rec. Clause-clause subsumption calls : 2757
+# Non-unit clause-clause subsumptions  : 7
+# Unit Clause-clause subsumption calls : 1
+# Rewrite failures with RHS unbound    : 0
+# BW rewrite match attempts            : 1
+# BW rewrite match successes           : 1
+# Condensation attempts                : 0
+# Condensation successes               : 0
+# Termbank termtop insertions          : 5856
+
+\end{lstlisting}
+\vfill
+\pagebreak
+\begin{lstlisting}[caption=Example partial output for E for two not equivalent queries (Query 1 and Query 11)]
+# No SInE strategy applied
+
+# Auto-Ordering is analysing problem.
+# Problem is type GHNSNFFMF22MS
+# Auto-mode selected ordering type KBO6
+# Auto-mode selected ordering precedence scheme <invfreq>
+# Auto-mode selected weight ordering scheme <invfreqrank>
+#
+# Auto-Heuristic is analysing problem.
+# Problem is type GHNSNFFMF22MS
+# Auto-Mode selected heuristic SAT001_MinMin_rr
+# and selection function SelectMaxLComplexAvoidPosPred.
+#
+# No equality, disabling AC handling.
+#
+# Initializing proof state
+#
+#cnf(i_0_63, negated_conjecture, (main_query_2(esk7_0,esk8_0)|main_query_1(esk7_0,esk8_0))).
+#
+#cnf(i_0_64, negated_conjecture, (~main_query_2(esk7_0,esk8_0)|~main_query_1(esk7_0,esk8_0))).
+
+[...]
+
+# No proof found!
+# SZS status CounterSatisfiable
+# Parsed axioms                        : 48
+# Removed by relevancy pruning/SinE    : 0
+# Initial clauses                      : 64
+# Removed in clause preprocessing      : 0
+# Initial clauses in saturation        : 64
+# Processed clauses                    : 2547
+# ...of these trivial                  : 0
+# ...subsumed                          : 1807
+# ...remaining for further processing  : 740
+# Other redundant clauses eliminated   : 0
+# Clauses deleted for lack of memory   : 0
+# Backward-subsumed                    : 0
+# Backward-rewritten                   : 3
+# Generated clauses                    : 2478
+# ...of the previous two non-trivial   : 2419
+# Contextual simplify-reflections      : 0
+# Paramodulations                      : 2477
+# Factorizations                       : 0
+# Equation resolutions                 : 0
+# Propositional unsat checks           : 0
+#    Propositional check models        : 0
+#    Propositional check unsatisfiable : 0
+#    Propositional clauses             : 0
+#    Propositional clauses after purity: 0
+#    Propositional unsat core size     : 0
+#    Propositional preprocessing time  : 0.000
+#    Propositional encoding time       : 0.000
+#    Propositional solver time         : 0.000
+#    Success case prop preproc time    : 0.000
+#    Success case prop encoding time   : 0.000
+#    Success case prop solver time     : 0.000
+# Current number of processed clauses  : 672
+#    Positive orientable unit clauses  : 3
+#    Positive unorientable unit clauses: 0
+#    Negative unit clauses             : 3
+#    Non-unit-clauses                  : 666
+# Current number of unprocessed clauses: 0
+# ...number of literals in the above   : 0
+# Current number of archived formulas  : 0
+# Current number of archived clauses   : 68
+# Clause-clause subsumption calls (NU) : 250725
+# Rec. Clause-clause subsumption calls : 21786
+# Non-unit clause-clause subsumptions  : 1801
+# Unit Clause-clause subsumption calls : 9
+# Rewrite failures with RHS unbound    : 0
+# BW rewrite match attempts            : 2
+# BW rewrite match successes           : 1
+# Condensation attempts                : 0
+# Condensation successes               : 0
+# Termbank termtop insertions          : 48072
+
+\end{lstlisting}
+
+\chapter{Summary}
+In the thesis the syntax and semantics of the Structured Query Language and the mathematical model of database queries was described. The semantical equivalence of SQL queries was defined. A compiler was implemented in order to translate a subset of SQL queries into a first-order logic representation in TPTP syntax. The implementation was tested on thirty sample SQL queries. The resulting translations were passed into automated theorem provers Vampire and E. The out of the automated theorem provers was analysed and compiled into a final report.
+
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{Bibliography}
+
+\bibitem[1]{arhol} Geoff Sutclifee, Christoph Benzm\"uller, \textit{Automated Reasoning in Higher-Order Logic using the TPTP THF Infrastructure}. Journal of Formalized Reasoning Vol. 3, No. 1, 2010 Pages 1–27.
+
+\bibitem[2]{fod} Serge Abiteboul, Richard Hull, Victor Vianu. \textit{Foundations of Databases}. Addison-Wesley, 1995.
+
+\bibitem[3]{ttffa} Geoff Sutcliffe, Stephan Schulz, Koen Claessen, Peter Baumgartner. \textit{The TPTP Typed First-order Form with Arithmetic}. Logic for Programming, Artificial Intelligence, and Reasoning. Berlin, Heidelberg, 2012, Pages 406--419
+
+\bibitem[4]{afadse} Shumo Chu, Brendan Murphy, Jared Roesch, Alvin Cheung, Dan Suciu. \textit{Axiomatic Foundations and Algorithms for Deciding Semantic Equivalences of SQL Queries}. Proceedings of the VLDB Endowment, Vol. 11, No. 11, August 2018, Rio de Janeiro, Brazil.
+
+\bibitem[5]{ibpct} Andrei Voronkov. Implementing Bottom-Up Procedures with Code Trees. 1995, Journal of Automated Reasoning, vol. 15.
+
+\bibitem[6]{codd} Edgar F. Codd. A Relational Model of Data for Large Shared Data Banks. 1970, Communication of the ACM, vol. 13, no. 6.
+
+\bibitem[7]{mozsqlparser} Moz SQL Parser Code Repository, \url{https://github.com/mozilla/moz-sql-parser}
+
+\bibitem[8]{vampire} Vampire's Home Page, \url{http://www.vprover.org/}
+
+\bibitem[9]{eprover} The E Theorem Prover, \url{https://wwwlehre.dhbw-stuttgart.de/~sschulz/E/E.html}
+
+\bibitem[10]{iso-sql-1998}
+International Organization for Standardization. (1987). Information processing systems - Database language - SQL (ISO Standard No. 9075:1987). \url{https://www.iso.org/standard/16661.html}
+
+
+\end{thebibliography}
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% coding: latin-2
+%%% End:
+

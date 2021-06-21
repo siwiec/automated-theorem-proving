@@ -112,7 +112,6 @@ def build_axioms():
     save("fof(reflexivity_of_less_than_or_equal, axiom, ( ! [X] : lte(X,X) )).")
     save("fof(antisymmetry_of_less_than_or_equal, axiom, ( ! [X,Y] : ( ( lte(X,Y) & lte(Y,X) ) <=> eq(X, Y) ) )).")
     save("fof(transitivity_of_less_than_or_equal, axiom, ( ! [X,Y,Z] : ( ( lte(X,Y) & lte(Y,Z) ) => lte(X,Z) ) )).")
-    #save("fof(strong_connectedness_of_less_than_or_equal, axiom, ( ! [X,Y] : ( lte(X,Y) | lte(Y,X) ) )).") -- this axiom breaks everything (timeouts all the way), god knows why
 
     save("fof(less_than_definition, definition, ( ! [X,Y] : ( ( lt(X,Y) ) <=> ( lte(X,Y) & (~ eq(X,Y))) ) )).")
     save("fof(greater_than_definition, definition, ( ! [X,Y] : ( ( gt(X,Y) ) <=>  ( lt(Y,X)) ) )).")
@@ -146,19 +145,7 @@ def build_axioms():
 
 
 def translate_from(statement, values, columns):
-    """
-    Parse list of statements within a FROM clause.
 
-    Parameters:
-        from_statement (dict or list(dict)): Input statement
-    
-    Returns:
-        A tuple (variables, mapping, formula), where
-            variables : list of variables exposed by the FROM clause to the outer SELECT
-            mapping   : a dictionary mapping local names (within the outer SELECT) to global columns' definitions
-            formula   : an first-order logic formula describing the FROM clause
-
-    """
     from_name = get_id('from')
     
     if not isinstance(statement, list):
@@ -185,7 +172,7 @@ def translate_from(statement, values, columns):
             if 'name' in subquery:
                 alias = make_predicate(subquery['name']) # alias of a subquery or a table
             else:
-                alias = make_predicate(get_id('subquery'))
+                alias = make_predicate(get_id('subquery')) # subquery without a name from a WHERE clause
 
             subquery_columns = get_columns(subquery_name)
             subquery_external = get_external(subquery_name)
@@ -239,9 +226,6 @@ def translate_from(statement, values, columns):
 
 
 def translate_where(statement, from_name, values, columns):
-    """
-
-    """
 
     def translate_where_item(item, where_name, values, columns, known_variables):
         aliases = dict(zip(values, columns))
@@ -253,11 +237,11 @@ def translate_where(statement, from_name, values, columns):
                 #fst = aliases.get(fst, fst)
                 #snd = aliases.get(snd, snd)
 
-                if fst not in known_variables: # not defined in FROM!
+                if fst not in known_variables: # not defined in FROM
                     add_external(where_name, fst)
                 else:
                     add_columns(where_name, fst)
-                if snd not in known_variables: # not defined in FROM!
+                if snd not in known_variables: # not defined in FROM
                     add_external(where_name, snd)
                 else:
                     add_columns(where_name, snd)
@@ -268,7 +252,7 @@ def translate_where(statement, from_name, values, columns):
             if x in item:
                 fst = make_variable(item[x][0])
                 #fst = aliases.get(fst, fst)
-                if fst not in known_variables: # not defined in FROM!
+                if fst not in known_variables: # not defined in FROM
                     add_external(where_name, fst)
                 else:
                     add_columns(where_name, fst)
@@ -326,16 +310,6 @@ def translate_where(statement, from_name, values, columns):
 
 
 def translate_select(statement):
-    """
-    Parse a single SELECT statement.
-    
-    Parameters:
-        dict: parsed SELECT statement
-
-    Returns:
-        string: name of the subquery
-
-    """
 
     select_name = get_id("select")
 
@@ -394,9 +368,7 @@ def translate_select(statement):
 
 
 def translate_query(statement, name=None):
-    """
-    Adds an external query definition by adding a new predicate with an appropriate name
-    """
+
     if name is None:
         query_name = get_id('query')
     else:
